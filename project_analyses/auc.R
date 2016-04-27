@@ -181,6 +181,11 @@ model <- lm(centered_face_rating ~
             d)
 summary(model)
 
+project_info <- data.frame(project_key = "auc",
+                           n_final = length(unique(d.raw$workerid)),
+                           n_excluded = 0)
+                           
+
 #This results in $F(5, 16) = 91.11, p < 0.001, R^2 = 0.97$ which is the same
 #significance level and effect size as the original study. Comparing the
 #coeffecient estimates from this model with that of the original study, the
