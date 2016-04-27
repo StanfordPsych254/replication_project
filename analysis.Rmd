@@ -8,17 +8,26 @@ output:
     toc: yes
 ---
 
+Libraries.
+
 ```{r}
 library(dplyr)
 library(ggplot2)
 library(googlesheets)
+library(readr)
 ```
-
 
 Get project planning sheet straight from google docs. 
 
 ```{r}
 project_plan_sheet <- gs_url("https://docs.google.com/spreadsheets/d/1KZw75xlypvtK0cDoOHqXfFd3HsrfJ4gbq8iEJ6LOa0Y")
-project_plan <- gs_read_csv(project_plan_sheet)
+project_plan_raw <- gs_read_csv(project_plan_sheet)
+```
+
+Exclude those to be excluded. 
+
+```{r}
+project_plan <- project_plan_raw %>%
+  filter(`Include in final writeup?`==1) 
 ```
 
