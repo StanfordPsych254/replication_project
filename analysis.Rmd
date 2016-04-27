@@ -1,0 +1,24 @@
+---
+title: "Psych 254 Replication Project Analysis"
+author: "Eric Smith, Robert Hawkins, Michael C. Frank"
+date: '`r Sys.Date()`'
+output:
+  html_document:
+    number_sections: yes
+    toc: yes
+---
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(googlesheets)
+```
+
+
+Get project planning sheet straight from google docs. 
+
+```{r}
+project_plan_sheet <- gs_url("https://docs.google.com/spreadsheets/d/1KZw75xlypvtK0cDoOHqXfFd3HsrfJ4gbq8iEJ6LOa0Y")
+project_plan <- gs_read_csv(project_plan_sheet)
+```
+
