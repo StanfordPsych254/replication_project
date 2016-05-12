@@ -12,7 +12,7 @@ library(lme4)
 # write.csv(d_id,"~/Downloads/ehermann.csv",row.names=F)
 
 # Read in this data
-path <- "~/replication_project/processed_data/"
+path <- "processed_data/"
 df <- read.csv(file = paste0(path,"ehermann.csv")) #Check excel file for any issues with data
 
 
@@ -32,7 +32,7 @@ itemQuestionsFirstData <- df[df$pfFirst == 0,]
 
 data.lm = lm(formula = scale(overclaimScore) ~ scale(pfClaimScore) + scale(accuracy), data = df)
 
-pval <- round(summary(data.lm)$coef["scale(pfClaimScore)","Pr(>|t|)"],7)
+pval <- summary(data.lm)$coef["scale(pfClaimScore)","Pr(>|t|)"]
 tval <- round(summary(data.lm)$coef["scale(pfClaimScore)","t value"],3)
 est <- round(summary(data.lm)$coef["scale(pfClaimScore)","Estimate"],3)
 degrees <- data.lm$df

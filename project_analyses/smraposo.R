@@ -1,4 +1,3 @@
-rm(list=ls())
 library(rjson)
 library(plyr)
 library(splitstackshape)
@@ -15,7 +14,7 @@ ci95 <- function(x) {sem(x) * 1.96}
 theme_set(theme_linedraw())
 
 #Getting files
-path <- "~/replication_project/data/smraposo/"
+path <- "data/smraposo/"
 files <- dir(path, 
              pattern = "*.json")
 d.raw <- data.frame()
@@ -104,7 +103,7 @@ d.demos$delaytimeyrs = d.demos$delaytime / d.demos$delaydiv #Calculating time to
 d = d.demos
 
 # Write tidy file
-path <- "~/replication_project/processed_data/"
+path <- "processed_data/"
 write.csv(d.demos, file = paste0(path,"smraposo.csv")) #Check excel file for any issues with data
 
 
