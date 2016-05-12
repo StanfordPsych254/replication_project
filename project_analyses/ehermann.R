@@ -12,7 +12,7 @@ library(lme4)
 # write.csv(d_id,"~/Downloads/ehermann.csv",row.names=F)
 
 # Read in this data
-path <- "~/replication_project/processed_data/"
+path <- "processed_data/"
 df <- read.csv(file = paste0(path,"ehermann.csv")) #Check excel file for any issues with data
 
 

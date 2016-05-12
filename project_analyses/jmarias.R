@@ -42,7 +42,7 @@ corstarsl <- function(x){
 #Temporarily changing wd to see where the error files are located within the vector of files in the json folder - to comment out
 
 #Reading the path
-path <- "~/replication_project/data/jmarias/"
+path <- "data/jmarias/"
 files <- dir(path, 
              pattern = "*.json")
 d <- data.frame()
@@ -223,7 +223,7 @@ z.pvthigh <- subjectmeans %>%
 
 # Save subjectmeans file
 # Save intermediate file
-path <- "~/replication_project/processed_data/"
+path <- "processed_data/"
 write.csv(subjectmeans, file = paste0(path,"jmarias.csv")) #Check excel file for any issues with data
 
 

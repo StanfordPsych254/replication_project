@@ -11,7 +11,7 @@ library(png)
 sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}
 ci95 <- function(x) {sem(x) * 1.96}
 
-path <- "~/replication_project/data/mkeil/"
+path <- "data/mkeil/"
 files <- dir(path, pattern = "*.json")
 d.raw <- data.frame()
 for (f in files) {
@@ -167,7 +167,7 @@ d1_bar <- d1 %>%
  #47 included
 
 # Save intermediate file
-path <- "~/replication_project/processed_data/"
+path <- "processed_data/"
 write.csv(d1, file = paste0(path,"mkeil.csv")) #Check excel file for any issues with data
 
 ###Confirmatory Analyses
