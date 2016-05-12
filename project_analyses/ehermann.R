@@ -32,7 +32,7 @@ itemQuestionsFirstData <- df[df$pfFirst == 0,]
 
 data.lm = lm(formula = scale(overclaimScore) ~ scale(pfClaimScore) + scale(accuracy), data = df)
 
-pval <- round(summary(data.lm)$coef["scale(pfClaimScore)","Pr(>|t|)"],7)
+pval <- summary(data.lm)$coef["scale(pfClaimScore)","Pr(>|t|)"]
 tval <- round(summary(data.lm)$coef["scale(pfClaimScore)","t value"],3)
 est <- round(summary(data.lm)$coef["scale(pfClaimScore)","Estimate"],3)
 degrees <- data.lm$df

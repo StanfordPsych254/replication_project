@@ -233,7 +233,7 @@ write.csv(subjectmeans, file = paste0(path,"jmarias.csv")) #Check excel file for
 #################################################################################### 
 
 mathperflm4 <- lm(z.pvt ~ age + gender + z.genanx + I(z.genanx^2) + z.mathanx * z.mathmot + (I(z.mathanx^2) * z.mathmot), data = subjectmeans)
-pval <- round(summary(mathperflm4)$coef["z.mathmot:I(z.mathanx^2)","Pr(>|t|)"],3)
+pval <- summary(mathperflm4)$coef["z.mathmot:I(z.mathanx^2)","Pr(>|t|)"]
 tval <- round(summary(mathperflm4)$coef["z.mathmot:I(z.mathanx^2)","t value"],3)
 est <- round(summary(mathperflm4)$coef["z.mathmot:I(z.mathanx^2)","Estimate"],3)
 df <- mathperflm4$df

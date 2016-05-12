@@ -1,4 +1,3 @@
-rm(list=ls())
 library(rjson)
 library(plyr)
 library(splitstackshape)
