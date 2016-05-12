@@ -1,0 +1,337 @@
+# REPLICATION REPORT
+
+
+### Replication of The Sound of Power: Conveying and Detecting Hierarchical Rank Through Voice by Ko et al. (2015, Psychological Science)
+
+Link to Original Study: http://pss.sagepub.com/content/early/2014/11/20/0956797614553009.full.pdf+html
+
+Justin Salloum
+
+jsalloum@stanford.edu
+
+
+## Introduction
+
+The present study replicates Experiment 2 from the original research, which assesses whether perceivers use speakers' hierarchy-induced acoustic cues to make hierarchical inferences about speakers. The phenomenon of interest for our replication is the effect of hierarchy condition on hierarchy-based behavioral inferences. We will aim to replicate the authors' original finding that "speakers who had been in the high-rank condition — regardless of their sex — were rated as more likely to engage in high-rank behaviors than were those in the low-rank condition." This replication study will be conducted on Amazon Mechanical Turk.
+
+##Methods
+
+### Power Analysis
+
+Power analysis is based on the main effect of hierarchy condition (plev) on behavior score from the results of a 2x2 ANOVA of behavior score over speaker sex and hierarchy condition.
+
+Original effect size $\eta^2$ = 0.603, $f^2$ = 0.572. The effect size was determined using the F-statistic and the degrees of freedom:
+
+$df_1 = 1$
+
+$df_2 = 55$
+
+$F(1, 55) = 83.67$
+
+$\eta^2 = \frac{df_1F}{df_1F + df_2} = 0.603$
+
+$f^2 = \frac{\eta^2}{1 - \eta^2} = 0.572$
+
+Power analysis was done using the software G*Power. To detect an effect size of 0.603, the following samples sizes are needed to achieve various power:
+	
+Power |Sample Size Needed
+------|-------------------
+0.8   | 17
+0.9   | 21
+0.95  | 25
+
+All of these sample sizes are reasonable and financially feasible. Note that here the sample size used in data analysis actually corresponded to the number of stimuli (speakers) rather than the number of participants in the experiment, since all the scores for each speaker were averaged over all the participants in the original research.
+
+### Planned Sample
+
+Data will be collected from 40 Turkers, without restriction on demographics; this is the same number as the original study, only the original study sampled only undergraduates. However, as a result of our power analysis, each participant will listen to only 24 speakers (25 was the necessary sample size calculated, but it must be an even number to ensure equal representation between speaker sex), as opposed to 60 which is the number of speakers in the original research.
+
+### Materials
+
+Recording of speakers saying aloud the Negotiation Passage from the original research: "I'm glad that we are able to meet today and I am looking forward to our negotiation. I know that you and I have different perspectives on some of the key issues and that these differences would need to be resolved for us to come to an agreement."
+
+The following items are used to measure hierarchy-based behavioral influences:
+![alt text](Table5.png)
+
+### Procedure
+
+Each participant listened to a subset (12 female and 12 male) of recordings of speakers reading the Negotiation Passage, that Ko et al (2015) collected in their Experiment 1. In the original research, "the voices’ baseline acoustics served as the criterion for the subset of voices such that the chosen voices’ baseline values had a smaller average deviation from the mean of their respective sex’s baseline values," and 60 speakers were chosen. In this study the 24 speakers chosen were the 24 of the original 60 that had the smallest deviations between their baseline acoustics and mean baseline values of that 60, 12 per sex.
+
+In the first part of this study, participants listen to 3 randomly chosen sample recordings for the purpose of calibrating their volume level. This is just for the participants to practice and get an idea of what the recordings will be like, and during this part of the study participants do not make any behavioral inferences.
+
+In the second part of this study, participants listen to the 24 recordings one at at time, and "rate the speaker on 12 hierarchy-based behaviors plausible in a negotiation context, using a scale from 1 (not at all) to 7  (very much). Six of these behaviors were associated with high rank, and six with low rank. The order of the speakers and the order of the behaviors were randomized for each perceiver. The low-rank behaviors were reverse-scored, and then scores for all 12 behaviors were averaged to create one composite hierarchical-inference score per perceiver per speaker." The questions are divided up into 3 pages, 4 questions each, for each speaker, and while answering the questions for a given speaker, the participant will hear the recording of that speaker on loop.
+
+### Analysis Plan
+
+The data will be analyzed with the same approach as in the original research. Effect of condition on hierarchy-based behavioral inferences:
+
+"We examined the extent to which perceivers' hierarchical inferences were consistent with the speakers' hierarchical rank using a 2 (speaker's condition: high rank, low rank) × 2 (speaker's sex: male, female) analysis of variance."
+
+Like in the original research, the current research will look for a main effect of speaker's condition, as well as main effect of speaker sex and interaction effects between speaker condition and sex.
+
+### Differences from Original Study
+
+The biggest difference from the original study is the number of speakers that each participant listens to. In the original study each participant listened to and made inferences about 60 speakers, whereas in this study the number of speakers is reduced to 24. Another key difference is that answering the 12 questions about hierarchy-based behavior is the only inferential task that participants perform in this study, as we are only aiming to replicate the result from this component of the original experiment. The third difference between the current study and the original study is the setting; the current study will be entirely online and distributed via Amazon Mechanical Turk.
+
+The authors of the original research expressed concerns about using Mturk as a platform as opposed to a controlled lab environment, for a few reasons. Participants should ideally listen to the speakers with headphones, volume must be the same for participants, audio files are large and participants may experience internet connection issues, participants must not have a hearing disability and they cannot be in a distracting environment. While this replication study acknowledges these limitations and that it is challenging to account for them all, the study's instructions try as best as possible to reduce these.
+
+### Actual sample
+
+Data was collected from 40 Turkers, and one participant's data were dropped because one of the participant's scores for one of the speakers came in as 'NA'.
+
+### Differences from Pre-data Collection Methods Plan
+
+None
+
+## Results
+
+### Initialization and Setup
+
+Loading the libraries needed for data analysis.
+
+```{r}
+options(warn=-1)
+rm(list=ls())
+
+loadLibraries = function() {
+  library(tidyr)
+  library(dplyr)
+  library(ggplot2)
+  library(rjson)
+  library(tidyjson)
+  library(lme4)
+  library(lmerTest)
+  library(gridExtra)
+  library(lsr)
+}
+suppressMessages(loadLibraries())
+
+sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}
+ci95 <- function(x) {sem(x) * 1.96}
+```
+
+#### Data Reading
+
+Data is read from the various json files into a data frame in long form.
+
+```{r}
+wid = 1
+files = dir(paste0("./","final-results/"), pattern = "*.json")
+d.raw = data.frame()
+for (f in files) {
+  jf = paste0("./", "final-results/",f)
+  jd = fromJSON(paste(readLines(jf), collapse=""))
+  for (elem in jd$answers$data) {
+    id = data.frame(workerId = wid,
+                    speakerId = elem$speakerId,
+                    speakerSex = elem$sex,
+                    plev = elem$plev,
+                    behaviorScore = elem$behaviorScore)
+    d.raw = bind_rows(d.raw, id)
+  }
+  wid = wid + 1
+}
+```
+
+The original data is simply read in from the csv provided on OSF.
+
+```{r}
+d = read.csv('S2_voice_level_Final.csv')
+```
+
+#### Data Preparation for Analysis
+
+To prepare the data for analysis, speakerSex and plev are recoded as ['Male', 'Female'] and ['Low-rank', 'High-rank'], respectively. Two sets of analysis will be carried out:
+
+1. Analysis on the data aggregated by average behavior score (d.af), in order to replicate the analysis done in the original research. To draw comparison to the original results, plots will also be generated for the original data (d.of).
+2. Analysis on the raw data in long form (d.rawf). Mixed model analysis will be conducted to see if there are any random effects of other variables such as speaker id or worker id.
+
+```{r}
+
+# workerId, speakerId, dspeakerSex and plev are coded as factors in the raw data
+
+d.raw = d.raw %>% 
+  mutate(
+    workerId = as.factor(workerId),
+    speakerId = as.factor(speakerId),
+    speakerSex = ifelse(speakerSex == -1, "Male", "Female"),
+    plev = ifelse(plev == -1, "Low", "High")
+  )
+d.rawf = d.raw
+
+# d.af is the aggregated replication data and d.of is the aggregated original data with speakerSex. d.af.summ and d.of.summ represent the summary statistics for d.af and d.of respectively (mean, sem and ci)
+
+d.af = d.raw %>% 
+  group_by(speakerId, speakerSex, plev) %>%
+  summarise(behaviorScore = mean(behaviorScore))
+
+d.af.summ = d.raw %>%
+  group_by(plev, speakerSex) %>%
+  summarize(
+    mean = mean(behaviorScore),
+    sem =sem(behaviorScore), 
+    ci95 = ci95(behaviorScore)
+  )
+
+d.of = d %>% 
+  mutate(
+    speakerSex = ifelse(vsex == -1, "Male", "Female"),
+    plev = ifelse(plev == -1, "Low", "High"),
+    speakerId = voice, 
+    behaviorScore = newpster
+  ) %>%
+  select(speakerId, speakerSex, plev, behaviorScore)
+
+d.of.summ = d.of %>%
+  group_by(plev, speakerSex) %>%
+  summarize(
+    mean = mean(behaviorScore),
+    sem = sem(behaviorScore), 
+    ci95 = ci95(behaviorScore)
+  )
+```
+
+Now that the data has been prepared, here's a quick look at the summary statistics of our data that we will analyze:
+
+```{r}
+# Replication data
+print(d.af.summ)
+
+# Original data
+print(d.of.summ)
+```
+
+### 1. Confirmatory Analysis - Replication of Original Analysis
+
+#### Box Plots
+
+We will gather an idea of the distribution of behavior scores in relation to hierarchy condition and speaker sex, and compare with the original results.
+
+```{r}
+bx1 = ggplot(d.of, aes(x = plev, y = behaviorScore, fill = speakerSex)) +
+  geom_boxplot() +
+  labs(title = 'Original Results', x = 'Hierarchy Condition', y = 'Behavior Score') +
+  scale_fill_discrete(name = 'Speaker Sex')
+bx2 = ggplot(d.af, aes(x = plev, y = behaviorScore, fill = speakerSex)) +
+  geom_boxplot() +
+  labs(title = 'Replication Results', x = 'Hierarchy Condition', y = 'Behavior Score') +
+  scale_fill_discrete(name = 'Speaker Sex')
+
+grid.arrange(bx1, bx2, ncol = 2)
+```
+
+#### Bar Plots
+
+We will use bar plots to get an idea of the average behavior scores between hierarchy condition and speaker sex, and compare with the original results.
+
+```{r}
+bp1 = ggplot(d.of.summ, aes(x = plev, y = mean, fill = speakerSex)) +
+  geom_bar(position = 'dodge', stat = 'identity') +
+  geom_errorbar(aes(ymin = mean - ci95, ymax = mean + ci95), position = 'dodge') +
+  labs(title = 'Original Results', x = 'Hierarchy Condition', y = 'Behavior Score') +
+  scale_fill_discrete(name = 'Speaker Sex')
+bp2 = ggplot(d.af.summ, aes(x = plev, y = mean, fill = speakerSex)) +
+  geom_bar(position = 'dodge', stat = 'identity') +
+  geom_errorbar(aes(ymin = mean - ci95, ymax = mean + ci95), position = 'dodge') +
+  labs(title = 'Replication Results', x = 'Hierarchy Condition', y = 'Behavior Score') +
+  scale_fill_discrete(name = 'Speaker Sex')
+
+grid.arrange(bp1, bp2, ncol = 2)
+```
+
+Our results resemble the original results very closely, with speakers in the high rank condition having higher behavior scores than speakers in the low rank condition. This lends itself to a potential main effect of hierarchy condition on behavior score. Additionally just like in the original results, our plots do not show much of a difference between behavior scores for male and female speakers within each condition.
+
+#### Analysis of Variance (ANOVA) - Fixed Effects Model Analysis
+
+ANOVA over hierarchy condition and speaker sex is done with both the additive model and the interactive model.
+
+```{r}
+# Additive model
+rs1.1 = aov(behaviorScore ~ plev + speakerSex, data = d.af)
+summary(rs1.1)
+
+# Interactive Model
+rs1.2 = aov(behaviorScore ~ plev * speakerSex, data = d.af)
+summary(rs1.2)
+
+# Compare the two models
+anova(rs1.1, rs1.2)
+```
+
+The full interactive model fits the data better (Model 1 RSS = 2.22, Model 2 RSS = 2.17), which is what the authors of the original research used in their ANOVA.
+
+From the results we observe that only a main effect of hierarchy condition (*F*(1, 20) = 30.932, *p* < .001) on behavior score is present. There isn't a significant main effect of speaker sex on behavior score or a significant interaction between hierarchy condition and speaker sex (both *p*s > .49). Speakers in the high-rank condition had higher behavior scores than speakers in the low-rank condition, regardless of sex. The means and standard deviations will be computed and summarized as follows:
+
+```{r}
+d.af %>% 
+  group_by(plev) %>% 
+  summarise(mean = mean(behaviorScore), sd = sd(behaviorScore))
+```
+
+The effect size will be computed in order to conduct post-hoc power analysis.
+
+```{r}
+print(etaSquared(rs1.2, type = 1))
+etaSq = etaSquared(rs1.2, type = 1)[1,2]
+fSq = etaSq^2 / (1 - etaSq^2)
+f = sqrt(fSq)
+power = 0.945 # computed with G*Power
+```
+
+Effect size *f* = `r f`, and using G*Power for power calculations the post-hoc power is calculated to be `r power`.
+
+### 2. Exploratory Analysis
+
+All the data analysis thus far replicates the analysis that was actually done in the original study. Analysis in this section aims to follow up on the original analysis by analyzing the raw data (unaggregated, in long form) to look for other effects, particularly random item (speaker) effects and subject (participant) effects.
+
+#### Distribution of Behavior Scores
+
+To get an idea of the distribution of behavior scores in the raw data, i.e. without being summarized and averaged across speaker, we will plot the density of behavior score per hierarchy condition, and also per hierarchy condition per speaker sex.
+
+```{r}
+dp1 = ggplot(d.rawf, aes(x = behaviorScore, fill = plev)) +
+  geom_density(alpha =.5) +
+  labs(title = 'Raw Data Distribution', x = 'Behavior Score') +
+  scale_fill_discrete(name = 'Hierarchy Condition')
+dp2 = ggplot(d.rawf, aes(x = behaviorScore, fill = plev)) +
+  geom_density(alpha =.5) + 
+  facet_grid(~ speakerSex) +
+  labs(x = 'Behavior Score') +
+  scale_fill_discrete(name = 'Hierarchy Condition')
+
+grid.arrange(dp1, dp2)
+```
+
+Interestingly enough, there seems to be much less variance among the behavior scores of speakers in the high-rank condition than among those of the low-rank speakers.
+
+#### Mixed Model Analysis
+
+Worker id and speaker id will be modeled as random effects in mixed model analysis to see if either them account for much of the variance of the data.
+
+```{r}
+# Random effect of speakerId
+rs2.1 = lmer(behaviorScore ~ (plev * speakerSex) + (1 | speakerId), data = d.rawf )
+summary(rs2.1)
+
+# Random effect of workerId
+rs2.2 = lmer(behaviorScore ~ (plev * speakerSex) + (1 | workerId), data = d.rawf )
+summary(rs2.2)
+
+# Random effect of both speakerId and workerId
+rs2.3 = lmer(behaviorScore ~ (plev * speakerSex) + (1 | workerId) + (1 | speakerId), data = d.rawf )
+summary(rs2.3)
+```
+
+Neither worker id nor speaker id account for a significant portion of the variance, so the fixed effects model works fine.
+
+## Discussion
+
+### Summary of Replication Attempt
+
+A 2 (speaker’s condition: high rank, low rank) × 2 (speaker’s sex: male, female) ANOVA was conducted to examine the extent to which perceivers' hierarchical inferences were consistent with the speakers' hierarchical rank. Our results successfully replicated the original results by finding a significant main effect of speaker's hierarchy condition on behavior score (*F*(1, 20) = 30.932, *p* < .001). Neither the main effect of speaker sex nor the interaction between hierarchy condition and speaker sex were significant, which is also consistent with the original results.
+
+The effect size also successfully replicates those in the original results. Our model achieved an effect size of *f* = `r f` and post-hoc power of `r power` (which is almost identical to our proposed power of .95), and the model from the original findings had an effect size of *f* = 0.756.
+
+### Commentary
+
+The replication overall was successful and the results were very faithful to the original results. Even though this study was conducted on Mturk instead of in a controlled laboratory environment like in the original research and therefore couldn't directly control all the limitations and address all of the concerns raised by the original authors, the findings were the same.
