@@ -2,5 +2,5 @@
 .Rhistory
 .RData
 packrat/lib*/
-
+*cache
 .httr-oauth
