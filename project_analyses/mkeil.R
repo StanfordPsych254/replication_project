@@ -198,30 +198,3 @@ project_info <- data.frame(
   rep_p_value = p.val,
   notes= "double check the aov mixed model- same as original authors? And different result than stated in report. This doesn't seem right collapsing by multiple trials first...?"
 )
-
-##### Additional Confirmatory Analysis - File B eight word condition without interaction
-
-# #filter data to 8-word condition and subgroups
-# dword8 <- d1_bar %>% filter(word_condition == 8)
-# dword8Save <- dword8 %>% filter(save_condition == "save")
-# dword8Delete <- dword8 %>% filter(save_condition == "delete")
-# 
-# 
-# #t-test 8-word condition
-# ttestB8 = t.test(meanB ~ save_condition, data = dword8, var.equal=T) #var.equal=T based on whole t-value below?
-# stat <- ttestB8$statistic
-# df <- ttestB8$parameter
-# p.val <-ttestB8$p.val
-# 
-# #effect size for difference in conditions
-# cohens_d <- cohen.d(dword8Save$meanB,dword8Delete$meanB)
-# # 
-# # The result of the 8-word File B recall for the original study was: 
-# # 
-# # > participants in the eight-word condition recalled significantly more words from File B when they had saved File A than when they had not saved File A, t(23) = 4.56, p < .001, d = 0.93, mean difference = .13 (95% CI = [.07, .18]). 
-# 
-
-
-# detach("package:tidyr")
-# detach("package:rjson")
-# detach("package:dplyr")
