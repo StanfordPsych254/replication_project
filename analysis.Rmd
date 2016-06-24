@@ -15,6 +15,7 @@ library(dplyr)
 library(ggplot2)
 library(googlesheets)
 library(readr)
+library(tidyr)
 ```
 
 Get project planning sheet straight from google docs. 
