@@ -10,7 +10,7 @@ document-params: "a4paper,man,apacite,floatsintext,longtable"
 bib-tex: "replication254.bib"
 
 author-information:
-    - \author{Eric Smith*, Robert X. D. Hawkins*, Michael C. Frank}
+    - \author{Eric Smith*, Robert X. D. Hawkins*, the students of Psych 254, & Michael C. Frank}
 
 affiliation-information:
     - \affiliation{Department of Psychology, Stanford University}
@@ -42,10 +42,9 @@ In the current article, we provide evidence on this issue by reporting the resul
 
 With respect to pedagogy, we describe our process for conducting well-powered, high-quality, direct replications as part of classroom pedagogy. This process is dramatically facilitated by the use of standardized (and free) technical tools for statistical analysis, data and code sharing, and creation of web experiments. Nevertheless, there are significant limitations on what can be done in the course of a single term and within the constraints of a course budget. We return in the Discussion to limitations on our approach. 
 
-With respect to broader questions of meta-science, it is a challenging proposition to estimate the reproducibility of an entire literature [cf. @osc2015;@gilbert2016;@anderson2016]. 
+With respect to broader questions of meta-science, it is a challenging proposition to estimate the replicability of an entire literature [cf. @osc2015;@gilbert2016;@anderson2016]. Making such an estimate requires determining a sampling strategy, a notion of what constitutes a direct replication, what constitutes a successful replication, among many other difficult decisions. In the current work, we focus on a quantity that is easier to estimate: the probability that a graduate student can choose an article of interest in *Psychological Science* and -- in a single attempt, and within constraints of budget, expertise, and effort -- reproduce the basic pattern of findings with sufficient fidelity to be able to build on it in future work. We believe that this notion of whether a piece of research supports cumulative progress is an important construct. Whether another independent scientist can build on a result is perhaps as important as -- and in many cases easier to measure -- whether the work is reproducible in some more abstract sense. 
 
-In sum, we view the contribution of the current work to be two-fold. First, we provide a proof-of-concept and pedagogical model for conducting replications in the classroom. Second, we provide an estimate of how likely it is for a graduate student to choose an article of interest in *Psychological Science* and -- within constraints of budget, expertise, and effort -- reproduce the basic pattern of findings with sufficient fielility to be able to build on it in future work. We believe that this notion of whether a piece of research supports cumulative progress is an important construct. Whether another independent scientist can build on a result is perhaps as important as -- and in many cases easier to measure -- whether the work is reproducible in some more abstract sense. 
-
+In sum, we view the contribution of the current work to be two-fold. First, we provide a proof-of-concept and pedagogical model for conducting replications in the classroom. Second, we provide an initial estimate of what proportion of studies from the most recent volume of *Psychological Science* could easily be reproduced by a motivated student. 
 
 ```{r}
 project_plan_sheet <- gs_url("https://docs.google.com/spreadsheets/d/1KZw75xlypvtK0cDoOHqXfFd3HsrfJ4gbq8iEJ6LOa0Y", lookup=TRUE) # Need lookup=T to initialize
@@ -62,7 +61,7 @@ ppt <- project_plan %>%
         select(cite, expt_num, open_data,
                open_materials, original_on_turk, original_n,collected_n)
 
-names(ppt) = c("Citation", "Expt Num", "Data", "Materials", "Turk?", 
+names(ppt) = c("Citation", "Expt", "Data", "Materials", "Turk?", 
                "N (orig)","N (rep)")
 
 # print(xtable(ppt, caption = "Summary of attempted replications", 
@@ -75,7 +74,7 @@ names(ppt) = c("Citation", "Expt Num", "Data", "Materials", "Turk?",
 \centering
 \begin{tabular}{lllllrr}
   \hline
-Citation & Expt Num & Data & Materials & Turk? & N (orig) & N (rep) \\ 
+Citation & Expt & Data & Materials & Turk? & N (orig) & N (rep) \\ 
   \hline
 @storm2015 & 3 & No & No & No &  48 &  61 \\ 
 @lewis2015 & 4 & No & Yes & Yes & 122 & 128 \\ 
@@ -124,43 +123,31 @@ One part of our workflow was extremely useful both pedagogically and for encoura
 
 To ensure high quality replications, students went through a rigorous process in which each student's work was reviewed several times by both the instructor (MCF) and the teaching assistants (ES and RXDH). In addition to as-needed guidance, each student collected two pilot samples. The first, "pilot A," consisted of a handful of non-naive participants (e.g., the experimenter, other students). The goal of this pilot was to ensure that all needed data were being logged by the experiment and that analytic scripts for the confirmatory analyses functioned appropriately. After pilot A was completed, the instructor or a TA reviewed the student's experiment (acting as a participant) and critiqued and reviewed the student's full analytic code and output. 
 
-Once requested changes were made, the student conducted "Pilot B," using a handful of naive participants recruited from Mechanical Turk. The goal of this pilot was to ensure that participants were able to complete the experiment and did not report any substantial issues with instructions or technical details of the experiment. (All students were instructed to give participants a way to leave free-form comments at the end of the experiment but prior to debriefing text). At the conclusion of Pilot B, both the instructor and a TA reviewed the student's analytic code and its outputs on the data for all confirmatory analysis. The goal of this code review was to ensure that all planned analyses were 
+Once requested changes were made, the student conducted "Pilot B," using a handful of naive participants recruited from Mechanical Turk. The goal of this pilot was to ensure that participants were able to complete the experiment and did not report any substantial issues with instructions or technical details of the experiment. (All students were instructed to give participants a way to leave free-form comments at the end of the experiment but prior to debriefing text). At the conclusion of Pilot B, both the instructor and a TA reviewed the student's analytic code and its outputs on the data for all confirmatory analysis. The goal of this code review was to ensure that all planned analyses were specified correctly and with sufficient detail to permit inclusion in the broader analysis.
 
+After Pilot B review was completed, students were given authorization to collect the full sample of participants, contingent on having made the requested change. Prior to data collection, the analytic script containing all confirmatory analyses was pre-registered using the Open Science Framework. (In one case, a student failed to complete the pre-registration but nevertheless submitted a pre-specified analysis plan to the instructors for review). 
 
+## Sample size determination and statistical approach
 
+After selecting a paper of interest, students selected a particular study from within that paper based on their judgment of interest and feasibility. The modal study chosen was the first, but several students chose later studies in a set as well. 
 
-Contributions
-Pedagogical recipe
-Author contact template
-Course experiment templates
-Extraction of key statistic, power analysis
-Multiple reviews by team
-Pre-registration
-Proof of concept
-Table w/ all included replications
-Scatter plot of effect sizes?
-Actual findings
+For purposes of planning and analysis, we asked stuents Despite the general emphasis in meta-analytic and reproducibility efforts to aggregate a single effect size of interest [@osc2015;@lipsey2001], it was often challenging to identify a single key statistical test in studies. Often a wide variety of statistical tests were conducted, often within one or several regression models with multiple specifications. Thus, we interpret "key statistical test" results with caution. Nevertheless, despite this interpretive difficulty, we attempted to use a single statistical test as our target for experiment planning and analysis. This test was determined by iterative discussion between the student, instructor, and TAs. 
+
+Derermining appropriate sample sizes is a major challenge in replication research [@button2013,@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;button2013], but -- especially with the constraints of a limited budget -- it may be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or underpowered original studies but may lead to impractical or unnecessary recommendations for experiments that were initially large and/or adequately powered. 
+
+We eventually used a hybrid, case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget.^[We initially were allocated $1,500 but one student contributed personal research funds, leading to a total cost of \approx $1,700 for all studies. We attempted to set payment for our studies at approximately $6/hour based on timing estimated from pilot A sessions.] In `{r} sum(project_plan$power_standard == "80% power")} cases, we powered the replication attempt to 80% post-hoc power. In `{r} sum(project_plan$power_standard == "Original")` cases, we used the original sample size. In one case, the original experiment was apparently extremely over-powered in the post-hoc analysis, so we chose a smaller sample size that still would apparently yield high power.  In one case, we reduced the number of trials as part of the adaptation to mechanical turk, and in one case of a multi-step procedure where the first step consisted of stimulus generation, we decreased the N in the first stage of the procedure (details available in Supplemntal Materials). 
+
 ## Individual Replications
 
-Details of individual replications are available in the supplementary materials.  
-### @storm2015
+Details of individual replications are available in the supplementary materials. Students chose findings from a wide variety of domains for replication. One group was nvestigations of memory and visual attention [e.g., @franconeri2015], including in applied contexts like remembering "deleted" files [@storm2015] or tracking transition between locations on smartphone apps [@liverence2015]. A second cluster came from studies of social perception, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015].
 
-### @lewis2015
+## Analysis strategy
 
-### @scopelliti2015
-
-### @liverence2015
-
-### @wang2015
-
-### @ko2015
-
-### @dunning2015
-
+Analyses for the final project were pre-registered ([https://osf.io/rxz8m/]())
 
 # Results
 
-Analyses for the final project were pre-registered ([https://osf.io/rxz8m/]()).
+.
 
 ## Pedagogical assessment 
 
