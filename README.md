@@ -18,3 +18,7 @@ Scripts return a one-row dataframe with the following format:
 ## Data
 
 Data files live in `processed_data`
+
+## Packrat
+
+Before running code, call `packrat: restore()` 
