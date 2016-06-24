@@ -10,7 +10,7 @@ document-params: "a4paper,man,apacite,floatsintext,longtable"
 bib-tex: "replication254.bib"
 
 author-information:
-    - \author{Eric Smith*, Robert X. D. Hawkins*, the students of Psych 254, & Michael C. Frank}
+    - \author{Eric Smith*, Robert X. D. Hawkins*, the students of Psych 254, and Michael C. Frank}
 
 affiliation-information:
     - \affiliation{Department of Psychology, Stanford University}
@@ -30,7 +30,7 @@ rm(list=ls())
 library(knitr)
 knitr::opts_chunk$set(fig.width=6, fig.height=5, fig.crop = FALSE, 
                       fig.path='figs/', echo=FALSE, warning = FALSE, 
-                      cache=FALSE, message = FALSE, sanitize = TRUE)
+                      cache=TRUE, message = FALSE, sanitize = TRUE)
 library(googlesheets)
 library(dplyr)
 library(xtable)
@@ -46,13 +46,9 @@ With respect to broader questions of meta-science, it is a challenging propositi
 
 In sum, we view the contribution of the current work to be two-fold. First, we provide a proof-of-concept and pedagogical model for conducting replications in the classroom. Second, we provide an initial estimate of what proportion of studies from the most recent volume of *Psychological Science* could easily be reproduced by a motivated student. 
 
-```{r}
+```{r, results='asis'}
 project_plan_sheet <- gs_url("https://docs.google.com/spreadsheets/d/1KZw75xlypvtK0cDoOHqXfFd3HsrfJ4gbq8iEJ6LOa0Y", lookup=TRUE) # Need lookup=T to initialize
 project_plan_raw <- gs_read_csv(project_plan_sheet)
-```
-
-{\small 
-```{r, results='asis',  fig.pos = "t", fig.cap = "Summary of attempted replications."}
 
 project_plan <- project_plan_raw %>%
   filter(`include_in_final_writeup`==1) 
@@ -86,7 +82,7 @@ Citation & Expt & Data & Materials & Turk? & N (orig) & N (rep) \\
 @dunning2015 & 1b & No & Yes & Yes & 202 &  50 \\ 
 @proudfoot2015 & 1 & No & No & Yes &  80 &  84 \\ 
 @zaval2015 & 1 & Yes & Yes & Yes & 312 & 328 \\ 
-@franconeri2015 & 1a & No & No & No &  12 &  27 \\ 
+@xu2015 & 1a & No & No & No &  12 &  27 \\ 
    \hline
 \end{tabular}
 \caption{Summary of attempted replications} 
@@ -135,11 +131,17 @@ For purposes of planning and analysis, we asked stuents Despite the general emph
 
 Derermining appropriate sample sizes is a major challenge in replication research [@button2013,@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;button2013], but -- especially with the constraints of a limited budget -- it may be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or underpowered original studies but may lead to impractical or unnecessary recommendations for experiments that were initially large and/or adequately powered. 
 
-We eventually used a hybrid, case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget.^[We initially were allocated $1,500 but one student contributed personal research funds, leading to a total cost of \approx $1,700 for all studies. We attempted to set payment for our studies at approximately $6/hour based on timing estimated from pilot A sessions.] In `{r} sum(project_plan$power_standard == "80% power")} cases, we powered the replication attempt to 80% post-hoc power. In `{r} sum(project_plan$power_standard == "Original")` cases, we used the original sample size. In one case, the original experiment was apparently extremely over-powered in the post-hoc analysis, so we chose a smaller sample size that still would apparently yield high power.  In one case, we reduced the number of trials as part of the adaptation to mechanical turk, and in one case of a multi-step procedure where the first step consisted of stimulus generation, we decreased the N in the first stage of the procedure (details available in Supplemntal Materials). 
+We eventually used a hybrid, case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget.
+^[We initially were allocated \$1,500 but one student contributed personal research funds, leading to a total cost of $\approx$ \$1,700 for all studies. We attempted to set payment for our studies at approximately \$6/hour based on timing estimated from pilot A sessions.] 
+In 
+`{r} sum(project_plan$power_standard == "80% power")} 
+cases, we powered the replication attempt to 80\% post-hoc power. In 
+`{r} sum(project_plan$power_standard == "Original")` 
+cases, we used the original sample size. In one case, the original experiment was apparently extremely over-powered in the post-hoc analysis, so we chose a smaller sample size that still would apparently yield high power.  In one case, we reduced the number of trials as part of the adaptation to mechanical turk, and in one case of a multi-step procedure where the first step consisted of stimulus generation, we decreased the N in the first stage of the procedure (details available in Supplemntal Materials). 
 
 ## Individual Replications
 
-Details of individual replications are available in the supplementary materials. Students chose findings from a wide variety of domains for replication. One group was nvestigations of memory and visual attention [e.g., @franconeri2015], including in applied contexts like remembering "deleted" files [@storm2015] or tracking transition between locations on smartphone apps [@liverence2015]. A second cluster came from studies of social perception, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015].
+Details of individual replications are available in the supplementary materials. Students chose findings from a wide variety of domains for replication. One group was nvestigations of memory and visual attention [e.g., @xu2015], including in applied contexts like remembering "deleted" files [@storm2015] or tracking transition between locations on smartphone apps [@liverence2015]. A second cluster came from studies of social perception, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015].
 
 ## Analysis strategy
 
