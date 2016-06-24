@@ -2,36 +2,32 @@ library(tidyr)
 library(rjson)
 library(dplyr)
 
-sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}
-ci95 <- function(x) {sem(x) * 1.96}
-
 path <- "data/mkeil/"
 files <- dir(path, pattern = "*.json")
 d.raw <- data.frame()
 for (f in files) {
   jf <- paste0(path, f)
   jd <- fromJSON(paste(readLines(jf), collapse=""))
-  jd$answers$data[9]
+  # jd$answers$data[9]
   for(i in 1:8){
-    id <- data.frame(
-                   workerId = jd$WorkerId,
-                   trial_num = i,
-                   start_num = jd$answers$data[[i]]$start_number,
-                   digits = jd$answers$data[[i]]$digits,
-                   word_condition = jd$answers$data[[i]]$word_condition,
-                   save_choice = jd$answers$data[[i]]$save_choice,
-                   save_condition = jd$answers$data[[i]]$save_condition,
-                   FileB = jd$answers$data[[i]]$FileB,
-                   FileA = jd$answers$data[[i]]$FileA,
-                   B_Recall = jd$answers$data[[i]]$B_Recall,
-                   A_Recall = jd$answers$data[[i]]$A_Recall,
-                   time = jd$answers$data[[i]]$time,
-                   age = jd$answers$data[[9]]$age,
-                   gender = jd$answers$data[[9]]$gender,
-                   homelang = jd$answers$data[[9]]$homelang,
-                   race = jd$answers$data[[9]]$race
-                   # comments = jd$answers$data[[9]]$comments
-                   )
+    id <- data.frame(workerId = jd$WorkerId,
+                     trial_num = i,
+                     start_num = jd$answers$data[[i]]$start_number,
+                     digits = jd$answers$data[[i]]$digits,
+                     word_condition = jd$answers$data[[i]]$word_condition,
+                     save_choice = jd$answers$data[[i]]$save_choice,
+                     save_condition = jd$answers$data[[i]]$save_condition,
+                     FileB = jd$answers$data[[i]]$FileB,
+                     FileA = jd$answers$data[[i]]$FileA,
+                     B_Recall = jd$answers$data[[i]]$B_Recall,
+                     A_Recall = jd$answers$data[[i]]$A_Recall,
+                     time = jd$answers$data[[i]]$time,
+                     age = jd$answers$data[[9]]$age,
+                     gender = jd$answers$data[[9]]$gender,
+                     homelang = jd$answers$data[[9]]$homelang,
+                     race = jd$answers$data[[9]]$race
+                     # comments = jd$answers$data[[9]]$comments
+    )
     d.raw <- bind_rows(d.raw, id)
   }
 }
@@ -42,6 +38,7 @@ for (f in files) {
 d1 <- d.raw
 
 entered_digits = strsplit(d1$digits, "[\n]")
+d1$DigitScore <- NA
 
 for(i in seq(from=1, to=nrow(d1), by=1)){
   correct_digit = d1$start_num[i]
@@ -53,7 +50,7 @@ for(i in seq(from=1, to=nrow(d1), by=1)){
     }
     correct_digit = as.numeric(digit)
   }
-  digitScore
+  
   d1$DigitScore[i] = digitScore
 }
 
@@ -65,6 +62,7 @@ for(i in seq(from=1, to=nrow(d1), by=1)){
 FileA_split = strsplit(d1$FileA, "[,]")
 FileA_recall_split = strsplit(d1$A_Recall, "[\n]")
 
+d1$AScore <- NA
 for(i in seq(from=1, to=nrow(d1), by=1)){
   FileA_split[[i]]
   FileAScore = 0
@@ -86,6 +84,7 @@ for(i in seq(from=1, to=nrow(d1), by=1)){
   }
 }
 
+d1$BScore <- NA
 #FileB
 for(i in seq(from=1, to=nrow(d1), by=1)){
   FileB_split = strsplit(d1$FileB, "[,]")
@@ -121,9 +120,9 @@ d1 <- d1 %>% mutate(save_condition = ifelse(save_condition == "nosave","delete",
 
 #remove wrong followers
 included_workers <- d1 %>%
-group_by(workerId)  %>%
-summarise(followed_instructions = all(save_condition == save_choice)) %>%
-filter(followed_instructions)
+  group_by(workerId)  %>%
+  summarise(followed_instructions = all(save_condition == save_choice)) %>%
+  filter(followed_instructions)
 d1 <- d1 %>% filter(workerId %in% included_workers$workerId)
 #7 particpants eliminated
 
@@ -147,16 +146,16 @@ d1_keep <- filter(d1_keep, meanDigit > digit_bottom_cutoff)
 d1_means <- d1_keep
 d1 <- filter(d1, workerId %in% d1_keep$workerId)
 
-d1_bar <- d1 %>%
-  group_by(gender,race,age,workerId,word_condition,save_condition) %>% 
-  summarise(meanB = mean(BScore), 
-            meanA =mean(AScore), 
-            meanDigit = mean(DigitScore), 
-            meanTime = mean(time), 
-            seB = sem(BScore), 
-            seA = sem(AScore))
+# d1_bar <- d1 %>%
+#   group_by(gender,race,age,workerId,word_condition,save_condition) %>% 
+#   summarise(meanB = mean(BScore), 
+#             meanA =mean(AScore), 
+#             meanDigit = mean(DigitScore), 
+#             meanTime = mean(time), 
+#             seB = sem(BScore), 
+#             seA = sem(AScore))
 
- #47 included
+#47 included
 
 # Save intermediate file
 path <- "processed_data/"
@@ -199,27 +198,3 @@ project_info <- data.frame(
   rep_p_value = p.val,
   notes= "double check the aov mixed model- same as original authors? And different result than stated in report. This doesn't seem right collapsing by multiple trials first...?"
 )
-  
-##### Additional Confirmatory Analysis - File B eight word condition without interaction
-
-#filter data to 8-word condition and subgroups
-dword8 <- d1_bar %>% filter(word_condition == 8)
-dword8Save <- dword8 %>% filter(save_condition == "save")
-dword8Delete <- dword8 %>% filter(save_condition == "delete")
-
-
-#t-test 8-word condition
-ttestB8 = t.test(meanB ~ save_condition, data = dword8, var.equal=T) #var.equal=T based on whole t-value below?
-stat <- ttestB8$statistic
-df <- ttestB8$parameter
-p.val <-ttestB8$p.val
-
-#effect size for difference in conditions
-# cohens_d <- cohen.d(dword8Save$meanB,dword8Delete$meanB)
-# 
-# The result of the 8-word File B recall for the original study was: 
-# 
-# > participants in the eight-word condition recalled significantly more words from File B when they had saved File A than when they had not saved File A, t(23) = 4.56, p < .001, d = 0.93, mean difference = .13 (95% CI = [.07, .18]). 
-
-
-
