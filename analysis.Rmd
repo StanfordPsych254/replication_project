@@ -45,17 +45,16 @@ project_keys <- project_plan$project_key # Find user names that are included in
 
 passing <- c("mkeil","jreynolds","jmarias","jsalloum","ehermann",
              "jedtan", "lampinen", "salehi")
-failing <- c("auc", "rhiac", "sraposo")
+failing <- c("smraposo", "auc", "rhiac")
 
 # Run all respective R code - need loop because project_keys same variable name
 for(project_key in passing) { # project_keys
   fp <- paste0("project_analyses/",project_key,".R")
   
   print(fp)
-  
   tryCatch(source(fp), 
            error = function(e) {
-             errors <- c(errors, paste0(project_key," has an error in .R file"))
+             print(e)
              }
            ) 
   

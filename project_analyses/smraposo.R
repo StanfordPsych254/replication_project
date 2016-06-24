@@ -4,14 +4,6 @@ library(dplyr)
 library(tidyr)
 library(stringr)
 
-<<<<<<< HEAD
-=======
-
-#Loading helpers
-sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}
-ci95 <- function(x) {sem(x) * 1.96}
-
->>>>>>> bca51d52d61e868f04b153d2adbe12a0aef7238f
 #Getting files
 path <- "data/smraposo/"
 files <- dir(path, 
