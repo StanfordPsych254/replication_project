@@ -1,12 +1,11 @@
 library(ggplot2)
 library(tidyr)
-library(lme4)
+# library(lme4)
 library(rjson)
-library(effsize)
-library(compute.es)
-library(grid)
-library(png)
-detach("package:dplyr")
+# library(effsize)
+# library(compute.es)
+# library(grid)
+# library(png)
 library(dplyr)
 
 sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}

@@ -1,13 +1,13 @@
 library(tidyr)
-library(plyr)
+# library(plyr)
 library(dplyr)
 library(psych)
 library(ggplot2)
 library(Hmisc)
-library(xtable)
-library(knitr)
+# library(xtable)
+# library(knitr)
 library(rjson)
-library(tidyjson)
+# library(tidyjson)
 library(memisc)
 
 #Script for generating clean correlation table (bottom triangle only) with significance stars
