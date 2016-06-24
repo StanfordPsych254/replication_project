@@ -49,10 +49,10 @@ temp_project_keys <- c("smraposo","jreynolds","jmarias","ehermann", "mkeil") # O
 # Run all respective R code - need loop because project_keys same variable name
 rm("project_info") # In case var is saved
 for(project_key in project_keys) { # change from temp - test; project_key <- "smraposo"
-  print(project_key)
+  print(paste0("Running ",project_key))
   fp <- paste0("project_analyses/",project_key,".R")
   #source(fp)
-  tryCatch(source(fp), error=function(e) {errors <- c(errors,paste0(project_key," has an error in .R file"),print(fp))}) 
+  tryCatch(source(fp), error=function(e) {print(e)}) 
   if(exists("project_info")) { # If has project_info dataframe
     all_project_info <- bind_rows(all_project_info,project_info) # add to all data
     rm("project_info") # In case other file does not same
