@@ -1,11 +1,11 @@
 library(rjson)
-library(plyr)
-library(splitstackshape)
+# library(plyr)
+library(splitstackshape) # csplit is the call, can change to tidyr "separate"
 library(dplyr)
 library(tidyr)
 library(stringr)
 library(ggplot2)
-library(knitr)
+# library(knitr)
 
 
 #Loading helpers

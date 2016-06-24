@@ -1,5 +1,5 @@
-library(readr)
-library(jsonlite)
+# library(readr)
+library(rjson)
 library(dplyr)
 
 ## Code in this block taken from: http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2)
