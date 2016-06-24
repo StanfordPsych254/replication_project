@@ -8,7 +8,6 @@ library(stringr)
 #Loading helpers
 sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}
 ci95 <- function(x) {sem(x) * 1.96}
-theme_set(theme_linedraw())
 
 #Getting files
 path <- "data/smraposo/"
@@ -140,7 +139,3 @@ project_info <- data.frame(
   rep_es = Fstat1, 
   rep_test_statistic = stat_descript,
   rep_p_value = pval1)
-
-
-
-

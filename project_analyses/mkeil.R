@@ -215,7 +215,7 @@ df <- ttestB8$parameter
 p.val <-ttestB8$p.val
 
 #effect size for difference in conditions
-cohens_d <- cohen.d(dword8Save$meanB,dword8Delete$meanB)
+# cohens_d <- cohen.d(dword8Save$meanB,dword8Delete$meanB)
 # 
 # The result of the 8-word File B recall for the original study was: 
 # 
