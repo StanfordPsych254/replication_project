@@ -1,43 +1,136 @@
 ---
 title: "Assessing the Replicability of Psychological Science Through Pedagogy"
-short-title: "Replication through pedagogy"
+short-title: "Replication Through Pedagogy"
 output: kmr::apa_manuscript
 csl: apa6.csl
 bibliography: replication254.bib
 
-document-params: "a4paper,man,apacite,floatsintext"
+document-params: "a4paper,man,apacite,floatsintext,longtable"
 
-bib-tex: "library.bib"
+bib-tex: "replication254.bib"
 
 author-information:
-    - \author{Eric Smith*}
-    - \author{Robert X. D. Hawkins*}
-    - \author{Michael C. Frank}
+    - \author{Eric Smith*, Robert X. D. Hawkins*, Michael C. Frank}
 
 affiliation-information:
-    # Single affiliation
     - \affiliation{Department of Psychology, Stanford University}
 
 author-note:
-    "The Author Note, containing contact information, acknowledgements, etc"
+    "Thanks to the Stanford Department of Psychology and the Vice Provost for Undergraduate Education for funding to support the class."
     
 abstract: 
-    "Abstract text."
+    "Replications are important to science, but who will do them? One proposal is that students can conduct direct replications as part of their training; but to date there is limited evidence that this proposal can result in high-quality research outputs. We report a series of 11 pre-registered, direct replications of findings from the 2015 volume of Psychological Science, all conducted as part of a graduate-level experimental methods. By a variety of measures, these replications were successful approximately half of the time, providing an estimate of the probability that a motivated graduate student can reproduce a previously published finding of interest on a first attempt We describe the workflow and pedagogical methods that were used in the class (providing access to all materials) and discuss challenges for adoption of this model more broadly."
     
 keywords:
-    "If provided, keywords will be displayed on a line beneath the abstract."
+    "Replication; Reproducibility; Pedagogy; Experimental Methods"
 ---
 
 ```{r global_options, include=FALSE}
 rm(list=ls())
-knitr::opts_chunk$set(fig.width=6, fig.height=5, fig.crop = F, fig.path='figs/',
-                      echo=FALSE, warning=FALSE, cache=T, message=FALSE, sanitize = T)
+library(knitr)
+knitr::opts_chunk$set(fig.width=6, fig.height=5, fig.crop = FALSE, 
+                      fig.path='figs/', echo=FALSE, warning = FALSE, 
+                      cache=FALSE, message = FALSE, sanitize = TRUE)
+library(googlesheets)
+library(dplyr)
+library(xtable)
 ```
+
+Reproducibility is a core value for empirical research, but there is increasing concern throughout psychology that weak statistical standards and methodological practices have led to low empirical rates of replication [@osc2015]. Under the current incentive structure for science, direct replication is not typically valued, however. One potential solution to this problem is to make direct replication an explicit part of pedagogy: that is, to teach students about experimental methods by asking them to run replication studies [@frank2012;@grahe2012]. Despite enthusiasm for this idea, however [@lebel2015;@everett2015;@standing2016;@king2016], there is limited data -- beyond anecdotal reports or individual projects [@phillips2015;@lakens2013] -- to support its efficacy. 
+
+In the current article, we provide evidence on this issue by reporting the results of replication projects conducted in a single class (a graduate-level experimental methods course). As part of the required work of the course, students conducted high-power, direct replications of published articles from the 2015 volume of the journal *Psychological Science*. These studies both provide insight into the process of pedagogical replication and give evidence about the state of replicability. 
+
+With respect to pedagogy, we describe our process for conducting well-powered, high-quality, direct replications as part of classroom pedagogy. This process is dramatically facilitated by the use of standardized (and free) technical tools for statistical analysis, data and code sharing, and creation of web experiments. Nevertheless, there are significant limitations on what can be done in the course of a single term and within the constraints of a course budget. We return in the Discussion to limitations on our approach. 
+
+With respect to broader questions of meta-science, it is a challenging proposition to estimate the reproducibility of an entire literature [cf. @osc2015;@gilbert2016;@anderson2016]. 
+
+In sum, we view the contribution of the current work to be two-fold. First, we provide a proof-of-concept and pedagogical model for conducting replications in the classroom. Second, we provide an estimate of how likely it is for a graduate student to choose an article of interest in *Psychological Science* and -- within constraints of budget, expertise, and effort -- reproduce the basic pattern of findings with sufficient fielility to be able to build on it in future work. We believe that this notion of whether a piece of research supports cumulative progress is an important construct. Whether another independent scientist can build on a result is perhaps as important as -- and in many cases easier to measure -- whether the work is reproducible in some more abstract sense. 
+
+
+```{r}
+project_plan_sheet <- gs_url("https://docs.google.com/spreadsheets/d/1KZw75xlypvtK0cDoOHqXfFd3HsrfJ4gbq8iEJ6LOa0Y", lookup=TRUE) # Need lookup=T to initialize
+project_plan_raw <- gs_read_csv(project_plan_sheet)
+```
+
+{\small 
+```{r, results='asis',  fig.pos = "t", fig.cap = "Summary of attempted replications."}
+
+project_plan <- project_plan_raw %>%
+  filter(`include_in_final_writeup`==1) 
+
+ppt <- project_plan %>%
+        select(cite, expt_num, open_data,
+               open_materials, original_on_turk, original_n,collected_n)
+
+names(ppt) = c("Citation", "Expt Num", "Data", "Materials", "Turk?", 
+               "N (orig)","N (rep)")
+
+# print(xtable(ppt, caption = "Summary of attempted replications", 
+#        label = "tab:summary"), include.rownames=FALSE)
+```
+
+% latex table generated in R 3.3.0 by xtable 1.8-2 package
+% Fri Jun 24 12:02:11 2016
+\begin{table}[ht]
+\centering
+\begin{tabular}{lllllrr}
+  \hline
+Citation & Expt Num & Data & Materials & Turk? & N (orig) & N (rep) \\ 
+  \hline
+@storm2015 & 3 & No & No & No &  48 &  61 \\ 
+@lewis2015 & 4 & No & Yes & Yes & 122 & 128 \\ 
+@scopelliti2015 & 3 & No & Yes & Yes & 550 & 124 \\ 
+@liverence2015 & 1 & No & Some & No &  18 &  \\ 
+@wang2015 & 2 & No & No & No & 219 & 397 \\ 
+@sofer2015 & 1 & No & Yes & No &  48 &  95 \\ 
+@ko2015 & 2 & Yes & Some & No &  40 &  40 \\ 
+@dunning2015 & 1b & No & Yes & Yes & 202 &  50 \\ 
+@proudfoot2015 & 1 & No & No & Yes &  80 &  84 \\ 
+@zaval2015 & 1 & Yes & Yes & Yes & 312 & 328 \\ 
+@franconeri2015 & 1a & No & No & No &  12 &  27 \\ 
+   \hline
+\end{tabular}
+\caption{Summary of attempted replications} 
+\label{tab:summary}
+\end{table}
+
+# Methods
+
+We begin by describing the general method of the class, then discuss shared methods for the replications and the process of development for each project.
+
+## Class Outline
+
+All projects were completed as part of a class (syllabus and materials available at [http://psych254.stanford.edu]()). At the initiation of class, all students were told that they had the opportunity to participate in a group replication project to which they could contribute their class project. The requirements for joining the project were to conduct a pre-registered replication of a finding from the 2015 volume of *Psychological Science* and to contribute the code, data, and materials to the writeup. 
+
+Students selected projects based on interest, rather than via a systematic sampling strategy. Thus, all interpretation of our findings should be with respect to the distribution of student interest. Any reproducibility estimates arising from our analyses are estimates of the probability of reproducing a finding that is of interest, rather than findings in general. This sampling strategy may thus bias our results towards more exciting or novel findings.
+
+Of the 15 students in the class, all completed projects (two with extensions), but one failed to find a project of interest in the sampling frame and three opted out of the broader project prior to data collection.^[Note that 2/3 of these opted out projects were judged by the instructor team to have been successful replications; thus we have no evidence that these students opted out systematically due to their belief that their project would fail.] The remaining 11 students contributed code, data, registrations and materials to the final product. 
+
+## Participants
+
+All participants were recruited on Amazon Mechanical Turk; individual samples are given in Table \ref{tab:summary}. Note that of the `{r} nrow(ppt)` studies included in the final sample, `{r} sum(project_plan$original_on_turk=="Yes")` (`{r} round(mean(ppt$original_on_turk), digits=2)`%) were originally conducted on Mechanical Turk. All experiments were approved by the Stanford University institutional review board under protocol \#23274, "Reproducibility of psychological science and instruction." 
+
+## Materials and Methods
+
+Of the `{r} nrow(ppt)` studies included in the final sample, `{r} round(mean(ppt$open_materials == "Yes" | ppt$open_materials == "Some"), digits=2)`% of studies had either some or all materials openly available. For `{r} sum(!is.na(authors_contact))` studies, however, students contacted the authors to request either materials or clarification of methods (using a template email that was customized by the students and reviewed by the instructors). Responses were received in all but one case, usually within a matter of days.  
+
+## Workflow
+
+All materials and methods for our replication studies are available at [https://github.com/StanfordPsych254](). All experiments were coded in JavaScript, HTML, and CSS so as to be run in a standard web browser. All analyses were written using R, a free and open-source platform for statistical analysis. 
+
+One part of our workflow was extremely useful both pedagogically and for encouraging reproducible research practices. Students wrote their final reports using [R Markdown](http://rmarkdown.rstudio.com/), a "literate programming" environment in which statistical analysis code can be interspersed with text, figures, and tables. Using the template developed by @osc2015 for replication reports, students created dynamic documents that included their proposed replication study, the code necessary to analyze their data, and the outputs of their data analysis (e.g. statistical tests, figures). This document can be compiled into a variety of formats (e.g., HTML, PDF, Microsoft Word). This method of writing allows students to share a single compiled document via a hyperlink, facilitating review of writing, results, and code together in a single platform.^[The current manuscript is written in this fashion as well.] This writing method is also likely to reduce the frequency of statistical reporting errors [which appear to be regrettably common; @nuijten2015], given that many of these are likely introduced by copying and pasting between analysis outputs and manuscripts. 
+
+## Preregistration and Review
+
+To ensure high quality replications, students went through a rigorous process in which each student's work was reviewed several times by both the instructor (MCF) and the teaching assistants (ES and RXDH). In addition to as-needed guidance, each student collected two pilot samples. The first, "pilot A," consisted of a handful of non-naive participants (e.g., the experimenter, other students). The goal of this pilot was to ensure that all needed data were being logged by the experiment and that analytic scripts for the confirmatory analyses functioned appropriately. After pilot A was completed, the instructor or a TA reviewed the student's experiment (acting as a participant) and critiqued and reviewed the student's full analytic code and output. 
+
+Once requested changes were made, the student conducted "Pilot B," using a handful of naive participants recruited from Mechanical Turk. The goal of this pilot was to ensure that participants were able to complete the experiment and did not report any substantial issues with instructions or technical details of the experiment. (All students were instructed to give participants a way to leave free-form comments at the end of the experiment but prior to debriefing text). At the conclusion of Pilot B, both the instructor and a TA reviewed the student's analytic code and its outputs on the data for all confirmatory analysis. The goal of this code review was to ensure that all planned analyses were 
+
+
 
 
 Contributions
 Pedagogical recipe
-Toolset (dplyr, ggplot, mturk, etc)
 Author contact template
 Course experiment templates
 Extraction of key statistic, power analysis
@@ -47,38 +140,42 @@ Proof of concept
 Table w/ all included replications
 Scatter plot of effect sizes?
 Actual findings
+## Individual Replications
+
+Details of individual replications are available in the supplementary materials.  
+### @storm2015
+
+### @lewis2015
+
+### @scopelliti2015
+
+### @liverence2015
+
+### @wang2015
+
+### @ko2015
+
+### @dunning2015
 
 
-Methods
+# Results
 
-Class Methods
+Analyses for the final project were pre-registered ([https://osf.io/rxz8m/]()).
 
-Participants
-
-IRB
-
-Individual Replications
-
-Preregistration
-
-Project preregistration: https://osf.io/rxz8m/
-  
-  Results
-
-Pedagogical assessment 
+## Pedagogical assessment 
 
 how many replications were conducted to the intended standard, how many opted out etc. 
 
 Assessing the fidelity of replications to the original (in terms of same sample, same materials, same task parameters) 
 
-Scientific Assessment
+## Scientific Assessment
 
-Indices of replicability 
+### Indices of replicability 
 
 
-Coding of previous years’ findings
+### Coding of previous years’ findings
 
-Discussion
+# Discussion
 
 Importance of self-selected papers - these are the papers that interesting to next generation of researchers
 
@@ -87,35 +184,13 @@ OSF - but need search tools
 PsychFileDrawer
 CurateScience
 
-Supplemental
+# Supplemental
 
 All materials that are needed for class to implement
 Email templates
 Spreadsheets
 TA/prof auditing processes
 
-
-# Introduction 
-Cite fancy references [@Garnier2007].
-
-# Results 
-Results 
-
-## Subsection 1 
-You can use R chunks directly to plot graphs.
-
-```{r, graph, echo=TRUE, message=FALSE, fig.height=4, fig.width=4, fig.align='center', fig.cap='Figure caption'}
-require("ggplot2")
-x <- 0:100
-y <- 2 * (x + rnorm(length(x), sd = 3) + 3)
-ggplot(data = data.frame(x, y), 
-       aes(x = x, y = y)) + 
-  geom_point() + 
-  geom_smooth(method = "lm")
-```
-
-## Subsection 2 
-
-# Discussion 
-
 # References 
+
+
