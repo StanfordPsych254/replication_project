@@ -4,8 +4,6 @@
 # MCF NOTE: this script runs over hand-deduped anonymized data. I removed by hand
 # the 7 datapoints that were accidentally run twice (all in the control
 # condition). There should be 321 participants (not 328).
-
-
 library(tidyr) 
 library(dplyr)
 library(ggplot2) 
