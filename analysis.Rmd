@@ -45,7 +45,7 @@ project_keys <- project_plan$project_key # Find user names that are included in
 
 passing <- c("mkeil","jreynolds","jmarias","jsalloum","ehermann",
              "jedtan", "lampinen", "salehi")
-failing <- c("sraposo", "auc", "rhiac")
+failing <- c("auc", "rhiac", "sraposo")
 
 # Run all respective R code - need loop because project_keys same variable name
 for(project_key in passing) { # project_keys
