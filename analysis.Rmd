@@ -22,7 +22,7 @@ library(tidyr)
 Get project planning sheet straight from google docs. 
 
 ```{r}
-project_plan_sheet <- gs_url("https://docs.google.com/spreadsheets/d/1KZw75xlypvtK0cDoOHqXfFd3HsrfJ4gbq8iEJ6LOa0Y") # Need lookup=T to initialize
+project_plan_sheet <- gs_url("https://docs.google.com/spreadsheets/d/1KZw75xlypvtK0cDoOHqXfFd3HsrfJ4gbq8iEJ6LOa0Y", lookup = TRUE) # Need lookup=T to initialize
 project_plan_raw <- gs_read_csv(project_plan_sheet)
 ```
 
@@ -45,7 +45,7 @@ all_project_info <- data.frame( # initialize an empty dataframe
 project_keys <- list(project_plan$project_key) # Find user names that are included in analysis
 # For each user_
 
-temp_project_keys <- c("mkeil","smraposo","jreynolds","jmarias","ehermann") # Only do users we have data for currently
+temp_project_keys <- c("smraposo","jreynolds","jmarias","ehermann", "mkeil") # Only do users we have data for currently
 length(project_keys[[1]]) - length(temp_project_keys) # How many people missing
 
 ## 
@@ -53,6 +53,7 @@ length(project_keys[[1]]) - length(temp_project_keys) # How many people missing
 # Run all respective R code - need loop because project_keys same variable name
 rm("project_info") # In case var is saved
 for(project_key in temp_project_keys) { # change from temp - test; project_key <- "smraposo"
+  print(project_key)
   fp <- paste0("project_analyses/",project_key,".R")
   source(fp)
   #tryCatch(source(fp), error=function(e) {errors <- c(errors,paste0(project_key," has an error in .R file"),print(fp))}) 
