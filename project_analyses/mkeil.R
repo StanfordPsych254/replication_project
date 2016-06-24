@@ -1,12 +1,13 @@
 library(ggplot2)
 library(tidyr)
-library(dplyr)
 library(lme4)
 library(rjson)
 library(effsize)
 library(compute.es)
 library(grid)
 library(png)
+detach("package:dplyr")
+library(dplyr)
 
 sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}
 ci95 <- function(x) {sem(x) * 1.96}
@@ -41,8 +42,6 @@ for (f in files) {
     d.raw <- bind_rows(d.raw, id)
   }
 }
-```
-
 
 ####Score Digits
 
