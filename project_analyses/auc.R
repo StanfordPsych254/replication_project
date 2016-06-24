@@ -1,5 +1,5 @@
-library(readr)
-library(jsonlite)
+# library(readr)
+library(rjson)
 library(dplyr)
 
 ## Code in this block taken from: http://www.cookbook-r.com/Graphs/Plotting_means_and_error_bars_(ggplot2)
@@ -31,7 +31,7 @@ summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
     )
 
     # Rename the "mean" column    
-    datac <- plyr::rename(datac, c("mean" = measurevar))
+    datac <- rename(datac, mean = measurevar)
     datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
 
     # Confidence interval multiplier for standard error

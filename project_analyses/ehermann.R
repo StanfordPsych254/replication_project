@@ -1,8 +1,7 @@
-library(knitr)
+# library(knitr)
 library(ggplot2)
 library(tidyr)
-library(lme4)
-detach("package:dplyr")
+# library(lme4)
 library(dplyr)
 
 ##Results
