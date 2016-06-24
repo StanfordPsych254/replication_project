@@ -1,9 +1,7 @@
 library(rjson)
-# library(knitr)
 library(dplyr)
 library(ggplot2)
 library(tidyr)
-# library(lme4)
 
 data_location = "data/lampinen/"
 files = list.files(path = data_location,pattern="data_subject_.*.json")

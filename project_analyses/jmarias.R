@@ -1,18 +1,10 @@
 library(tidyr)
-# library(plyr)
 library(dplyr)
-# library(psych)
 library(ggplot2)
-# library(Hmisc)
-# library(xtable)
-# library(knitr)
 library(rjson)
-# library(tidyjson)
-# library(memisc)
 
 #Script for generating clean correlation table (bottom triangle only) with significance stars
 corstarsl <- function(x){ 
-  require(Hmisc) 
   x <- as.matrix(x) 
   R <- rcorr(x)$r 
   p <- rcorr(x)$P 

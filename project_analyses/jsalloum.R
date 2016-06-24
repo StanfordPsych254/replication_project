@@ -1,8 +1,6 @@
 library(tidyr)
 library(dplyr)
-library(ggplot2)
 library(rjson)
-# library(tidyjson)
 
 path <- "data/jsalloum/"
 files = dir(path, pattern = "*.json")

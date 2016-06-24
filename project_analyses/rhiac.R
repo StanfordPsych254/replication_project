@@ -9,11 +9,7 @@
 library(tidyr) 
 library(dplyr)
 library(ggplot2) 
-# library(langcog)
 library(rjson)
-# library(broom)
-# library(MBESS)
-# library(qdap)
 
 # Therefore, I've run power analysis on one of the key effects, 
 # the effect of condition on behavioral intentions (d=0.36)

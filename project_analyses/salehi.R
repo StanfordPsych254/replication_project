@@ -1,22 +1,7 @@
 library(jsonlite)
 library(tidyr)
 library(dplyr)
-# library(ggplot2)
-# library(langcog) 
-# library(rjson)
-# library(tidyjson)
-# library(car)
-# library(effsize)
-# library(compute.es)
-# library(lme4)
-# library(lsr)
-# library(xlsx)
-# library(knitr)
-# library(png)
-# library(grid)
-# library(lmtest)
-# library(lmerTest)
-# library(gridExtra)
+
 
 #functions for se and CI
 sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}
