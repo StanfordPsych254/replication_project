@@ -1,6 +1,8 @@
 .Rproj.user
 .Rhistory
 .RData
+.RProfile
 packrat/lib*/
+packrat/src*/
 *cache
 .httr-oauth

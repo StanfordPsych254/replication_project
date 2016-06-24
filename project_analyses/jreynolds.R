@@ -2,14 +2,10 @@ library(tidyr)
 library(dplyr)
 library(ggplot2)
 
-#functions for se and CI
-sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}
-ci95 <- function(x) {sem(x) * 1.96}
-
 #function to get confidence interval
 get_confint<-function(model, vcovCL){
   t<-qt(.975, model$df.residual)
-  ct<-coeftest(model, vcovCL)
+  ct<-lmtest::coeftest(model, vcovCL)
   est<-cbind(ct[,1], ct[,1]-t*ct[,2], ct[,1]+t*ct[,2])
   colnames(est)<-c("Estimate","LowerCI","UpperCI")
   return(est)
@@ -17,13 +13,11 @@ get_confint<-function(model, vcovCL){
 
 #function to compute clustered SE, run regression using clustered SE and return coefficients and confidence intervals
 super.cluster.fun<-function(model, cluster) {
-  require(multiwayvcov)
-  require(lmtest)
-  vcovCL<-cluster.vcov(model, cluster)
+  vcovCL<-multiwayvcov::cluster.vcov(model, cluster)
   
-  assign("coef",coeftest(model, vcovCL),.GlobalEnv)
+  assign("coef", lmtest::coeftest(model, vcovCL),.GlobalEnv)
   #coef<-coeftest(model, vcovCL)
-  w<-waldtest(model, vcov = vcovCL, test = "F")
+  w<-lmtest::waldtest(model, vcov = vcovCL, test = "F")
   ci<-get_confint(model, vcovCL)
   
   coefs=coef

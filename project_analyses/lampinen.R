@@ -1,6 +1,4 @@
-library(rjson)
 library(dplyr)
-library(ggplot2)
 library(tidyr)
 
 data_location = "data/lampinen/"
@@ -15,7 +13,7 @@ for (i in 1:length(files)) {
   c = file(path, "r")
   l = readLines(c, -1L)
   close(c)
-  these_data = lapply(X=l, fromJSON) #Convert list of json objects to list of R objects
+  these_data = lapply(X=l, rjson::fromJSON) #Convert list of json objects to list of R objects
   
   this_trial_data = list();
   j = 1;
