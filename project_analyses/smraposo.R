@@ -1,5 +1,4 @@
 library(rjson)
-library(plyr)
 library(splitstackshape)
 library(dplyr)
 library(tidyr)
