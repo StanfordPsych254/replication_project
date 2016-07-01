@@ -51,9 +51,9 @@ project_plan_raw <- read.csv("data/planning_and_outcomes.csv")
 project_plan <- project_plan_raw %>%
   filter(`include_in_final_writeup`==1) 
 
-results <- read_csv("data/project_data_summary.csv")
+project_data_summary <- read_csv("data/project_data_summary.csv")
 
-d <- left_join(project_plan, results)
+d <- left_join(project_plan, project_data_summary)
 ```
 
 ```{r}

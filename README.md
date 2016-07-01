@@ -4,7 +4,9 @@ Replications from Stanford Psych 254 - Winter 2016. This repository documents th
 
 ## Preprocessing
 
-All scripts live in `project_analyses`.
+To preprocess, run `project_preprocessing.R`, which runs minimal analyses for all projects and caches a `project_data_summary` data frame.
+
+All project-specific scripts live in `project_analyses`.
 
 Scripts return a one-row dataframe with the following format:
 

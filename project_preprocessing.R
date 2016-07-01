@@ -11,7 +11,7 @@ project_plan <- read_csv("data/planning_and_outcomes.csv")
 errors <- list()
 
 # initialize an empty dataframe
-all_project_info <- data.frame( 
+project_data_summary <- data.frame( 
   project_key = character()
 )
 
@@ -35,11 +35,11 @@ for(project_key in passing) { # project_keys
   
   # If has project_info dataframe, add to all data
   if(exists("project_info")) { 
-    all_project_info <- bind_rows(all_project_info,project_info) 
+    project_data_summary <- bind_rows(project_data_summary,project_info) 
     rm("project_info") # In case other file does not same
   } else {
     errors <- c(errors,paste0(project_key," is missing project_info"))
   }
 }
 
-write_csv(all_project_info, "data/project_data_summary.csv")
+write_csv(project_data_summary, "data/project_data_summary.csv")
