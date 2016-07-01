@@ -149,6 +149,8 @@ Of the 15 students in the class, all completed projects (two with extensions), b
 
 Assessing the fidelity of replications to the original (in terms of same sample, same materials, same task parameters) 
 
+Flag: in some cases (auc) we found that the key test statistic was not coded correctly. 
+
 ## Confirmatory analyses
 
 ### Subjective judgments of replication
@@ -200,7 +202,17 @@ project_plan %>%
 Demographics
 
 
-
+```{r}
+layout(matrix(1:22,nr=11,byr=T))
+for (key in project_plan$project_key) {
+  tryCatch(source(function() {
+  orig <- readPNG(paste0("figures/",key,"-original.png"))
+  rep <- readPNG(paste0("figures/",key,"-replication.png"))
+  plot(orig)
+  plot(rep)}
+  ))
+}
+```
 
 ## Exploratory analysis
 
