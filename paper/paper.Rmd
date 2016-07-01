@@ -31,6 +31,7 @@ library(knitr)
 knitr::opts_chunk$set(fig.width=6, fig.height=5, fig.crop = FALSE, 
                       fig.path='figs/', echo=FALSE, warning = FALSE, 
                       cache=TRUE, message = FALSE, sanitize = TRUE)
+library(readr)
 library(dplyr)
 library(xtable)
 ```
@@ -46,14 +47,14 @@ With respect to pedagogy, we describe our process for conducting well-powered, h
 In sum, we view the contribution of the current work to be two-fold. First, we provide a proof-of-concept and pedagogical model for conducting replications in the classroom. Second, we provide an initial estimate of what proportion of studies from the most recent volume of *Psychological Science* could easily be reproduced by a motivated student. 
 
 ```{r, results='asis'}
-project_plan_raw <- read.csv("data/planning_and_outcomes.csv")
+project_plan_raw <- read_csv("data/planning_and_outcomes.csv")
 
 project_plan <- project_plan_raw %>%
   filter(`include_in_final_writeup`==1) 
 
 results <- read_csv("data/all_project_info.csv")
 
-d <- left_join(project_plan, results)
+d <- left_join(project_plan, results) 
 ```
 
 ```{r}
@@ -177,6 +178,10 @@ mean(d$replicated_student, na.rm=TRUE)
 
 ### Bayes factor analysis
 
+```{r}
+BayesFactor::meta.ttestBF(d$origin_t_stat, d$original_t_df)
+BayesFactor::meta.ttestBF(d$rep_t_stat, d$rep_t_df)
+```
 @etz2016
 
 ### Moderator analyses
