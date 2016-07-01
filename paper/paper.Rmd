@@ -19,7 +19,7 @@ author-note:
     "Thanks to the Stanford Department of Psychology and the Vice Provost for Undergraduate Education for funding to support the class."
     
 abstract: 
-    "Replications are important to science, but who will do them? One proposal is that students can conduct direct replications as part of their training; but to date there is limited evidence that this proposal can result in high-quality research outputs. We report a series of 11 pre-registered, direct replications of findings from the 2015 volume of Psychological Science, all conducted as part of a graduate-level experimental methods. By a variety of measures, these replications were successful approximately half of the time, providing an estimate of the probability that a motivated graduate student can reproduce a previously published finding of interest on a first attempt We describe the workflow and pedagogical methods that were used in the class (providing access to all materials) and discuss challenges for adoption of this model more broadly."
+    "Replications are important to science, but who will do them? One proposal is that students can conduct direct replications as part of their training; but to date there is limited evidence that this proposal can result in high-quality research outputs. We report a series of 11 pre-registered, direct replications of findings from the 2015 volume of Psychological Science, all conducted as part of a graduate-level experimental methods. By a variety of measures, these replications were successful approximately half of the time, providing an estimate of the probability that a motivated graduate student can reproduce a previously published finding of interest on a first attempt. We describe the workflow and pedagogical methods that were used in the class (providing access to all materials) and discuss challenges for adoption of this model more broadly."
     
 keywords:
     "Replication; Reproducibility; Pedagogy; Experimental Methods"
@@ -31,24 +31,22 @@ library(knitr)
 knitr::opts_chunk$set(fig.width=6, fig.height=5, fig.crop = FALSE, 
                       fig.path='figs/', echo=FALSE, warning = FALSE, 
                       cache=TRUE, message = FALSE, sanitize = TRUE)
-library(googlesheets)
 library(dplyr)
 library(xtable)
 ```
 
 Reproducibility is a core value for empirical research, but there is increasing concern throughout psychology that weak statistical standards and methodological practices have led to low empirical rates of replication [@osc2015]. Under the current incentive structure for science, direct replication is not typically valued, however. One potential solution to this problem is to make direct replication an explicit part of pedagogy: that is, to teach students about experimental methods by asking them to run replication studies [@frank2012;@grahe2012]. Despite enthusiasm for this idea, however [@lebel2015;@everett2015;@standing2016;@king2016], there is limited data -- beyond anecdotal reports or individual projects [@phillips2015;@lakens2013] -- to support its efficacy. 
 
-In the current article, we provide evidence on this issue by reporting the results of replication projects conducted in a single class (a graduate-level experimental methods course). As part of the required work of the course, students conducted high-power, direct replications of published articles from the 2015 volume of the journal *Psychological Science*. These studies both provide insight into the process of pedagogical replication and give evidence about the state of replicability. 
+In the current article, we provide evidence on this issue by reporting the results of replication projects conducted in a single class (a graduate-level experimental methods course). As part of the required work of the course, students conducted high-power, direct replications of published articles from the 2015 volume of the journal *Psychological Science*. These studies both give evidence about the state of replicability in the field and provide insight into the process of pedagogical replication. 
+
+It is a challenging proposition to estimate the replicability of an entire literature [cf. @osc2015]. Making such an estimate requires determining a sampling strategy, a notion of what constitutes a direct replication, what constitutes a successful replication, among many other difficult decisions [@gilbert2016;@anderson2016]. In the current work, we focus on a quantity that is easier to estimate: the probability that a graduate student can choose an article of interest in *Psychological Science* and -- in a single attempt, within constraints of budget, expertise, and effort -- reproduce the basic pattern of findings with sufficient fidelity to be able to build on it in future work. We believe that this notion of whether a piece of research supports cumulative progress is an important construct. Whether another independent scientist can build on a result is perhaps as important as -- and in many cases easier to measure -- whether the work is reproducible in some more abstract sense. 
 
 With respect to pedagogy, we describe our process for conducting well-powered, high-quality, direct replications as part of classroom pedagogy. This process is dramatically facilitated by the use of standardized (and free) technical tools for statistical analysis, data and code sharing, and creation of web experiments. Nevertheless, there are significant limitations on what can be done in the course of a single term and within the constraints of a course budget. We return in the Discussion to limitations on our approach. 
-
-With respect to broader questions of meta-science, it is a challenging proposition to estimate the replicability of an entire literature [cf. @osc2015;@gilbert2016;@anderson2016]. Making such an estimate requires determining a sampling strategy, a notion of what constitutes a direct replication, what constitutes a successful replication, among many other difficult decisions. In the current work, we focus on a quantity that is easier to estimate: the probability that a graduate student can choose an article of interest in *Psychological Science* and -- in a single attempt, and within constraints of budget, expertise, and effort -- reproduce the basic pattern of findings with sufficient fidelity to be able to build on it in future work. We believe that this notion of whether a piece of research supports cumulative progress is an important construct. Whether another independent scientist can build on a result is perhaps as important as -- and in many cases easier to measure -- whether the work is reproducible in some more abstract sense. 
 
 In sum, we view the contribution of the current work to be two-fold. First, we provide a proof-of-concept and pedagogical model for conducting replications in the classroom. Second, we provide an initial estimate of what proportion of studies from the most recent volume of *Psychological Science* could easily be reproduced by a motivated student. 
 
 ```{r, results='asis'}
-project_plan_sheet <- gs_url("https://docs.google.com/spreadsheets/d/1KZw75xlypvtK0cDoOHqXfFd3HsrfJ4gbq8iEJ6LOa0Y", lookup=TRUE) # Need lookup=T to initialize
-project_plan_raw <- gs_read_csv(project_plan_sheet)
+project_plan_raw <- read_csv("data/planning_and_outcomes.csv")
 
 project_plan <- project_plan_raw %>%
   filter(`include_in_final_writeup`==1) 
@@ -99,11 +97,9 @@ All projects were completed as part of a class (syllabus and materials available
 
 Students selected projects based on interest, rather than via a systematic sampling strategy. Thus, all interpretation of our findings should be with respect to the distribution of student interest. Any reproducibility estimates arising from our analyses are estimates of the probability of reproducing a finding that is of interest, rather than findings in general. This sampling strategy may thus bias our results towards more exciting or novel findings.
 
-Of the 15 students in the class, all completed projects (two with extensions), but one failed to find a project of interest in the sampling frame and three opted out of the broader project prior to data collection.^[Note that 2/3 of these opted out projects were judged by the instructor team to have been successful replications; thus we have no evidence that these students opted out systematically due to their belief that their project would fail.] The remaining 11 students contributed code, data, registrations and materials to the final product. 
-
 ## Participants
 
-All participants were recruited on Amazon Mechanical Turk; individual samples are given in Table \ref{tab:summary}. Note that of the `{r} nrow(ppt)` studies included in the final sample, `{r} sum(project_plan$original_on_turk=="Yes")` (`{r} round(mean(ppt$original_on_turk), digits=2)`%) were originally conducted on Mechanical Turk. All experiments were approved by the Stanford University institutional review board under protocol \#23274, "Reproducibility of psychological science and instruction." 
+All study participants were recruited on Amazon Mechanical Turk; individual samples are given in Table \ref{tab:summary}. Note that of the `{r} nrow(ppt)` studies included in the final sample, `{r} sum(project_plan$original_on_turk=="Yes")` (`{r} round(mean(ppt$original_on_turk), digits=2)`%) were originally conducted on Mechanical Turk. All experiments were approved by the Stanford University institutional review board under protocol \#23274, "Reproducibility of psychological science and instruction." 
 
 ## Materials and Methods
 
@@ -121,13 +117,13 @@ To ensure high quality replications, students went through a rigorous process in
 
 Once requested changes were made, the student conducted "Pilot B," using a handful of naive participants recruited from Mechanical Turk. The goal of this pilot was to ensure that participants were able to complete the experiment and did not report any substantial issues with instructions or technical details of the experiment. (All students were instructed to give participants a way to leave free-form comments at the end of the experiment but prior to debriefing text). At the conclusion of Pilot B, both the instructor and a TA reviewed the student's analytic code and its outputs on the data for all confirmatory analysis. The goal of this code review was to ensure that all planned analyses were specified correctly and with sufficient detail to permit inclusion in the broader analysis.
 
-After Pilot B review was completed, students were given authorization to collect the full sample of participants, contingent on having made the requested change. Prior to data collection, the analytic script containing all confirmatory analyses was pre-registered using the Open Science Framework. (In one case, a student failed to complete the pre-registration but nevertheless submitted a pre-specified analysis plan to the instructors for review). 
+After Pilot B review was completed, students were given authorization to collect the full sample of participants, contingent on having made the requested change. Prior to data collection, the analytic script containing all confirmatory analyses was pre-registered using the Open Science Framework. 
 
 ## Sample size determination and statistical approach
 
 After selecting a paper of interest, students selected a particular study from within that paper based on their judgment of interest and feasibility. The modal study chosen was the first, but several students chose later studies in a set as well. 
 
-For purposes of planning and analysis, we asked stuents Despite the general emphasis in meta-analytic and reproducibility efforts to aggregate a single effect size of interest [@osc2015;@lipsey2001], it was often challenging to identify a single key statistical test in studies. Often a wide variety of statistical tests were conducted, often within one or several regression models with multiple specifications. Thus, we interpret "key statistical test" results with caution. Nevertheless, despite this interpretive difficulty, we attempted to use a single statistical test as our target for experiment planning and analysis. This test was determined by iterative discussion between the student, instructor, and TAs. 
+Despite the general emphasis in meta-analytic and reproducibility efforts to aggregate a single effect size of interest [@osc2015;@lipsey2001], it was often challenging to identify a single key statistical test in studies. Often a wide variety of statistical tests were conducted, often within one or several regression models with multiple specifications. Thus, we interpret "key statistical test" results with caution. Nevertheless, despite this interpretive difficulty, we attempted to use a single statistical test as our target for experiment planning and analysis. This test was determined by iterative discussion between the student, instructor, and TAs. 
 
 Derermining appropriate sample sizes is a major challenge in replication research [@button2013,@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;button2013], but -- especially with the constraints of a limited budget -- it may be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or underpowered original studies but may lead to impractical or unnecessary recommendations for experiments that were initially large and/or adequately powered. 
 
@@ -143,26 +139,71 @@ cases, we used the original sample size. In one case, the original experiment wa
 
 Details of individual replications are available in the supplementary materials. Students chose findings from a wide variety of domains for replication. One group was nvestigations of memory and visual attention [e.g., @xu2015], including in applied contexts like remembering "deleted" files [@storm2015] or tracking transition between locations on smartphone apps [@liverence2015]. A second cluster came from studies of social perception, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015].
 
-## Analysis strategy
+# Results
 
 Analyses for the final project were pre-registered ([https://osf.io/rxz8m/]())
 
-# Results
-
-
-
 ## Pedagogical assessment 
 
-how many replications were conducted to the intended standard, how many opted out etc. 
+Of the 15 students in the class, all completed projects (two with extensions), but one failed to find a project of interest in the sampling frame and three opted out of the broader project prior to data collection.^[Note that 2/3 of these opted out projects were judged by the instructor team to have been successful replications; thus we have no evidence that these students opted out systematically due to their belief that their project would fail.] The remaining 11 students contributed code, data, registrations and materials to the final product. (In one case, a student failed to complete the pre-registration but nevertheless submitted a pre-specified analysis plan to the instructors for review). 
 
 Assessing the fidelity of replications to the original (in terms of same sample, same materials, same task parameters) 
 
-## Scientific Assessment
+## Confirmatory analyses
 
-### Indices of replicability 
+### Subjective judgments of replication
+
+What’s the subjective “replication rating” given by MCF, ES, and RH? Criterion is based on the theoretical interpretation of the original finding. (0 = non-replication, .5 is substantial hints of the same pattern or a significant but different pattern, 1 = full replication). 
+
+```{r}
+mean(project_plan$replicated_TA)
+```
+
+```{r}
+mean(project_plan$replicated_student, na.rm=TRUE)
+```
+
+### Significance of the key effect size
+
+### Original ES in the confidence interval of the replication 
+
+### Bayes factor analysis
+
+@etz2016
+
+### Moderator analyses
+
+Turk vs. not-turk
+
+```{r}
+project_plan %>% 
+  group_by(original_on_turk) %>%
+  summarise(replicated_TA = mean(replicated_TA))
+```
+
+Coding of replication fidelity
+
+```{r}
+project_plan %>% 
+  group_by(fidelity) %>%
+  summarise(replicated = mean(replicated_TA))
+```
+
+Open materials/data vs. not
+
+```{r}
+project_plan %>% 
+  group_by(open_materials) %>%
+  summarise(replicated = mean(replicated_TA))
+```
+
+Demographics
 
 
-### Coding of previous years’ findings
+
+
+## Exploratory analysis
+
 
 # Discussion
 

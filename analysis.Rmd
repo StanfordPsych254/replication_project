@@ -13,21 +13,15 @@ Libraries.
 ```{r}
 library(dplyr)
 library(ggplot2)
-library(googlesheets)
 library(readr)
 library(tidyr)
 ```
 
-Get project planning sheet straight from google docs. 
+Get project planning sheet and exclude those to be excluded. 
 
 ```{r}
-project_plan_sheet <- gs_url("https://docs.google.com/spreadsheets/d/1KZw75xlypvtK0cDoOHqXfFd3HsrfJ4gbq8iEJ6LOa0Y", lookup = TRUE) # Need lookup=T to initialize
-project_plan_raw <- gs_read_csv(project_plan_sheet)
-```
+project_plan_raw <- read_csv("data/planning_and_outcomes.csv")
 
-Exclude those to be excluded. 
-
-```{r}
 project_plan <- project_plan_raw %>%
   filter(`include_in_final_writeup`==1) 
 ```
@@ -44,8 +38,8 @@ all_project_info <- data.frame( # initialize an empty dataframe
 project_keys <- project_plan$project_key # Find user names that are included in 
 
 passing <- c("mkeil","jreynolds","jmarias","jsalloum","ehermann",
-             "jedtan", "lampinen", "salehi")
-failing <- c("smraposo", "auc", "rhiac")
+              "lampinen")
+failing <- c("smraposo", "auc", "rhiac", "jedtan", "salehi")
 
 # Run all respective R code - need loop because project_keys same variable name
 for(project_key in passing) { # project_keys
