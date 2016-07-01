@@ -37,9 +37,9 @@ all_project_info <- data.frame( # initialize an empty dataframe
 
 project_keys <- project_plan$project_key # Find user names that are included in 
 
-passing <- c("mkeil","jreynolds","jmarias","jsalloum","ehermann",
+passing <- c("salehi","smraposo","jedtan","mkeil","jreynolds","jmarias","jsalloum","ehermann",
               "lampinen")
-failing <- c("smraposo", "auc", "rhiac", "jedtan", "salehi")
+failing <- c( "auc", "rhiac" )
 
 # Run all respective R code - need loop because project_keys same variable name
 for(project_key in passing) { # project_keys
