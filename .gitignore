@@ -6,3 +6,5 @@ packrat/lib*/
 packrat/src*/
 *cache
 .httr-oauth
+*.pdf
+*.tex
