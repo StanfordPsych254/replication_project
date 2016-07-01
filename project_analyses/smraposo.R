@@ -1,5 +1,4 @@
 library(rjson)
-library(splitstackshape) # csplit is the call, can change to tidyr "separate"
 library(dplyr)
 library(tidyr)
 library(stringr)
@@ -55,17 +54,9 @@ d0$demos <- gsub(",Q2", "_", d0$demos)
 d0$demos <- gsub(",Q3", "_", d0$demos)
 d0$comments <- gsub("Q0", "", d0$comments) 
 d0$comments <- gsub("Q1", "_", d0$comments) 
-d0 = as.data.frame(cSplit(d0, "demos", sep = "_", direction = "wide"))
-d0 = as.data.frame(cSplit(d0, "comments", sep = "_", direction = "wide"))
-
-#Renaming demographic variables
-d.demos <- d0 %>% 
-  rename(gender = demos_1,
-         edu = demos_2,
-         race = demos_3,
-         income = demos_4,
-         purpose = comments_1,
-         comments = comments_2) %>%
+d.demos <- d0 %>%
+  separate(demos, sep="_", into=c("gender","edu","race","income")) %>%
+  separate(comments, sep="_",into=c("purpose","comments")) %>%
   mutate(gendercat = as.factor(gender),
          educat = as.factor(edu),
          racecat = as.factor(race),
