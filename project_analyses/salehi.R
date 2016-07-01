@@ -2,9 +2,9 @@ library(tidyr)
 library(dplyr)
 
 ## MCF: note that Shima chose the followup ANOVA to be the primary test for power 
-# analysis, and so that's what we're using as the outcome. but actually, on further 
-# reflection we think it's the interaction that is most theoretically central. 
-# in fact she gets the interaction, though. 
+# analysis. but actually, on further 
+# reflection we think it's the interaction that is most theoretically central. so we have revised
+# to reflect that. (7/1/16)
 
 path <- "data/salehi/"
 files <- dir(path, 
@@ -52,37 +52,50 @@ write_csv(d, "processed_data/salehi.csv")
 # 10.21, p = .002, d = 0.71.
 
 #filtering data points for masculine data points
-masculine <- d %>% filter(traitType == 'Masculine')
+# masculine <- d %>% filter(traitType == 'Masculine')
 
 #averaging ratings for each participant
-masculine <- masculine %>%
-  group_by(condition, workerid) %>%
-  summarize(workermean=mean(rating))
+# masculine <- masculine %>%
+#   group_by(condition, workerid) %>%
+#   summarize(workermean=mean(rating))
 
 #one-way anova
-fitMasculine <- aov(workermean ~ condition, data = masculine)
-summary(fitMasculine)
-
-p <- summary(fitMasculine)[[1]][1,5]
-Fval <- summary(fitMasculine)[[1]][1,4]
-df1 <- summary(fitMasculine)[[1]][1,1]
-df2 <- summary(fitMasculine)[[1]][2,1]
+# fitMasculine <- aov(workermean ~ condition, data = masculine)
+# summary(fitMasculine)
 
 #effect size
-masculineDivergentMean <- masculine %>% filter(condition == 'Divergent')
-masculineConnvergentMean <- masculine %>% filter(condition == 'Convergent')
-cohens_d <- effsize::cohen.d(masculineDivergentMean$workermean, masculineConnvergentMean$workermean)$estimate
+# masculineDivergentMean <- masculine %>% filter(condition == 'Divergent')
+# masculineConnvergentMean <- masculine %>% filter(condition == 'Convergent')
+# cohens_d <- effsize::cohen.d(masculineDivergentMean$workermean, masculineConnvergentMean$workermean)$estimate
+
+### REVISED TO USE FULL ANOVA (MCF 7/1/16)
+fitConTrait <- aov(rating ~ traitType * condition + 
+                     Error(workerid/(traitType))+(condition), data=d)
+summary(fitConTrait)
+
+p <- summary(fitConTrait)[[2]][[1]][2,5]
+Fval <- summary(fitConTrait)[[2]][[1]][2,4]
+df1 <- summary(fitConTrait)[[2]][[1]][2,1]
+df2 <- summary(fitConTrait)[[2]][[1]][3,1]
+
+#effect size
+# d %>%
+#   group_by(workerid, condition, traitType) %>%
+#   summarise(mean 
+# masculineDivergentMean <- masculine %>% filter(condition == 'Divergent')
+# masculineConnvergentMean <- masculine %>% filter(condition == 'Convergent')
+# cohens_d <- effsize::cohen.d(masculineDivergentMean$workermean, masculineConnvergentMean$workermean)$estimate
 
 test_stat <- paste0("F(",df1,",",df2,")=",round(Fval, digits=3))
   
-project_info <- data.frame(
-  project_key = "salehi",
-  rep_final_n = length(unique(d$workerid)),
-  rep_n_excluded = 0, 
-  rep_es = cohens_d, 
-  rep_test_statistic_str = test_stat,
-  rep_p_value = p
-)
+project_info <- data.frame(project_key = "salehi",
+                           rep_final_n = length(unique(d$workerid)),
+                           rep_n_excluded = 0, 
+                           rep_es = NA, 
+                           rep_test_statistic_str = test_stat,
+                           rep_t_stat = sqrt(Fval), #http://www.tc.umn.edu/~oakes007/Files/Comm%20Trials/F%20and%20t%20statistics.pdf
+                           rep_t_df = df2,
+                           rep_p_value = p)
 
 
 # The result of mixed-model ANOVA for the original study was: A mixed-model

@@ -34,6 +34,8 @@ knitr::opts_chunk$set(fig.width=6, fig.height=5, fig.crop = FALSE,
 library(readr)
 library(dplyr)
 library(xtable)
+library(readr)
+library(ggplot2)
 ```
 
 Reproducibility is a core value for empirical research, but there is increasing concern throughout psychology that weak statistical standards and methodological practices have led to low empirical rates of replication [@osc2015]. Under the current incentive structure for science, direct replication is not typically valued, however. One potential solution to this problem is to make direct replication an explicit part of pedagogy: that is, to teach students about experimental methods by asking them to run replication studies [@frank2012;@grahe2012]. Despite enthusiasm for this idea, however [@lebel2015;@everett2015;@standing2016;@king2016], there is limited data -- beyond anecdotal reports or individual projects [@phillips2015;@lakens2013] -- to support its efficacy. 
@@ -52,9 +54,9 @@ project_plan_raw <- read_csv("data/planning_and_outcomes.csv")
 project_plan <- project_plan_raw %>%
   filter(`include_in_final_writeup`==1) 
 
-results <- read_csv("data/all_project_info.csv")
+project_data_summary <- read_csv("data/project_data_summary.csv")
 
-d <- left_join(project_plan, results) 
+d <- left_join(project_plan, project_data_summary)
 ```
 
 ```{r}
@@ -162,19 +164,47 @@ Flag: in some cases (auc) we found that the key test statistic was not coded cor
 
 ### Subjective judgments of replication
 
-What’s the subjective “replication rating” given by MCF, ES, and RH? Criterion is based on the theoretical interpretation of the original finding. (0 = non-replication, .5 is substantial hints of the same pattern or a significant but different pattern, 1 = full replication). 
+Students of the class and the instructors gave independent “replication ratings” to assess subjective judgement of the replication. Criterion is based on the theoretical interpretation of the original finding. (0 = non-replication, .5 is substantial hints of the same pattern or a significant but different pattern, 1 = full replication). We find that the these ratings of the student carrying out the replication and the instructors were in agreement for `r sum(d$replicated_TA == d$replicated_student,na.rm=T)` out of the `r nrow(d)` replications.  The average rating given by instructors and students was `r mean(d$replicated_TA, na.rm=TRUE)` and `r mean(d$replicated_student, na.rm=TRUE)` respectively.  
 
+Flag: waiting for one student's subjective rating
 ```{r}
-mean(d$replicated_TA)
-```
-
-```{r}
-mean(d$replicated_student, na.rm=TRUE)
+table(d$replicated_TA,d$replicated_student) # Make prettier
+#mean(d$replicated_team)
 ```
 
 ### Significance of the key effect size
 
+```{r, echo=F}
+d$original_p_value_bins <- NA
+d$original_p_value_bins[d$original_p_value %in% c("<.05","0.04")] <- "<.05"
+d$original_p_value_bins[d$original_p_value %in% c("0.007","0.001")] <- "<.01"
+d$original_p_value_bins[d$original_p_value %in% c("<.001","< .001")] <- "<.001"
+d$rep_p_value_05 <- d$rep_p_value < .05
+```
+
+We assess the replication p-value to determine whether the key statistic found a significant effect at the traditional p=.05 level. We find this to be true for only `r sum(d$rep_p_value_05)` of the studies. However, the well-documented "dance of the p-values" [@cummings2011] suggests that the inference drawn from a single replication p-value may not be highly informative, and other metrics suchs as the confidence interval and Bayes factor analysis below can give the reader a better understanding of replication success.  
+
+Flag: Are all effects in the hypothesized direction?
+
+
+```{r}
+ggplot(d,aes(x=original_p_value_bins,y=rep_p_value, color=as.factor(d$replicated_TA))) +
+  geom_jitter(height=0, width=.4) +
+  theme_bw() + 
+  geom_hline(yintercept=c(0.05,0.1,0.2), color="gray")
+```
+
 ### Original ES in the confidence interval of the replication 
+
+We determine whether the original reported effect size is included in the 95\% confidence interval found in the replication studies.  
+
+Flag: Original effect size not given for auc?
+```{r}
+d$original_ES <- as.numeric(gsub(".*=(.*)","\\1", d$original_ES_text))
+#Ensure that effect size is given in same units... Make beautiful ci chart here...
+
+```
+
 
 ### Bayes factor analysis
 
@@ -196,9 +226,10 @@ d %>%
 
 Coding of replication fidelity
 
-```{r}
-d %>% 
-  group_by(fidelity) %>%
+```{r,eval=F}
+d$high_fidelity <- d$replication_fidelity_MCF > median(d$replication_fidelity_MCF)
+d %>%
+  group_by(high_fidelity) %>%
   summarise(replicated = mean(replicated_TA))
 ```
 
@@ -213,7 +244,7 @@ project_plan %>%
 Demographics
 
 
-```{r}
+```{r, eval=F}
 layout(matrix(1:22,nr=11,byr=T))
 for (key in project_plan$project_key) {
   tryCatch(source(function() {
