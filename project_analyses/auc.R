@@ -163,6 +163,7 @@ for (f in files) {
 
 chr.rows <- sapply(d.raw, is.character)
 d.raw[,chr.rows] <- lapply(d.raw[,chr.rows], as.factor) # need to factorize character strings
+d.raw$face_dft <- as.factor(d.raw$face_dft)
 
 d <- summarySEwithin(d.raw, measurevar="face_rating", withinvars=c("face_dft", "exp_type"),
                             idvar="workerid", na.rm=FALSE, conf.interval=.95)
