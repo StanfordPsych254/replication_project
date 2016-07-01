@@ -50,8 +50,10 @@ stat_descript <- paste0("t(",df,") = ",round(tval, 3))
 
 project_info <- data.frame(
   project_key = "jreynolds", 
+  rep_t_stat = tval,
+  rep_t_df = df,
   rep_final_n = length(unique(d$Participant)), 
   rep_n_excluded = 0, 
-  rep_es = tval, 
-  rep_test_statistic = stat_descript,
+  rep_es = NA, 
+  rep_test_statistic_str = stat_descript,
   rep_p_value = pval)

@@ -48,10 +48,12 @@ stat_descript = paste0("t(",full_t.test$parameter,")=",round(full_t.test$statist
 
 project_info <- data.frame(
   project_key = "jedtan", 
+  rep_t_stat = full_t.test$parameter,
+  rep_t_df = full_t.test$statistic,
   rep_final_n = length(unique(d$WorkerID)), 
   rep_n_excluded = 0, 
   rep_es = full_cohensDVal, 
-  rep_test_statistic = stat_descript,
+  rep_test_statistic_str = stat_descript,
   rep_p_value = full_t.test$p.value)
 
 # 

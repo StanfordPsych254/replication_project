@@ -75,12 +75,14 @@ cohens_d <- effsize::cohen.d(masculineDivergentMean$workermean, masculineConnver
 
 test_stat <- paste0("F(",df1,",",df2,")=",round(Fval, digits=3))
   
-project_info <- data.frame(project_key = "salehi",
-                           rep_final_n = length(unique(d$workerid)),
-                           rep_n_excluded = 0, 
-                           rep_es = cohens_d, 
-                           rep_test_statistic = test_stat,
-                           rep_p_value = p)
+project_info <- data.frame(
+  project_key = "salehi",
+  rep_final_n = length(unique(d$workerid)),
+  rep_n_excluded = 0, 
+  rep_es = cohens_d, 
+  rep_test_statistic_str = test_stat,
+  rep_p_value = p
+)
 
 
 # The result of mixed-model ANOVA for the original study was: A mixed-model

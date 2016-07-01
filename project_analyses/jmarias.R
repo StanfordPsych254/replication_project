@@ -230,17 +230,16 @@ tval <- round(summary(mathperflm4)$coef["z.mathmot:I(z.mathanx^2)","t value"],3)
 est <- round(summary(mathperflm4)$coef["z.mathmot:I(z.mathanx^2)","Estimate"],3)
 df <- mathperflm4$df
 
-
 stat_descript <- paste0("t(",df,") = ",tval)
-
-
 
 project_info <- data.frame(
   project_key = "jmarias", 
+  rep_t_stat = tval,
+  rep_t_df = df,
   rep_final_n = nrow(subjectmeans), 
   rep_n_excluded = length(unique(d$workerid))-nrow(subjectmeans) , 
-  rep_es = est, 
-  rep_test_statistic = stat_descript,
+  rep_es = NA, 
+  rep_test_statistic_str = stat_descript,
   rep_p_value = pval,
   notes= "double check participant summaries and exclusion criteria"
 )
