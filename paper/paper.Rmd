@@ -46,7 +46,7 @@ With respect to pedagogy, we describe our process for conducting well-powered, h
 In sum, we view the contribution of the current work to be two-fold. First, we provide a proof-of-concept and pedagogical model for conducting replications in the classroom. Second, we provide an initial estimate of what proportion of studies from the most recent volume of *Psychological Science* could easily be reproduced by a motivated student. 
 
 ```{r, results='asis'}
-project_plan_raw <- read_csv("data/planning_and_outcomes.csv")
+project_plan_raw <- read.csv("data/planning_and_outcomes.csv")
 
 project_plan <- project_plan_raw %>%
   filter(`include_in_final_writeup`==1) 
@@ -62,8 +62,8 @@ names(ppt) = c("Citation", "Expt", "Data", "Materials", "Turk?",
 #        label = "tab:summary"), include.rownames=FALSE)
 ```
 
-% latex table generated in R 3.3.0 by xtable 1.8-2 package
-% Fri Jun 24 12:02:11 2016
+<!-- latex table generated in R 3.3.0 by xtable 1.8-2 package
+ Fri Jun 24 12:02:11 2016 -->
 \begin{table}[ht]
 \centering
 \begin{tabular}{lllllrr}
@@ -99,11 +99,11 @@ Students selected projects based on interest, rather than via a systematic sampl
 
 ## Participants
 
-All study participants were recruited on Amazon Mechanical Turk; individual samples are given in Table \ref{tab:summary}. Note that of the `{r} nrow(ppt)` studies included in the final sample, `{r} sum(project_plan$original_on_turk=="Yes")` (`{r} round(mean(ppt$original_on_turk), digits=2)`%) were originally conducted on Mechanical Turk. All experiments were approved by the Stanford University institutional review board under protocol \#23274, "Reproducibility of psychological science and instruction." 
+All study participants were recruited on Amazon Mechanical Turk; individual samples are given in Table \ref{tab:summary}. Note that of the `r nrow(ppt)` studies included in the final sample, `r sum(project_plan$original_on_turk=="Yes")` (`r 100 * round(mean(project_plan$original_on_turk=="Yes"), digits=2)`%) were originally conducted on Mechanical Turk. All experiments were approved by the Stanford University institutional review board under protocol \#23274, "Reproducibility of psychological science and instruction." 
 
 ## Materials and Methods
 
-Of the `{r} nrow(ppt)` studies included in the final sample, `{r} round(mean(ppt$open_materials == "Yes" | ppt$open_materials == "Some"), digits=2)`% of studies had either some or all materials openly available. For `{r} sum(!is.na(authors_contact))` studies, however, students contacted the authors to request either materials or clarification of methods (using a template email that was customized by the students and reviewed by the instructors). Responses were received in all but one case, usually within a matter of days.  
+Of the `r nrow(ppt)` studies included in the final sample, `r 100 * round(mean(project_plan$open_materials == "Yes" | project_plan$open_materials == "Some"), digits=2)`% of studies had either some or all materials openly available. For `r sum(project_plan$author_contact != "")` studies, however, students contacted the authors to request either materials or clarification of methods (using a template email that was customized by the students and reviewed by the instructors). Responses were received in all but one case, usually within a matter of days.  
 
 ## Workflow
 
@@ -185,7 +185,7 @@ Coding of replication fidelity
 
 ```{r}
 project_plan %>% 
-  group_by(fidelity) %>%
+  group_by(replication_fidelity_MCF) %>%
   summarise(replicated = mean(replicated_TA))
 ```
 
