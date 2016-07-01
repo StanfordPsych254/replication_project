@@ -61,3 +61,9 @@ for(project_key in passing) { # project_keys
   }
 }
 ```
+
+Save.
+
+```{r}
+write_csv(all_project_info, "data/all_project_info.csv")
+```

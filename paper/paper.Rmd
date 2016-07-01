@@ -51,6 +51,12 @@ project_plan_raw <- read_csv("data/planning_and_outcomes.csv")
 project_plan <- project_plan_raw %>%
   filter(`include_in_final_writeup`==1) 
 
+results <- read_csv("data/all_project_info.csv")
+
+d <- left_join(project_plan, results)
+```
+
+```{r}
 ppt <- project_plan %>%
         select(cite, expt_num, open_data,
                open_materials, original_on_turk, original_n,collected_n)
@@ -158,11 +164,11 @@ Flag: in some cases (auc) we found that the key test statistic was not coded cor
 What’s the subjective “replication rating” given by MCF, ES, and RH? Criterion is based on the theoretical interpretation of the original finding. (0 = non-replication, .5 is substantial hints of the same pattern or a significant but different pattern, 1 = full replication). 
 
 ```{r}
-mean(project_plan$replicated_TA)
+mean(d$replicated_TA)
 ```
 
 ```{r}
-mean(project_plan$replicated_student, na.rm=TRUE)
+mean(d$replicated_student, na.rm=TRUE)
 ```
 
 ### Significance of the key effect size
@@ -178,7 +184,7 @@ mean(project_plan$replicated_student, na.rm=TRUE)
 Turk vs. not-turk
 
 ```{r}
-project_plan %>% 
+d %>% 
   group_by(original_on_turk) %>%
   summarise(replicated_TA = mean(replicated_TA))
 ```
@@ -186,7 +192,7 @@ project_plan %>%
 Coding of replication fidelity
 
 ```{r}
-project_plan %>% 
+d %>% 
   group_by(fidelity) %>%
   summarise(replicated = mean(replicated_TA))
 ```
