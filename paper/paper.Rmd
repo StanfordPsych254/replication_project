@@ -164,7 +164,7 @@ Flag: in some cases (auc) we found that the key test statistic was not coded cor
 What’s the subjective “replication rating” given by MCF, ES, and RH? Criterion is based on the theoretical interpretation of the original finding. (0 = non-replication, .5 is substantial hints of the same pattern or a significant but different pattern, 1 = full replication). 
 
 ```{r}
-mean(d$replicated_TA)
+mean(d$replicated_team)
 ```
 
 ```{r}
