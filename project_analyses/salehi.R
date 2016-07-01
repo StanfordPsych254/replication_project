@@ -34,9 +34,6 @@ for (f in files) {
   d.raw <- bind_rows(d.raw, id)
 }
 
-# Number of participants
-length(unique(d.b$workerid))
-
 d <- d.raw %>%
   mutate(traitb = sentence %in% c('Decisive', 'Competitive', 'Self-reliant',   
                                   'Willing to take risks' , 'Ambitious', 'Daring' ,

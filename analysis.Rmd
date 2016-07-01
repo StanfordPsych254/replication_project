@@ -55,7 +55,7 @@ for(project_key in passing) { # project_keys
   # If has project_info dataframe, add to all data
   if(exists("project_info")) { 
     all_project_info <- bind_rows(all_project_info,project_info) 
-    # rm("project_info") # In case other file does not same
+    rm("project_info") # In case other file does not same
   } else {
     errors <- c(errors,paste0(project_key," is missing project_info"))
   }

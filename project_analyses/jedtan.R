@@ -27,8 +27,8 @@ fade_mean =  round(transition_means$meanTime[2]/1000, digits=2)
 
 full_t.test <- t.test((transition_worker_means %>% filter(Transition == "Fade"))$meanTime, (transition_worker_means %>% filter(Transition == "Slide"))$meanTime, paired=TRUE)
 
-# epoch <- d %>% group_by(WorkerID, epoch, Transition) %>% 
-#   summarise(meanTime = mean(Time), meanPress = mean(KeyPresses))
+epoch <- d %>% group_by(WorkerID, epoch, Transition) %>% 
+ summarise(meanTime = mean(Time), meanPress = mean(KeyPresses))
 
 full_cohensDVal <- lsr::cohensD((epoch %>% filter(Transition == "Fade"))$meanTime, (epoch %>% filter(Transition == "Slide"))$meanTime)
 
