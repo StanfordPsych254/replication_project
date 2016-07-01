@@ -30,7 +30,7 @@ summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
     )
 
     # Rename the "mean" column    
-    datac <- rename(datac, mean = measurevar)
+    datac <- plyr::rename(datac, c("mean" = measurevar))
     datac$se <- datac$sd / sqrt(datac$N)  # Calculate standard error of the mean
 
     # Confidence interval multiplier for standard error
@@ -161,6 +161,10 @@ for (f in files) {
   d.raw <- bind_rows(d.raw, id)
 }
 
+chr.rows <- sapply(d.raw, is.character)
+d.raw[,chr.rows] <- lapply(d.raw[,chr.rows], as.factor) # need to factorize character strings
+d.raw$face_dft <- as.factor(d.raw$face_dft)
+
 d <- summarySEwithin(d.raw, measurevar="face_rating", withinvars=c("face_dft", "exp_type"),
                             idvar="workerid", na.rm=FALSE, conf.interval=.95)
 
@@ -180,10 +184,22 @@ model <- lm(centered_face_rating ~
             d)
 summary(model)
 
+model_coef <- summary(model)$coefficients["exp_typetrustworthy:centered_dft","Estimate"]
+model_tval <- summary(model)$coefficients["exp_typetrustworthy:centered_dft","t value"]
+model_pval <- summary(model)$coefficients["exp_typetrustworthy:centered_dft","Pr(>|t|)"]
+model_df <- summary(model)$df[2]
+
+stat_descript <- paste0("t(",model_df,") = ",round(model_tval,2))
+
+
 project_info <- data.frame(project_key = "auc",
-                           n_final = length(unique(d.raw$workerid)),
-                           n_excluded = 0)
-                           
+                           rep_final_n = length(unique(d.raw$workerid)),
+                           rep_n_excluded = 0,
+                           rep_es = model_coef,
+                           rep_test_statistic = stat_descript,
+                           rep_p_value = pval1,
+                           note="based on writeup and article, assuming exp_typetrustworthy:centered_dft interaction is key stat of interest. Should clarify with Carolyn. Also make sure doing correct analysis from article."
+)
 
 #This results in $F(5, 16) = 91.11, p < 0.001, R^2 = 0.97$ which is the same
 #significance level and effect size as the original study. Comparing the
@@ -215,3 +231,5 @@ ms$face_dft <- as.factor(ms$face_dft)
 ms$exp_type <- as.factor(ms$exp_type) 
 
 summary(aov(mean_rating ~ face_dft + exp_type, ms))
+
+
