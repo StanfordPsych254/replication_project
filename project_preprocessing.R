@@ -1,41 +1,22 @@
----
-title: "Psych 254 Replication Project Analysis"
-author: "Eric Smith, Robert Hawkins, Michael C. Frank"
-date: '`r Sys.Date()`'
-output:
-  html_document:
-    number_sections: yes
-    toc: yes
----
 
-Libraries.
-
-```{r}
 library(dplyr)
-library(ggplot2)
 library(readr)
 library(tidyr)
-```
 
-Get project planning sheet and exclude those to be excluded. 
+project_plan <- read_csv("data/planning_and_outcomes.csv")
 
-```{r}
-project_plan_raw <- read_csv("data/planning_and_outcomes.csv")
+# Read in project_info data from each project
 
-project_plan <- project_plan_raw %>%
-  filter(`include_in_final_writeup`==1) 
-```
+# Initialize an error var
+errors <- list()
 
-Read in project_info data from each project
-
-```{r}
-errors <- list()# Initialize an error var
-
-all_project_info <- data.frame( # initialize an empty dataframe
+# initialize an empty dataframe
+all_project_info <- data.frame( 
   project_key = character()
 )
 
-project_keys <- project_plan$project_key # Find user names that are included in 
+# Find user names that are included in 
+project_keys <- project_plan$project_key 
 
 passing <- c("salehi","smraposo","jedtan","mkeil","jreynolds","jmarias","jsalloum","ehermann",
               "lampinen","auc","rhiac")
@@ -60,10 +41,5 @@ for(project_key in passing) { # project_keys
     errors <- c(errors,paste0(project_key," is missing project_info"))
   }
 }
-```
 
-Save.
-
-```{r}
-write_csv(all_project_info, "data/all_project_info.csv")
-```
+write_csv(all_project_info, "data/project_data_summary.csv")
