@@ -10,7 +10,6 @@
 library(tidyr) 
 library(dplyr)
 library(ggplot2) 
-library(multilevel) #contains sobel
 
 path <- "data/rhiac/"
 files <- dir(path, 

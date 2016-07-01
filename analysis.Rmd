@@ -38,8 +38,8 @@ all_project_info <- data.frame( # initialize an empty dataframe
 project_keys <- project_plan$project_key # Find user names that are included in 
 
 passing <- c("salehi","smraposo","jedtan","mkeil","jreynolds","jmarias","jsalloum","ehermann",
-              "lampinen")
-failing <- c( "auc", "rhiac" )
+              "lampinen","auc","rhiac")
+failing <- c( NA )
 
 # Run all respective R code - need loop because project_keys same variable name
 for(project_key in passing) { # project_keys
@@ -60,4 +60,10 @@ for(project_key in passing) { # project_keys
     errors <- c(errors,paste0(project_key," is missing project_info"))
   }
 }
+```
+
+Save.
+
+```{r}
+write_csv(all_project_info, "data/all_project_info.csv")
 ```
