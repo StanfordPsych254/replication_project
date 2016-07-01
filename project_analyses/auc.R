@@ -196,7 +196,9 @@ project_info <- data.frame(project_key = "auc",
                            rep_final_n = length(unique(d.raw$workerid)),
                            rep_n_excluded = 0,
                            rep_es = model_coef,
-                           rep_test_statistic = stat_descript,
+                           rep_test_statistic_str = stat_descript,
+                           rep_t_stat = model_tval,
+                           rep_t_df = model_df,
                            rep_p_value = pval1,
                            note="based on writeup and article, assuming exp_typetrustworthy:centered_dft interaction is key stat of interest. Should clarify with Carolyn. Also make sure doing correct analysis from article."
 )
@@ -213,23 +215,23 @@ project_info <- data.frame(project_key = "auc",
 
 
 # Within-subjects means
-ms <- d.raw %>%
-  group_by(exp_type, face_dft, workerid) %>%
-  dplyr::summarise(mean_rating = mean(face_rating))
-
-ms$workerid <- as.factor(ms$workerid)
-ms$face_dft <- as.factor(ms$face_dft)
-ms$exp_type <- as.factor(ms$exp_type)
-
-summary(aov(mean_rating ~ face_dft * exp_type + Error(workerid / face_dft), ms))
-
-ms <- d.raw %>%
-  group_by(exp_type, face_dft) %>%
-  dplyr::summarise(mean_rating = mean(face_rating))
-
-ms$face_dft <- as.factor(ms$face_dft)
-ms$exp_type <- as.factor(ms$exp_type) 
-
-summary(aov(mean_rating ~ face_dft + exp_type, ms))
-
-
+# ms <- d.raw %>%
+#   group_by(exp_type, face_dft, workerid) %>%
+#   dplyr::summarise(mean_rating = mean(face_rating))
+# 
+# ms$workerid <- as.factor(ms$workerid)
+# ms$face_dft <- as.factor(ms$face_dft)
+# ms$exp_type <- as.factor(ms$exp_type)
+# 
+# summary(aov(mean_rating ~ face_dft * exp_type + Error(workerid / face_dft), ms))
+# 
+# ms <- d.raw %>%
+#   group_by(exp_type, face_dft) %>%
+#   dplyr::summarise(mean_rating = mean(face_rating))
+# 
+# ms$face_dft <- as.factor(ms$face_dft)
+# ms$exp_type <- as.factor(ms$exp_type) 
+# 
+# summary(aov(mean_rating ~ face_dft + exp_type, ms))
+# 
+# 
