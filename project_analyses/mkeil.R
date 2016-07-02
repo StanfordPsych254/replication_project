@@ -191,7 +191,7 @@ stat_descript <- paste0("F(",df1,",",df2,") = ",F_test)
 
 project_info <- data.frame(
   project_key = "mkeil", 
-  rep_t_stat = sqrt(F_stat),
+  rep_t_stat = sqrt(F_test),
   rep_t_df = df2,
   rep_final_n = length(unique(d1$workerId)), 
   rep_n_excluded = length(unique(d.raw$workerId))-length(unique(d1$workerId)), 
