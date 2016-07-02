@@ -200,7 +200,7 @@ project_info <- data.frame(project_key = "auc",
                            rep_t_stat = model_tval,
                            rep_t_df = model_df,
                            rep_p_value = pval1,
-                           note="based on writeup and article, assuming exp_typetrustworthy:centered_dft interaction is key stat of interest. Should clarify with Carolyn. Also make sure doing correct analysis from article."
+                           notes="based on writeup and article, assuming exp_typetrustworthy:centered_dft interaction is key stat of interest. Should clarify with Carolyn. Also make sure doing correct analysis from article."
 )
 
 #This results in $F(5, 16) = 91.11, p < 0.001, R^2 = 0.97$ which is the same
