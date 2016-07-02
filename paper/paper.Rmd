@@ -56,7 +56,7 @@ project_plan <- project_plan_raw %>%
 
 project_data_summary <- read_csv("data/project_data_summary.csv")
 
-d <- left_join(project_plan, project_data_summary)
+d <- left_join(project_plan, project_data_summary, by = c("project_key"))
 ```
 
 ```{r}
@@ -209,8 +209,36 @@ d$original_ES <- as.numeric(gsub(".*=(.*)","\\1", d$original_ES_text))
 ### Bayes factor analysis
 
 ```{r}
-BayesFactor::meta.ttestBF(d$origin_t_stat, d$original_t_df)
-BayesFactor::meta.ttestBF(d$rep_t_stat, d$rep_t_df)
+getBF <- function(t_stat, t_df) {
+  return(log10(ttest.tstat(t = t_stat, n1 = t_df, rscale = 1, simple = T)))
+};
+
+tstatDF <- d %>%
+  filter(original_t_stat != "NA") %>%
+  select(project_key, original_t_stat, original_t_df, rep_t_stat, rep_t_df) %>%
+  rowwise() %>%
+  mutate(origBF = getBF(original_t_stat, original_t_df)) %>%
+  rowwise() %>%
+  mutate(repBF = getBF(rep_t_stat, rep_t_df))
+
+ggplot(tstatDF, aes(x = origBF, y = repBF, size = rep_t_df/original_t_df)) +
+  geom_point()+
+  theme_bw()+
+  xlim(-2, 30) +
+  ylim(-2, 30) +
+  geom_hline(aes(yintercept = 10), linetype = 2)+
+  geom_hline(aes(yintercept = 3), linetype = 2)+
+  geom_hline(aes(yintercept = 1/3), linetype = 2)+
+  geom_hline(aes(yintercept = 1/10), linetype = 2)+
+  geom_vline(aes(xintercept = 10), linetype = 2)+
+  geom_vline(aes(xintercept = 3), linetype = 2)+
+  geom_vline(aes(xintercept = 1/3), linetype = 2)+
+  geom_vline(aes(xintercept = 1/10), linetype = 2)
+
+  # scale_x_log10(limits = c(-50, 100)) +
+  # scale_y_log10(limits = c(-50, 10)) 
+
+
 ```
 @etz2016
 
