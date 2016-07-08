@@ -44,8 +44,10 @@ stat_descript
 
 project_info <- data.frame(
   project_key = "jsalloum", 
+  rep_t_stat = sqrt(F_stat),
+  rep_t_df = dfdenom,
   rep_final_n = length(d.af$speakerId), 
   rep_n_excluded = 0, 
-  rep_es = F_stat, 
-  rep_test_statistic = stat_descript,
+  rep_es = NA, 
+  rep_test_statistic_str = stat_descript,
   rep_p_value = p)

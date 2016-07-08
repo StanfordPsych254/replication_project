@@ -85,10 +85,12 @@ stat_descript <- paste0("F(",1,", ",t_res$parameter,") = ",round(F_stat, 3))
 
 project_info <- data.frame(
   project_key = "lampinen", 
+  rep_t_stat = t_res$statistic,
+  rep_t_df = t_res$parameter,
   rep_final_n = n_subjects, 
   rep_n_excluded = length(files) - n_subjects, 
-  rep_es = F_stat, 
-  rep_test_statistic = stat_descript,
+  rep_es = NA, 
+  rep_test_statistic_str = stat_descript,
   rep_p_value = p)
 
 
