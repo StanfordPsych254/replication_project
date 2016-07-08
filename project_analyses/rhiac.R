@@ -103,14 +103,17 @@ Fstat1 = modres[1,4] #time metric
 dfnum1 = modres[1,1]
 dfdenom1 = modres$Df[2]
 pval1 = modres[1,5]
+
 stat_descript <- paste0("F(",dfnum1,", ",dfdenom1,") = ",round(Fstat1, 3))
 
 project_info <- data.frame(
   project_key = "rhiac", 
+  rep_t_stat = sqrt(Fstat1),
+  rep_t_df = dfdenom1,
   rep_final_n = 321, 
   rep_n_excluded = 7, 
-  rep_es = Fstat1, 
-  rep_test_statistic = stat_descript,
+  rep_es = NA, 
+  rep_test_statistic_str = stat_descript,
   rep_p_value = pval1)
 
 # model <- lm(leg_mot_index ~ condition, d)
