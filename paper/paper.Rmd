@@ -271,7 +271,7 @@ ggplot(d,aes(x=original_p_value_bins,y=rep_p_value,
   geom_hline(yintercept=c(0.1), lty = 3) + 
   ylim(c(0,1)) +
   xlab("Original p-value (binned)") + 
-  ylab("Instructor replication rating") + 
+  ylab("Replication p-value (exact)") + 
   theme_bw() + 
   scale_color_solarized(name = "Subjective replication rating") + 
   theme(legend.position = "bottom")
@@ -356,6 +356,13 @@ for (key in project_plan$project_key) {
 
 # Discussion
 
+In this paper, we reported the results of a series of 11 direct replications of previously-published experiments from the 2015 volume of *Psychological Science*. We had two interlocking goals: first, to create a proof of concept for high-quality pedagogical replications, and second, to provide evidence on the ability of students replicate important, recent findings in a top journal. Despite our relatively tight adherence to the original experimental protocols and relatively large sample sizes, our results were disappointing. The modal outcome of our projects was an incomplete replication, in which some hint of the original pattern was observed but results were not statistically significance and had both smaller effect size and lower evidential value than the originals. 
+
+
+Our findings are largely congruent with the results of @osc2015
+
+we believe these findings 
+
 Importance of self-selected papers - these are the papers that interesting to next generation of researchers
 
 
@@ -366,12 +373,15 @@ OSF - but need search tools
 PsychFileDrawer
 CurateScience
 
-# Supplemental
+Pitfalls of doing the sort of analysis here. Even open data posed significant challenges in reproducing effect sizes. Data were stored in proprietary formats, model specifications were unclear from text. Reproducing individual numbers was challenging or impossible. 
 
-All materials that are needed for class to implement
-Email templates
-Spreadsheets
-TA/prof auditing processes
+
+<!-- # Supplemental -->
+
+<!-- All materials that are needed for class to implement -->
+<!-- Email templates -->
+<!-- Spreadsheets -->
+<!-- TA/prof auditing processes -->
 
 # References 
 
