@@ -203,6 +203,24 @@ project_info <- data.frame(project_key = "auc",
                            notes="based on writeup and article, assuming exp_typetrustworthy:centered_dft interaction is key stat of interest. Should clarify with Carolyn. Also make sure doing correct analysis from article."
 )
 
+# New Analysis Eric
+
+d <- summarySEwithin(d.raw, measurevar="face_rating", withinvars=c("face_dft"),
+                     betweenvars=c("exp_type","workerid"),idvar="workerid", na.rm=FALSE, conf.interval=.95)
+
+mean_dft <- mean(as.numeric(as.character(d$face_dft)))
+mean_face_rating <- mean(d$face_rating_norm)
+d <- d %>%
+  mutate(centered_face_rating = face_rating_norm - mean_face_rating,
+         centered_dft = as.numeric(as.character(face_dft)) - mean_dft)
+
+aov <- aov(centered_face_rating ~ face_dft * exp_type + Error(workerid / face_dft), data=d)
+summary(aov)
+aov <- aov(centered_face_rating ~ centered_dft * exp_type + Error(workerid / face_dft), data=d) 
+summary(aov)
+
+### End Analysis Eric
+
 #This results in $F(5, 16) = 91.11, p < 0.001, R^2 = 0.97$ which is the same
 #significance level and effect size as the original study. Comparing the
 #coeffecient estimates from this model with that of the original study, the

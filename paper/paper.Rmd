@@ -30,12 +30,17 @@ rm(list=ls())
 library(knitr)
 knitr::opts_chunk$set(fig.width=6, fig.height=5, fig.crop = FALSE, 
                       fig.path='figs/', echo=FALSE, warning = FALSE, 
-                      cache=TRUE, message = FALSE, sanitize = TRUE)
+                      cache=FALSE, message = FALSE, sanitize = TRUE)
 library(readr)
 library(dplyr)
 library(xtable)
 library(readr)
+library(tidyr)
 library(ggplot2)
+library(BayesFactor)
+library(ggrepel)
+#devtools::install_github("langcog/langcog")
+library(langcog)
 ```
 
 Reproducibility is a core value for empirical research, but there is increasing concern throughout psychology that weak statistical standards and methodological practices have led to low empirical rates of replication [@osc2015]. Under the current incentive structure for science, direct replication is not typically valued, however. One potential solution to this problem is to make direct replication an explicit part of pedagogy: that is, to teach students about experimental methods by asking them to run replication studies [@frank2012;@grahe2012]. Despite enthusiasm for this idea, however [@lebel2015;@everett2015;@standing2016;@king2016], there is limited data -- beyond anecdotal reports or individual projects [@phillips2015;@lakens2013] -- to support its efficacy. 
@@ -49,12 +54,12 @@ With respect to pedagogy, we describe our process for conducting well-powered, h
 In sum, we view the contribution of the current work to be two-fold. First, we provide a proof-of-concept and pedagogical model for conducting replications in the classroom. Second, we provide an initial estimate of what proportion of studies from the most recent volume of *Psychological Science* could easily be reproduced by a motivated student. 
 
 ```{r, results='asis'}
-project_plan_raw <- read_csv("data/planning_and_outcomes.csv")
+project_plan_raw <- read.csv("../data/planning_and_outcomes.csv")
 
 project_plan <- project_plan_raw %>%
   filter(`include_in_final_writeup`==1) 
 
-project_data_summary <- read_csv("data/project_data_summary.csv")
+project_data_summary <- read_csv("../data/project_data_summary.csv")
 
 d <- left_join(project_plan, project_data_summary, by = c("project_key"))
 ```
@@ -74,25 +79,26 @@ names(ppt) = c("Citation", "Expt", "Data", "Materials", "Turk?",
 <!-- latex table generated in R 3.3.0 by xtable 1.8-2 package
  Fri Jun 24 12:02:11 2016 -->
 \begin{table}[ht]
+\footnotesize
 \centering
 \begin{tabular}{lllllrr}
   \hline
 Citation & Expt & Data & Materials & Turk? & N (orig) & N (rep) \\ 
   \hline
-@storm2015 & 3 & No & No & No &  48 &  61 \\ 
-@lewis2015 & 4 & No & Yes & Yes & 122 & 128 \\ 
-@scopelliti2015 & 3 & No & Yes & Yes & 550 & 124 \\ 
-@liverence2015 & 1 & No & Some & No &  18 &  \\ 
-@wang2015 & 2 & No & No & No & 219 & 397 \\ 
-@sofer2015 & 1 & No & Yes & No &  48 &  95 \\ 
-@ko2015 & 2 & Yes & Some & No &  40 &  40 \\ 
-@dunning2015 & 1b & No & Yes & Yes & 202 &  50 \\ 
-@proudfoot2015 & 1 & No & No & Yes &  80 &  84 \\ 
-@zaval2015 & 1 & Yes & Yes & Yes & 312 & 328 \\ 
-@xu2015 & 1a & No & No & No &  12 &  27 \\ 
+Storm \& Stone (2015) & 3 & No & No & No &  48 &  61 \\ 
+Lewis \& Oyserman (2015) & 4 & No & Yes & Yes & 122 & 128 \\ 
+Scopelliti, Loewenstein, \& Vosgerau (2015) & 3 & No & Yes & Yes & 550 & 124 \\ 
+Liverence \& Scholl (2015) & 1 & No & Some & No &  18 &  \\ 
+Wang et al. (2015) & 2 & No & No & No & 219 & 397 \\ 
+Sofer et al. (2015) & 1 & No & Yes & No &  48 &  95 \\ 
+Ko, Sadler, \& Galinksy (2015) & 2 & Yes & Some & No &  40 &  40 \\ 
+Atir, Rosenzweig, \& Dunning (2015) & 1b & No & Yes & Yes & 202 &  50 \\ 
+Proudfoot, Kay, \& Koval (2015) & 1 & No & No & Yes &  80 &  84 \\ 
+Zaval, Markowitz, \& Weber (2015) & 1 & Yes & Yes & Yes & 312 & 328 \\ 
+Xu \& Franconeri (2015) & 1a & No & No & No &  12 &  27 \\ 
    \hline
 \end{tabular}
-\caption{Summary of attempted replications} 
+\caption{\label{tab:summary} Summary of attempted replications.} 
 \label{tab:summary}
 \end{table}
 
@@ -104,7 +110,7 @@ We begin by describing the general method of the class, then discuss shared meth
 
 All projects were completed as part of a class (syllabus and materials available at [http://psych254.stanford.edu]()). At the initiation of class, all students were told that they had the opportunity to participate in a group replication project to which they could contribute their class project. The requirements for joining the project were to conduct a pre-registered replication of a finding from the 2015 volume of *Psychological Science* and to contribute the code, data, and materials to the writeup. 
 
-Students selected projects based on interest, rather than via a systematic sampling strategy. Thus, all interpretation of our findings should be with respect to the distribution of student interest. Any reproducibility estimates arising from our analyses are estimates of the probability of reproducing a finding that is of interest, rather than findings in general. This sampling strategy may thus bias our results towards more exciting or novel findings.
+Students selected projects based on interest, rather than via a systematic sampling strategy. Thus, all interpretation of our findings should be with respect to the distribution of student interest. Any reproducibility estimates arising from our analyses are estimates of the probability of reproducing a finding that is of interest, rather than findings in general. This sampling strategy may thus bias our results towards more exciting or novel findings. A summary of the original findings is given in Table \ref{tab:summary}. 
 
 ## Participants
 
@@ -122,76 +128,153 @@ One part of our workflow was extremely useful both pedagogically and for encoura
 
 ## Preregistration and Review
 
-To ensure high quality replications, students went through a rigorous process in which each student's work was reviewed several times by both the instructor (MCF) and the teaching assistants (ES and RXDH). In addition to as-needed guidance, each student collected two pilot samples. The first, "pilot A," consisted of a handful of non-naive participants (e.g., the experimenter, other students). The goal of this pilot was to ensure that all needed data were being logged by the experiment and that analytic scripts for the confirmatory analyses functioned appropriately. After pilot A was completed, the instructor or a TA reviewed the student's experiment (acting as a participant) and critiqued and reviewed the student's full analytic code and output. 
+To ensure high quality replications, students went through a rigorous process in which each student's work was reviewed several times by both the instructor (MCF) and the teaching assistants (ES and RXDH). In addition to as-needed guidance, each student collected two pilot samples. The first, "Pilot A," consisted of a handful of non-naive participants (e.g., the experimenter, other students). The goal of this pilot was to ensure that all needed data were being logged by the experiment and that analytic scripts for the confirmatory analyses functioned appropriately. After pilot A was completed, the instructor or a TA reviewed the student's experiment (acting as a participant) and critiqued and reviewed the student's full analytic code and output. 
 
 Once requested changes were made, the student conducted "Pilot B," using a handful of naive participants recruited from Mechanical Turk. The goal of this pilot was to ensure that participants were able to complete the experiment and did not report any substantial issues with instructions or technical details of the experiment. (All students were instructed to give participants a way to leave free-form comments at the end of the experiment but prior to debriefing text). At the conclusion of Pilot B, both the instructor and a TA reviewed the student's analytic code and its outputs on the data for all confirmatory analysis. The goal of this code review was to ensure that all planned analyses were specified correctly and with sufficient detail to permit inclusion in the broader analysis.
 
-After Pilot B review was completed, students were given authorization to collect the full sample of participants, contingent on having made the requested change. Prior to data collection, the analytic script containing all confirmatory analyses was pre-registered using the Open Science Framework. 
+After Pilot B review was completed, students were given authorization to collect the full sample of participants, contingent on having made the requested change. Prior to data collection, the analytic script containing all confirmatory analyses was pre-registered using the Open Science Framework. In addition, prior to data collection, we pre-registered the confirmatory analyses reported in the current paper ([https://osf.io/rxz8m/](https://osf.io/rxz8m/)).
 
 ## Sample size determination and statistical approach
 
 After selecting a paper of interest, students selected a particular study from within that paper based on their judgment of interest and feasibility. The modal study chosen was the first, but several students chose later studies in a set as well. 
 
-Despite the general emphasis in meta-analytic and reproducibility efforts to aggregate a single effect size of interest [@osc2015;@lipsey2001], it was often challenging to identify a single key statistical test in studies. Often a wide variety of statistical tests were conducted, often within one or several regression models with multiple specifications. Thus, we interpret "key statistical test" results with caution. Nevertheless, despite this interpretive difficulty, we attempted to use a single statistical test as our target for experiment planning and analysis. This test was determined by iterative discussion between the student, instructor, and TAs. 
+Despite the general emphasis in meta-analytic and reproducibility efforts to aggregate a single effect size of interest [@osc2015;@lipsey2001], it was often challenging to identify a single key statistical test in studies. Often a wide variety of statistical tests were conducted, often within one or several regression models with multiple specifications. Thus, we interpret "key statistical test" results with caution. Nevertheless, despite this interpretive difficulty, we attempted to use a single statistical test as our target for experiment planning and analysis.
 
-Derermining appropriate sample sizes is a major challenge in replication research [@button2013,@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;button2013], but -- especially with the constraints of a limited budget -- it may be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or underpowered original studies but may lead to impractical or unnecessary recommendations for experiments that were initially large and/or adequately powered. 
+Derermining appropriate sample sizes is a second major challenge in replication research [@button2013;@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;@button2013], but -- especially with the constraints of a limited budget -- it may be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or underpowered original studies but may lead to impractical or unnecessary recommendations for experiments that were initially large and/or adequately powered. 
 
 We eventually used a hybrid, case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget.
 ^[We initially were allocated \$1,500 but one student contributed personal research funds, leading to a total cost of $\approx$ \$1,700 for all studies. We attempted to set payment for our studies at approximately \$6/hour based on timing estimated from pilot A sessions.] 
 In 
-`{r} sum(project_plan$power_standard == "80% power")} 
+`r sum(project_plan$power_standard == "80% power")`
 cases, we powered the replication attempt to 80\% post-hoc power. In 
-`{r} sum(project_plan$power_standard == "Original")` 
+`r sum(project_plan$power_standard == "Original")` 
 cases, we used the original sample size. In one case, the original experiment was apparently extremely over-powered in the post-hoc analysis, so we chose a smaller sample size that still would apparently yield high power.  In one case, we reduced the number of trials as part of the adaptation to mechanical turk, and in one case of a multi-step procedure where the first step consisted of stimulus generation, we decreased the N in the first stage of the procedure (details available in Supplemntal Materials). 
 
 ## Individual Replications
 
-Details of individual replications are available in the supplementary materials. Students chose findings from a wide variety of domains for replication. One group was nvestigations of memory and visual attention [e.g., @xu2015], including in applied contexts like remembering "deleted" files [@storm2015] or tracking transition between locations on smartphone apps [@liverence2015]. A second cluster came from studies of social perception, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015].
+Details of individual replications are available in the supplementary materials. Students chose findings from a wide variety of domains for replication. One cluster of studies included investigations of memory and visual attention [e.g., @xu2015], including in applied contexts like remembering "deleted" files [@storm2015] or tracking transition between locations on smartphone apps [@liverence2015]. A second cluster came from studies of social perception, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015].
 
 # Results
 
-Analyses for the final project were pre-registered ([https://osf.io/rxz8m/]())
-
 ## Pedagogical assessment 
 
-Of the 15 students in the class, all completed projects (two with extensions), but one failed to find a project of interest in the sampling frame and three opted out of the broader project prior to data collection.^[Note that 2/3 of these opted out projects were judged by the instructor team to have been successful replications; thus we have no evidence that these students opted out systematically due to their belief that their project would fail.] The remaining 11 students contributed code, data, registrations and materials to the final product. (In one case, a student failed to complete the pre-registration but nevertheless submitted a pre-specified analysis plan to the instructors for review). 
+Of the 15 students in the class, all completed projects (two with extensions), but one failed to find a project of interest in the sampling frame and three opted out of the broader project prior to data collection.^[Note that these students did not express doubts about the success of their projects prior to opting out, and  2/3 projects were judged by the instructor team to have been successful replications. Thus we have no evidence that these students opted out systematically due to their belief that their project would fail.] The remaining 11 students contributed code, data, registrations and materials to the final product. (In one case, a student failed to complete the pre-registration but nevertheless submitted a pre-specified analysis plan to the instructors for review). 
 
-Assessing the fidelity of replications to the original (in terms of same sample, same materials, same task parameters) 
+The instructor team coded the fidelity of replications, weighing whether the materials, sample, and task parameters differed from the original studies. Coded on a scale of 1 -- 7 (with 1 being a loose replication with substantive deviations from the original, and 7 being essentially identical), the modal rating was `r round(mean(d$replication_fidelity_MCF), digits = 2)`. Several studies were essentially identical to the originals, but there was a group of others that included differences in population or number of trials that might have an effect on the results. 
 
-Flag: in some cases (auc) we found that the key test statistic was not coded correctly. 
+In two cases, in final review of the projects (after data collection), the instructor team decided that the student's choice of key statisical test was not in fact a strong test of the original authors' primary theoretical claim. In both of these cases [@sofer2015;@proudfoot2015], the original authors had fit a multiple regression model to the data and there was not a single obvious test that corresponded directly to the authors' hypothesis. After discussion, the instructor team converged on a statistical test that they thought better corresponded to the original authors' intended hypothesis of interest. We report results from these corrected tests here. We return to this issue in the Discussion, as we believe that test selection is a critical theoretical issue in replication research. 
 
 ## Confirmatory analyses
 
 ### Subjective judgments of replication
 
-Students of the class and the instructors gave independent “replication ratings” to assess subjective judgement of the replication. Criterion is based on the theoretical interpretation of the original finding. (0 = non-replication, .5 is substantial hints of the same pattern or a significant but different pattern, 1 = full replication). We find that the these ratings of the student carrying out the replication and the instructors were in agreement for `r sum(d$replicated_TA == d$replicated_student,na.rm=T)` out of the `r nrow(d)` replications.  The average rating given by instructors and students was `r mean(d$replicated_TA, na.rm=TRUE)` and `r mean(d$replicated_student, na.rm=TRUE)` respectively.  
+Students of the class and the instructors gave independent “replication ratings” to assess subjective judgement of the replication. Criterion is based on the theoretical interpretation of the original finding. (0 = non-replication, .5 is substantial hints of the same pattern or a significant but different pattern, 1 = full replication). We find that the these ratings of the student carrying out the replication and the instructors were in agreement for `r sum(d$replicated_TA == d$replicated_student,na.rm=T)` out of the `r nrow(d)` replications.  The average rating given by instructors and students were `r round(mean(d$replicated_TA, na.rm=TRUE), digits = 2)` and `r round(mean(d$replicated_student, na.rm=TRUE), digits = 2)` respectively.  
 
-Flag: waiting for one student's subjective rating
 ```{r}
-table(d$replicated_TA,d$replicated_student) # Make prettier
+d$high_fidelity <- d$replication_fidelity_MCF > median(d$replication_fidelity_MCF)
+# table(d$replicated_TA,d$replicated_student) # Make prettier
 #mean(d$replicated_team)
+
+replicated <- d %>% 
+  group_by(replicated_TA) %>%
+  summarise(n= n()) %>%
+  spread(replicated_TA, n) %>%
+  mutate(measure = "replicated",
+         value = "")
+
+turk <- d %>% 
+  group_by(original_on_turk, replicated_TA) %>%
+  summarise(n= n()) %>%
+  spread(replicated_TA, n) %>%
+  rename(value = original_on_turk) %>%
+  mutate(measure = "original on turk") 
+
+fidelity <- d %>% 
+  group_by(high_fidelity,replicated_TA) %>%
+  summarise(n= n()) %>%
+  spread(replicated_TA, n) %>%
+  mutate(measure = "high fidelity") %>%
+  rename(value = high_fidelity) %>%
+  ungroup() %>%
+  mutate(value = c("Yes","No")[as.numeric(value) + 1])
+
+open_materials <- d %>% 
+  group_by(open_materials,replicated_TA) %>%
+  summarise(n= n()) %>%
+  spread(replicated_TA, n) %>%
+  mutate(measure = "open materials") %>%
+  rename(value = open_materials)
+
+outcomes <- bind_rows(replicated, turk, fidelity, open_materials) 
+names(outcomes) <- c("No","Partial","Full", "Mediator","Value")
+outcomes <- outcomes %>%
+  select(Mediator, Value, No, Partial, Full)
+
+# print(xtable(outcomes), include.rownames = FALSE)
 ```
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{llrrr|r}
+  \hline
+Mediator & Value & No & Partial & Full & Total\\ 
+  \hline
+Replicated? &  &   2 &   6 &   3 & 11 \\ 
+\hline
+  Original on turk & Yes &   1 &   2 &   2 & 5 \\ 
+   & No &   1 &   4 &   1 & 6\\ 
+\hline
+  High fidelity replication? & Yes &   2 &   3 &   1  & 6\\ 
+   & No &  &   3 &   2 & 5\\ 
+\hline
+  Open materials? & Yes &   1 &   3 &   1  & 4\\ 
+   & Some &  &   1 &   1 & 2\\ 
+   &  No &   1 &   2 &   1 & 4\\ 
+\hline
+\end{tabular}
+\caption{\label{tab:results} Counts of instructor team replication ratings, split by various different mediating variables.}
+\end{table}
+
+
+The modal replication project in our sample was judged to be a "partial" replication, meaning that some aspects of the observed findings were different from those reported by the original authors. While this conclusion is dispiriting, it is also perhaps unsurprising given the complexity of the analyses reported in many of the original papers. In addition, `r sum(d$original_test=="interaction")` of the tests were interactions, which tend to have lower statistical power [@mcclelland1993] and have fared poorly in previous replication studies [@osc2015].
+
+The distribution of ratings are given in Table \ref{tab:results}, along with breakdowns by various factors of interest. Since our sample only includes 11 studies, we describe general trends here rather than attempting to conduct statistical tests (which would be dramatically underpowered after correcting for multiple comparisons). Overall, projects had a somewhat larger probability of being judged successful if it was judged to be closer to the original:
+\%`r round(mean(d$replicated_TA[d$high_fidelity]), digits=2)` 
+vs. 
+\%`r round(mean(d$replicated_TA[d$high_fidelity == FALSE]), digits=2)`.
+There were small numerical effects of being run on Mechanical Turk (
+\%`r round(mean(d$replicated_TA[d$original_on_turk == "Yes"]), digits=2)` 
+vs. 
+\%`r round(mean(d$replicated_TA[d$original_on_turk == "No"]), digits=2)`. 
+) and having open materials (
+\%`r round(mean(d$replicated_TA[d$open_materials!="No"]), digits=2)` 
+vs. 
+\%`r round(mean(d$replicated_TA[d$open_materials=="No"]), digits=2)`), though we do not believe these differences are interpretable given our sample size. 
 
 ### Significance of the key effect size
 
-```{r, echo=F}
-d$original_p_value_bins <- NA
+We next turn to an assessment of the replication $p$-value to determine whether the key statistic found a significant effect at the traditional $p=.05$ level. Only `r sum(d$rep_p_value_05)` of the studies yielded a significant replication $p$-value. The well-documented "dance of the p-values" [@cumming2013] suggests that the inference drawn from a single replication p-value may not be  informative, however, and other metrics such as effect sizes and Bayes factors may provide a more nuanced perspective. 
+
+```{r}
+d$original_p_value_bins <- .1
 d$original_p_value_bins[d$original_p_value %in% c("<.05","0.04")] <- "<.05"
 d$original_p_value_bins[d$original_p_value %in% c("0.007","0.001")] <- "<.01"
 d$original_p_value_bins[d$original_p_value %in% c("<.001","< .001")] <- "<.001"
 d$rep_p_value_05 <- d$rep_p_value < .05
-```
 
-We assess the replication p-value to determine whether the key statistic found a significant effect at the traditional p=.05 level. We find this to be true for only `r sum(d$rep_p_value_05)` of the studies. However, the well-documented "dance of the p-values" [@cummings2011] suggests that the inference drawn from a single replication p-value may not be highly informative, and other metrics suchs as the confidence interval and Bayes factor analysis below can give the reader a better understanding of replication success.  
-
-Flag: Are all effects in the hypothesized direction?
-
-
-```{r}
-ggplot(d,aes(x=original_p_value_bins,y=rep_p_value, color=as.factor(d$replicated_TA))) +
-  geom_jitter(height=0, width=.4) +
+d$replicated_TA_factor <- factor(d$replicated_TA, levels = c(0, .5, 1), 
+                                 labels = c("No","Partial","Yes"))
+ggplot(d,aes(x=original_p_value_bins,y=rep_p_value, 
+             color=d$replicated_TA_factor)) +
+  geom_jitter(height=0, width=.2) +
+  geom_hline(yintercept=c(0.05), lty = 2) + 
+  geom_hline(yintercept=c(0.1), lty = 3) + 
+  ylim(c(0,1)) +
+  xlab("Original p-value (binned)") + 
+  ylab("Instructor replication rating") + 
   theme_bw() + 
-  geom_hline(yintercept=c(0.05,0.1,0.2), color="gray")
+  scale_color_solarized(name = "Subjective replication rating") + 
+  theme(legend.position = "bottom")
 ```
 
 ### Original ES in the confidence interval of the replication 
@@ -199,14 +282,16 @@ ggplot(d,aes(x=original_p_value_bins,y=rep_p_value, color=as.factor(d$replicated
 We determine whether the original reported effect size is included in the 95\% confidence interval found in the replication studies.  
 
 Flag: Original effect size not given for auc?
+
 ```{r}
 d$original_ES <- as.numeric(gsub(".*=(.*)","\\1", d$original_ES_text))
 #Ensure that effect size is given in same units... Make beautiful ci chart here...
-
 ```
 
 
 ### Bayes factor analysis
+
+Next, following @etz2016, we conducted a Bayesian analysis. 
 
 ```{r}
 getBF <- function(t_stat, t_df) {
@@ -215,64 +300,45 @@ getBF <- function(t_stat, t_df) {
 
 tstatDF <- d %>%
   filter(original_t_stat != "NA") %>%
-  select(project_key, original_t_stat, original_t_df, rep_t_stat, rep_t_df) %>%
+  select(project_key, replicated_TA_factor, first_author_name, original_t_stat, original_t_df, rep_t_stat, rep_t_df) %>%
   rowwise() %>%
   mutate(origBF = getBF(original_t_stat, original_t_df)) %>%
   rowwise() %>%
-  mutate(repBF = getBF(rep_t_stat, rep_t_df))
+  mutate(repBF = getBF(rep_t_stat, rep_t_df), 
+         df_ratio = rep_t_df/original_t_df)
 
-ggplot(tstatDF, aes(x = origBF, y = repBF, size = rep_t_df/original_t_df)) +
-  geom_point()+
-  theme_bw()+
-  # xlim(-2, 30) +
-  # ylim(-2, 30) +
-  geom_hline(aes(yintercept = 10), linetype = 2)+
-  geom_hline(aes(yintercept = 3), linetype = 2)+
-  geom_hline(aes(yintercept = 1/3), linetype = 2)+
-  geom_hline(aes(yintercept = 1/10), linetype = 2)+
-  geom_vline(aes(xintercept = 10), linetype = 2)+
-  geom_vline(aes(xintercept = 3), linetype = 2)+
-  geom_vline(aes(xintercept = 1/3), linetype = 2)+
-  geom_vline(aes(xintercept = 1/10), linetype = 2) +
+tstatDF$origBF[7] <- 1e+11
+
+ggplot(tstatDF, aes(x = origBF, y = repBF)) +
+  geom_point(alpha = .8, aes(size = df_ratio, 
+                             col = replicated_TA_factor)) +
+  geom_abline(slope = 1, lty = 2) + 
+  geom_smooth(method = "lm", se=FALSE) + 
+  # geom_smooth(data = filter(tstatDF, 
+  #                           !(first_author_name %in% c("Atir","Ko"))), 
+  #                           method = "lm", se=FALSE, lty = 2, size = .5) + 
+  geom_text_repel(aes(label = first_author_name), size = 3) + 
+  xlab("Original Bayes Factor") + 
+  ylab("Replication Bayes Factor") + 
   scale_x_log10(limits = c(10**-1.75, 10**11), 
-                breaks = c(1/10, 1/3, 3, 10),
-                labels = c("1/10", "1/3", "3", "10")) +
+                breaks = c(1/10, 1/3, 3, 10, 100, 1e+3, 1e+6, 1e+9),
+                labels = c("1/10", "1/3", "3", "10","100", "1,000", 
+                           "1,000,000","1,000,000,000")) +
   scale_y_log10(limits = c(10**-1.75, 10**11),
-                breaks = c(1/10, 1/3, 3, 10),
-                labels = c("1/10", "1/3", "3", "10"))
+                breaks = c(1/10, 1/3, 3, 10, 100, 1e+3, 1e+6, 1e+9),
+                labels = c("1/10", "1/3", "3", "10","100", "1,000", 
+                           "1,000,000","1,000,000,000")) + 
+  scale_size_continuous(name = "Ratio of replication df to original df") + 
+  scale_color_solarized(name = "Subjective replication rating") + 
+  theme_bw() +
+  theme(legend.position="bottom")
 
-
-```
-@etz2016
-
-### Moderator analyses
-
-Turk vs. not-turk
-
-```{r}
-d %>% 
-  group_by(original_on_turk) %>%
-  summarise(replicated_TA = mean(replicated_TA))
+# note: fix slope on trend line, because the atir finding is a hack right now so it fits in the axes. 
 ```
 
-Coding of replication fidelity
 
-```{r,eval=F}
-d$high_fidelity <- d$replication_fidelity_MCF > median(d$replication_fidelity_MCF)
-d %>%
-  group_by(high_fidelity) %>%
-  summarise(replicated = mean(replicated_TA))
-```
 
-Open materials/data vs. not
-
-```{r}
-project_plan %>% 
-  group_by(open_materials) %>%
-  summarise(replicated = mean(replicated_TA))
-```
-
-Demographics
+<!-- Demographics -->
 
 
 ```{r, eval=F}
@@ -287,12 +353,13 @@ for (key in project_plan$project_key) {
 }
 ```
 
-## Exploratory analysis
-
 
 # Discussion
 
 Importance of self-selected papers - these are the papers that interesting to next generation of researchers
+
+
+The single effect-size paradigm is deeply broken. 
 
 How to archive and make searchable the results of this sort of class?
 OSF - but need search tools
