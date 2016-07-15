@@ -341,39 +341,59 @@ ggplot(tstatDF, aes(x = origBF, y = repBF)) +
 <!-- Demographics -->
 
 
-```{r, eval=F}
-layout(matrix(1:22,nr=11,byr=T))
-for (key in project_plan$project_key) {
-  tryCatch(source(function() {
-  orig <- readPNG(paste0("figures/",key,"-original.png"))
-  rep <- readPNG(paste0("figures/",key,"-replication.png"))
-  plot(orig)
-  plot(rep)}
-  ))
-}
-```
 
 
 # Discussion
 
-In this paper, we reported the results of a series of 11 direct replications of previously-published experiments from the 2015 volume of *Psychological Science*. We had two interlocking goals: first, to create a proof of concept for high-quality pedagogical replications, and second, to provide evidence on the ability of students replicate important, recent findings in a top journal. Despite our relatively tight adherence to the original experimental protocols and relatively large sample sizes, our results were disappointing. The modal outcome of our projects was an incomplete replication, in which some hint of the original pattern was observed but results were not statistically significance and had both smaller effect size and lower evidential value than the originals. 
+In this paper, we reported the results of a series of 11 direct replications of previously-published experiments from the 2015 volume of *Psychological Science*. We had two interlocking goals: first, to create a proof of concept for high-quality pedagogical replications, and second, to provide evidence on the ability of students replicate important, recent findings in a top journal. Despite our relatively tight adherence to the original experimental protocols and relatively large sample sizes, our results were disappointing. The modal outcome of our projects was partial replication, in which some hint of the original pattern was observed but results were not statistically significant and had both smaller effect size and lower evidential value than the originals. 
+
+Our project aimed to assess the probability that a finding -- selected on grounds of feasibility and interest -- would be replicated with the time, money, and effort constraints of a course project. While these constraints might initially seem severe, our work here shows what is possible for motivated students using freely-available tools and resources. Indeed, the majority of the projects in our report were relativley close replications and included the same or greater numbers of participants. Yet, despite these virtues, our findings were congruent with the results of @osc2015, revealing a relatively low rate of replicability by a number of tests. In addition, in informal assessments of previous years' findings, we see a similar rate of replicability [@frank2015]. What are the causes of this relatively low rate of replication? 
+
+Many statistical factors leading to lowered replicability have been discussed in past work, including analytic flexibility, publication bias, and low statistical power among others [e.g., @button2013,@ioannidis2005]. On the other hand, an alternative viewpoint is that -- especially for studies that leverage social constructs -- exact replication may be difficult across contexts [@gilbert2016;@vanbavel2016]. For both reasons of design and scale, our study here cannot disentangle these factors empirically. Nevertheless, the consistent descreases in effect size and evidential value we report seem consistent with a "winner's curse" -- that intial publications tend to over-estimate effects. And although our sample was too small for statistical inference, numerically our results do not support replication fidelity in terms of sample and procedure as a primary driver of success.
+
+Our experiences performing and compiling the studies here sheds light on one further concern that we believe has been under-reported in past studies [including @osc2015]. Our standard model of replication is based on the notion of a single statistical test -- and its associated effect size -- being the key properties of a study that can be targeted for replication. Yet, as we mentioned above, selecting this key statistical test was difficult for most of the projects in our sample, and virtually impossible for some. We were often forced to consult other sections of the papers (e.g., abstracts, discussion sections) to gain clarity on what test was considered the critical one for the authors' interpretation. It is likely that some of our decisions would not be ratified by the original authors. 
+
+Indeed, by the standards of clinical trials research, every single study we replicated in this report would be classified as exploratory research. No protocol was pre-registered, and the pattern of evidence across studies was often more important to the authors' conclusions than any particular test in any single study.  Almost every study conducted multiple statistical tests, often associated with several statistical models with differing specifications. And in many cases, there are no conventionally-reported and easily calculable effect size measures [e.g., for mixed- and random-effect models, cf. @bakeman2005]. This set of features -- which, in our experience, are endemic to published psychological work -- makes replication research within the conventional statistical paradigm extremely challenging. 
+
+In our view, two recommendations will improve this situation dramatically. First, pre-registration typically requires the selection of one or a small number of statistical analyses to be designated as critical for interpretation. Were this information available, it would have simplified the problem of selecting effects to replicate in several cases. Second, the widespread adoption of open data practices can dramatically facilitate the type of meta-research pursued here, in a number of ways. In addition to clarifying the (often terse) reporting in a paper, the availability of data facilitates the computation of the relevant meta-analytic variables.^[We note that, although we were grateful that several papers in our sample shared data and materials, the use of open (non-proprietary) formats for archving data and analytic code is often critical for other investigators attempting to reproduce analyses.] No paper can perfectly predict the uses to which future investigators will put a piece of work; the availability of the source materials is a way of allowing more flexible reuse. 
+
+In conclusion, our results here demonstrate the practical possibility of performing replication research in the classroom. There are many challenges for ensuring high-quality replications in a pedagogical setting -- from checking experimental methods to reviewing analytic code for errors -- but we would argue that these are not just pedagogical challenges. They are challenges for psychological science. We believe that the openness and transparency we pursued here as part of our pedagogical goals should be models not just for other classes but for future research more broadly. 
+
+# Supplemental Materials: Project-By-Project Methods Addendum
 
 
-Our findings are largely congruent with the results of @osc2015
+```{r, fig.height=9, fig.width=6}
+library(png)
+layout(matrix(1:24,nr=6,byr=T))
+for (key in project_plan$project_key) {
+  orig <- readPNG(paste0("../figures/",key,"-original.png"))
+  rep <- readPNG(paste0("../figures/",key,"-replication.png"))
+  
+  par(mai=c(0,0,0,0))
+  plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
+  rasterImage(orig, 0, 0, 100, 100, interpolate=FALSE)
+  
+  plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
+  rasterImage(rep, 0, 0, 100, 100, interpolate=FALSE)
 
-we believe these findings 
+}
+```
 
-Importance of self-selected papers - these are the papers that interesting to next generation of researchers
+For each project, we present a summary of the finding, the key statistical test, and the outcomes of the replication. Side-by-side visualizations are presented in Figure SM1. 
+
+## Sofer et al. (2015)
+
+- key statistic in original 
+- 
+
+##  
 
 
-The single effect-size paradigm is deeply broken. 
 
-How to archive and make searchable the results of this sort of class?
-OSF - but need search tools
-PsychFileDrawer
-CurateScience
+# References 
 
-Pitfalls of doing the sort of analysis here. Even open data posed significant challenges in reproducing effect sizes. Data were stored in proprietary formats, model specifications were unclear from text. Reproducing individual numbers was challenging or impossible. 
+
+
 
 
 <!-- # Supplemental -->
@@ -381,8 +401,4 @@ Pitfalls of doing the sort of analysis here. Even open data posed significant ch
 <!-- All materials that are needed for class to implement -->
 <!-- Email templates -->
 <!-- Spreadsheets -->
-<!-- TA/prof auditing processes -->
-
-# References 
-
-
+<!-- TA/prof auditing processes --
