@@ -42,12 +42,15 @@ dfdenom = params$Df[length(params$Df)]
 stat_descript <- paste0("F(",dfnum,", ",dfdenom,") = ",round(F_stat, 3))
 stat_descript
 
+## lsr::etaSquared(rs1.1) => d = 2.3758
+cohensD <- 2*sqrt(F_stat)/sqrt(dfdenom)
+
 project_info <- data.frame(
   project_key = "jsalloum", 
   rep_t_stat = sqrt(F_stat),
   rep_t_df = dfdenom,
   rep_final_n = length(d.af$speakerId), 
   rep_n_excluded = 0, 
-  rep_es = NA, 
+  rep_es = cohensD, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = p)

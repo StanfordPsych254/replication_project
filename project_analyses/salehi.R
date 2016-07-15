@@ -70,7 +70,7 @@ write_csv(d, "processed_data/salehi.csv")
 
 ### REVISED TO USE FULL ANOVA (MCF 7/1/16)
 fitConTrait <- aov(rating ~ traitType * condition + 
-                     Error(workerid/(traitType))+(condition), data=d)
+                   Error(workerid/(traitType))+(condition), data=d)
 summary(fitConTrait)
 
 p <- summary(fitConTrait)[[2]][[1]][2,5]
@@ -87,11 +87,12 @@ df2 <- summary(fitConTrait)[[2]][[1]][3,1]
 # cohens_d <- effsize::cohen.d(masculineDivergentMean$workermean, masculineConnvergentMean$workermean)$estimate
 
 test_stat <- paste0("F(",df1,",",df2,")=",round(Fval, digits=3))
-  
+cohensd = 2*sqrt(Fval)/sqrt(df2)
+
 project_info <- data.frame(project_key = "salehi",
                            rep_final_n = length(unique(d$workerid)),
                            rep_n_excluded = 0, 
-                           rep_es = NA, 
+                           rep_es = cohensd, 
                            rep_test_statistic_str = test_stat,
                            rep_t_stat = sqrt(Fval), #http://www.tc.umn.edu/~oakes007/Files/Comm%20Trials/F%20and%20t%20statistics.pdf
                            rep_t_df = df2,
