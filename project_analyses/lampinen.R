@@ -81,7 +81,7 @@ n_subjects = length(unique(subject_aggregated_data$subject))
 nonRotatingK = subject_aggregated_data[!subject_aggregated_data$rotating,]$K
 rotatingK = subject_aggregated_data[subject_aggregated_data$rotating,]$K
 t_res = t.test(nonRotatingK, rotatingK, paired=T)
-cohensD = cohensD(nonRotatingK, rotatingK, method='paired')
+cohensd = lsr::cohensD(nonRotatingK, rotatingK, method='paired')
 
 F_stat = (t_res$statistic)^2
 p = pf(F_stat,1,n_subjects-1,lower.tail=F)
@@ -93,7 +93,7 @@ project_info <- data.frame(
   rep_t_df = t_res$parameter,
   rep_final_n = n_subjects, 
   rep_n_excluded = length(files) - n_subjects, 
-  rep_es = cohensD, 
+  rep_es = cohensd, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = p)
 
