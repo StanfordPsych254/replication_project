@@ -178,7 +178,6 @@ summary(aov_mixed) # double check this model?
 # Originally stated in replication report:
 # The ANOVA did not show a significant interaction between save condition and word condition, F(1,46) = .206, MSE = .01, p = .65, η2 = .01. However, there was a significant main effect of save condition in the ANOVA, F(1,46) = 15.47, MSE = .50, p <.001, η2 = .25.
 
-
 stat_sum <- summary(aov_mixed)$"Error: workerId:save_condition"
 df1 <- stat_sum[[1]][2,"Df"]
 df2 <- stat_sum[[1]][3,"Df"]
@@ -187,7 +186,7 @@ F_test<- round(stat_sum[[1]][2,"F value"],3)
 
 stat_descript <- paste0("F(",df1,",",df2,") = ",F_test)
 
-
+cohensd <- 2 * sqrt(F_test) / sqrt(df2)
 
 project_info <- data.frame(
   project_key = "mkeil", 
@@ -195,7 +194,7 @@ project_info <- data.frame(
   rep_t_df = df2,
   rep_final_n = length(unique(d1$workerId)), 
   rep_n_excluded = length(unique(d.raw$workerId))-length(unique(d1$workerId)), 
-  rep_es = NA, 
+  rep_es = cohensd, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = p.val,
   notes= "double check the aov mixed model- same as original authors? And different result than stated in report. This doesn't seem right collapsing by multiple trials first...?"

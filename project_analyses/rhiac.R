@@ -106,13 +106,15 @@ pval1 = modres[1,5]
 
 stat_descript <- paste0("F(",dfnum1,", ",dfdenom1,") = ",round(Fstat1, 3))
 
+cohensd <- 2 * sqrt(Fstat1) / sqrt(dfdenom1)
+
 project_info <- data.frame(
   project_key = "rhiac", 
   rep_t_stat = sqrt(Fstat1),
   rep_t_df = dfdenom1,
   rep_final_n = 321, 
   rep_n_excluded = 7, 
-  rep_es = NA, 
+  rep_es = cohensd, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = pval1)
 

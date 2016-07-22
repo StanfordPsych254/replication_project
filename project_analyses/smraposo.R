@@ -118,12 +118,14 @@ n_final <- dim(d[d$exclude=="include",])
 key_stat <- Fstat1
 stat_descript <- paste0("F(",dfnum1,", ",dfdenom1,") = ",round(Fstat1, 3))
 
+cohensd <- 2 * sqrt(Fstat1) / sqrt(dfdenom1)
+
 project_info <- data.frame(
   project_key = "smraposo", 
   rep_t_stat = sqrt(Fstat1),
   rep_t_df = dfdenom1,
   rep_final_n = nrow(d[d$exclude=="include",]), 
   rep_n_excluded = nrow(d[d$exclude!="include",]), 
-  rep_es = NA, 
+  rep_es = cohensd, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = pval1)

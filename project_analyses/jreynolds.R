@@ -46,6 +46,8 @@ tval = interactionRow[3]
 pval = interactionRow[4]
 df = rs1[[2]][1,]$Res.Df
 
+cohensd <- 2*tval/sqrt(df)
+
 stat_descript <- paste0("t(",df,") = ",round(tval, 3))
 
 project_info <- data.frame(
@@ -54,6 +56,6 @@ project_info <- data.frame(
   rep_t_df = df,
   rep_final_n = length(unique(d$Participant)), 
   rep_n_excluded = 0, 
-  rep_es = NA, 
+  rep_es = cohensd, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = pval)

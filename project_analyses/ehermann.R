@@ -34,13 +34,15 @@ degrees <- data.lm$df
 
 stat_descript <- paste0("t(",degrees,") = ",tval)
 
+cohensd <- 2 * tval / sqrt(degrees)
+
 project_info <- data.frame(
   project_key = "ehermann", 
   rep_t_stat = tval,
   rep_t_df = degrees,
   rep_final_n = nrow(df), 
   rep_n_excluded = 0 , 
-  rep_es = NA, 
+  rep_es = cohensd, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = pval,
   notes= ""
