@@ -138,7 +138,7 @@ summarySEwithin <- function(data=NULL, measurevar, betweenvars=NULL, withinvars=
 
 ## The planned sample would be US-based mTurkers, with 45 participants in each condition. We will not be able to replicate the exclusion criteria and instead will restrict the locale to US participants of all genders and all ages. We will collect light demographic information to analyze this difference.
 
-path <- "data/auc/"
+path <- "../data/auc/"
 files <- dir(path, pattern = "*.json")
 d.raw <- data.frame()
 d.balance <- data.frame()
@@ -163,7 +163,9 @@ for (f in files) {
 
 chr.rows <- sapply(d.raw, is.character)
 d.raw[,chr.rows] <- lapply(d.raw[,chr.rows], as.factor) # need to factorize character strings
-d.raw$face_dft <- as.factor(d.raw$face_dft)
+d.raw <- d.raw %>%
+    mutate(face_dft = as.factor(face_dft))
+
 
 d <- summarySEwithin(d.raw, measurevar="face_rating", withinvars=c("face_dft", "exp_type"),
                             idvar="workerid", na.rm=FALSE, conf.interval=.95)
@@ -182,6 +184,14 @@ model <- lm(centered_face_rating ~
               centered_dft * exp_type + 
               I(centered_dft**2) * exp_type,
             d)
+
+
+mixedModel <- lmer(face_rating ~ exp_type + nDFT + I(nDFT^2) 
+                   + exp_type:nDFT + exp_type:I(nDFT^2) 
+                   + (1 + nDFT + I(nDFT^2)| workerid), 
+                   d.raw %>% mutate(nDFT = scale(as.numeric(as.character(face_dft)), scale=TRUE)))
+                   
+
 summary(model)
 
 model_coef <- summary(model)$coefficients["exp_typetrustworthy:centered_dft","Estimate"]
@@ -192,6 +202,7 @@ lsr::etaSquared(model)
 cohensd <- abs(2*model_tval/sqrt(model_df))
 
 stat_descript <- paste0("t(",model_df,") = ",round(model_tval,2))
+
 
 
 project_info <- data.frame(project_key = "auc",
