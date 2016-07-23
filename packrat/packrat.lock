@@ -11,7 +11,7 @@ Hash: be2967bcff307e561d9ba17faf03205c
 Package: BayesFactor
 Source: CRAN
 Version: 0.9.12-2
-Hash: 4df092ef2edbd7ab7bfc1724e91e15c0
+Hash: 97ee7833fc2e93b78daac6020c56a0fd
 Requires: MatrixModels, Rcpp, RcppEigen, coda, gtools, mvtnorm,
     pbapply, stringr
 
@@ -37,13 +37,13 @@ Hash: c0d56cd15034f395874c870141870c25
 
 Package: Rcpp
 Source: CRAN
-Version: 0.12.5
-Hash: 625a95cb4ef523a77ad02e140b715db6
+Version: 0.12.6
+Hash: 79f89fabd832de0a2e60aa05d9027f32
 
 Package: RcppEigen
 Source: CRAN
 Version: 0.3.2.8.1
-Hash: 8c2b87edd3eaad610fc11e6975f84d23
+Hash: 285217f5daa6a40cc4990dd6fc941762
 Requires: Rcpp
 
 Package: assertthat
@@ -94,20 +94,20 @@ Hash: fd55d5a024f160fc001a5ece1e27782d
 
 Package: dplyr
 Source: CRAN
-Version: 0.4.3
-Hash: e6d3a09516f2018080e4737423aadfa6
-Requires: BH, DBI, R6, Rcpp, assertthat, lazyeval, magrittr
-
-Package: effsize
-Source: CRAN
-Version: 0.6.2
-Hash: 70ce176cd90e5c7993a5516be9b78fad
+Version: 0.5.0
+Hash: e34869d6b47a9b9579c2e98c20aa7609
+Requires: BH, DBI, R6, Rcpp, assertthat, lazyeval, magrittr, tibble
 
 Package: evaluate
 Source: CRAN
 Version: 0.9
 Hash: cf338d73ba4ee3a4fefec612cdfd38db
 Requires: stringr
+
+Package: foreign
+Source: CRAN
+Version: 0.8-66
+Hash: 99a453ffeef7ff27060aed83cde5bae3
 
 Package: formatR
 Source: CRAN
@@ -119,6 +119,12 @@ Source: CRAN
 Version: 2.1.0
 Hash: 50e297b0191179c39c7dcae0eff72b51
 Requires: digest, gtable, plyr, reshape2, scales
+
+Package: ggrepel
+Source: CRAN
+Version: 0.5
+Hash: 5d651efac9741c4fd6bf488d48417849
+Requires: Rcpp, ggplot2
 
 Package: gtable
 Source: CRAN
@@ -138,7 +144,7 @@ Hash: aa3d5b7912b5fed4b546ed5cd2a1760b
 Package: htmltools
 Source: CRAN
 Version: 0.3.5
-Hash: 645c10ce7e6c8dbbedb358a829c41848
+Hash: f81546c00234653ca3a7dcd0b7e1a757
 Requires: Rcpp, digest
 
 Package: jsonlite
@@ -166,6 +172,16 @@ Package: labeling
 Source: CRAN
 Version: 0.3
 Hash: ecf589b42cd284b03a4beb9665482d3e
+
+Package: langcog
+Source: github
+Version: 0.1.9001
+Hash: fae1635d843b7ff3ff167cb957b2eb22
+Requires: assertthat, dplyr, ggplot2, lazyeval, quadprog
+GithubRepo: langcog
+GithubUsername: langcog
+GithubRef: master
+GithubSha1: 70e5e76cc8197e9073063963af18ed7ddee3b06d
 
 Package: lazyeval
 Source: CRAN
@@ -199,11 +215,6 @@ Source: CRAN
 Version: 0.4
 Hash: b08c52dae92a0a11e64a4deea032ec33
 
-Package: multilevel
-Source: CRAN
-Version: 2.5
-Hash: 5ed1dbd390afbbadce759ed59c901c77
-
 Package: multiwayvcov
 Source: CRAN
 Version: 1.2.3
@@ -234,19 +245,28 @@ Hash: beef7c1bb292dc8904bdce5fbff8a724
 Package: plyr
 Source: CRAN
 Version: 1.8.4
-Hash: 9710078c5fd126420ec039be1db44994
+Hash: e76f4b6b2ba5cb8309b10308cea03967
 Requires: Rcpp
+
+Package: png
+Source: CRAN
+Version: 0.1-7
+
+Package: quadprog
+Source: CRAN
+Version: 1.5-5
+Hash: 69000b7dc41b09977dcf781f909d235c
 
 Package: readr
 Source: CRAN
 Version: 0.2.2
-Hash: 26f8572dee39ace757753fa5c4286569
+Hash: e6758bdc88b19359596b43d6fa1511ef
 Requires: BH, Rcpp, curl
 
 Package: reshape2
 Source: CRAN
 Version: 1.4.1
-Hash: 4c341beb363831f5320f678f7f1b679d
+Hash: 55a31e20f8a216855e138ca83756a4b0
 Requires: Rcpp, plyr, stringr
 
 Package: rjson
@@ -269,7 +289,7 @@ Requires: zoo
 Package: scales
 Source: CRAN
 Version: 0.4.0
-Hash: bce90b73946711302c29ceabdb08241c
+Hash: 99ca163a301d7c1d959424a2cccdcacd
 Requires: RColorBrewer, Rcpp, dichromat, labeling, munsell, plyr
 
 Package: stringi
@@ -285,14 +305,14 @@ Requires: magrittr, stringi
 
 Package: tibble
 Source: CRAN
-Version: 1.0
-Hash: 135bebe37e899e9ebabcfdf74cb86ade
+Version: 1.1
+Hash: 5467b4aa158b2d984538f7ffde17171c
 Requires: Rcpp, assertthat, lazyeval
 
 Package: tidyr
 Source: CRAN
 Version: 0.5.1
-Hash: c107f349e6a400a168f6862d78a69a03
+Hash: 56af57d037a1d229dfa50601debf3f4b
 Requires: Rcpp, dplyr, lazyeval, magrittr, stringi, tibble
 
 Package: xtable

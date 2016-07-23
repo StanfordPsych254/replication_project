@@ -239,17 +239,17 @@ Replicated? &  &   2 &   6 &   3 & 11 \\
 The modal replication project in our sample was judged to be a "partial" replication, meaning that some aspects of the observed findings were different from those reported by the original authors. While this conclusion is dispiriting, it is also perhaps unsurprising given the complexity of the analyses reported in many of the original papers. In addition, `r sum(d$original_test=="interaction")` of the tests were interactions, which tend to have lower statistical power [@mcclelland1993] and have fared poorly in previous replication studies [@osc2015].
 
 The distribution of ratings are given in Table \ref{tab:results}, along with breakdowns by various factors of interest. Since our sample only includes 11 studies, we describe general trends here rather than attempting to conduct statistical tests (which would be dramatically underpowered after correcting for multiple comparisons). Overall, projects had a somewhat larger probability of being judged successful if it was judged to be closer to the original:
-\%`r round(mean(d$replicated_TA[d$high_fidelity]), digits=2)` 
+`r 100 * round(mean(d$replicated_TA[d$high_fidelity]), digits=2)`\% 
 vs. 
-\%`r round(mean(d$replicated_TA[d$high_fidelity == FALSE]), digits=2)`.
+`r 100 * round(mean(d$replicated_TA[d$high_fidelity == FALSE]), digits=2)`\%.
 There were small numerical effects of being run on Mechanical Turk (
-\%`r round(mean(d$replicated_TA[d$original_on_turk == "Yes"]), digits=2)` 
+`r 100 *round(mean(d$replicated_TA[d$original_on_turk == "Yes"]), digits=2)`\%
 vs. 
-\%`r round(mean(d$replicated_TA[d$original_on_turk == "No"]), digits=2)`. 
+`r 100 *round(mean(d$replicated_TA[d$original_on_turk == "No"]), digits=2)`\%. 
 ) and having open materials (
-\%`r round(mean(d$replicated_TA[d$open_materials!="No"]), digits=2)` 
+`r 100 *round(mean(d$replicated_TA[d$open_materials!="No"]), digits=2)`\% 
 vs. 
-\%`r round(mean(d$replicated_TA[d$open_materials=="No"]), digits=2)`), though we do not believe these differences are interpretable given our sample size. 
+`r 100 *round(mean(d$replicated_TA[d$open_materials=="No"]), digits=2)`\%), though we do not believe these differences are interpretable given our sample size. 
 
 ### Significance of the key effect size
 
@@ -281,11 +281,29 @@ ggplot(d,aes(x=original_p_value_bins,y=rep_p_value,
 
 We determine whether the original reported effect size is included in the 95\% confidence interval found in the replication studies.  
 
-Flag: Original effect size not given for auc?
 
 ```{r}
-d$original_ES <- as.numeric(gsub(".*=(.*)","\\1", d$original_ES_text))
-#Ensure that effect size is given in same units... Make beautiful ci chart here...
+# Note that the sofer paper is off the charts (d > 16) and excluded
+ggplot(d,aes(x=original_ES_d,y=rep_es, 
+             color=d$replicated_TA_factor)) +
+  geom_jitter(height=0, width=.2) +
+  geom_vline(xintercept=c(0.2), lty = 5) +
+  geom_vline(xintercept=c(0.5), lty = 2) +
+  geom_vline(xintercept=c(0.8), lty = 3) +
+  # geom_hline(yintercept=c(0.2), lty = 5) +
+  # geom_hline(yintercept=c(0.5), lty = 2) +
+  # geom_hline(yintercept=c(0.8), lty = 3) +
+  geom_abline(slope = 1, intercept = 0, linetype = 2) +
+  xlab("Original effect size (cohen's d)") + 
+  ylab("Replication effect size (cohen's d)") + 
+  theme_bw() + 
+  scale_color_solarized(name = "Subjective replication rating") + 
+  xlim(0, 4) +
+  ylim(0, 4) +
+  theme(legend.position = "bottom")
+
+# Make beautiful ci chart here...
+
 ```
 
 
@@ -313,11 +331,11 @@ ggplot(tstatDF, aes(x = origBF, y = repBF)) +
   geom_point(alpha = .8, aes(size = df_ratio, 
                              col = replicated_TA_factor)) +
   geom_abline(slope = 1, lty = 2) + 
-  geom_smooth(method = "lm", se=FALSE) + 
-  # geom_smooth(data = filter(tstatDF, 
-  #                           !(first_author_name %in% c("Atir","Ko"))), 
-  #                           method = "lm", se=FALSE, lty = 2, size = .5) + 
-  geom_text_repel(aes(label = first_author_name), size = 3) + 
+  geom_smooth(method = "lm", se=FALSE) +
+  # geom_smooth(data = filter(tstatDF,
+  #                           !(first_author_name %in% c("Atir","Ko"))),
+  #                           method = "lm", se=FALSE, lty = 2, size = .5) +
+  geom_text_repel(aes(label = first_author_name), size = 3) +
   xlab("Original Bayes Factor") + 
   ylab("Replication Bayes Factor") + 
   scale_x_log10(limits = c(10**-1.75, 10**11), 
@@ -363,20 +381,20 @@ In conclusion, our results here demonstrate the practical possibility of perform
 
 
 ```{r, fig.height=9, fig.width=6}
-library(png)
-layout(matrix(1:24,nr=6,byr=T))
-for (key in project_plan$project_key) {
-  orig <- readPNG(paste0("../figures/",key,"-original.png"))
-  rep <- readPNG(paste0("../figures/",key,"-replication.png"))
-  
-  par(mai=c(0,0,0,0))
-  plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
-  rasterImage(orig, 0, 0, 100, 100, interpolate=FALSE)
-  
-  plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
-  rasterImage(rep, 0, 0, 100, 100, interpolate=FALSE)
-
-}
+# library(png)
+# layout(matrix(1:24,nr=6,byr=T))
+# for (key in project_plan$project_key) {
+#   orig <- readPNG(paste0("../figures/",key,"-original.png"))
+#   rep <- readPNG(paste0("../figures/",key,"-replication.png"))
+# 
+#   par(mai=c(0,0,0,0))
+#   plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
+#   rasterImage(orig, 0, 0, 100, 100, interpolate=FALSE)
+# 
+#   plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
+#   rasterImage(rep, 0, 0, 100, 100, interpolate=FALSE)
+# 
+# }
 ```
 
 For each project, we present a summary of the finding, the key statistical test, and the outcomes of the replication. Side-by-side visualizations are presented in Figure SM1. 
@@ -384,9 +402,6 @@ For each project, we present a summary of the finding, the key statistical test,
 ## Sofer et al. (2015)
 
 - key statistic in original 
-- 
-
-##  
 
 
 
@@ -401,4 +416,4 @@ For each project, we present a summary of the finding, the key statistical test,
 <!-- All materials that are needed for class to implement -->
 <!-- Email templates -->
 <!-- Spreadsheets -->
-<!-- TA/prof auditing processes --
+<!-- TA/prof auditing processes -->
