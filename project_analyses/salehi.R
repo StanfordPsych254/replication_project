@@ -66,7 +66,6 @@ write_csv(d, "processed_data/salehi.csv")
 #effect size
 # masculineDivergentMean <- masculine %>% filter(condition == 'Divergent')
 # masculineConnvergentMean <- masculine %>% filter(condition == 'Convergent')
-# cohens_d <- effsize::cohen.d(masculineDivergentMean$workermean, masculineConnvergentMean$workermean)$estimate
 
 ### REVISED TO USE FULL ANOVA (MCF 7/1/16)
 fitConTrait <- aov(rating ~ traitType * condition + 
@@ -84,7 +83,6 @@ df2 <- summary(fitConTrait)[[2]][[1]][3,1]
 #   summarise(mean 
 # masculineDivergentMean <- masculine %>% filter(condition == 'Divergent')
 # masculineConnvergentMean <- masculine %>% filter(condition == 'Convergent')
-# cohens_d <- effsize::cohen.d(masculineDivergentMean$workermean, masculineConnvergentMean$workermean)$estimate
 
 test_stat <- paste0("F(",df1,",",df2,")=",round(Fval, digits=3))
 cohensd = 2*sqrt(Fval)/sqrt(df2)
