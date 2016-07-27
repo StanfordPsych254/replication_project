@@ -1,1 +1,12 @@
-project_key,rep_final_n,rep_n_excluded,rep_es,rep_test_statistic_str,rep_t_stat,rep_t_df,rep_p_value,notessalehi,84,0,0.495213588,"F(1,82)=5.027",2.24217488,82,0.027650187,NAsmraposo,128,2,0.189252691,"F(1, 93) = 0.833",0.912543426,93,0.363842264,NAjedtan,19,0,0.159682384,t(18)=0.963,0.96258975,18,0.348507664,NAmkeil,48,14,0.133839618,"F(1,46) = 0.206",0.453872229,46,0.65,double check the aov mixed model- same as original authors? And different result than stated in report. This doesn't seem right collapsing by multiple trials first...?jreynolds,124,0,0.006561619,t(1922) = 0.144,0.143832729,1922,0.885647636,NAjmarias,397,6,0.00987434,t(386) = 0.097,0.097,386,0.92280368,double check participant summaries and exclusion criteriajsalloum,24,0,2.463665047,"F(1, 21) = 31.866",5.644965783,21,1.33E-05,NAehermann,50,0,1.783345386,t(47) = 6.113,6.113,47,1.82E-07,lampinen,27,5,0.367441454,"F(1, 26) = 3.645",1.909281802,26,0.067319916,NAauc,95,0,6.217710202,t(16) = -12.44,-12.4354204,16,0.363842264,"based on writeup and article, assuming exp_typetrustworthy:centered_dft interaction is key stat of interest. Should clarify with Carolyn. Also make sure doing correct analysis from article."rhiac,321,7,0.173257526,"F(1, 319) = 2.394",1.547239179,319,0.12279705,NA
+project_key,rep_final_n,rep_n_excluded,rep_es,rep_test_statistic_str,rep_t_stat,rep_t_df,rep_p_value,notes
+salehi,84,0,0.495213588,"F(1,82)=5.027",2.24217488,82,0.027650187,NA
+smraposo,128,2,0.189252691,"F(1, 93) = 0.833",0.912543426,93,0.363842264,NA
+jedtan,19,0,0.159682384,t(18)=0.963,0.96258975,18,0.348507664,NA
+mkeil,48,14,0.133839618,"F(1,46) = 0.206",0.453872229,46,0.65,double check the aov mixed model- same as original authors? And different result than stated in report. This doesn't seem right collapsing by multiple trials first...?
+jreynolds,124,0,0.006561619,t(1922) = 0.144,0.143832729,1922,0.885647636,NA
+jmarias,397,6,0.00987434,t(386) = 0.097,0.097,386,0.92280368,double check participant summaries and exclusion criteria
+jsalloum,24,0,2.463665047,"F(1, 21) = 31.866",5.644965783,21,1.33E-05,NA
+ehermann,50,0,1.783345386,t(47) = 6.113,6.113,47,1.82E-07,
+lampinen,27,5,0.367441454,"F(1, 26) = 3.645",1.909281802,26,0.067319916,NA
+auc,95,0,6.217710202,t(16) = -12.44,-12.4354204,16,0.363842264,"based on writeup and article, assuming exp_typetrustworthy:centered_dft interaction is key stat of interest. Should clarify with Carolyn. Also make sure doing correct analysis from article."
+rhiac,321,7,0.197217888,"F(1, 319) = 3.102",1.761212056,319,0.079160525,NA

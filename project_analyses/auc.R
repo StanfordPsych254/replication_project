@@ -138,7 +138,7 @@ summarySEwithin <- function(data=NULL, measurevar, betweenvars=NULL, withinvars=
 
 ## The planned sample would be US-based mTurkers, with 45 participants in each condition. We will not be able to replicate the exclusion criteria and instead will restrict the locale to US participants of all genders and all ages. We will collect light demographic information to analyze this difference.
 
-path <- "../data/auc/"
+path <- "data/auc/"
 files <- dir(path, pattern = "*.json")
 d.raw <- data.frame()
 d.balance <- data.frame()
@@ -186,11 +186,11 @@ model <- lm(centered_face_rating ~
             d)
 
 
-mixedModel <- lmer(face_rating ~ exp_type + nDFT + I(nDFT^2) 
-                   + exp_type:nDFT + exp_type:I(nDFT^2) 
-                   + (1 + nDFT + I(nDFT^2)| workerid), 
-                   d.raw %>% mutate(nDFT = scale(as.numeric(as.character(face_dft)), scale=TRUE)))
-                   
+# mixedModel <- lmer(face_rating ~ exp_type + nDFT + I(nDFT^2) 
+#                    + exp_type:nDFT + exp_type:I(nDFT^2) 
+#                    + (1 + nDFT + I(nDFT^2)| workerid), 
+#                    d.raw %>% mutate(nDFT = scale(as.numeric(as.character(face_dft)), scale=TRUE)))
+#                    
 
 summary(model)
 
