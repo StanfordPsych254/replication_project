@@ -148,7 +148,7 @@ ggplot(o_plot, aes(x=timeMetric, y = mean,fill = timeMetric)) +
   coord_cartesian(ylim=c(0,6.1)) + #to match original study
   xlab("Time metric condition") +
   ylab("Years to start saving") +
-  ggtitle("Sofer - Original") +
+  ggtitle("Lewis - Original") +
   theme_bw(base_size = 6) +
   scale_fill_grey(start=.4) +
   theme(legend.position="none")
@@ -176,7 +176,7 @@ ggplot(d_plot, aes(x=timeMetric, y = mean,fill = timeMetric)) +
   coord_cartesian(ylim=c(0,6.1)) + #to match original study
   xlab("Time metric condition") +
   ylab("Years to start saving") +
-  ggtitle("Sofer - Replication") +
+  ggtitle("Lewis - Replication") +
   theme_bw(base_size = 6) +
   scale_fill_grey(start=.4) +
   theme(legend.position="none")
