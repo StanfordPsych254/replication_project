@@ -396,9 +396,36 @@ In conclusion, our results here demonstrate the practical possibility of perform
 
 For each project, we present a summary of the finding, the key statistical test, and the outcomes of the replication. Side-by-side visualizations are presented in Figure SM1. 
 
+## Storm & Stone (2015)
+
+This paper found that when participants had the opportunity to save a file containing a list of target words before studying another file, they retained more information from the second study session. Our target for replication was Experiment 3, in which the effect was found to depend on the amount of information that was studied in the first file, with a greater effect for an eight-word list than a two-word list. The key statistical test we selected was the interaction in a 2x2 mixed-design ANOVA (save vs. no-save condition and two- vs. eight-word condition). The replication study failed to find evidence of the interaction, but ironically this was because we found evidence for a main effect of save condition: The authors' key manipulation succeeded for both load conditions. Perhaps even two words was sufficient to create interference for our online sample.
+
+## Lewis & Oyserman (2015)
+
+
+
+## Scopelliti, Lowenstein & Vosgerau (2015)
+
+## Liverence & Scholl (2015)
+
+
+## Wang et al. (2015)
+
 ## Sofer et al. (2015)
 
 key statistic in original 
+
+
+## Ko, Sadler, & Galinksy (2015)
+
+## Atir, Rosenzweig, & Dunning (2015)
+
+## Proudfoot, Kay, & Koval (2015)
+ 
+## Zaval, Markowitz, & Weber (2015)
+
+## Xu & Franconeri (2015)
+
 
 
 
