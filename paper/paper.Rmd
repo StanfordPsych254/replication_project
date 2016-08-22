@@ -391,20 +391,20 @@ In conclusion, our results here demonstrate the practical possibility of perform
 
 
 ```{r, fig.height=9, fig.width=6}
-# library(png)
-# layout(matrix(1:24,nr=6,byr=T))
-# for (key in project_plan$project_key) {
-#   orig <- readPNG(paste0("../figures/",key,"-original.png"))
-#   rep <- readPNG(paste0("../figures/",key,"-replication.png"))
-# 
-#   par(mai=c(0,0,0,0))
-#   plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
-#   rasterImage(orig, 0, 0, 100, 100, interpolate=FALSE)
-# 
-#   plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
-#   rasterImage(rep, 0, 0, 100, 100, interpolate=FALSE)
-# 
-# }
+library(png)
+layout(matrix(1:24,nr=6,byr=T))
+for (key in project_plan$project_key) {
+  orig <- readPNG(paste0("../figures/",key,"-original.png"))
+  rep <- readPNG(paste0("../figures/",key,"-replication.png"))
+
+  par(mai=c(0,0,0,0))
+  plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
+  rasterImage(orig, 0, 0, 100, 100, interpolate=FALSE)
+
+  plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
+  rasterImage(rep, 0, 0, 100, 100, interpolate=FALSE)
+
+}
 ```
 
 For each project, we present a summary of the finding, the key statistical test, and the outcomes of the replication.  

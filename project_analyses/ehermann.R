@@ -47,3 +47,35 @@ project_info <- data.frame(
   rep_p_value = pval,
   notes= ""
 )
+
+# Original plot
+data_slope <- 0.09
+data_intercept <- .305 - (4.43 * .09)# get intercept using scale means
+
+ggplot(df, aes(x=pfClaimScore, y = overclaimScore)) + 
+geom_abline(intercept = data_intercept, slope=data_slope) +
+theme_bw(base_size = 6) +
+ggtitle("Atir - Original") + 
+xlab("Perceived Financial Knowledge") + 
+ylab("Overclaiming") +
+scale_y_continuous(limits = c(0,0.8)) +
+scale_x_continuous(limits = c(1,7),breaks=1:7)
+
+ggsave("figures/ehermann-original.png",width = 1.5,height=1.5,units="in")
+
+# Replication plot
+
+data.lm.raw = lm(formula = overclaimScore ~ pfClaimScore + scale(accuracy), data = df)
+data_intercept <- data.lm.raw$coefficients[1]
+data_slope <- data.lm.raw$coefficients[2]
+ggplot(df, aes(x=pfClaimScore, y = overclaimScore)) + 
+  geom_point(alpha=.3) + 
+  geom_abline(intercept = data_intercept, slope=data_slope) +
+  theme_bw(base_size = 6) +
+  ggtitle("Atir - Replication") + 
+  xlab("Perceived Financial Knowledge") + 
+  ylab("Overclaiming") +
+  scale_y_continuous(limits = c(0,0.8)) +
+  scale_x_continuous(limits = c(1,7),breaks=1:7)
+
+ggsave("figures/ehermann-replication.png",width = 1.5,height=1.5,units="in")
