@@ -258,8 +258,6 @@ vs.
 
 ### Significance of the key effect size
 
-We next turn to an assessment of the replication $p$-value to determine whether the key statistic found a significant effect at the traditional $p=.05$ level. Only `r sum(d$rep_p_value_05)` of the studies yielded a significant replication $p$-value. The well-documented "dance of the p-values" [@cumming2013] suggests that the inference drawn from a single replication p-value may not be  informative, however, and other metrics such as effect sizes and Bayes factors may provide a more nuanced perspective. 
-
 ```{r}
 d$original_p_value_bins <- .1
 d$original_p_value_bins[d$original_p_value %in% c("<.05","0.04")] <- "<.05"
@@ -282,14 +280,13 @@ d$replicated_TA_factor <- factor(d$replicated_TA, levels = c(0, .5, 1),
 #   theme(legend.position = "bottom")
 ```
 
-### Original ES in the confidence interval of the replication 
 
-We determine whether the original reported effect size is included in the 95\% confidence interval found in the replication studies.  
+We next turn to an assessment of the replication $p$-value to determine whether the key statistic found a significant effect at the traditional $p=.05$ level. Only `r sum(d$rep_p_value_05)` of the studies yielded a significant replication $p$-value. The well-documented "dance of the p-values" [@cumming2013] suggests that the inference drawn from a single replication p-value may not be  informative, however, and other metrics such as effect sizes and Bayes factors may provide a more nuanced perspective. While we preregistered an analysis determining whether the original reported effect size is included in the 95\% confidence interval found in the replication, we instead opted for a straightforward comparison of point estimates. This choice was motivated by recent discussions of the utility and validity of interpretating confidence intervals in this manner [@morey2016], as well as discrepencies in reporting effect sizes across the articles we included. 
 
 
-### Bayes factor analysis
+### Bayes factor and effect size analysis
 
-Next, following @etz2016, we conducted a Bayesian analysis. 
+Next, following @etz2016, we compared Bayes Factors between the original and replication. The Bayes Factor is an alternative to classical null hypothesis significance testing; it quantifies the evidence in favor of a hypothesis as the ratio of the likelihood of the data under that hypothesis relative to another [@jeffreys1961]. Its proponents point to many advantages over classical $p$-values. For example, it does not privilege the null hypothesis and can provide evidence either *for* or *against* it [see also @scheibehenne2016, @wagenmakers2016]. While the Bayes Factor often agrees with the $p$-value as to which hypothesis is more likely [@wetzels2011], they often substantially disagree on the strength of the evidence. 
 
 ```{r}
 # Note that the sofer paper is off the charts (d > 16) and excluded
