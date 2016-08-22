@@ -64,7 +64,10 @@ se <- function(x) sd(x, na.rm=T)/sqrt(length(x[!is.na(x)]))
 ms <- epoch %>%
   group_by(epoch, Transition) %>%
   summarise(se = se(meanTime)/1000, 
-            time = mean(meanTime)/1000)
+            time = mean(meanTime)/1000) %>%
+  ungroup %>%
+  mutate(Transition = factor(Transition, 
+                             levels = c("Fade","Slide")))
 
 ggplot(ms, aes(x=epoch, y = time, col = Transition, group=Transition)) + 
   geom_line() + 
