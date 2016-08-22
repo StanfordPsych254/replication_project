@@ -97,4 +97,55 @@ project_info <- data.frame(
   rep_test_statistic_str = stat_descript,
   rep_p_value = p)
 
+# Original plot
+se <- function(x) sd(x, na.rm=T)/sqrt(length(x[!is.na(x)]))
+
+plot_mean = c(0.96,1.86)
+plot_se = c(0.1,0.15)
+plot_rotating = c("Rotating","Static")
+o_plot <- data.frame(plot_mean,plot_se,plot_rotating)
+colnames(o_plot) <- c('mean', 'se', 'rotating')
+o_plot <- o_plot %>%
+  mutate(upper = mean + se,
+         lower = mean - se)
+
+ggplot(o_plot, aes(x=rotating, y = mean,fill = rotating)) + 
+  geom_bar(stat="identity") +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3) +
+  coord_cartesian(ylim=c(0,2.5)) + #to match original study
+  xlab("Condition") +
+  ylab("Feature-Part Capacity (K)") +
+  ggtitle("Xu - Original") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  theme(legend.position="none")
+
+ggsave("figures/lampinen-original.png",width = 1.5,height=1.5,units="in")
+
+# Replication plot
+
+d_plot <- subject_aggregated_data %>% 
+  group_by(rotating) %>%
+  summarise(mean = mean(as.numeric(K),na.rm=T),
+            se = se(as.numeric(K)),
+            upper = mean + se,
+            lower = mean - se)
+d_plot$rotating <- c("Static","Rotating")
+
+ggplot(d_plot, aes(x=rotating, y = mean,fill = rotating)) + 
+  geom_bar(stat="identity") +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3) +
+  coord_cartesian(ylim=c(0,2.5)) + #to match original study
+  xlab("Condition") +
+  ylab("Feature-Part Capacity (K)") +
+  ggtitle("Xu - Replication") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  theme(legend.position="none")
+
+ggsave("figures/lampinen-replication.png",width = 1.5,height=1.5,units="in")
 
