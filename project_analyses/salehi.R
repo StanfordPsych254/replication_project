@@ -129,3 +129,76 @@ project_info <- data.frame(project_key = "salehi",
 # ANOVA's for each trait type across conditions to test the effect of condition
 # on the rating of each trait type. These follow-up tests have been repeated for
 # the replication data in the following.
+
+# Original plot
+
+se <- function(x) sd(x, na.rm=T)/sqrt(length(x[!is.na(x)]))
+
+plot_mean = c(7.22,5.10,6.26,4.85) # From Paper
+plot_se = c(1.26,2.04,1.43,1.56) / sqrt(80) # From Paper
+traitType = c("Masculine-Agentic Traits","Feminine-Communal Traits","Masculine-Agentic Traits","Feminine-Communal Traits")
+condition <- c("Divergent","Divergent","Convergent","Convergent")
+
+o_plot <- data.frame(plot_mean,plot_se,traitType,condition)
+colnames(o_plot) <- c('mean', 'se', 'traitType','condition')
+o_plot$condition <- factor(o_plot$condition, levels=c("Divergent","Convergent"))
+o_plot$traitType <- factor(o_plot$traitType, levels=c("Masculine-Agentic Traits","Feminine-Communal Traits"))
+
+o_plot <- o_plot %>%
+  mutate(upper = mean + se,
+         lower = mean - se)
+
+dodge <- position_dodge(width=0.9)
+ggplot(o_plot, aes(x=condition, y = mean,fill = traitType)) + 
+  geom_bar(stat="identity",position=dodge) +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3,
+                position=dodge) +
+  coord_cartesian(ylim=c(2.9,10.2)) + #to match original study
+  xlab("Condition") +
+  ylab("Centrality to Creativity") +
+  ggtitle("Proudfoot - Original") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  scale_y_continuous(breaks=c(3:10)) +
+  theme(legend.position=c(.5,.805),
+        legend.direction= "vertical",
+        legend.title=element_blank(),
+        legend.key = element_blank(),
+        legend.text=element_text(size=4),
+        legend.key.size = unit(3, "mm"))
+
+ggsave("figures/salehi-original.png",width = 1.5,height=1.5,units="in")
+
+# Replication plot
+d_plot <- d %>% 
+  group_by(traitType,condition) %>%
+  summarise(mean = mean(as.numeric(rating),na.rm=T),
+            se = se(as.numeric(rating)),
+            upper = mean + se,
+            lower = mean - se)
+
+levels(d_plot$traitType) <- list("Masculine-Agentic Traits"="Masculine","Feminine-Communal Traits"="Feminine")
+
+ggplot(d_plot, aes(x=condition, y = mean,fill = traitType)) + 
+  geom_bar(stat="identity",position=dodge) +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3,
+                position=dodge) +
+  coord_cartesian(ylim=c(2.9,10.2)) + #to match original study
+  xlab("Condition") +
+  ylab("Centrality to Creativity") +
+  ggtitle("Proudfoot - Replication") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  scale_y_continuous(breaks=c(3:10)) +
+  theme(legend.position=c(.5,.805),
+        legend.direction= "vertical",
+        legend.title=element_blank(),
+        legend.key = element_blank(),
+        legend.text=element_text(size=4),
+        legend.key.size = unit(3, "mm"))
+
+ggsave("figures/salehi-replication.png",width = 1.5,height=1.5,units="in")
