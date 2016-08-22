@@ -20,7 +20,7 @@ author-note:
     "Thanks to the Stanford Department of Psychology and the Vice Provost for Undergraduate Education for funding to support the class."
     
 abstract: 
-    "Replications are important to science, but who will do them? One proposal is that students can conduct direct replications as part of their training. As a proof-of-concept for this idea, here we report a series of 11 pre-registered, direct replications of findings from the 2015 volume of Psychological Science, all conducted as part of a graduate-level course. This work provides an estimate of the probability that a motivated graduate student can reproduce a previously published finding of interest on a first attempt. Congruent with previous findings, replication studies typically yielded smaller effects than originals, though the modal outcome was some support for the original claim. We describe the workflow and pedagogical methods that were used in the class and discuss challenges for adoption of this pedagogical model and replication research more broadly."
+    "Replications are important to science, but who will do them? One proposal is that students can conduct direct replications as part of their training. As a proof-of-concept for this idea, here we report a series of 11 pre-registered, direct replications of findings from the 2015 volume of Psychological Science, all conducted as part of a graduate-level course. This work provides an estimate of the probability that a motivated graduate student can reproduce a previously published finding of interest on a first attempt. Congruent with previous findings, replication studies typically yielded smaller effects than originals: The modal outcome was partial support for the original claim. We describe the workflow and pedagogical methods that were used in the class and discuss challenges for adoption of this pedagogical model and replication research more broadly."
     
 keywords:
     "Replication; Reproducibility; Pedagogy; Experimental Methods"
@@ -42,13 +42,14 @@ library(BayesFactor)
 library(ggrepel)
 #devtools::install_github("langcog/langcog")
 library(langcog)
+library(cowplot)
 ```
 
 Replicability is a core value for empirical research and there is increasing concern throughout psychology that more independent replication is necessary [@osc2015;@wagenmakers2012]. Under the current incentive structure for science, direct replication is not typically valued, however. One potential solution to this problem is to make direct replication an explicit part of pedagogy: that is, to teach students about experimental methods by asking them to run replication studies [@frank2012;@grahe2012]. Despite enthusiasm for this idea, however [@lebel2015;@everett2015;@standing2016;@king2016], there is limited data -- beyond anecdotal reports or individual projects [@phillips2015;@lakens2013] -- to support its efficacy. 
 
 In the current article, we provide evidence on this issue by reporting the results of replication projects conducted in a single class (a graduate-level experimental methods course). As part of the required work of the course, students conducted high-power, direct replications of published articles from the 2015 volume of the journal *Psychological Science*. These studies both give evidence about the state of replicability in the field and provide insight into the process of pedagogical replication. 
 
-It is a challenging proposition to estimate the replicability of an entire literature [cf. @osc2015]. Making such an estimate minimally requires determining a sampling strategy, a notion of what constitutes a direct replication, and a standard for what constitutes a successful replication, among many other difficult decisions [@gilbert2016;@anderson2016]. In the current work, we focus on a quantity that is easier to estimate: the probability that a graduate student can choose an article of interest in *Psychological Science* and -- in a single attempt, within constraints of budget, expertise, and effort -- reproduce the basic pattern of findings with sufficient fidelity to be able to build on it in future work. We believe that this notion of whether a piece of research supports cumulative progress is an important construct. Whether another independent scientist can build on a result is perhaps as important as -- and in many cases easier to measure -- whether the work is reproducible in some more abstract sense. 
+It is a challenging proposition to estimate the replicability of an entire literature [cf. @osc2015]. Making such an estimate minimally requires determining a sampling strategy, a notion of what constitutes a direct replication, and a standard for what constitutes a successful replication, among many other difficult decisions [@gilbert2016;@anderson2016]. In the current work, we focus on a quantity that is easier to estimate: the probability that a graduate student can choose an article of interest in *Psychological Science* and -- in a single attempt, within constraints of budget, expertise, and effort -- reproduce the basic pattern of findings with sufficient fidelity to be able to build on it in future work. We believe that this notion of whether a piece of research supports cumulative progress is an important construct. Whether another independent scientist can build on a result is perhaps as important as -- and in many cases easier to measure -- whether the work is replicable in some more abstract sense. 
 
 With respect to pedagogy, we describe our process for conducting well-powered, high-quality, direct replications as part of classroom pedagogy. This process is dramatically facilitated by the use of standardized (and free) technical tools for statistical analysis, data and code sharing, and creation of web experiments. Nevertheless, there are significant limitations on what can be done in the course of a single term and within the constraints of a course budget. We return in the Discussion to limitations on our approach. 
 
@@ -268,17 +269,17 @@ d$rep_p_value_05 <- d$rep_p_value < .05
 
 d$replicated_TA_factor <- factor(d$replicated_TA, levels = c(0, .5, 1), 
                                  labels = c("No","Partial","Yes"))
-ggplot(d,aes(x=original_p_value_bins,y=rep_p_value, 
-             color=d$replicated_TA_factor)) +
-  geom_jitter(height=0, width=.2) +
-  geom_hline(yintercept=c(0.05), lty = 2) + 
-  geom_hline(yintercept=c(0.1), lty = 3) + 
-  ylim(c(0,1)) +
-  xlab("Original p-value (binned)") + 
-  ylab("Replication p-value (exact)") + 
-  theme_bw() + 
-  scale_color_solarized(name = "Subjective replication rating") + 
-  theme(legend.position = "bottom")
+# ggplot(d,aes(x=original_p_value_bins,y=rep_p_value, 
+#              color=d$replicated_TA_factor)) +
+#   geom_jitter(height=0, width=.2) +
+#   geom_hline(yintercept=c(0.05), lty = 2) + 
+#   geom_hline(yintercept=c(0.1), lty = 3) + 
+#   ylim(c(0,1)) +
+#   xlab("Original p-value (binned)") + 
+#   ylab("Replication p-value (exact)") + 
+#   theme_bw() + 
+#   scale_color_solarized(name = "Subjective replication rating") + 
+#   theme(legend.position = "bottom")
 ```
 
 ### Original ES in the confidence interval of the replication 
@@ -286,36 +287,28 @@ ggplot(d,aes(x=original_p_value_bins,y=rep_p_value,
 We determine whether the original reported effect size is included in the 95\% confidence interval found in the replication studies.  
 
 
-```{r}
-# Note that the sofer paper is off the charts (d > 16) and excluded
-ggplot(d,aes(x=original_ES_d,y=rep_es, 
-             color=d$replicated_TA_factor)) +
-  geom_jitter(height=0, width=.2) +
-  geom_vline(xintercept=c(0.2), lty = 5) +
-  geom_vline(xintercept=c(0.5), lty = 2) +
-  geom_vline(xintercept=c(0.8), lty = 3) +
-  # geom_hline(yintercept=c(0.2), lty = 5) +
-  # geom_hline(yintercept=c(0.5), lty = 2) +
-  # geom_hline(yintercept=c(0.8), lty = 3) +
-  geom_abline(slope = 1, intercept = 0, linetype = 2) +
-  xlab("Original effect size (cohen's d)") + 
-  ylab("Replication effect size (cohen's d)") + 
-  theme_bw() + 
-  scale_color_solarized(name = "Subjective replication rating") + 
-  xlim(0, 4) +
-  ylim(0, 4) +
-  theme(legend.position = "bottom")
-
-# Make beautiful ci chart here...
-
-```
-
-
 ### Bayes factor analysis
 
 Next, following @etz2016, we conducted a Bayesian analysis. 
 
 ```{r}
+# Note that the sofer paper is off the charts (d > 16) and excluded
+p1 <- ggplot(d,aes(x=original_ES_d,y=rep_es)) +
+  geom_point(alpha = .8, 
+             aes(color=replicated_TA_factor, size = collected_n)) +
+  geom_text_repel(aes(label = first_author_name), size = 2, force = 2) +
+  scale_x_continuous(limits = c(0, 3.5), 
+                breaks = c(.2, .5, .8, 1, 2, 3)) +
+  scale_y_continuous(limits = c(0, 3.5), 
+                breaks = c(.2, .5, .8, 1, 2, 3)) +
+  geom_abline(slope = 1, intercept = 0, linetype = 2) +
+  geom_smooth(method = "lm", se=FALSE) +
+  xlab("Orig. effect size (d)") + 
+  ylab("Rep. effect size (d)") + 
+  theme_bw(base_size=10) + theme(legend.position="bottom") + 
+  scale_size(name = "Rep. N") +
+  scale_color_solarized(name = "Subjective rep. rating") 
+
 getBF <- function(t_stat, t_df) {
   return(ttest.tstat(t = t_stat, n1 = t_df, rscale = 1, simple = T))
 };
@@ -331,31 +324,29 @@ tstatDF <- d %>%
 
 tstatDF$origBF[7] <- 1e+11
 
-ggplot(tstatDF, aes(x = origBF, y = repBF)) +
+p2 <- ggplot(tstatDF, aes(x = origBF, y = repBF)) +
   geom_point(alpha = .8, aes(size = df_ratio, 
                              col = replicated_TA_factor)) +
   geom_abline(slope = 1, lty = 2) + 
   geom_smooth(method = "lm", se=FALSE) +
-  # geom_smooth(data = filter(tstatDF,
-  #                           !(first_author_name %in% c("Atir","Ko"))),
-  #                           method = "lm", se=FALSE, lty = 2, size = .5) +
-  geom_text_repel(aes(label = first_author_name), size = 3) +
-  xlab("Original Bayes Factor") + 
-  ylab("Replication Bayes Factor") + 
+  geom_text_repel(aes(label = first_author_name), size = 2, force = 2) +
+  xlab("Orig. Bayes factor") + 
+  ylab("Rep. Bayes factor") + 
   scale_x_log10(limits = c(10**-1.75, 10**11), 
-                breaks = c(1/10, 1/3, 3, 10, 100, 1e+3, 1e+6, 1e+9),
-                labels = c("1/10", "1/3", "3", "10","100", "1,000", 
-                           "1,000,000","1,000,000,000")) +
+                breaks = c(1/10, .3, 3, 10, 100, 1e+3, 1e+6, 1e+9),
+                labels = c("1e-1", "3e-1", "3", "1e1","1e2", "1e3", 
+                           "1e6","1e9")) +
   scale_y_log10(limits = c(10**-1.75, 10**11),
-                breaks = c(1/10, 1/3, 3, 10, 100, 1e+3, 1e+6, 1e+9),
-                labels = c("1/10", "1/3", "3", "10","100", "1,000", 
-                           "1,000,000","1,000,000,000")) + 
-  scale_size_continuous(name = "Ratio of replication df to original df") + 
-  scale_color_solarized(name = "Subjective replication rating") + 
-  theme_bw() +
-  theme(legend.position="bottom")
+                breaks = c(1/10, .3, 3, 10, 100, 1e+3, 1e+6, 1e+9),
+                labels = c("1e-1", "3e-1", "3", "1e1","1e2", "1e3", 
+                           "1e6","1e9")) + 
+  theme_bw(base_size=10) + theme(legend.position="bottom") + 
+  scale_size_continuous(name = "Ratio of rep. df to orig. df") + 
+  scale_color_solarized(name = "Subjective rep. rating")
 
 # note: fix slope on trend line, because the atir finding is a hack right now so it fits in the axes. 
+
+plot_grid(p1, p2, labels = c("A", "B"))
 ```
 
 
