@@ -129,3 +129,56 @@ project_info <- data.frame(
   rep_es = cohensd, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = pval1)
+
+# Original plot
+plot_mean = c(0.45,1.70) 
+plot_se = c(0.4,0.35)
+plot_timeMetric = c("Days","Years")
+o_plot <- data.frame(plot_mean,plot_se,plot_timeMetric)
+colnames(o_plot) <- c('mean', 'se', 'timeMetric')
+o_plot <- o_plot %>%
+  mutate(upper = mean + se,
+         lower = mean - se)
+
+ggplot(o_plot, aes(x=timeMetric, y = mean,fill = timeMetric)) + 
+  geom_bar(stat="identity") +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3) +
+  coord_cartesian(ylim=c(0,6.1)) + #to match original study
+  xlab("Time metric condition") +
+  ylab("Years to start saving") +
+  ggtitle("Sofer - Original") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  theme(legend.position="none")
+
+ggsave("figures/smraposo-original.png",width = 1.5,height=1.5,units="in")
+
+# Replication plot
+
+se <- function(x) sd(x, na.rm=T)/sqrt(length(x[!is.na(x)]))
+
+d_plot <- d %>% 
+  filter(d$exclude == "include") %>%
+  group_by(timeMetric) %>%
+  summarise(mean = mean(as.numeric(delaytimeyrs),na.rm=T),
+            se = se(as.numeric(delaytimeyrs)),
+            upper = mean + se,
+            lower = mean - se)
+d_plot$timeMetric <- c("Days","Years")
+
+ggplot(d_plot, aes(x=timeMetric, y = mean,fill = timeMetric)) + 
+  geom_bar(stat="identity") +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3) +
+  coord_cartesian(ylim=c(0,6.1)) + #to match original study
+  xlab("Time metric condition") +
+  ylab("Years to start saving") +
+  ggtitle("Sofer - Replication") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  theme(legend.position="none")
+
+ggsave("figures/smraposo-replication.png",width = 1.5,height=1.5,units="in")

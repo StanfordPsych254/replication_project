@@ -118,6 +118,68 @@ project_info <- data.frame(
   rep_test_statistic_str = stat_descript,
   rep_p_value = pval1)
 
+# Original Plot
+se <- function(x) sd(x, na.rm=T)/sqrt(length(x[!is.na(x)]))
+
+# Original plot
+plot_mean = c(2.73,3.05) 
+plot_se = c(0.86,0.85) / sqrt(310)
+condition = c("Control","Essay Prime")
+o_plot <- data.frame(plot_mean,plot_se,condition)
+colnames(o_plot) <- c('mean', 'se', 'condition')
+o_plot <- o_plot %>%
+  mutate(upper = mean + se,
+         lower = mean - se)
+
+ggplot(o_plot, aes(x=condition, y = mean,fill = condition)) + 
+  geom_bar(stat="identity") +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3) +
+  coord_cartesian(ylim=c(1.2,6)) + #to match original study
+  xlab("Condition") +
+  ylab("Behavioral Intentions") +
+  ggtitle("Zaval - Original") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  theme(legend.position="none") +
+  scale_y_continuous(breaks=1:6)
+
+ggsave("figures/rhiac-original.png",width = 1.5,height=1.5,units="in")
+
+
+# Replication Plot
+d_plot <- d %>% 
+  group_by(condition) %>%
+  summarise(mean = mean(as.numeric(beh_int_index),na.rm=T),
+            se = se(as.numeric(beh_int_index)),
+            upper = mean + se,
+            lower = mean - se)
+d_plot$condition <- c("Control","Essay Prime")
+
+ggplot(d_plot, aes(x=condition, y = mean,fill = condition)) + 
+  geom_bar(stat="identity") +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3) +
+  coord_cartesian(ylim=c(1.2,6)) + #to match original study
+  xlab("Condition") +
+  ylab("Behavioral Intentions") +
+  ggtitle("Zaval - Replication") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  theme(legend.position="none") +
+  scale_y_continuous(breaks=1:6)
+
+ggsave("figures/rhiac-replication.png",width = 1.5,height=1.5,units="in")
+
+ggplot(ms_beh, aes(x=condition, y=meanBeh)) + 
+  geom_bar(stat = "identity") + 
+  ylim(0, 6) +
+  geom_errorbar(aes(ymin = meanBeh - ci95, 
+                    ymax = meanBeh + ci95), width=0.25)
+
+
 # model <- lm(leg_mot_index ~ condition, d)
 # summary(model)
 # model <- lm(env_att_index ~ condition, d)
