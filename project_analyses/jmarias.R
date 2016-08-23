@@ -232,7 +232,10 @@ df <- mathperflm4$df
 
 
 # Note that this is the same as converting eta^2 to d:
-cohensd = 2*tval/sqrt(df)
+source("project_analyses/computeES.R")
+es <- esComp(tval, df2 = df, esType = "t")
+
+# cohensd = 2*tval/sqrt(df)
 # etaSquared(mathperflm4)[9,2]
 
 stat_descript <- paste0("t(",df,") = ",tval)
@@ -243,7 +246,7 @@ project_info <- data.frame(
   rep_t_df = df,
   rep_final_n = nrow(subjectmeans), 
   rep_n_excluded = length(unique(d$workerid))-nrow(subjectmeans) , 
-  rep_es = cohensd, 
+  rep_es = es, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = pval,
   notes= "double check participant summaries and exclusion criteria"
