@@ -43,6 +43,7 @@ library(ggrepel)
 #devtools::install_github("langcog/langcog")
 library(langcog)
 library(cowplot)
+library(png)
 ```
 
 Replicability is a core value for empirical research and there is increasing concern throughout psychology that more independent replication is necessary [@osc2015;@wagenmakers2012]. Under the current incentive structure for science, direct replication is not typically valued, however. One potential solution to this problem is to make direct replication an explicit part of pedagogy: that is, to teach students about experimental methods by asking them to run replication studies [@frank2012;@grahe2012]. Despite enthusiasm for this idea, however [@lebel2015;@everett2015;@standing2016;@king2016], there is limited data -- beyond anecdotal reports or individual projects [@phillips2015;@lakens2013] -- to support its efficacy. 
@@ -127,7 +128,18 @@ Of the `r nrow(ppt)` studies included in the final sample, `r 100 * round(mean(p
 
 ## Workflow
 
-All materials and methods for our replication studies are available at [https://github.com/StanfordPsych254](). All experiments were coded in JavaScript, HTML, and CSS so as to be run in a standard web browser. All analyses were written using R, a free and open-source platform for statistical analysis. 
+All materials and methods for our replication studies are available at [https://github.com/StanfordPsych254](). All experiments were coded in JavaScript, HTML, and CSS so as to be run in a standard web browser. All analyses were written using R, a free and open-source platform for statistical analysis. A schematic of our class workflow is shown in Figure 1. 
+
+```{r, fig.cap="A schematic view of our class timeline for replication projects. R indicates the approximate timing of instructor team reviews of student materials.", fig.height=4, fig.width=6, fig.align="center", fig.pos="t"}
+
+img <- readPNG(source = "../figures/pipeline.png")
+plot.new()
+plot.window(0:1, 0:1)
+
+#fill plot with image
+usr<-par("usr")    
+rasterImage(img, usr[1], usr[3], usr[2], usr[4])
+```
 
 One part of our workflow was extremely useful both pedagogically and for encouraging reproducible research practices. Students wrote their final reports using [R Markdown](http://rmarkdown.rstudio.com/), a "literate programming" environment in which statistical analysis code can be interspersed with text, figures, and tables. Using the template developed by @osc2015 for replication reports, students created dynamic documents that included their proposed replication study, the code necessary to analyze their data, and the outputs of their data analysis (e.g. statistical tests, figures). This document can be compiled into a variety of formats (e.g., HTML, PDF, Microsoft Word). This method of writing allows students to share a single compiled document via a hyperlink, facilitating review of writing, results, and code together in a single platform.^[The current manuscript is written in this fashion as well.] This writing method is also likely to reduce the frequency of statistical reporting errors [which appear to be regrettably common; @nuijten2015], given that many of these are likely introduced by copying and pasting between analysis outputs and manuscripts. 
 
@@ -240,7 +252,6 @@ Replicated? &  &   2 &   6 &   3 & 11 \\
 \caption{\label{tab:results} Counts of instructor team replication ratings, split by various different mediating variables.}
 \end{table}
 
-
 The modal replication project in our sample was judged to be a "partial" replication, meaning that some aspects of the observed findings were different from those reported by the original authors. While this conclusion is dispiriting, it is also perhaps unsurprising given the complexity of the analyses reported in many of the original papers. In addition, `r sum(d$original_test=="interaction")` of the tests were interactions, which tend to have lower statistical power [@mcclelland1993] and have fared poorly in previous replication studies [@osc2015].
 
 The distribution of ratings are given in Table \ref{tab:results}, along with breakdowns by various factors of interest. Since our sample only includes 11 studies, we describe general trends here rather than attempting to conduct statistical tests (which would be dramatically under-powered after correcting for multiple comparisons). Overall, projects had a somewhat larger probability of being judged successful if it was judged to be closer to the original:
@@ -280,16 +291,21 @@ d$replicated_TA_factor <- factor(d$replicated_TA, levels = c(0, .5, 1),
 #   theme(legend.position = "bottom")
 ```
 
-
 We next turn to an assessment of the replication $p$-value to determine whether the key statistic found a significant effect at the traditional $p=.05$ level. Only `r sum(d$rep_p_value_05)` of the studies yielded a significant replication $p$-value. The well-documented "dance of the p-values" [@cumming2013] suggests that the inference drawn from a single replication p-value may not be  informative, however, and other metrics such as effect sizes and Bayes factors may provide a more nuanced perspective. 
 
 ### Effect size and Bayes factor analysis
 
 Effect sizes and Bayes factors improve upon inferences drawn from $p$-values in different ways. The effect size is an estimate of the *magnitude* of an effect, which is stable across sample sizes and allows for a more fine-grained comparison across studies than a binary significance criterion. The Bayes Factor is an alternative hypothesis testing method that quantifies the *evidence* in favor of a hypothesis [@jeffreys1961]. Among other advantages, it does not privilege the null hypothesis and can provide evidence either *for* or *against* [see also @scheibehenne2016, @wagenmakers2016].  While the Bayes Factor often agrees with the $p$-value as to which hypothesis is more likely [@wetzels2011], they often substantially disagree on the strength of the evidence.
 
-These additional measures therefore give another sense in which replications can be successful: if we find roughly the same effect size or Bayes factor despite $p$-values on different sides of the $p = 0.05$ threshold, we should have increased confidence in the effect's reproducibility. To compute a standardized effect size, we converted all one-sample $t$-statistics into a Cohen's $d$ using the formula $d = t/\sqrt{df}$, where $df$ is the degrees of freedom Following @etz2016, we compared Bayes Factors between the original and replication. While we preregistered an analysis determining whether the original reported effect size is included in the 95\% confidence interval found in the replication, we instead opted for a straightforward comparison of point estimates. This choice was motivated by recent discussions of the utility and validity of interpretating confidence intervals in this manner [@morey2016], as well as discrepencies in reporting effect sizes across the articles we included. 
+These additional measures therefore give another sense in which replications can be successful: if we find roughly the same effect size or Bayes factor despite $p$-values on different sides of the $p = 0.05$ threshold, we should have increased confidence in the effect's reproducibility. To compute a standardized effect size, we converted all one-sample $t$-statistics into a Cohen's $d$ using the formula $d = t/\sqrt{df}$, where $df$ is the degrees of freedom. We first compared effect sizes from the original and replication studies (Figure 2A). Effect sizes were highly correlated between the two sets of studies 
+(r = `r signif(cor.test(d$original_ES_d,d$rep_es)$estimate, digits =2)`, p < .0001), but they were generally smaller in the replications 
+(`r signif(coef(lm(d$rep_es~d$original_ES_d-1))[1], digits = 2)`\% of the original [`r signif(confint(lm(d$rep_es~d$original_ES_d-1))[1], digits = 2)` - `r signif(confint(lm(d$rep_es~d$original_ES_d-1))[2], digits = 2)`]). This estimate should be viewed with caution, however, due to its dependence on one very large effect size estimate ($d > 15$) from a single study.
 
-```{r}
+Next, following @etz2016, we compared Bayes Factors between the original and replication. While we preregistered an analysis determining whether the original reported effect size is included in the 95\% confidence interval found in the replication, we instead opted for a straightforward comparison of point estimates. This choice was motivated by recent discussions of the utility and validity of interpretating confidence intervals in this manner [@morey2016], as well as discrepencies in reporting effect sizes across the articles we included (which made computing confidence intervals difficult in some cases). 
+
+
+```{r, fig.cap="Replication effect size (A) and Bayes factor (B), plotted by the original effect size and Bayes factor, respectively. Point size shows replication N (A) and ratio of test degrees of freedom (B), color indicates subjective replication assessments by the authors. Note that the Sofer et al. (2015) replication showed ES and BF too large to plot easily on these axes and is hence excluded.", fig.pos="ht", fig.height=4}
+
 # Note that the sofer paper is off the charts (d > 16) and excluded
 p1 <- ggplot(d,aes(x=original_ES_d,y=rep_es)) +
   geom_point(alpha = .8, 
@@ -305,6 +321,7 @@ p1 <- ggplot(d,aes(x=original_ES_d,y=rep_es)) +
   ylab("Rep. effect size (d)") + 
   theme_bw(base_size=10) + theme(legend.position="bottom") + 
   scale_size(name = "Rep. N") +
+  # scale_color_solarized(guide = FALSE)
   scale_color_solarized(name = "Subjective rep. rating") 
 
 getBF <- function(t_stat, t_df) {
@@ -328,8 +345,8 @@ p2 <- ggplot(tstatDF, aes(x = origBF, y = repBF)) +
   geom_abline(slope = 1, lty = 2) + 
   geom_smooth(method = "lm", se=FALSE) +
   geom_text_repel(aes(label = first_author_name), size = 2, force = 2) +
-  xlab("Orig. Bayes factor") + 
-  ylab("Rep. Bayes factor") + 
+  xlab("Orig. Bayes Factor") + 
+  ylab("Rep. Bayes Factor") + 
   scale_x_log10(limits = c(10**-1.75, 10**11), 
                 breaks = c(1/10, .3, 3, 10, 100, 1e+3, 1e+6, 1e+9),
                 labels = c("1e-1", "3e-1", "3", "1e1","1e2", "1e3", 
@@ -376,23 +393,23 @@ In conclusion, our results here demonstrate the practical possibility of perform
 
 
 ```{r, fig.height=9, fig.width=6}
-# library(png)
-# layout(matrix(1:24,nr=6,byr=T))
-# for (key in project_plan$project_key) {
-#   orig <- readPNG(paste0("../figures/",key,"-original.png"))
-#   rep <- readPNG(paste0("../figures/",key,"-replication.png"))
-# 
-#   par(mai=c(0,0,0,0))
-#   plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
-#   rasterImage(orig, 0, 0, 100, 100, interpolate=FALSE)
-# 
-#   plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
-#   rasterImage(rep, 0, 0, 100, 100, interpolate=FALSE)
-# 
-# }
+library(png)
+layout(matrix(1:24,nr=6,byr=T))
+for (key in project_plan$project_key) {
+  orig <- readPNG(paste0("../figures/",key,"-original.png"))
+  rep <- readPNG(paste0("../figures/",key,"-replication.png"))
+
+  par(mai=c(0,0,0,0))
+  plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
+  rasterImage(orig, 0, 0, 100, 100, interpolate=FALSE)
+
+  plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=FALSE)
+  rasterImage(rep, 0, 0, 100, 100, interpolate=FALSE)
+
+}
 ```
 
-For each project, we present a summary of the finding, the key statistical test, and the outcomes of the replication. Side-by-side visualizations are presented in Figure SM1. 
+For each project, we present a summary of the finding, the key statistical test, and the outcomes of the replication.  
 
 ## Storm & Stone (2015)
 
@@ -418,7 +435,7 @@ This paper reported that the relationship between math anxiety and math performa
 
 ## Sofer et al. (2015)
 
-This paper tested the hypothesis that face typicality affects trustworthiness judgments such that the most typical face will be judged to be the most trustworthy. In Study 1, our target, faces of varying typicality were rated on their trustworthiness and attractiveness; while trustworthiness peaked at the most typical face, less typical faces were judged more attractive. While the original class projects selected a global, item-wise regression model as the key statistical test of interest, the instructor team (post-data collection) determined that the fit of this model did not in fact correspond most closely with the authors' stated hypothesis. We thus selected the interaction between face typicality and rating condition as our key test statistic and used the more standard by-participant regression model (which the original paper also reported subsequent to the by-items model) as the target model. Our replication study successfully showed this same interaction. We note that, despite the significant interaction, in our study trustworthiness judgments did not change substantially with typicality (though attractiveness did) and trustworthiness did not peak numerically at the most typical face. Thus, despite replicating one key statistical test, our results are at odds with some of the original papers' claims. 
+This paper tested the hypothesis that face typicality affects trustworthiness judgments such that the most typical face will be judged to be the most trustworthy. In Study 1, our target, faces of varying typicality were rated on their trustworthiness and attractiveness; while trustworthiness peaked at the most typical face, less typical faces were judged more attractive. While the original class projects selected a global, item-wise regression model as the key statistical test of interest, the instructor team (post-data collection) determined that the fit of this model did not in fact correspond most closely with the authors' stated hypothesis. We thus selected the interaction between face typicality and rating condition as our key test statistic and used the more standard by-participant regression model (which the original paper also reported subsequent to the by-items model) as the target model. Our replication study successfully showed this same interaction.^[We were unable to reproduce the numerical results from this model using the data from the original study, but we report the (larger) test statistics from our recomputed version.] We note that, despite the significant interaction, in our study trustworthiness judgments did not change substantially with typicality (though attractiveness did) and trustworthiness did not peak numerically at the most typical face. Thus, despite replicating one key statistical test, our results are at odds with some of the original paper's claims. 
 
 ## Ko, Sadler, & Galinksy (2015)
 

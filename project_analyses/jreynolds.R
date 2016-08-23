@@ -59,3 +59,71 @@ project_info <- data.frame(
   rep_es = cohensd, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = pval)
+
+# Original plot
+
+se <- function(x) sd(x, na.rm=T)/sqrt(length(x[!is.na(x)]))
+
+plot_mean = c(4.85,4.52,5.28,4.31) # From Paper
+plot_se = c(.257,.073,.257,.073) # From Paper
+Evaluation.Contrast = c("Predicted","Actual","Predicted","Actual")
+Condition.Contrast <- c("Control","Control","Maximize","Maximize")
+
+o_plot <- data.frame(plot_mean,plot_se,Evaluation.Contrast,Condition.Contrast)
+colnames(o_plot) <- c('mean', 'se', 'Evaluation.Contrast','Condition.Contrast')
+o_plot$Evaluation.Contrast <- factor(o_plot$Evaluation.Contrast, levels=c("Predicted","Actual"))
+
+o_plot <- o_plot %>%
+  mutate(upper = mean + se,
+         lower = mean - se)
+
+dodge <- position_dodge(width=0.9)
+ggplot(o_plot, aes(x=Condition.Contrast, y = mean,fill = Evaluation.Contrast)) + 
+  geom_bar(stat="identity",position=dodge) +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3,
+                position=dodge) +
+  coord_cartesian(ylim=c(2.9,6.5)) + #to match original study
+  xlab("Instruction") +
+  ylab("Liking") +
+  ggtitle("Scopelliti - Original") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  theme(legend.position=c(.5,.85),
+        legend.direction= "horizontal",
+        legend.title=element_blank(),
+        legend.key = element_blank(),
+        legend.text=element_text(size=4),
+        legend.key.size = unit(3, "mm"))
+
+ggsave("figures/jreynolds-original.png",width = 1.5,height=1.5,units="in")
+
+# Replication plot
+d_plot <- d %>% 
+  group_by(Evaluation.Contrast,Condition.Contrast) %>%
+  summarise(mean = mean(as.numeric(Liking),na.rm=T),
+            se = se(as.numeric(Liking)),
+            upper = mean + se,
+            lower = mean - se)
+
+ggplot(d_plot, aes(x=Condition.Contrast, y = mean,fill = Evaluation.Contrast)) + 
+  geom_bar(stat="identity",position=dodge) +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3,
+                position=dodge) +
+  coord_cartesian(ylim=c(2.9,6.5)) + #to match original study
+  xlab("Instruction") +
+  ylab("Liking") +
+  ggtitle("Scopelliti - Replication") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  theme(legend.position=c(.5,.85),
+        legend.direction= "horizontal",
+        legend.title=element_blank(),
+        legend.key = element_blank(),
+        legend.text=element_text(size=4),
+        legend.key.size = unit(3, "mm"))
+
+ggsave("figures/jreynolds-replication.png",width = 1.5,height=1.5,units="in")

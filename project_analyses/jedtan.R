@@ -60,39 +60,60 @@ project_info <- data.frame(
   rep_test_statistic_str = stat_descript,
   rep_p_value = full_t.test$p.value)
 
-# 
-# time_differences <- d %>%
-#   group_by(epoch) %>% 
-#   summarise(meanTime = mean(Time))
-# 
-# 
-# overTrial <- d %>% group_by(Trial, Transition, epoch) %>% 
-#   summarise(meanTime = t.test(Time)$estimate, timeLow = t.test(Time)$conf.int[1], timeHigh = t.test(Time)$conf.int[2], meanPress = t.test(KeyPresses)$estimate, meanLow = t.test(KeyPresses)$conf.int[1], meanHigh = t.test(KeyPresses)$conf.int[2], meanKeyPressOver = t.test(keyPressesOver)$estimate, overLow = t.test(keyPressesOver)$conf.int[1], overHigh = t.test(keyPressesOver)$conf.int[2])
-# totalMeans <- d %>% group_by(Transition, epoch) %>% 
-#   summarise(meanTime = t.test(Time)$estimate, timeLow = t.test(Time)$conf.int[1], timeHigh = t.test(Time)$conf.int[2], meanPress = t.test(KeyPresses)$estimate, meanLow = t.test(KeyPresses)$conf.int[1], meanHigh = t.test(KeyPresses)$conf.int[2], meanKeyPressOver = t.test(keyPressesOver)$estimate, overLow = t.test(keyPressesOver)$conf.int[1], overHigh = t.test(keyPressesOver)$conf.int[2])
-# 
-# test_statistics <- data.frame(Epoch=c(1,2,3,4,5)) %>% 
-#   mutate(Statistic = 0, PValue = 0)
-# 
-# for(i in 1:5)
-# {
-#   temp_t.test = t.test((epoch %>% filter(epoch == i, Transition == "Fade"))$meanTime, (epoch %>% filter(epoch == i, Transition == "Slide"))$meanTime, paired=TRUE)
-#   test_statistics[i, 2] = temp_t.test$statistic
-#   test_statistics[i, 3] = temp_t.test$p.value
-# }
-# test_statistics
-# 
-# 
-# 
-# ggplot(data=totalMeans, aes(x=epoch, y=meanTime, group = Transition, colour = Transition)) +
-#   geom_line() +
-#   geom_errorbar(aes(ymin=timeLow, ymax=timeHigh), width=.2) + 
-#   geom_point( size=2, shape=21, fill="white") + labs(title = "Per Epoch Means") + xlab("Epoch") + ylab("Mean Time (ms)")
-# 
-# 
-# ggplot(data=overTrial, aes(x=Trial, y=meanTime, group = Transition, colour = Transition)) +
-#   geom_line() +
-#   geom_errorbar(aes(ymin=timeLow, ymax=timeHigh), width=.2) + 
-#   geom_point( size=2, shape=21, fill="white") + labs(title = "Per Trial Means") + xlab("Trial") + ylab("Mean Time (ms)")
-# 
-# 
+
+### PLOTS
+se <- function(x) sd(x, na.rm=T)/sqrt(length(x[!is.na(x)]))
+
+ms <- epoch %>%
+  group_by(epoch, Transition) %>%
+  summarise(se = se(meanTime)/1000, 
+            time = mean(meanTime)/1000) %>%
+  ungroup %>%
+  mutate(Transition = factor(Transition, 
+                             levels = c("Fade","Slide")))
+
+ggplot(ms, aes(x=epoch, y = time, col = Transition, group=Transition)) + 
+  geom_line() + 
+  geom_point(position = position_dodge(width = .05)) + 
+  geom_errorbar(aes(ymin=time-se, ymax=time+se),
+                size =.3,
+                width =.3, 
+                position = position_dodge(width = .05))  + 
+  geom_label_repel(data = filter(ms, epoch==2), 
+                   aes(label = Transition), size = 2) + 
+  theme_bw(base_size = 6) +
+  scale_colour_grey(start=.4, guide=FALSE) + 
+  ggtitle("Liverence - Replication") + 
+  xlab("Epoch") + 
+  scale_y_continuous(name = "Time (s)", limits=c(5,18))
+
+ggsave("figures/jedtan-replication.png",width = 1.5, height=1.5, units="in")
+
+
+## Original
+# estimated from figure
+original <- tibble(epoch = factor(c(1:5, 1:5)), 
+                       condition = factor(c(rep("Fade",5),
+                                     rep("Slide",5))),
+                       time = c(13.8,11.2,10.1,10.3,10.1,
+                                11.9,9.5,9.2,9.1,8.7),
+                       se = c(1,.7,.7,.7,.7,
+                              .5, .4,.4,.4,.4))
+                       
+ggplot(original, aes(x=epoch, y = time, col = condition, group=condition)) + 
+  geom_line() + 
+  geom_point(position = position_dodge(width = .05)) + 
+  geom_errorbar(aes(ymin=time-se, ymax=time+se),
+                size =.3,
+                width =.3, 
+                position = position_dodge(width = .05))  + 
+  geom_label_repel(data = filter(original, epoch==2), 
+                   aes(label = condition), size = 2) + 
+  theme_bw(base_size = 6) +
+  scale_colour_grey(start=.4, guide=FALSE) + 
+  ggtitle("Liverence - Original") + 
+  xlab("Epoch") + 
+  scale_y_continuous(name = "Time (s)", limits=c(5,18)) 
+
+ggsave("figures/jedtan-original.png",width = 1.5, height=1.5, units="in")
+

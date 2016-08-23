@@ -197,5 +197,78 @@ project_info <- data.frame(
   rep_es = cohensd, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = p.val,
-  notes= "double check the aov mixed model- same as original authors? And different result than stated in report. This doesn't seem right collapsing by multiple trials first...?"
+  notes= ""
 )
+
+# Original plot
+
+se <- function(x) sd(x, na.rm=T)/sqrt(length(x[!is.na(x)]))
+
+plot_mean = c(0.448,0.319,0.490,0.476) # Estimates from graph
+plot_se = c(0.028,0.028,0.028,0.034) # Estimates from graph
+word_condition = c("Eight Words","Eight Words","Two Words", "Two Words")
+save_condition <- c("Save Trials","No-Save Trials","Save Trials","No-Save Trials")
+
+o_plot <- data.frame(plot_mean,plot_se,word_condition,save_condition)
+colnames(o_plot) <- c('mean', 'se', 'word_condition','save_condition')
+o_plot$save_condition <- factor(o_plot$save_condition, levels=c("Save Trials","No-Save Trials"))
+
+o_plot <- o_plot %>%
+  mutate(upper = mean + se,
+         lower = mean - se)
+
+dodge <- position_dodge(width=0.9)
+ggplot(o_plot, aes(x=word_condition, y = mean,fill = save_condition)) + 
+  geom_bar(stat="identity",position=dodge) +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3,
+                position=dodge) +
+  coord_cartesian(ylim=c(0,0.81)) + #to match original study
+  xlab("Information in File A") +
+  ylab("Proportion of Words Recalled") +
+  ggtitle("Storm - Original") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  theme(legend.position=c(.5,.85),
+        legend.direction= "horizontal",
+        legend.title=element_blank(),
+        legend.key = element_blank(),
+        legend.text=element_text(size=4),
+        legend.key.size = unit(3, "mm"))
+
+ggsave("figures/mkeil-original.png",width = 1.5,height=1.5,units="in")
+
+# Replication plot
+d_plot <- d1 %>% 
+  group_by(save_condition,word_condition) %>%
+  summarise(mean = mean(as.numeric(BScore),na.rm=T),
+            se = se(as.numeric(BScore)),
+            upper = mean + se,
+            lower = mean - se)
+d_plot$save_condition <- c("No-Save Trials","No-Save Trials","Save Trials","Save Trials")
+d_plot$word_condition <- c("Two Words", "Eight Words","Two Words", "Eight Words")
+d_plot$save_condition <- factor(d_plot$save_condition, levels=c("Save Trials","No-Save Trials"))
+
+ggplot(d_plot, aes(x=word_condition, y = mean,fill = save_condition)) + 
+  geom_bar(stat="identity",position=dodge) +
+  geom_errorbar(aes(ymin=lower, ymax=upper),
+                size=.3,
+                width=.3,
+                position=dodge) +
+  coord_cartesian(ylim=c(0,0.81)) + #to match original study
+  xlab("Information in File A") +
+  ylab("Proportion of Words Recalled") +
+  ggtitle("Storm - Replication") +
+  theme_bw(base_size = 6) +
+  scale_fill_grey(start=.4) +
+  theme(legend.position=c(.5,.85),
+        legend.direction= "horizontal",
+        legend.title=element_blank(),
+        legend.key = element_blank(),
+        legend.text=element_text(size=4),
+        legend.key.size = unit(3, "mm"))
+
+ggsave("figures/mkeil-replication.png",width = 1.5,height=1.5,units="in")
+
+
