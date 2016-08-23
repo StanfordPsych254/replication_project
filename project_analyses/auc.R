@@ -199,7 +199,11 @@ model_tval <- summary(model)$coefficients["exp_typetrustworthy:centered_dft","t 
 model_pval <- summary(model)$coefficients["exp_typetrustworthy:centered_dft","Pr(>|t|)"]
 model_df <- summary(model)$df[2]
 lsr::etaSquared(model)
-cohensd <- abs(2*model_tval/sqrt(model_df))
+
+source("project_analyses/computeES.R")
+es <- esComp(model_tval, df2 = model_df, esType = "t")
+
+# cohensd <- abs(2 * model_tval/sqrt(model_df))
 
 stat_descript <- paste0("t(",model_df,") = ",round(model_tval,2))
 
@@ -208,7 +212,7 @@ stat_descript <- paste0("t(",model_df,") = ",round(model_tval,2))
 project_info <- data.frame(project_key = "auc",
                            rep_final_n = length(unique(d.raw$workerid)),
                            rep_n_excluded = 0,
-                           rep_es = cohensd ,
+                           rep_es = es ,
                            rep_test_statistic_str = stat_descript,
                            rep_t_stat = model_tval,
                            rep_t_df = model_df,

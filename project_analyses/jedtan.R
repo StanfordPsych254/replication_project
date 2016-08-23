@@ -25,13 +25,16 @@ transition_worker_means = d %>%
 slide_mean = round(transition_means$meanTime[1]/1000, digits=2)
 fade_mean =  round(transition_means$meanTime[2]/1000, digits=2)
 
-full_t.test <- t.test((transition_worker_means %>% filter(Transition == "Fade"))$meanTime, (transition_worker_means %>% filter(Transition == "Slide"))$meanTime, paired=TRUE)
+full_t.test <- t.test((transition_worker_means %>% filter(Transition == "Fade"))$meanTime, 
+                      (transition_worker_means %>% filter(Transition == "Slide"))$meanTime, 
+                      paired=TRUE)
+
+source("project_analyses/computeES.R")
+es <- esComp(full_t.test$statistic, df2 = full_t.test$parameter, esType = "t")
 
 epoch <- d %>% group_by(WorkerID, epoch, Transition) %>% 
  summarise(meanTime = mean(Time), meanPress = mean(KeyPresses))
 
-full_cohensDVal <- lsr::cohensD((epoch %>% filter(Transition == "Fade"))$meanTime, 
-                                (epoch %>% filter(Transition == "Slide"))$meanTime)
 
 #As a key statistic, Liverence and Scholl report that "Across all trials, 
 # participants were on average 1.41 s faster per trial on slide-transition blocks
@@ -53,7 +56,7 @@ project_info <- data.frame(
   rep_t_df = full_t.test$parameter,
   rep_final_n = length(unique(d$WorkerID)), 
   rep_n_excluded = 0, 
-  rep_es = full_cohensDVal, 
+  rep_es = es,
   rep_test_statistic_str = stat_descript,
   rep_p_value = full_t.test$p.value)
 

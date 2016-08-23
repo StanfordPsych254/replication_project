@@ -34,7 +34,8 @@ degrees <- data.lm$df
 
 stat_descript <- paste0("t(",degrees,") = ",tval)
 
-cohensd <- 2 * tval / sqrt(degrees)
+source("project_analyses/computeES.R")
+es <- esComp(tval, df2 = degrees, esType = "t")
 
 project_info <- data.frame(
   project_key = "ehermann", 
@@ -42,7 +43,7 @@ project_info <- data.frame(
   rep_t_df = degrees,
   rep_final_n = nrow(df), 
   rep_n_excluded = 0 , 
-  rep_es = cohensd, 
+  rep_es = es,
   rep_test_statistic_str = stat_descript,
   rep_p_value = pval,
   notes= ""

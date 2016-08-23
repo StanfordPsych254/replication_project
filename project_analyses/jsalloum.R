@@ -43,14 +43,16 @@ stat_descript <- paste0("F(",dfnum,", ",dfdenom,") = ",round(F_stat, 3))
 stat_descript
 
 ## lsr::etaSquared(rs1.1) => d = 2.3758
-cohensD <- 2*sqrt(F_stat)/sqrt(dfdenom)
-
+#cohensD <- 2*sqrt(F_stat)/sqrt(dfdenom)
+source("project_analyses/computeES.R")
+es <- esComp(F_stat, df1 = dfnum, df2 = dfdenom, esType = "F")
+es
 project_info <- data.frame(
   project_key = "jsalloum", 
   rep_t_stat = sqrt(F_stat),
   rep_t_df = dfdenom,
   rep_final_n = length(d.af$speakerId), 
   rep_n_excluded = 0, 
-  rep_es = cohensD, 
+  rep_es = es, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = p)
