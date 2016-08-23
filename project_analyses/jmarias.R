@@ -272,15 +272,16 @@ dat <- dat %>% rowwise() %>%
   gather(anx,value,-x) %>%
   mutate(anx = paste0(anx," Motivation"))
 ggplot(dat, aes(x,value,group=anx)) + 
-  stat_function(fun=my_func, colour="black") +
-  stat_function(fun=my_func2, colour="grey50",linetype=2) +
+  stat_function(fun=my_func, colour="grey80") +
+  stat_function(fun=my_func2, colour="grey40") +
   theme_bw(base_size = 6) +
+  scale_colour_grey(start=.4, guide=FALSE) + 
   ggtitle("Wang - Original") +
   xlab("Math Anxiety") +
   ylab("PVT Performance (SD)") +
   scale_y_continuous(limits = c(0,1)) +
   scale_x_continuous(limits = c(-1,1),breaks=c(-1,1),labels=c("Low","High")) +
-  geom_label_repel(data = filter(dat, x==0),aes(label = anx), size = 2,nudge_y = c(-.2,+.2), nudge_x = c(-.4,+.4)) 
+  geom_label_repel(data = filter(dat, x==0),aes(label = anx,color=anx), size = 2,nudge_y = c(-.2,+.2), nudge_x = c(-.4,+.4)) 
 
 ggsave("figures/jmarias-original.png",width = 1.5,height=1.5,units="in")
 
@@ -296,18 +297,20 @@ above_lmeq <- function(x) above_lmcoefs[1] + above_lmcoefs[7] * x  + above_lmcoe
 
 below_lmeq <- function(x) below_lmcoefs[1] + below_lmcoefs[7] * x  + above_lmcoefs[9]*x^2
 
-plot_points <- data.frame(z.mathanx=c(0,0), z.pvt=c(above_lmeq(0),below_lmeq(0)),label=c("High Motivation","Low M."),stringsAsFactors = F)
+plot_points <- data.frame(z.mathanx=c(0,0), z.pvt=c(above_lmeq(0),below_lmeq(0)),label=c("High Motivation","Low Motivation"),stringsAsFactors = F)
 
 ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) + 
-  stat_function(fun=below_lmeq, colour="black") +
-  stat_function(fun=above_lmeq, colour="grey50",linetype=2) +
+  stat_function(fun=below_lmeq, colour="grey80") +
+  stat_function(fun=above_lmeq, colour="grey40") +
   theme_bw(base_size = 6) +
+  scale_colour_grey(start=.4, guide=FALSE) + 
   ggtitle("Wang - Replication") +
   xlab("Math Anxiety") +
   ylab("PVT Performance (SD)") +
   scale_y_continuous(limits = c(0,1)) +
   scale_x_continuous(limits = c(-1,1),breaks=c(-1,1),labels=c("Low","High")) +
-  geom_label_repel(data=plot_points,aes(label = label), size = 2, nudge_y = c(.2,-.1), nudge_x = c(.4,-.6)) 
+  geom_label_repel(data=plot_points,aes(label = label,color=label), size = 2, nudge_y = c(.2,-.12), nudge_x = c(.4,-.7))
+  
 
 ggsave("figures/jmarias-replication.png",width = 1.5,height=1.5,units="in")
 
