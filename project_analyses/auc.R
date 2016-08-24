@@ -77,7 +77,8 @@ ggplot(d_plot_rep, aes(x=face_dft, y = rating, col = condition, group=condition)
   xlab("Distance from Typical") + 
   scale_y_continuous(name = "Rating", 
                      limits = c(1, 9), 
-                     breaks = c(1, 3, 5, 7, 9))
+                     breaks = c(1, 3, 5, 7, 9)) +
+  theme( plot.title = element_text(color="#dc322f"))
 
 ggsave("figures/auc-replication.png", width = 1.5, height=1.5,units="in")
 
@@ -106,7 +107,8 @@ ggplot(d_plot_orig, aes(x=face_dft, y = face_rating, col = condition, group=cond
   xlab("Distance from Typical") + 
   scale_y_continuous(name = "Rating", 
                      limits = c(1,9), 
-                     breaks = c(1,3, 5, 7, 9))
+                     breaks = c(1,3, 5, 7, 9)) +
+  theme( plot.title = element_text(color="#dc322f"))
 
 ggsave("figures/auc-original.png",width = 1.5, height=1.5, units="in")
 

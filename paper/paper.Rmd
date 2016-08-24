@@ -393,9 +393,15 @@ In conclusion, our results here demonstrate the practical possibility of perform
 
 
 ```{r, fig.height=9, fig.width=6}
+  # colors:268bd2 859900 dc322f
 library(png)
 layout(matrix(1:24,nr=6,byr=T))
-for (key in project_plan$project_key) {
+project_key_sorted <- c(
+  "jsalloum","ehermann","salehi", # rep = 1
+  "mkeil","smraposo","jedtan","rhiac","lampinen", # rep=.5
+  "jreynolds","jmarias","auc" #rep = 0
+)
+for (key in project_key_sorted) {
   orig <- readPNG(paste0("../figures/",key,"-original.png"))
   rep <- readPNG(paste0("../figures/",key,"-replication.png"))
 
@@ -407,6 +413,11 @@ for (key in project_plan$project_key) {
   rasterImage(rep, 0, 0, 100, 100, interpolate=FALSE)
 
 }
+# Add legend
+legend <- readPNG(paste0("../figures/Replication-Legend.png"))
+
+plot(c(0, 100), c(0, 100), type = "n", xlab="", ylab="", axes=F)
+  rasterImage(legend, 0, 0, 100, 100, interpolate=FALSE)
 ```
 
 For each project, we present a summary of the finding, the key statistical test, and the outcomes of the replication.  
