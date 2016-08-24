@@ -406,7 +406,7 @@ In conclusion, our results here demonstrate the practical possibility of perform
 # Appendix: Project-By-Project Methods Addendum
 
 
-```{r, fig.height=9, fig.width=6, fig.cap="Side-by-side comparison of plots for each attempted replication. All error bars are standard error of the mean. Original data were estimated from figures when not otherwise available. Replications are sorted and color coded by subjective replication success."}
+```{r, fig.height=9, fig.width=6, fig.cap="Side-by-side plots for each attempted replication. Error bars show standard error of the mean. Original data estimated from figures when not otherwise available. Replications are sorted and color coded by subjective replication success."}
   # colors:268bd2 859900 dc322f
 library(png)
 layout(matrix(1:24,nr=6,byr=T))
