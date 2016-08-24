@@ -167,7 +167,8 @@ ggplot(o_plot, aes(x=condition, y = mean,fill = traitType)) +
         legend.title=element_blank(),
         legend.key = element_blank(),
         legend.text=element_text(size=4),
-        legend.key.size = unit(3, "mm"))
+        legend.key.size = unit(3, "mm"),
+        plot.title = element_text(color="#268bd2"))
 
 ggsave("figures/salehi-original.png",width = 1.5,height=1.5,units="in")
 
@@ -199,6 +200,7 @@ ggplot(d_plot, aes(x=condition, y = mean,fill = traitType)) +
         legend.title=element_blank(),
         legend.key = element_blank(),
         legend.text=element_text(size=4),
-        legend.key.size = unit(3, "mm"))
+        legend.key.size = unit(3, "mm"),
+        plot.title = element_text(color="#268bd2"))
 
 ggsave("figures/salehi-replication.png",width = 1.5,height=1.5,units="in")

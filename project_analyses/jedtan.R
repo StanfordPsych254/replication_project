@@ -85,14 +85,15 @@ ggplot(ms, aes(x=epoch, y = time, col = Transition, group=Transition)) +
   scale_colour_grey(start=.4, guide=FALSE) + 
   ggtitle("Liverence - Replication") + 
   xlab("Epoch") + 
-  scale_y_continuous(name = "Time (s)", limits=c(5,18))
+  scale_y_continuous(name = "Time (s)", limits=c(5,18)) +
+  theme(plot.title = element_text(color="#859900"))
 
 ggsave("figures/jedtan-replication.png",width = 1.5, height=1.5, units="in")
 
 
 ## Original
 # estimated from figure
-original <- tibble(epoch = factor(c(1:5, 1:5)), 
+original <- data.frame(epoch = factor(c(1:5, 1:5)), 
                        condition = factor(c(rep("Fade",5),
                                      rep("Slide",5))),
                        time = c(13.8,11.2,10.1,10.3,10.1,
@@ -113,7 +114,8 @@ ggplot(original, aes(x=epoch, y = time, col = condition, group=condition)) +
   scale_colour_grey(start=.4, guide=FALSE) + 
   ggtitle("Liverence - Original") + 
   xlab("Epoch") + 
-  scale_y_continuous(name = "Time (s)", limits=c(5,18)) 
+  scale_y_continuous(name = "Time (s)", limits=c(5,18)) +
+  theme(plot.title = element_text(color="#859900"))
 
 ggsave("figures/jedtan-original.png",width = 1.5, height=1.5, units="in")
 
