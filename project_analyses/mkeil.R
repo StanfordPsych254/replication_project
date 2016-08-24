@@ -186,7 +186,8 @@ F_test<- round(stat_sum[[1]][2,"F value"],3)
 
 stat_descript <- paste0("F(",df1,",",df2,") = ",F_test)
 
-cohensd <- 2 * sqrt(F_test) / sqrt(df2)
+source("project_analyses/computeES.R")
+es <- esComp(F_test, df1 = df1, df2 = df2, esType = "F")
 
 project_info <- data.frame(
   project_key = "mkeil", 
@@ -194,7 +195,7 @@ project_info <- data.frame(
   rep_t_df = df2,
   rep_final_n = length(unique(d1$workerId)), 
   rep_n_excluded = length(unique(d.raw$workerId))-length(unique(d1$workerId)), 
-  rep_es = cohensd, 
+  rep_es = es, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = p.val,
   notes= ""

@@ -133,7 +133,11 @@ manova.orig = lm(cbind(dft_0, dft_10, dft_20, dft_30, dft_40, dft_50,
                       dft_60, dft_70, dft_80, dft_90, dft_100) ~ condition, 
                 data = shortForm.orig)
 manova.res.orig = Anova(manova.orig, idata= idata, idesign = ~dft)
-manova.res.orig
+# Effect size from Steyn Jr, H. S., & Ellis, S. M. (2009). 
+# Estimating an effect size in one-way multivariate analysis of variance (MANOVA). 
+# Multivariate Behavioral Research, 44(1), 106-129.
+# Note that the formula used in esComp (by the OSF people) corrects this by a factor sqrt(1/df1) to get "explained variance by predictor"
+etasq(manova.res.orig)
 
 ## REPLICATION
 shortForm.rep = rep %>%
@@ -162,6 +166,7 @@ manova.res.rep
 model_Fval = 3.2
 model_dfnum = 10
 model_dfdenom = 84
+model_pval = 0.001594
 
 source("project_analyses/computeES.R")
 es <- esComp(model_Fval, df1 = model_dfnum, df2 = model_dfdenom, esType = "F")
@@ -176,7 +181,7 @@ project_info <- data.frame(project_key = "auc",
                            rep_test_statistic_str = stat_descript,
                            rep_t_stat = NA,
                            rep_t_df = NA,
-                           rep_p_value = pval1,
+                           rep_p_value = model_pval,
                            notes="based on writeup and article, assuming conditiontrustworthy:centered_dft interaction is key stat of interest. Should clarify with Carolyn. Also make sure doing correct analysis from article (i.e. MANOVA)."
 )
 

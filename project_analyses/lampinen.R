@@ -81,11 +81,13 @@ n_subjects = length(unique(subject_aggregated_data$subject))
 nonRotatingK = subject_aggregated_data[!subject_aggregated_data$rotating,]$K
 rotatingK = subject_aggregated_data[subject_aggregated_data$rotating,]$K
 t_res = t.test(nonRotatingK, rotatingK, paired=T)
-cohensd = lsr::cohensD(nonRotatingK, rotatingK, method='paired')
 
 F_stat = (t_res$statistic)^2
 p = pf(F_stat,1,n_subjects-1,lower.tail=F)
 stat_descript <- paste0("F(",1,", ",t_res$parameter,") = ",round(F_stat, 3))
+
+source("project_analyses/computeES.R")
+es <- esComp(F_stat, df1 = 1, df2 = t_res$parameter, esType = "F")
 
 project_info <- data.frame(
   project_key = "lampinen", 
@@ -93,7 +95,7 @@ project_info <- data.frame(
   rep_t_df = t_res$parameter,
   rep_final_n = n_subjects, 
   rep_n_excluded = length(files) - n_subjects, 
-  rep_es = cohensd, 
+  rep_es = es, 
   rep_test_statistic_str = stat_descript,
   rep_p_value = p)
 
