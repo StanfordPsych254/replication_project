@@ -113,51 +113,68 @@ ggsave("figures/auc-original.png",width = 1.5, height=1.5, units="in")
 
 ##### STATS --------------------------------------------------
 # we select the more standard "by subjects" analysis for the final.
+library(car)
+idata = data.frame(dft = c("dft_0", "dft_10", "dft_20", "dft_30", "dft_40", "dft_50", 
+                           "dft_60", "dft_70", "dft_80", "dft_90", "dft_100"))
 
 ## ORIGINAL 
-sofer <- sofer %>%
+shortForm.orig = sofer %>%
   ungroup %>%
   mutate(dft = factor(face_dft), 
          condition = factor(condition), 
-         subid = factor(subid))
+         subid = factor(subid)) %>%
+  select(dft, condition, subid, rating) %>%
+  group_by(subid) %>%
+  spread(dft, rating, sep = "_")
 
-# Repeated measures
-orig.mod <- aov(rating ~ dft * condition +
-           + Error(subid / dft), data = sofer)
-summary(orig.mod)
+manova.orig = lm(cbind(dft_0, dft_10, dft_20, dft_30, dft_40, dft_50,
+                      dft_60, dft_70, dft_80, dft_90, dft_100) ~ condition, 
+                data = shortForm.orig)
+manova.res.orig = Anova(manova.orig, idata= idata, idesign = ~dft)
+manova.res.orig
 
 ## REPLICATION
-rep <- rep %>%
+shortForm.rep = rep %>%
   ungroup %>%
   mutate(dft = factor(face_dft), 
          condition = factor(condition), 
-         workerid = factor(workerid))
-    
-rep.mod <- aov(rating ~ dft * condition +
-             + Error(workerid / dft), data = rep)
-summary(rep.mod)
+         workerid = factor(workerid)) %>%
+  select(dft, condition, workerid, rating) %>%
+  group_by(workerid) %>%
+  spread(dft, rating, sep = "_")
 
-model_coef <- summary(rep.model)$coefficients["exp_typetrustworthy:centered_dft","Estimate"]
-model_tval <- summary(rep.model)$coefficients["exp_typetrustworthy:centered_dft","t value"]
-model_pval <- summary(rep.model)$coefficients["exp_typetrustworthy:centered_dft","Pr(>|t|)"]
-model_df <- summary(rep.model)$df[2]
-# lsr::etaSquared(model)
+manova.rep = lm(cbind(dft_0, dft_10, dft_20, dft_30, dft_40, dft_50,
+                      dft_60, dft_70, dft_80, dft_90, dft_100) ~ condition, 
+                data = shortForm.rep)
+manova.res.rep = Anova(manova.rep, idata= idata, idesign = ~dft)
+manova.res.rep 
+
+# anovaObj = unlist(summary(rep.mod)[[2]])
+# model_Fval = anovaObj["F value2"]
+# model_dfnum = anovaObj["Df2"]
+# model_dfdenom = anovaObj["Df3"]
+# model_pval = anovaObj["Pr(>F)2"]
+
+# It's too hard to extract vals from manova output, so we just manually pull from table
+
+model_Fval = 3.2
+model_dfnum = 10
+model_dfdenom = 84
 
 source("project_analyses/computeES.R")
-es <- esComp(model_tval, df2 = model_df, esType = "t")
+es <- esComp(model_Fval, df1 = model_dfnum, df2 = model_dfdenom, esType = "F")
 
-stat_descript <- paste0("t(",model_df,") = ",round(model_tval,2))
-
+stat_descript <- paste0("F(",model_dfnum,",", model_dfdenom,") = ",round(model_Fval,2))
 
 #### TO DO
 project_info <- data.frame(project_key = "auc",
                            rep_final_n = length(unique(d.raw$workerid)),
                            rep_n_excluded = 0,
-                           rep_es = es ,
+                           rep_es = es,
                            rep_test_statistic_str = stat_descript,
-                           rep_t_stat = model_tval,
-                           rep_t_df = model_df,
+                           rep_t_stat = NA,
+                           rep_t_df = NA,
                            rep_p_value = pval1,
-                           notes="based on writeup and article, assuming conditiontrustworthy:centered_dft interaction is key stat of interest. Should clarify with Carolyn. Also make sure doing correct analysis from article."
+                           notes="based on writeup and article, assuming conditiontrustworthy:centered_dft interaction is key stat of interest. Should clarify with Carolyn. Also make sure doing correct analysis from article (i.e. MANOVA)."
 )
 
