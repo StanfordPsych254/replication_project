@@ -17,7 +17,7 @@ affiliation-information:
     - \affiliation{Department of Psychology, Stanford University}
 
 author-note:
-    "Thanks to the Stanford Department of Psychology and the Vice Provost for Undergraduate Education for funding to support the class."
+    "Thanks to the Stanford Department of Psychology and the Vice Provost for Graduate Education for funding to support the class."
     
 abstract: 
     "Replications are important to science, but who will do them? One proposal is that students can conduct direct replications as part of their training. As a proof-of-concept for this idea, here we report a series of 11 pre-registered, direct replications of findings from the 2015 volume of Psychological Science, all conducted as part of a graduate-level course. This work provides an estimate of the probability that a motivated graduate student can reproduce a previously published finding of interest on a first attempt. Congruent with previous findings, replication studies typically yielded smaller effects than originals: The modal outcome was partial support for the original claim. We describe the workflow and pedagogical methods that were used in the class and discuss challenges for adoption of this pedagogical model and replication research more broadly."
@@ -82,6 +82,9 @@ names(ppt) = c("Citation", "Expt", "Data", "Materials", "Turk?",
 #        label = "tab:summary"), include.rownames=FALSE)
 ```
 
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+  
 <!-- latex table generated in R 3.3.0 by xtable 1.8-2 package
  Fri Jun 24 12:02:11 2016 -->
 \begin{table}[ht]
@@ -89,12 +92,12 @@ names(ppt) = c("Citation", "Expt", "Data", "Materials", "Turk?",
 \centering
 \begin{tabular}{lllllrr}
   \hline
-Citation & Expt & Data & Materials & Turk? & N (orig) & N (rep) \\ 
+Citation & Expt & \specialcell{Open\\Data?} & \specialcell{Open\\Materials?} & \specialcell{Original\\on Turk?} & N (orig) & N (rep) \\ 
   \hline
 Storm \& Stone (2015) & 3 & No & No & No &  48 &  61 \\ 
 Lewis \& Oyserman (2015) & 4 & No & Yes & Yes & 122 & 128 \\ 
 Scopelliti, Loewenstein, \& Vosgerau (2015) & 3 & No & Yes & Yes & 550 & 124 \\ 
-Liverence \& Scholl (2015) & 1 & No & Some & No &  18 &  \\ 
+Liverence \& Scholl (2015) & 1 & No & Some & No &  18 &  19 \\ 
 Wang et al. (2015) & 2 & No & No & No & 219 & 397 \\ 
 Sofer et al. (2015) & 1 & No & Yes & No &  48 &  95 \\ 
 Ko, Sadler, \& Galinksy (2015) & 2 & Yes & Some & No &  40 &  40 \\ 
@@ -104,7 +107,7 @@ Zaval, Markowitz, \& Weber (2015) & 1 & Yes & Yes & Yes & 312 & 328 \\
 Xu \& Franconeri (2015) & 1a & No & No & No &  12 &  27 \\ 
    \hline
 \end{tabular}
-\caption{\label{tab:summary} Summary of attempted replications.} 
+\caption{\label{tab:summary} Summary of papers and experiments that were targets for replication in our projects.} 
 \label{tab:summary}
 \end{table}
 
@@ -147,7 +150,7 @@ One part of our workflow was extremely useful both pedagogically and for encoura
 
 To ensure high quality replications, students went through a rigorous process in which each student's work was reviewed several times by both the instructor (MCF) and the teaching assistants (ES and RXDH). In addition to as-needed guidance, each student collected two pilot samples. The first, "Pilot A," consisted of a handful of non-naive participants (e.g., the experimenter, other students). The goal of this pilot was to ensure that all needed data were being logged by the experiment and that analytic scripts for the confirmatory analyses functioned appropriately. After pilot A was completed, the instructor or a TA reviewed the student's experiment (acting as a participant) and critiqued and reviewed the student's full analytic code and output. 
 
-Once requested changes were made, the student conducted "Pilot B," using a handful of naive participants recruited from Mechanical Turk. The goal of this pilot was to ensure that participants were able to complete the experiment and did not report any substantial issues with instructions or technical details of the experiment. (All students were instructed to give participants a way to leave free-form comments at the end of the experiment but prior to debriefing text). At the conclusion of Pilot B, both the instructor and a TA reviewed the student's analytic code and its outputs on the data for all confirmatory analysis. The goal of this code review was to ensure that all planned analyses were specified correctly and with sufficient detail to permit inclusion in the broader analysis.
+Once requested changes were made, the student conducted "Pilot B," using a handful of naive participants recruited from Mechanical Turk. The goal of this pilot was to ensure that participants were able to complete the experiment and did not report any substantial issues with instructions or technical details of the experiment. (All students were instructed to give participants a way to leave free-form comments at the end of the experiment but prior to debriefing text). At the conclusion of Pilot B, both the instructor and a TA reviewed the student's analytic code and its outputs on the data for all confirmatory analyses. The goal of this code review was to ensure that all planned analyses were specified correctly and with sufficient detail to permit inclusion in the broader analysis.
 
 After Pilot B review was completed, students were given authorization to collect the full sample of participants, contingent on having made the requested change. Prior to data collection, the analytic script containing all confirmatory analyses was pre-registered using the Open Science Framework. In addition, prior to data collection, we pre-registered the confirmatory analyses reported in the current paper ([https://osf.io/rxz8m/](https://osf.io/rxz8m/)).
 
@@ -165,7 +168,7 @@ In
 `r sum(project_plan$power_standard == "80% power")`
 cases, we powered the replication attempt to 80\% post-hoc power. In 
 `r sum(project_plan$power_standard == "Original")` 
-cases, we used the original sample size. In one case, the original experiment was apparently extremely over-powered in the post-hoc analysis, so we chose a smaller sample size that still would apparently yield high power.  In one case, we reduced the number of trials as part of the adaptation to mechanical turk, and in one case of a multi-step procedure where the first step consisted of stimulus generation, we decreased the N in the first stage of the procedure (details available in SOM). 
+cases, we used the original sample size. In one case, the original experiment was  extremely over-powered in the post-hoc analysis, so we chose a smaller sample size that still would yield high power.  In one case, we reduced the number of trials as part of the adaptation to Mechanical Turk, and in one case of a multi-step procedure where the first step consisted of stimulus generation, we decreased the N in the first stage of the procedure (details available in SOM). 
 
 ## Individual Replications
 
@@ -185,7 +188,7 @@ In two cases, in final review of the projects (after data collection), the instr
 
 ### Subjective judgments of replication
 
-Students of the class and the instructors gave independent “replication ratings” to assess subjective judgement of the replication. Criterion is based on the theoretical interpretation of the original finding. (0 = non-replication, .5 is substantial hints of the same pattern or a significant but different pattern, 1 = full replication). We find that the these ratings of the student carrying out the replication and the instructors were in agreement for `r sum(d$replicated_TA == d$replicated_student,na.rm=T)` out of the `r nrow(d)` replications.  The average rating given by instructors and students were `r round(mean(d$replicated_TA, na.rm=TRUE), digits = 2)` and `r round(mean(d$replicated_student, na.rm=TRUE), digits = 2)` respectively.  
+Students of the class and the instructors gave independent “replication ratings” to assess subjective judgement of the replication. Our rating system was based on the theoretical interpretation of the original finding, with 0 = no support for the original interpretation, .5 = some support for the original interpretation, 1 = full replication). We found that the ratings of the student carrying out the replication and the instructors were in agreement for `r sum(d$replicated_TA == d$replicated_student,na.rm=T)` out of the `r nrow(d)` replications.  The average rating given by instructors and students were `r round(mean(d$replicated_TA, na.rm=TRUE), digits = 2)` and `r round(mean(d$replicated_student, na.rm=TRUE), digits = 2)` respectively.  
 
 ```{r}
 d$high_fidelity <- d$fidelity > median(d$fidelity)
@@ -232,29 +235,46 @@ outcomes <- outcomes %>%
 
 \begin{table}[ht]
 \centering
-\begin{tabular}{llrrr|r}
+\begin{tabular}{rllllllll}
   \hline
-Mediator & Value & No & Partial & Full & Total\\ 
+\multicolumn{2}{c}{Replicated} & \multicolumn{2}{c}{Original on Turk?} & \multicolumn{2}{c}{High fidelity?} & \multicolumn{3}{c}{Open Materials?} \\
   \hline
-Replicated? &  &   2 &   6 &   3 & 11 \\ 
-\hline
-  Original on turk & Yes &   1 &   2 &   2 & 5 \\ 
-   & No &   1 &   4 &   1 & 6\\ 
-\hline
-  High fidelity replication? & Yes &   2 &   3 &   1  & 6\\ 
-   & No &  &   3 &   2 & 5\\ 
-\hline
-  Open materials? & Yes &   1 &   3 &   1  & 4\\ 
-   & Some &  &   1 &   1 & 2\\ 
-   &  No &   1 &   2 &   1 & 4\\ 
-\hline
+   &  & No & Yes & Yes & No & No & Some & Yes \\ 
+  No &  2 &  1 &  1 &  2 & 0 &  1 & 0 &  1 \\ 
+  Partial & 6 & 4 & 2 & 4 & 2 & 2 & 1 & 3 \\ 
+  Full & 3 & 1 & 2 & 1 & 2 & 1 & 1 & 1 \\ 
+  \hline
+  Total & 11 & 6 & 5 & 5 & 6 & 4 & 2 & 5 \\
+   \hline
 \end{tabular}
-\caption{\label{tab:results} Counts of instructor team replication ratings, split by various different mediating variables.}
+\caption{\label{tab:results} Counts of instructor team replication ratings, split by mediating variables.}
 \end{table}
+
+<!-- \begin{table}[ht] -->
+<!-- \centering -->
+<!-- \begin{tabular}{llrrr|r} -->
+<!--   \hline -->
+<!-- Mediator & Value & No & Partial & Full & Total\\  -->
+<!--   \hline -->
+<!-- Replicated? &  &   2 &   6 &   3 & 11 \\  -->
+<!-- \hline -->
+<!--   Original on turk & Yes &   1 &   2 &   2 & 5 \\  -->
+<!--    & No &   1 &   4 &   1 & 6\\  -->
+<!-- \hline -->
+<!--   High fidelity replication? & Yes &   2 &   3 &   1  & 6\\  -->
+<!--    & No &  &   3 &   2 & 5\\  -->
+<!-- \hline -->
+<!--   Open materials? & Yes &   1 &   3 &   1  & 4\\  -->
+<!--    & Some &  &   1 &   1 & 2\\  -->
+<!--    &  No &   1 &   2 &   1 & 4\\  -->
+<!-- \hline -->
+<!-- \end{tabular} -->
+<!-- \caption{\label{tab:results} Counts of instructor team replication ratings, split by various different mediating variables.} -->
+<!-- \end{table} -->
 
 The modal replication project in our sample was judged to be a "partial" replication, meaning that some aspects of the observed findings were different from those reported by the original authors. While this conclusion is dispiriting, it is also perhaps unsurprising given the complexity of the analyses reported in many of the original papers. In addition, `r sum(d$original_test=="interaction")` of the tests were interactions, which tend to have lower statistical power [@mcclelland1993] and have fared poorly in previous replication studies [@osc2015].
 
-The distribution of ratings are given in Table \ref{tab:results}, along with breakdowns by various factors of interest. Since our sample only includes 11 studies, we describe general trends here rather than attempting to conduct statistical tests (which would be dramatically under-powered after correcting for multiple comparisons). Overall, projects had a somewhat larger probability of being judged successful if it was judged to be closer to the original:
+The distribution of ratings are given in Table \ref{tab:results}, along with breakdowns by various factors of interest. Since our sample only includes 11 studies, we describe general trends here rather than attempting to conduct statistical tests (which would be dramatically under-powered after correcting for multiple comparisons). Overall, projects had a somewhat larger probability of being judged successful if they were judged to be closer to the original:
 `r 100 * round(mean(d$replicated_TA[d$high_fidelity]), digits=2)`\% 
 vs. 
 `r 100 * round(mean(d$replicated_TA[d$high_fidelity == FALSE]), digits=2)`\%.
@@ -301,7 +321,7 @@ These additional measures therefore give another sense in which replications can
 (r = `r signif(cor.test(d$original_ES_d,d$rep_es)$estimate, digits =2)`, p < .0001), but they were generally smaller in the replications 
 (`r signif(coef(lm(d$rep_es~d$original_ES_d-1))[1], digits = 2)`\% of the original [`r signif(confint(lm(d$rep_es~d$original_ES_d-1))[1], digits = 2)` - `r signif(confint(lm(d$rep_es~d$original_ES_d-1))[2], digits = 2)`]). 
 
-Next, following @etz2016, we compared Bayes Factors between the original and replication. While we preregistered an analysis determining whether the original reported effect size is included in the 95\% confidence interval found in the replication, we instead opted for a straightforward comparison of point estimates. This choice was motivated by recent discussions of the utility and validity of interpretating confidence intervals in this manner [@morey2016], as well as discrepencies in reporting effect sizes across the articles we included (which made computing confidence intervals difficult in some cases). 
+Next, following @etz2016, we compared Bayes Factors between the original and replication. While we preregistered an analysis determining whether the original reported effect size is included in the 95\% confidence interval found in the replication, we instead opted for a straightforward comparison of point estimates. This choice was motivated by recent discussions of the utility and validity of interpreting confidence intervals in this manner [@morey2016], as well as discrepencies in reporting effect sizes across the articles we included (which made computing confidence intervals difficult in some cases). 
 
 
 ```{r, fig.cap="Replication effect size (A) and Bayes factor (B), plotted by the original effect size and Bayes factor, respectively. Point size shows replication N (A) and ratio of test degrees of freedom (B), color indicates subjective replication assessments by the authors. Note that the key statistic in the Sofer et al. (2015) replication was a multivariate $F$ test, hence a default Bayes factor could not be computed.", fig.pos="ht", fig.height=4}
@@ -427,7 +447,7 @@ This paper found that when participants had the opportunity to save a file conta
 
 ## Lewis & Oyserman (2015)
 
-This paper investigated motivations to save for retirement, and specifically whether changing participants' relationships to the future (making it feel more immanent) would cause them to save more. Our target was Study 4, which found that seeing the time to retirement in days (10,950) rather than years (30) caused participants to say they would begin saving sooner, even controlling for age, education, and income in a linear model (there was also a manipulation of whether saving was incremental that did not result in an effect). We failed to find a significant relationship between the time metric manipulation and saving time. However, when we did not include demographic controls, we did find a marginally-significant relationship. In exploratory analyses, we also observed an un-predicted effect of income such that participants who reported higher income selected to start saving sooner.
+This paper investigated motivations to save for retirement, and specifically whether changing participants' relationships to the future (making it feel more imminent) would lead them to report that they would begin saving for retirement sooner. Our target was Study 4, which found that seeing the time to retirement in days (10,950) rather than years (30) caused participants to say they would begin saving sooner, even controlling for age, education, and income in a linear model (there was also a manipulation of whether saving was incremental that did not result in an effect). We failed to find a significant relationship between the time metric manipulation and saving time. However, when we did not include demographic controls, we did find a marginally-significant relationship. In exploratory analyses, we also observed an un-predicted effect of income such that participants who reported higher income selected to start saving sooner.
 
 ## Scopelliti, Lowenstein & Vosgerau (2015)
 
