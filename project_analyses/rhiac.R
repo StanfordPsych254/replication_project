@@ -1,12 +1,6 @@
 # Replication of "How Will I Be Remembered? Conserving the Environment for the Sake of One's Legacy" by Zaval, Markowitz & Weber (2015, Psychological Science)
 # Rhia Catapano
 
-# MCF NOTE: this script runs over hand-deduped anonymized data. I removed by hand
-# the 7 datapoints that were accidentally run twice (all in the control
-# condition). There should be 321 participants (not 328).
-
-# RXDH NOTE: Numbers still don't match up
-
 library(tidyr) 
 library(dplyr)
 library(ggplot2) 
@@ -137,7 +131,7 @@ ggplot(o_plot, aes(x=condition, y = mean,fill = condition)) +
   geom_errorbar(aes(ymin=lower, ymax=upper),
                 size=.3,
                 width=.3) +
-  coord_cartesian(ylim=c(1.2,6)) + #to match original study
+  coord_cartesian(ylim=c(0,4)) + # 1.2 - 6 matches original study but looks terrible
   xlab("Condition") +
   ylab("Behavioral Intentions") +
   ggtitle("Zaval - Original") +
@@ -164,7 +158,7 @@ ggplot(d_plot, aes(x=condition, y = mean,fill = condition)) +
   geom_errorbar(aes(ymin=lower, ymax=upper),
                 size=.3,
                 width=.3) +
-  coord_cartesian(ylim=c(1.2,6)) + #to match original study
+  coord_cartesian(ylim=c(0,4)) + 
   xlab("Condition") +
   ylab("Behavioral Intentions") +
   ggtitle("Zaval - Replication") +
@@ -175,12 +169,12 @@ ggplot(d_plot, aes(x=condition, y = mean,fill = condition)) +
   scale_y_continuous(breaks=1:6)
 
 ggsave("figures/rhiac-replication.png",width = 1.5,height=1.5,units="in")
-
-ggplot(ms_beh, aes(x=condition, y=meanBeh)) + 
-  geom_bar(stat = "identity") + 
-  ylim(0, 6) +
-  geom_errorbar(aes(ymin = meanBeh - ci95, 
-                    ymax = meanBeh + ci95), width=0.25)
+# 
+# ggplot(ms_beh, aes(x=condition, y=meanBeh)) + 
+#   geom_bar(stat = "identity") + 
+#   ylim(0, 6) +
+#   geom_errorbar(aes(ymin = meanBeh - ci95, 
+#                     ymax = meanBeh + ci95), width=0.25)
 
 
 # model <- lm(leg_mot_index ~ condition, d)
