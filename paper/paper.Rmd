@@ -103,7 +103,7 @@ Sofer et al. (2015) & 1 & No & Yes & No &  48 &  95 \\
 Ko, Sadler, \& Galinksy (2015) & 2 & Yes & Some & No &  40 &  40 \\ 
 Atir, Rosenzweig, \& Dunning (2015) & 1b & No & Yes & Yes & 202 &  50 \\ 
 Proudfoot, Kay, \& Koval (2015) & 1 & No & No & Yes &  80 &  84 \\ 
-Zaval, Markowitz, \& Weber (2015) & 1 & Yes & Yes & Yes & 312 & 328 \\ 
+Zaval, Markowitz, \& Weber (2015) & 1 & Yes & Yes & Yes & 312 & 321 \\ 
 Xu \& Franconeri (2015) & 1a & No & No & No &  12 &  27 \\ 
    \hline
 \end{tabular}
@@ -144,11 +144,11 @@ usr<-par("usr")
 rasterImage(img, usr[1], usr[3], usr[2], usr[4])
 ```
 
-One part of our workflow was extremely useful both pedagogically and for encouraging reproducible research practices. Students wrote their final reports using [R Markdown](http://rmarkdown.rstudio.com/), a "literate programming" environment in which statistical analysis code can be interspersed with text, figures, and tables. Using the template developed by @osc2015 for replication reports, students created dynamic documents that included their proposed replication study, the code necessary to analyze their data, and the outputs of their data analysis (e.g. statistical tests, figures). This document can be compiled into a variety of formats (e.g., HTML, PDF, Microsoft Word). This method of writing allows students to share a single compiled document via a hyperlink, facilitating review of writing, results, and code together in a single platform.^[The current manuscript is written in this fashion as well.] This writing method is also likely to reduce the frequency of statistical reporting errors [which appear to be regrettably common; @nuijten2015], given that many of these are likely introduced by copying and pasting between analysis outputs and manuscripts. 
+Students wrote their final reports using [R Markdown](http://rmarkdown.rstudio.com/), a "literate programming" environment in which statistical analysis code can be interspersed with text, figures, and tables. This part of our workflow was extremely useful both pedagogically and for encouraging reproducible research practices. Using the template developed by @osc2015 for replication reports, students created dynamic documents that included their proposed replication study, the code necessary to analyze their data, and the outputs of their data analysis (e.g. statistical tests, figures). These documents could be compiled into a variety of formats (e.g., HTML, PDF, Microsoft Word). This method of writing allows students to share a single compiled document via a hyperlink, facilitating review of writing, results, and code together in a single platform.^[The current manuscript is written in this fashion as well.] This writing method is also likely to reduce the frequency of statistical reporting errors [which appear to be regrettably common; @nuijten2015], given that many of these are likely introduced by copying and pasting between analysis outputs and manuscripts. 
 
 ## Preregistration and Review
 
-To ensure high quality replications, students went through a rigorous process in which each student's work was reviewed several times by both the instructor (MCF) and the teaching assistants (ES and RXDH). In addition to as-needed guidance, each student collected two pilot samples. The first, "Pilot A," consisted of a handful of non-naive participants (e.g., the experimenter, other students). The goal of this pilot was to ensure that all needed data were being logged by the experiment script and that analytic scripts for the confirmatory analyses functioned appropriately. After Pilot A was completed, the instructor or a TA reviewed the student's experimental script (acting as a participant) and critiqued and reviewed the student's full analytic code and output. 
+In addition to as-needed guidance on projects, to ensure high quality replications, students went through a rigorous process in which each student's work was reviewed several times by both the instructor (MCF) and the teaching assistants (ES and RXDH). Each student collected two pilot samples and review was coordinated with these. The first, "Pilot A," consisted of a handful of non-naive participants (e.g., the experimenter, other students). The goal of this pilot was to ensure that all needed data were being logged by the experiment script and that analytic scripts for the confirmatory analyses functioned appropriately. After Pilot A was completed, the instructor or a TA reviewed the student's experimental script (acting as a participant) and critiqued and reviewed the student's full analytic code and output. 
 
 Once requested changes were made, the student conducted "Pilot B," using a handful of naive participants recruited from Mechanical Turk. The goal of this pilot was to ensure that participants were able to complete the experiment and did not report any substantial issues with instructions or technical details of the experiment. (All students were instructed to give participants a way to leave free-form comments at the end of the experiment but prior to debriefing text). At the conclusion of Pilot B, both the instructor and a TA reviewed the student's analytic code and its outputs on the data for all confirmatory analyses. The goal of this code review was to ensure that all planned analyses were specified correctly and with sufficient detail to permit inclusion in the broader analysis.
 
@@ -156,7 +156,7 @@ After Pilot B review was completed, students were given authorization to collect
 
 ## Sample size determination and statistical approach
 
-After selecting a paper of interest, students selected a particular study from within that paper based on their judgment of interest and feasibility. The modal study chosen was the first, but several students chose later studies in a set as well. 
+After selecting a paper of interest, students chose a particular study from within that paper based on their judgment of interest and feasibility. The modal study chosen was the first, but several students chose later studies in a set as well. 
 
 Despite the general emphasis in meta-analytic and reproducibility efforts to aggregate a single effect size of interest [@osc2015;@lipsey2001], it was often challenging to identify a single key statistical test in studies. Often a wide variety of statistical tests were conducted, often within one or several regression models with multiple specifications. Thus, we interpret "key statistical test" results with caution. Nevertheless, despite this interpretive difficulty, we attempted to use a single statistical test as our target for experiment planning and analysis.
 
@@ -362,12 +362,12 @@ p2 <- ggplot(tstatDF, aes(x = origBF, y = repBF)) +
   xlab("Orig. Bayes Factor") + 
   ylab("Rep. Bayes Factor") + 
   scale_x_log10(limits = c(10**-1.75, 10**11), 
-                breaks = c(1/10, .3, 3, 10, 100, 1e+3, 1e+6, 1e+9),
-                labels = c("1e-1", "3e-1", "3", "1e1","1e2", "1e3", 
+                breaks = c(1/10, 1, 10, 100, 1e+3, 1e+6, 1e+9),
+                labels = c("1e-1", "1", "1e1","1e2", "1e3", 
                            "1e6","1e9")) +
   scale_y_log10(limits = c(10**-1.75, 10**11),
-                breaks = c(1/10, .3, 3, 10, 100, 1e+3, 1e+6, 1e+9),
-                labels = c("1e-1", "3e-1", "3", "1e1","1e2", "1e3", 
+                breaks = c(1/10, 1, 10, 100, 1e+3, 1e+6, 1e+9),
+                labels = c("1e-1", "1", "1e1","1e2", "1e3", 
                            "1e6","1e9")) + 
   theme_bw(base_size=10) + theme(legend.position="bottom") + 
   scale_size_continuous(name = "Ratio of rep. df to orig. df") + 
@@ -393,7 +393,7 @@ Our project aimed to assess the probability that a finding -- selected on ground
 
 Our findings were congruent with the results of @osc2015, revealing a relatively low rate of replicability by a number of tests. In addition, in informal assessments of previous years' findings, we see a similar rate of replicability [@frank2015]. What are the causes of this relatively low rate? 
 
-Many statistical factors leading to lowered replicability have been discussed in past work, including analytic flexibility, publication bias, and low statistical power among others [e.g., @button2013,@ioannidis2005]. On the other hand, an alternative viewpoint is that -- especially for studies that leverage social constructs -- exact replication may be difficult across contexts [@gilbert2016;@vanbavel2016]. For both reasons of design and scale, our study here cannot disentangle these factors empirically. Nevertheless, the consistent decreases in effect size and evidential value we report seem consistent with a "winner's curse" -- that initial publications tend to over-estimate effects. However, in addition, although our sample was too small for statistical inference, numerically our results support replication fidelity in terms of sample and procedure as having some effects on success.
+Many statistical factors leading to lowered replicability have been discussed in past work, including analytic flexibility, publication bias, and low statistical power among others [e.g., @button2013;@ioannidis2005]. On the other hand, an alternative viewpoint is that -- especially for studies that leverage social constructs -- exact replication may be difficult across contexts [@gilbert2016;@vanbavel2016]. For both reasons of design and scale, our study here cannot disentangle these factors empirically. Nevertheless, the consistent decreases in effect size and evidential value we report seem consistent with a "winner's curse" -- that initial publications tend to over-estimate effects. However, in addition, although our sample was too small for statistical inference, numerically our results support replication fidelity in terms of sample and procedure as having some effects on success.
 
 Our experiences performing and compiling the studies here sheds light on one further concern that we believe has been under-reported in past studies [including @osc2015]. Our standard model of replication is based on the notion of a single statistical test -- and its associated effect size -- being the key properties of a study that can be targeted for replication. Yet, as we mentioned above, selecting this key statistical test was difficult for most of the projects in our sample, and virtually impossible for some. We were often forced to consult other sections of the papers (e.g., abstracts, discussion sections) to gain clarity on what test was considered the critical one for the authors' interpretation. It is likely that some of our decisions would not be ratified by the original authors. 
 
@@ -468,7 +468,7 @@ This paper investigated vocal cues to social hierarchy. Our target for replicati
 
 ## Atir, Rosenzweig, & Dunning (2015)
 
-This paper investigated how perceived knowledge affects "overclaiming" (claiming knowledge that you do not have. We targeted Study 1b, which asked participants to rate their knowledge about finances, and then asked them to rate their knowledge about a set of financial terms, some of which were invented (and hence for which a positive knowledge statement would necessarily be an overclaim). The original study found that participants with higher self-rated financial knowledge also overclaimed at a higher rate. The key test statistic for this study was the coefficient in a regression model predicting overclaiming as a function of claimed personal financial knowledge, controlling for accuracy in the true financial knowledge questions. We successfully replicated this effect, despite our use of a much smaller sample (due to the extremely high post-hoc power of the original study). 
+This paper investigated how perceived knowledge affects "overclaiming" (claiming knowledge that you do not have). We targeted Study 1b, which asked participants to rate their knowledge about finances, and then asked them to rate their knowledge about a set of financial terms, some of which were invented (and hence for which a positive knowledge statement would necessarily be an overclaim). The original study found that participants with higher self-rated financial knowledge also overclaimed at a higher rate. The key test statistic for this study was the coefficient in a regression model predicting overclaiming as a function of claimed personal financial knowledge, controlling for accuracy in the true financial knowledge questions. We successfully replicated this effect, despite our use of a much smaller sample (due to the extremely high post-hoc power of the original study). 
 
 ## Proudfoot, Kay, & Koval (2015)
 
