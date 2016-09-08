@@ -17,7 +17,7 @@ affiliation-information:
     - \affiliation{Department of Psychology, Stanford University}
 
 author-note:
-    "*These authors contributed equally. **Project contributors included Carolyn Au, Juan Arias, Rhia Catapano, Eric Hermann, Marty Keil, Andrew Lampien, Sarah Raposo, Jesse Reynolds, Shima Salehi, Justin Salloum, Jed Tan. Thanks to the Stanford Department of Psychology and the Vice Provost for Graduate Education for funding to support the class."
+    "*These authors contributed equally. **Project contributors included Carolyn Au, Juan Arias, Rhia Catapano, Eric Hermann, Marty Keil, Andrew Lampien, Sarah Raposo, Jesse Reynolds, Shima Salehi, Justin Salloum, and Jed Tan. Thanks to the Stanford Department of Psychology and the Vice Provost for Graduate Education for funding to support the class."
     
 abstract: 
     "Replications are important to science, but who will do them? One proposal is that students can conduct direct replications as part of their training. As a proof-of-concept for this idea, here we report a series of 11 pre-registered, direct replications of findings from the 2015 volume of Psychological Science, all conducted as part of a graduate-level course. This work provides an estimate of the probability that a motivated graduate student can reproduce a previously published finding of interest on a first attempt. Congruent with previous findings, replication studies typically yielded smaller effects than originals: The modal outcome was partial support for the original claim. We describe the workflow and pedagogical methods that were used in the class and discuss challenges for adoption of this pedagogical model and replication research more broadly."
@@ -184,7 +184,11 @@ In two cases, in final review of the projects (after data collection), the instr
 
 ### Subjective judgments of replication
 
-Students of the class and the instructors gave independent “replication ratings” to assess subjective judgement of the replication. Our three-point rating system was based on the theoretical interpretation of the original finding, with 0\% = no support for the original interpretation, 50\% = some support for the original interpretation, 100\% = full replication). We found that the ratings of the student carrying out the replication and the instructors were in agreement for `r sum(d$replicated_TA == d$replicated_student,na.rm=T)` out of the `r nrow(d)` replications.  The average rating given by instructors and students was `r round(mean(d$replicated_TA, na.rm=TRUE), digits = 2)` and `r round(mean(d$replicated_student, na.rm=TRUE), digits = 2)` respectively.  
+
+100 * round(mean(d$replicated_TA[d$high_fidelity == FALSE]), digits=2)`\%
+
+
+Students of the class and the instructors gave independent “replication ratings” to assess subjective judgement of the replication. Our three-point rating system was based on the theoretical interpretation of the original finding, with 0\% = no support for the original interpretation, 50\% = some support for the original interpretation, 100\% = full replication). We found that the ratings of the student carrying out the replication and the instructors were in agreement for `r sum(d$replicated_TA == d$replicated_student,na.rm=T)` out of the `r nrow(d)` replications.  The average rating given by instructors and students was `r 100 * round(mean(d$replicated_TA, na.rm=TRUE), digits = 2)`\% and `r 100 * round(mean(d$replicated_student, na.rm=TRUE), digits = 2)`\% respectively.  
 
 ```{r}
 d$high_fidelity <- d$fidelity > median(d$fidelity)
@@ -270,9 +274,9 @@ outcomes <- outcomes %>%
 
 The modal replication project in our sample was judged to be a "partial" replication, meaning that some aspects of the observed findings were different from those reported by the original authors. While this conclusion is dispiriting, it is also perhaps unsurprising given the complexity of the analyses reported in many of the original papers. In addition, `r sum(d$original_test=="interaction")` of the tests were interactions, which tend to have lower statistical power [@mcclelland1993] and have fared poorly in previous replication studies [@osc2015].
 
-The distribution of ratings are given in Table \ref{tab:results}, along with breakdowns by various factors of interest. Since our sample only includes 11 studies, we describe general trends here rather than attempting to conduct statistical tests (which would be dramatically under-powered after correcting for multiple comparisons). Overall, projects had a somewhat larger probability of being judged successful if they were judged to be closer to the original: `r 100 * round(mean(d$replicated_TA[d$high_fidelity]), digits=2)`\% 
+The distribution of ratings are given in Table \ref{tab:results}, along with breakdowns by various factors of interest. Since our sample only includes 11 studies, we describe general trends here rather than attempting to conduct statistical tests (which would be dramatically under-powered after correcting for multiple comparisons). Overall, projects had a somewhat larger probability of being judged successful if they were judged to be closer to the original (`r 100 * round(mean(d$replicated_TA[d$high_fidelity]), digits=2)`\% 
 vs. 
-`r 100 * round(mean(d$replicated_TA[d$high_fidelity == FALSE]), digits=2)`\%.
+`r 100 * round(mean(d$replicated_TA[d$high_fidelity == FALSE]), digits=2)`\%).
 There were small numerical effects of being run on Mechanical Turk (`r 100 *round(mean(d$replicated_TA[d$original_on_turk == "Yes"]), digits=2)`\% vs. `r 100 *round(mean(d$replicated_TA[d$original_on_turk == "No"]), digits=2)`\%) and having open materials (`r 100 *round(mean(d$replicated_TA[d$open_materials!="No"]), digits=2)`\% 
 vs. `r 100 *round(mean(d$replicated_TA[d$open_materials=="No"]), digits=2)`\%), though we do not believe these differences are interpretable given our sample size. 
 
