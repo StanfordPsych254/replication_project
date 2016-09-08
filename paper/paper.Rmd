@@ -376,13 +376,6 @@ p2 <- ggplot(tstatDF, aes(x = origBF, y = repBF)) +
 plot_grid(p1, p2, labels = c("A", "B"))
 ```
 
-
-
-<!-- Demographics -->
-
-
-
-
 # Discussion
 
 In this paper, we reported the results of a series of 11 direct replications of previously-published experiments from the 2015 volume of *Psychological Science*. We had two interlocking goals: first, to create a proof of concept for high-quality pedagogical replications, and second, to provide evidence on the ability of students replicate important, recent findings in a top journal. Despite our relatively tight adherence to the original experimental protocols and relatively large sample sizes, our results were disappointing. The modal outcome of our projects was partial replication, in which some hint of the original pattern was observed but the key statistical test was not statistically significant and showed both smaller effect size and lower evidential value than the same test in the original. 
