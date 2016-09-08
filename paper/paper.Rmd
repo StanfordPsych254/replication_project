@@ -53,7 +53,7 @@ Replicability is a core value for empirical research and there is increasing con
 
 In the current article, we report the results of replication projects conducted in a single class (a graduate-level experimental methods course). As part of the required work of the course, students conducted high-power, direct replications of published articles from the 2015 volume of the journal *Psychological Science*. These studies both give evidence about the state of replicability in the field and provide insight into the challenges and promise of pedagogical replication. 
 
-Past work has attempted to estimate the proportion of true effects in a particular literature [@ioannidis2005;@osc2015], but this goal is challenging -- perhaps even impossible [@gilbert2016;@anderson2016]. Assessing the truth of even an individual effect relies on delineating what constitutes an exact replication [@cites] and establishing a standard for replication success [@simonsohn2015]. Estimating the proportion of true effects in a literature further requires a systematic sampling strategy to ensure generality. Furthermore, no single replication attempt is definitive, so multiple iterations are typically necessary to increase the evidential value of replication attempts [@lewis2016;@klein2014]. 
+Past work has attempted to estimate the proportion of true effects in a particular literature [@ioannidis2005;@osc2015], but this goal is challenging -- perhaps even impossible [@gilbert2016;@anderson2016]. Assessing the truth of even an individual effect relies on delineating what constitutes an exact replication [e.g., @stroebe2014] and establishing a standard for replication success [e.g., @simonsohn2015]. Estimating the proportion of true effects in a literature further requires a systematic sampling strategy to ensure generality. Furthermore, no single replication attempt is definitive, so multiple iterations are typically necessary to increase the evidential value of replication attempts [@lewis2016;@klein2014]. 
 
 In the current work, we do not address these challenges directly; instead, our goal is more modest. We assess the probability that a graduate student can choose an article of interest and -- in a single attempt, within constraints of budget, expertise, and effort -- reproduce the findings. We consider a number of criteria for replication success, including statistical significance, effect size, a Bayesian measure of evidence [@etz2016], and a subjective assessment with respect to the original authors' interpretations. While each of these is imperfect, taken together these measures help provide a sense of how easy it is for a student to reproduce an effect to the degree that they could confidently build on it in future work. 
 
@@ -75,18 +75,6 @@ d <- left_join(project_plan, project_data_summary, by = c("project_key")) %>%
   ungroup
 ```
 
-```{r}
-ppt <- project_plan %>%
-        select(cite, expt_num, open_data,
-               open_materials, original_on_turk, original_n,collected_n)
-
-names(ppt) = c("Citation", "Expt", "Data", "Materials", "Turk?", 
-               "N (orig)","N (rep)")
-
-# print(xtable(ppt, caption = "Summary of attempted replications", 
-#        label = "tab:summary"), include.rownames=FALSE)
-```
-
 \begin{landscape}
 \centering
 
@@ -102,17 +90,17 @@ names(ppt) = c("Citation", "Expt", "Data", "Materials", "Turk?",
 \specialcell{Citation\\(Psychological Science; 2015)} & Expt. & \specialcell{Open\\Data?} & \specialcell{Open\\Materials?} & \specialcell{On\\MTurk?} & \specialcell{N\\(orig)} & \specialcell{Power\\Standard} & \specialcell{N\\(rep)} & \specialcell{Instructor\\Fidelity} & \specialcell{Replication\\Support}\\ 
   \hline
   
-Atir, Rosenzweig, \& Dunning & 1b & No & Yes & Yes & 202 & Other &  50 & 6.50 & Full \\ 
-Ko, Sadler, \& Galinksy & 2 & Yes & Some & No &  40 & Original &  40 & 4.50 & Full \\ 
-Lewis \& Oyserman & 4 & No & Yes & Yes & 122 & 80\% power & 128 & 6.25 & Partial \\ 
-Liverence \& Scholl & 1 & No & Some & No &  18 & Original &  19 & 4.75 & Partial \\ 
-Proudfoot, Kay, \& Koval & 1 & No & No & Yes &  80 & 80\% power &  84 & 6.25 & Full \\ 
-Scopelliti, Loewenstein, \& Vosgerau & 3 & No & Yes & Yes & 550 & 80\% power & 124 & 4.75 & None \\ 
-Sofer et al. & 1 & No & Yes & No &  48 & Other &  95 & 4.50 & Partial \\ 
+Atir, Rosenzweig, \& Dunning & 1b & No & Yes & Yes & 202 & Other &  50 & 6.67 & Full \\ 
+Ko, Sadler, \& Galinksy & 2 & Yes & Some & No &  40 & Original &  40 & 4.67 & Full \\ 
+Lewis \& Oyserman & 4 & No & Yes & Yes & 122 & 80\% power & 128 & 6.67 & Partial \\ 
+Liverence \& Scholl & 1 & No & Some & No &  18 & Original &  19 & 5.33 & Partial \\ 
+Proudfoot, Kay, \& Koval & 1 & No & No & Yes &  80 & 80\% power &  84 & 6.67 & Full \\ 
+Scopelliti, Loewenstein, \& Vosgerau & 3 & No & Yes & Yes & 550 & 80\% power & 124 & 5.67 & None \\ 
+Sofer et al. & 1 & No & Yes & No &  48 & Other &  95 & 4.33 & Partial \\ 
 Storm \& Stone & 3 & No & No & No &  48 & Original &  61 & 4.00 & Partial \\ 
-Wang et al. & 2 & No & No & No & 219 & 80\% power & 397 & 4.00 & None \\ 
-Xu \& Franconeri & 1a & No & No & No &  12 & Original &  27 & 4.00 & Partial \\ 
-Zaval, Markowitz, \& Weber & 1 & Yes & Yes & Yes & 312 & Original & 321 & 5.25 & Partial \\ 
+Wang et al. & 2 & No & No & No & 219 & 80\% power & 397 & 4.33 & None \\ 
+Xu \& Franconeri & 1a & No & No & No &  12 & Original &  27 & 5.00 & Partial \\ 
+Zaval, Markowitz, \& Weber & 1 & Yes & Yes & Yes & 312 & Original & 321 & 5.00 & Partial \\ 
    \hline
 \end{tabular}
 \caption{\label{tab:summary} Summary of original research papers and results of experiments that were targets for replication in our projects.} 
@@ -135,7 +123,7 @@ A summary of the original experiments chosen for replication is given in Table \
 
 ## Participants
 
-All study participants were recruited on Amazon Mechanical Turk; individual samples are given in Table \ref{tab:summary}.^[Note that of the `r nrow(ppt)` studies included in the final sample, `r sum(project_plan$original_on_turk=="Yes")` (`r 100 * round(mean(project_plan$original_on_turk=="Yes"), digits=2)`%) were originally conducted on Mechanical Turk.] All experiments were approved by the Stanford University institutional review board under protocol \#23274, "Reproducibility of psychological science and instruction."
+All study participants were recruited on Amazon Mechanical Turk; individual samples are given in Table \ref{tab:summary}.^[Note that of the `r nrow(d)` studies included in the final sample, `r sum(project_plan$original_on_turk=="Yes")` (`r 100 * round(mean(project_plan$original_on_turk=="Yes"), digits=2)`%) were originally conducted on Mechanical Turk.] All experiments were approved by the Stanford University institutional review board under protocol \#23274, "Reproducibility of psychological science and instruction."
 
 Determining appropriate sample sizes is a major challenge in replication research [@button2013;@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;@button2013], but -- especially within the constraints of a limited budget -- it can be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or under-powered original studies but may lead to impractical or unnecessary recommendations for experiments that were initially large and/or adequately powered. 
 
@@ -149,7 +137,7 @@ cases, we used the original sample size. Three replications deviated from these 
 
 ## Materials and Methods
 
-Of the `r nrow(ppt)` studies included in the final sample, `r 100 * round(mean(project_plan$open_materials == "Yes" | project_plan$open_materials == "Some"), digits=2)`% of studies had either some or all materials openly available. For `r sum(project_plan$author_contact != "")` studies, however, students contacted the authors to request either materials or clarification of methods (using a template email that was customized by the students and reviewed by the instructors). Responses were received in all but one case, all within a matter of days.  
+Of the `r nrow(d)` studies included in the final sample, `r 100 * round(mean(project_plan$open_materials == "Yes" | project_plan$open_materials == "Some"), digits=2)`% of studies had either some or all materials openly available. For `r sum(project_plan$author_contact != "")` studies, however, students contacted the authors to request either materials or clarification of methods (using a template email that was customized by the students and reviewed by the instructors). Responses were received in all but one case, all within a matter of days.  
 
 ## Workflow
 
@@ -237,9 +225,9 @@ outcomes <- outcomes %>%
 
 The modal replication project in our sample was judged to be a "partial" replication, meaning that some aspects of the observed findings were different from those reported by the original authors. While this conclusion is dispiriting, it is also perhaps unsurprising given the complexity of the analyses reported in many of the original papers. In addition, `r sum(d$original_test=="interaction")` of the tests were interactions, which tend to have lower statistical power [@mcclelland1993] and have fared poorly in previous replication studies [@osc2015].
 
-Since our sample only includes 11 studies, we describe general trends here rather than attempting to conduct statistical tests (which would be dramatically under-powered after correcting for multiple comparisons). Overall, projects had a somewhat larger probability of being judged successful if they were judged to be closer to the original (`r 100 * round(mean(d$replicated_TA[d$high_fidelity]), digits=2)`\% 
+Since our sample only includes 11 studies, we describe general trends here rather than attempting to conduct statistical tests (which would be dramatically under-powered after correcting for multiple comparisons). Overall, projects had a slightly larger probability of being judged successful if they were judged to be closer to the original (`r 100 * round(mean(d$replicated_TA[d$high_fidelity == TRUE]), digits=2)`\% 
 vs. 
-`r 100 * round(mean(d$replicated_TA[d$high_fidelity == FALSE]), digits=2)`\%). This result is consistent with a reanalysis of @osc2015 that found identified variability across contexts as a potential factor mediating replication success [@vanbavel2016; cf. @inbar2016].
+`r 100 * round(mean(d$replicated_TA[d$high_fidelity == FALSE]), digits=2)`\%). 
 There were also small numerical effects of being run on Mechanical Turk (`r 100 *round(mean(d$replicated_TA[d$original_on_turk == "Yes"]), digits=2)`\% vs. `r 100 *round(mean(d$replicated_TA[d$original_on_turk == "No"]), digits=2)`\%) and having open materials (`r 100 *round(mean(d$replicated_TA[d$open_materials!="No"]), digits=2)`\% 
 vs. `r 100 *round(mean(d$replicated_TA[d$open_materials=="No"]), digits=2)`\%), though we do not believe these differences are interpretable given our sample size. 
 
