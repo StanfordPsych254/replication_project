@@ -233,7 +233,7 @@ outcomes <- outcomes %>%
 \centering
 \begin{tabular}{rl|ccccccc}
   \hline
-\multicolumn{2}{c}{Replicated} & \multicolumn{2}{c}{Original on Turk?} & \multicolumn{2}{c}{High fidelity?} & \multicolumn{3}{c}{Open Materials?} \\
+\multicolumn{2}{c}{Support} & \multicolumn{2}{c}{Original on Turk?} & \multicolumn{2}{c}{High fidelity?} & \multicolumn{3}{c}{Open Materials?} \\
   \hline
    &  & No & Yes & Yes & No & No & Some & Yes \\ 
   Full & 3 & 1 & 2 & 1 & 2 & 1 & 1 & 1 \\ 
@@ -243,7 +243,7 @@ outcomes <- outcomes %>%
   Total & 11 & 6 & 5 & 7 & 4 & 4 & 2 & 5 \\
    \hline
 \end{tabular}
-\caption{\label{tab:results} Counts of instructor team replication ratings, split by mediating variables. High fidelity denotes replications judged to be above the median rating of fidelity ( >`r median(d$fidelity)` out of 7).}
+\caption{\label{tab:results} Counts of instructor team ratings of replication support for the theoretical findings, split by variables of interest. High fidelity denotes replications judged to be above the median rating of fidelity ( >`r median(d$fidelity)` out of 7).}
 \end{table}
 
 <!-- \begin{table}[ht] -->
