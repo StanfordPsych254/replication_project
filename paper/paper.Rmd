@@ -115,15 +115,27 @@ Xu \& Franconeri (2015) & 1a & No & No & No &  12 &  27 \\
 
 We begin by describing the general method of the class, then discuss shared methods for the replications and the process of development for each project.
 
-## Class Outline
+## Study Selection
 
 All projects were completed as part of a graduate-level methodology class (syllabus and materials available at [http://psych254.stanford.edu]()). At the initiation of class, all students were told that they had the opportunity to contribute their individual class assignment to a group replication project. The requirements for joining the project were to conduct a pre-registered replication of a finding from the 2015 volume of *Psychological Science* and to contribute the code, data, and materials to the writeup. 
 
-Students selected projects based on interest, rather than via a systematic sampling strategy. Thus, all interpretation of our findings should be with respect to the distribution of student interest. Any reproducibility estimates arising from our analyses are estimates of the probability of reproducing a finding that is of interest, rather than findings in general. This sampling strategy may thus bias our results towards more exciting or novel findings, as well as those that were more feasible for students. A summary of the original experiments chosen for replication is given in Table \ref{tab:summary}. 
+Students selected projects based on interest, rather than via a systematic sampling strategy. After selecting a paper of interest, students chose a particular study from within that paper based on their judgment of interest and feasibility. The modal study chosen was the first, but several students chose later studies in a set as well.  Thus, all interpretation of our findings should be with respect to the distribution of student interest. Any reproducibility estimates arising from our analyses are estimates of the probability of reproducing a finding that is of interest, rather than findings in general. This sampling strategy may thus bias our results towards more exciting or novel findings, as well as those that were more feasible for students. A summary of the original experiments chosen for replication is given in Table \ref{tab:summary}. 
+
+Students chose findings from a wide variety of domains for replication. One cluster of studies included investigations of memory and visual attention [e.g., @xu2015], for example in applied contexts like remembering "deleted" files [@storm2015] or tracking transition between locations on smartphone apps [@liverence2015]. A second cluster came from studies of social perception and judgment, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015]. Details of individual replications are available in SOM. 
 
 ## Participants
 
-All study participants were recruited on Amazon Mechanical Turk; individual samples are given in Table \ref{tab:summary}.^[Note that of the `r nrow(ppt)` studies included in the final sample, `r sum(project_plan$original_on_turk=="Yes")` (`r 100 * round(mean(project_plan$original_on_turk=="Yes"), digits=2)`%) were originally conducted on Mechanical Turk.] All experiments were approved by the Stanford University institutional review board under protocol \#23274, "Reproducibility of psychological science and instruction." 
+All study participants were recruited on Amazon Mechanical Turk; individual samples are given in Table \ref{tab:summary}.^[Note that of the `r nrow(ppt)` studies included in the final sample, `r sum(project_plan$original_on_turk=="Yes")` (`r 100 * round(mean(project_plan$original_on_turk=="Yes"), digits=2)`%) were originally conducted on Mechanical Turk.] All experiments were approved by the Stanford University institutional review board under protocol \#23274, "Reproducibility of psychological science and instruction."
+
+Determining appropriate sample sizes is a major challenge in replication research [@button2013;@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;@button2013], but -- especially within the constraints of a limited budget -- it can be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or under-powered original studies but may lead to impractical or unnecessary recommendations for experiments that were initially large and/or adequately powered. 
+
+We eventually used a hybrid, case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget.
+^[We initially were allocated \$1,500 but one student contributed personal research funds, leading to a total cost of $\approx$ \$1,700 for all studies. We attempted to set payment for our studies at approximately \$6/hour based on timing estimated from Pilot A sessions.] 
+In 
+`r sum(project_plan$power_standard == "80% power")`
+cases, we powered the replication attempt to 80\% post-hoc power. In 
+`r sum(project_plan$power_standard == "Original")` 
+cases, we used the original sample size. Three replications deviated from these two criteria.  In one case, the original experiment was extremely over-powered in the post-hoc analysis, so we chose a smaller sample size that still would yield high power.  In another, we reduced the number of trials as part of the adaptation to Mechanical Turk. In the last case of a multi-step procedure where the first step consisted of stimulus generation, we decreased the N in the first stage of the procedure (details available in SOM). 
 
 ## Materials and Methods
 
@@ -154,25 +166,9 @@ Once requested changes were made, the student conducted "Pilot B," using a handf
 
 After Pilot B review was completed, students were given authorization to collect the full sample of participants, contingent on having made any requested changes. Prior to data collection, the analytic script containing all confirmatory analyses was pre-registered using the Open Science Framework. In addition, prior to data collection, we pre-registered the confirmatory analyses reported in the current paper ([https://osf.io/rxz8m/](https://osf.io/rxz8m/)).
 
-## Sample size determination and statistical approach
-
-After selecting a paper of interest, students chose a particular study from within that paper based on their judgment of interest and feasibility. The modal study chosen was the first, but several students chose later studies in a set as well. 
+## Statistical approach
 
 Despite the general emphasis in meta-analytic and reproducibility efforts to aggregate a single effect size of interest [@osc2015;@lipsey2001], it was often challenging to identify a single key statistical test in studies. Often a wide variety of statistical tests were conducted, often within one or several regression models with multiple specifications. Thus, we interpret "key statistical test" results with caution. Nevertheless, despite this interpretive difficulty, we attempted to use a single statistical test as our target for experiment planning and analysis.
-
-Determining appropriate sample sizes is a second major challenge in replication research [@button2013;@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;@button2013], but -- especially within the constraints of a limited budget -- it can be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or under-powered original studies but may lead to impractical or unnecessary recommendations for experiments that were initially large and/or adequately powered. 
-
-We eventually used a hybrid, case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget.
-^[We initially were allocated \$1,500 but one student contributed personal research funds, leading to a total cost of $\approx$ \$1,700 for all studies. We attempted to set payment for our studies at approximately \$6/hour based on timing estimated from Pilot A sessions.] 
-In 
-`r sum(project_plan$power_standard == "80% power")`
-cases, we powered the replication attempt to 80\% post-hoc power. In 
-`r sum(project_plan$power_standard == "Original")` 
-cases, we used the original sample size. Three replications deviated from these two criteria.  In one case, the original experiment was extremely over-powered in the post-hoc analysis, so we chose a smaller sample size that still would yield high power.  In another, we reduced the number of trials as part of the adaptation to Mechanical Turk. In the last case of a multi-step procedure where the first step consisted of stimulus generation, we decreased the N in the first stage of the procedure (details available in SOM). 
-
-## Individual Replications
-
-Students chose findings from a wide variety of domains for replication. One cluster of studies included investigations of memory and visual attention [e.g., @xu2015], for example in applied contexts like remembering "deleted" files [@storm2015] or tracking transition between locations on smartphone apps [@liverence2015]. A second cluster came from studies of social perception and judgment, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015]. Details of individual replications are available in SOM. 
 
 # Results
 
