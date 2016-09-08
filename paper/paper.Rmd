@@ -11,13 +11,13 @@ document-params: "a4paper,man,apacite,floatsintext,longtable"
 bib-tex: "replication254.bib"
 
 author-information:
-    - \author{Eric N. Smith*, Robert X. D. Hawkins*, the students of Psych 254, and Michael C. Frank}
+    - \author{Eric N. Smith*, Robert X. D. Hawkins*, the students of Psych 254**, and Michael C. Frank}
 
 affiliation-information:
     - \affiliation{Department of Psychology, Stanford University}
 
 author-note:
-    "These authors contributed equally. Thanks to the Stanford Department of Psychology and the Vice Provost for Graduate Education for funding to support the class."
+    "*These authors contributed equally. **Project contributors included Carolyn Au, Juan Arias, Rhia Catapano, Eric Hermann, Marty Keil, Andrew Lampien, Sarah Raposo, Jesse Reynolds, Shima Salehi, Justin Salloum, Jed Tan. Thanks to the Stanford Department of Psychology and the Vice Provost for Graduate Education for funding to support the class."
     
 abstract: 
     "Replications are important to science, but who will do them? One proposal is that students can conduct direct replications as part of their training. As a proof-of-concept for this idea, here we report a series of 11 pre-registered, direct replications of findings from the 2015 volume of Psychological Science, all conducted as part of a graduate-level course. This work provides an estimate of the probability that a motivated graduate student can reproduce a previously published finding of interest on a first attempt. Congruent with previous findings, replication studies typically yielded smaller effects than originals: The modal outcome was partial support for the original claim. We describe the workflow and pedagogical methods that were used in the class and discuss challenges for adoption of this pedagogical model and replication research more broadly."
