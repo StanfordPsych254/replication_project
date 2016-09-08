@@ -3,6 +3,9 @@ title: "Assessing the Replicability of Psychological Science Through Pedagogy"
 short-title: "Replication Through Pedagogy"
 output: kmr::apa_manuscript
 
+header-includes:
+   - \usepackage{lscape}
+   
 csl: apa6.csl
 bibliography: replication254.bib
 
@@ -84,34 +87,39 @@ names(ppt) = c("Citation", "Expt", "Data", "Materials", "Turk?",
 #        label = "tab:summary"), include.rownames=FALSE)
 ```
 
+\begin{landscape}
+\centering
+
 \newcommand{\specialcell}[2][c]{%
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
-  
-<!-- latex table generated in R 3.3.0 by xtable 1.8-2 package
- Fri Jun 24 12:02:11 2016 -->
+
+
 \begin{table}[ht]
 \footnotesize
 \centering
-\begin{tabular}{lllllrr}
+\begin{tabular}{lllllr|lrcl}
   \hline
-Citation & Expt & \specialcell{Open\\Data?} & \specialcell{Open\\Materials?} & \specialcell{Original\\on Turk?} & N (orig) & N (rep) \\ 
+\specialcell{Citation\\(Psychological Science; 2015)} & Expt. & \specialcell{Open\\Data?} & \specialcell{Open\\Materials?} & \specialcell{On\\MTurk?} & \specialcell{N\\(orig)} & \specialcell{Power\\Standard} & \specialcell{N\\(rep)} & \specialcell{Instructor\\Fidelity} & \specialcell{Replication\\Support}\\ 
   \hline
-Storm \& Stone (2015) & 3 & No & No & No &  48 &  61 \\ 
-Lewis \& Oyserman (2015) & 4 & No & Yes & Yes & 122 & 128 \\ 
-Scopelliti, Loewenstein, \& Vosgerau (2015) & 3 & No & Yes & Yes & 550 & 124 \\ 
-Liverence \& Scholl (2015) & 1 & No & Some & No &  18 &  19 \\ 
-Wang et al. (2015) & 2 & No & No & No & 219 & 397 \\ 
-Sofer et al. (2015) & 1 & No & Yes & No &  48 &  95 \\ 
-Ko, Sadler, \& Galinksy (2015) & 2 & Yes & Some & No &  40 &  40 \\ 
-Atir, Rosenzweig, \& Dunning (2015) & 1b & No & Yes & Yes & 202 &  50 \\ 
-Proudfoot, Kay, \& Koval (2015) & 1 & No & No & Yes &  80 &  84 \\ 
-Zaval, Markowitz, \& Weber (2015) & 1 & Yes & Yes & Yes & 312 & 321 \\ 
-Xu \& Franconeri (2015) & 1a & No & No & No &  12 &  27 \\ 
+  
+Atir, Rosenzweig, \& Dunning & 1b & No & Yes & Yes & 202 & Other &  50 & 6.50 & Full \\ 
+Ko, Sadler, \& Galinksy & 2 & Yes & Some & No &  40 & Original &  40 & 4.50 & Full \\ 
+Lewis \& Oyserman & 4 & No & Yes & Yes & 122 & 80\% power & 128 & 6.25 & Partial \\ 
+Liverence \& Scholl & 1 & No & Some & No &  18 & Original &  19 & 4.75 & Partial \\ 
+Proudfoot, Kay, \& Koval & 1 & No & No & Yes &  80 & 80\% power &  84 & 6.25 & Full \\ 
+Scopelliti, Loewenstein, \& Vosgerau & 3 & No & Yes & Yes & 550 & 80\% power & 124 & 4.75 & None \\ 
+Sofer et al. & 1 & No & Yes & No &  48 & Other &  95 & 4.50 & Partial \\ 
+Storm \& Stone & 3 & No & No & No &  48 & Original &  61 & 4.00 & Partial \\ 
+Wang et al. & 2 & No & No & No & 219 & 80\% power & 397 & 4.00 & None \\ 
+Xu \& Franconeri & 1a & No & No & No &  12 & Original &  27 & 4.00 & Partial \\ 
+Zaval, Markowitz, \& Weber & 1 & Yes & Yes & Yes & 312 & Original & 321 & 5.25 & Partial \\ 
    \hline
 \end{tabular}
-\caption{\label{tab:summary} Summary of papers and experiments that were targets for replication in our projects.} 
+\caption{\label{tab:summary} Summary of original research papers and results of experiments that were targets for replication in our projects.} 
 \label{tab:summary}
 \end{table}
+
+\end{landscape}
 
 # Methods
 
