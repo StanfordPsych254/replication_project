@@ -269,7 +269,7 @@ While we preregistered an analysis determining whether the original reported eff
 
 Next, following @etz2016, we compared Bayes Factors between the original and replication. We used the default test suggested by @rouder2009 and did not attempt to correct for publication bias.^[A default BF for one paper could not be computed based on the statistical test that was used.] This analysis revealed a number of interesting findings. First, as with effect sizes, we saw generally smaller Bayes Factors for the replications than the originals. Second, it appeared that replication Bayes Factors generally tracked nicely with subjective replication judgments. Finally, the Bayes Factors for a number of the original effects did not appear to show strong evidential value (e.g. BF < 3); thus, it would have been somewhat surprising for our replications to show stronger evidence. 
 
-```{r, fig.cap="Replication effect size (A) and Bayes factor (B), plotted by the original effect size and Bayes factor, respectively. Point size shows replication N (A) and ratio of test degrees of freedom (B), color indicates subjective replication assessments by the authors. Note that the key statistic in the Sofer et al. (2015) replication was a multivariate $F$ test, hence a default Bayes factor could not be computed.", fig.pos="ht", fig.height=4}
+```{r, fig.cap="Replication effect size (A) and Bayes factor (B), plotted by the original effect size and Bayes factor, respectively. Point size shows replication N (A) and ratio of test degrees of freedom (B), color indicates subjective replication assessments by the authors. Note that the key statistic in the Sofer et al. (2015) replication was a multivariate $F$ test, hence a comparable default Bayes factor could not be computed. Additionally, the original Bayes factor for Atir et al (2015) was many orders of magnitude greater than the others, so we displayed it at the edge of the range for visibility.", fig.pos="ht", fig.height=3.6}
 
 p1 <- ggplot(d,aes(x=original_ES_d,y=rep_es)) +
   geom_point(alpha = .8, 
@@ -286,7 +286,7 @@ p1 <- ggplot(d,aes(x=original_ES_d,y=rep_es)) +
   theme_bw(base_size=10) + theme(legend.position="bottom") + 
   scale_size(name = "Rep. N") +
   # scale_color_solarized(guide = FALSE)
-  scale_color_solarized(name = "Subjective rep. rating") 
+  scale_color_solarized(name = "Subj. rep. rating") 
 
 getBF <- function(t_stat, t_df) {
   return(ttest.tstat(t = t_stat, n1 = t_df, rscale = 1, simple = T))
@@ -320,8 +320,8 @@ p2 <- ggplot(tstatDF, aes(x = origBF, y = repBF)) +
                 labels = c(".1", "1", "10","100", "1e3", 
                            "1e6","1e9")) + 
   theme_bw(base_size=10) + theme(legend.position="bottom") + 
-  scale_size_continuous(name = "Ratio of rep. df to orig. df") + 
-  scale_color_solarized(name = "Subjective rep. rating")
+  scale_size_continuous(name = "rep. df/orig. df") + 
+  scale_color_solarized(name = "Subj. rep. rating")
 
 plot_grid(p1, p2, labels = c("A", "B"))
 ```
