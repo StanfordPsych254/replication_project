@@ -20,7 +20,7 @@ affiliation-information:
     - \affiliation{Department of Psychology, Stanford University}
 
 author-note:
-    "*These authors contributed equally and are listed alphabetically. **Carolyn Au, Juan Miguel Arias, Rhia Catapano, Eric Hermann, Marty Keil, Andrew Lampinen, Sarah Raposo, Jesse Reynolds, Shima Salehi, Justin Salloum, and Jed Tan. Thanks to the Stanford Department of Psychology and the Vice Provost for Graduate Education for funding to support the class."
+    "*These authors contributed equally and are listed alphabetically. **Carolyn Au, Juan Miguel Arias, Rhia Catapano, Eric Hermann, Martin Keil, Andrew Lampinen, Sarah Raposo, Jesse Reynolds, Shima Salehi, Justin Salloum, and Jed Tan. Thanks to the Stanford Department of Psychology and the Vice Provost for Graduate Education for funding to support the class."
     
 abstract: 
     "Replications are important to science, but who will do them? One proposal is that students can conduct direct replications as part of their training. As a proof-of-concept for this idea, here we report a series of 11 pre-registered, direct replications of findings from the 2015 volume of Psychological Science, all conducted as part of a graduate-level course. This work provides an estimate of the probability that a motivated graduate student can reproduce a previously published result on a first attempt. Congruent with previous studies, replications typically yielded smaller effects than originals: The modal outcome was partial support for the original claim. We describe the workflow and pedagogical methods that were used in the class and discuss challenges both for the adoption of this pedagogical model and for replication research more broadly."
@@ -123,7 +123,7 @@ A summary of the original experiments chosen for replication is given in Table \
 
 ## Participants
 
-All study participants were recruited on Amazon Mechanical Turk; individual samples are given in Table \ref{tab:summary}.^[Note that of the `r nrow(d)` studies included in the final sample, `r sum(project_plan$original_on_turk=="Yes")` (`r 100 * round(mean(project_plan$original_on_turk=="Yes"), digits=2)`%) were originally conducted on Mechanical Turk.] All experiments were approved by the Stanford University institutional review board under protocol \#23274, "Reproducibility of psychological science and instruction."
+All study participants were recruited on Amazon Mechanical Turk; individual samples are given in Table \ref{tab:summary}.^[Note that of the `r nrow(d)` studies included in the final sample, `r sum(project_plan$original_on_turk=="Yes")` (`r 100 * round(mean(project_plan$original_on_turk=="Yes"), digits=2)`%) were originally conducted on Mechanical Turk.] Each sample was recruited independently (using the same account); most were All experiments were approved by the Stanford University institutional review board under protocol \#23274, "Reproducibility of psychological science and instruction."
 
 Determining appropriate sample sizes is a major challenge in replication research [@button2013;@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;@button2013], but -- especially within the constraints of a limited budget -- it can be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or under-powered original studies but may lead to impractical or unnecessary recommendations for experiments that were initially large and/or adequately powered. 
 
@@ -345,7 +345,7 @@ In our view, two recommendations will improve this situation dramatically. First
 
 In conclusion, our results here demonstrate the practical possibility of performing replication research in the classroom. There are many challenges for ensuring high-quality replications in a pedagogical setting -- from checking experimental methods to reviewing analytic code for errors -- but we would argue that these are not just pedagogical challenges. They are challenges for psychological science. We believe that the openness and transparency we pursued here as part of our pedagogical goals should be models not just for other classes but for future research more broadly. 
 
-# Appendix: Project-By-Project Methods Addendum
+# SOM-R: Project-By-Project Methods Addendum
 
 
 ```{r, fig.height=9, fig.width=6, fig.cap="Side-by-side plots for each attempted replication. Error bars show standard error of the mean. Original data estimated from figures when not otherwise available. Replications are sorted and color coded by subjective replication success."}
@@ -380,7 +380,7 @@ For each project, we present a summary of the finding, the key statistical test,
 
 ## Storm & Stone (2015)
 
-This paper found that when participants had the opportunity to save a file containing a list of target words before studying another file, they retained more information from the second study session. Our target for replication was Experiment 3, in which the effect was found to depend on the amount of information that was studied in the first file, with a greater effect for an eight-word list than a two-word list. The key statistical test we selected was the interaction in a 2x2 mixed-design ANOVA (save vs. no-save condition and two- vs. eight-word condition). The replication study failed to find evidence of the interaction, but ironically this was because we found evidence for a main effect of save condition: The authors' key manipulation succeeded for both load conditions. Perhaps even two words was sufficient to create interference for our online sample.
+This paper found that when participants had the opportunity to save a file containing a list of target words before studying another file, they retained more information from the second study session. Our target for replication was Experiment 3, in which the effect was found to depend on the amount of information that was studied in the first file, with a greater effect for an eight-word list than a two-word list. The key statistical test we selected was the interaction in a 2x2 mixed-design ANOVA (save vs. no-save condition and two- vs. eight-word condition). The replication study failed to find evidence of the interaction, but ironically this failure was because of a main effect of save condition: The authors' key manipulation succeeded for both load conditions. Perhaps even two words was sufficient to create interference for our online sample.
 
 ## Lewis & Oyserman (2015)
 
