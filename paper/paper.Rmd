@@ -127,7 +127,7 @@ All study participants were recruited on Amazon Mechanical Turk; individual samp
 
 Determining appropriate sample sizes is a major challenge in replication research [@button2013;@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;@button2013], but -- especially within the constraints of a limited budget -- it can be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or under-powered original studies but may lead to impractical or unnecessary recommendations for experiments that were initially large and/or adequately powered. 
 
-We eventually used a hybrid, case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget.
+We eventually used a hybrid, case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget. For all criteria, experimenters recruited an additional 5% of participants to ensure we still achieved desired power if some participants skipped through or did not complete the experiment.
 ^[We initially were allocated \$1,500 but one student contributed personal research funds, leading to a total cost of $\approx$ \$1,700 for all studies. We attempted to set payment for our studies at approximately \$6/hour based on timing estimated from Pilot A sessions.] 
 In 
 `r sum(project_plan$power_standard == "80% power")`
@@ -182,7 +182,7 @@ In two cases, in final review of the projects (after data collection), the instr
 
 ### Subjective judgments of replication
 
-Students of the class and the instructors gave independent “replication ratings” to assess subjective judgement of the replication. Our three-point rating system was based on the theoretical interpretation of the original finding, with 0\% = no support for the original interpretation, 50\% = some support for the original interpretation, 100\% = full replication). We found that the ratings of the student carrying out the replication and the instructors were in agreement for `r sum(d$replicated_TA == d$replicated_student,na.rm=T)` out of the `r nrow(d)` replications.  The average rating given by instructors and students was `r 100 * round(mean(d$replicated_TA, na.rm=TRUE), digits = 2)`\% and `r 100 * round(mean(d$replicated_student, na.rm=TRUE), digits = 2)`\% respectively.  
+Students of the class and the instructors gave independent “replication ratings” to assess subjective judgement of the replication. Our three-point rating system was based on the theoretical support for the original finding, "None" (no support; 0\%), "Partial" (some support; 50\%), and "Full" (replication consistent with original interpretation; 100\%). We found that the ratings of the student carrying out the replication and the instructors were in agreement for `r sum(d$replicated_TA == d$replicated_student,na.rm=T)` out of the `r nrow(d)` replications.  The average rating given by instructors and students was `r 100 * round(mean(d$replicated_TA, na.rm=TRUE), digits = 2)`\% and `r 100 * round(mean(d$replicated_student, na.rm=TRUE), digits = 2)`\% respectively.  
 
 ```{r}
 d$high_fidelity <- d$fidelity > median(d$fidelity)
@@ -269,7 +269,7 @@ While we preregistered an analysis determining whether the original reported eff
 
 Next, following @etz2016, we compared Bayes Factors between the original and replication. We used the default test suggested by @rouder2009 and did not attempt to correct for publication bias.^[A default BF for one paper could not be computed based on the statistical test that was used.] This analysis revealed a number of interesting findings. First, as with effect sizes, we saw generally smaller Bayes Factors for the replications than the originals. Second, it appeared that replication Bayes Factors generally tracked nicely with subjective replication judgments. Finally, the Bayes Factors for a number of the original effects did not appear to show strong evidential value (e.g. BF < 3); thus, it would have been somewhat surprising for our replications to show stronger evidence. 
 
-```{r, fig.cap="Replication effect size (A) and Bayes factor (B), plotted by the original effect size and Bayes factor, respectively. Point size shows replication N (A) and ratio of test degrees of freedom (B), color indicates subjective replication assessments by the authors. Note that the key statistic in the Sofer et al. (2015) replication was a multivariate $F$ test, hence a default Bayes factor could not be computed.", fig.pos="ht", fig.height=4}
+```{r, fig.cap="Replication effect size (A) and Bayes factor (B), plotted by the original effect size and Bayes factor, respectively. Point size shows replication N (A) and ratio of test degrees of freedom (B), color indicates subjective replication assessments by the authors. Note that the key statistic in the Sofer et al. (2015) replication was a multivariate $F$ test, hence a comparable default Bayes factor could not be computed. Additionally, the original Bayes factor for Atir et al (2015) was many orders of magnitude greater than the others, so we displayed it at the edge of the range for visibility.", fig.pos="ht", fig.height=3.6}
 
 p1 <- ggplot(d,aes(x=original_ES_d,y=rep_es)) +
   geom_point(alpha = .8, 
@@ -286,7 +286,7 @@ p1 <- ggplot(d,aes(x=original_ES_d,y=rep_es)) +
   theme_bw(base_size=10) + theme(legend.position="bottom") + 
   scale_size(name = "Rep. N") +
   # scale_color_solarized(guide = FALSE)
-  scale_color_solarized(name = "Subjective rep. rating") 
+  scale_color_solarized(name = "Subj. rep. rating") 
 
 getBF <- function(t_stat, t_df) {
   return(ttest.tstat(t = t_stat, n1 = t_df, rscale = 1, simple = T))
@@ -320,8 +320,8 @@ p2 <- ggplot(tstatDF, aes(x = origBF, y = repBF)) +
                 labels = c(".1", "1", "10","100", "1e3", 
                            "1e6","1e9")) + 
   theme_bw(base_size=10) + theme(legend.position="bottom") + 
-  scale_size_continuous(name = "Ratio of rep. df to orig. df") + 
-  scale_color_solarized(name = "Subjective rep. rating")
+  scale_size_continuous(name = "rep. df/orig. df") + 
+  scale_color_solarized(name = "Subj. rep. rating")
 
 plot_grid(p1, p2, labels = c("A", "B"))
 ```
