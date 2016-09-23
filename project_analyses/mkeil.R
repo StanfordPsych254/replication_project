@@ -236,8 +236,7 @@ ggplot(o_plot, aes(x=word_condition, y = mean,fill = save_condition)) +
         legend.title=element_blank(),
         legend.key = element_blank(),
         legend.text=element_text(size=4),
-        legend.key.size = unit(3, "mm"),
-        plot.title = element_text(color="#859900"))
+        legend.key.size = unit(3, "mm"))
 
 ggsave("figures/mkeil-original.png",width = 1.5,height=1.5,units="in")
 
@@ -269,8 +268,7 @@ ggplot(d_plot, aes(x=word_condition, y = mean,fill = save_condition)) +
         legend.title=element_blank(),
         legend.key = element_blank(),
         legend.text=element_text(size=4),
-        legend.key.size = unit(3, "mm"),
-        plot.title = element_text(color="#859900"))
+        legend.key.size = unit(3, "mm"))
 
 ggsave("figures/mkeil-replication.png",width = 1.5,height=1.5,units="in")
 
