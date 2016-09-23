@@ -137,8 +137,7 @@ ggplot(o_plot, aes(x=condition, y = mean,fill = condition)) +
   ggtitle("Zaval - Original") +
   theme_bw(base_size = 6) +
   scale_fill_grey(start=.4) +
-  theme(legend.position="none",
-        plot.title = element_text(color="#859900")) +
+  theme(legend.position="none") +
   scale_y_continuous(breaks=1:6)
 
 ggsave("figures/rhiac-original.png",width = 1.5,height=1.5,units="in")
@@ -164,8 +163,7 @@ ggplot(d_plot, aes(x=condition, y = mean,fill = condition)) +
   ggtitle("Zaval - Replication") +
   theme_bw(base_size = 6) +
   scale_fill_grey(start=.4) +
-  theme(legend.position="none",
-        plot.title = element_text(color="#859900")) +
+  theme(legend.position="none") +
   scale_y_continuous(breaks=1:6)
 
 ggsave("figures/rhiac-replication.png",width = 1.5,height=1.5,units="in")

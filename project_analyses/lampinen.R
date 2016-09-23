@@ -122,8 +122,7 @@ ggplot(o_plot, aes(x=rotating, y = mean,fill = rotating)) +
   ggtitle("Xu - Original") +
   theme_bw(base_size = 6) +
   scale_fill_grey(start=.4) +
-  theme(legend.position="none",
-        plot.title = element_text(color="#859900"))
+  theme(legend.position="none")
 
 ggsave("figures/lampinen-original.png",width = 1.5,height=1.5,units="in")
 
@@ -148,8 +147,7 @@ ggplot(d_plot, aes(x=rotating, y = mean,fill = rotating)) +
   ggtitle("Xu - Replication") +
   theme_bw(base_size = 6) +
   scale_fill_grey(start=.4) +
-  theme(legend.position="none",
-        plot.title = element_text(color="#859900"))
+  theme(legend.position="none")
 
 ggsave("figures/lampinen-replication.png",width = 1.5,height=1.5,units="in")
 

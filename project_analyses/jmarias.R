@@ -281,8 +281,7 @@ ggplot(dat, aes(x,value,group=anx)) +
   ylab("PVT Performance (SD)") +
   scale_y_continuous(limits = c(0,1)) +
   scale_x_continuous(limits = c(-1,1),breaks=c(-1,1),labels=c("Low","High")) +
-  geom_label_repel(data = filter(dat, x==0),aes(label = anx,color=anx), size = 2,nudge_y = c(-.2,+.2), nudge_x = c(-.4,+.4)) +
-  theme(plot.title = element_text(color="#dc322f"))
+  geom_label_repel(data = filter(dat, x==0),aes(label = anx,color=anx), size = 2,nudge_y = c(-.2,+.2), nudge_x = c(-.4,+.4))
 
 ggsave("figures/jmarias-original.png",width = 1.5,height=1.5,units="in")
 
@@ -310,8 +309,7 @@ ggplot(subjectmeans, aes(x = z.mathanx, y = z.pvt)) +
   ylab("PVT Performance (SD)") +
   scale_y_continuous(limits = c(0,1)) +
   scale_x_continuous(limits = c(-1,1),breaks=c(-1,1),labels=c("Low","High")) +
-  geom_label_repel(data=plot_points,aes(label = label,color=label), size = 2, nudge_y = c(.2,-.12), nudge_x = c(.4,-.7)) +
-  theme(plot.title = element_text(color="#dc322f"))
+  geom_label_repel(data=plot_points,aes(label = label,color=label), size = 2, nudge_y = c(.2,-.12), nudge_x = c(.4,-.7))
   
 
 ggsave("figures/jmarias-replication.png",width = 1.5,height=1.5,units="in")
