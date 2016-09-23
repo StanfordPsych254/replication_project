@@ -351,15 +351,12 @@ In conclusion, our results here demonstrate the practical possibility of perform
 # SOM-R: Project-By-Project Methods Addendum
 
 
-```{r, fig.height=9, fig.width=6, fig.cap="Side-by-side plots for each attempted replication. Error bars show standard error of the mean. Original data estimated from figures when not otherwise available. Replications are sorted by subjective replication success."}
+```{r, fig.height=9, fig.width=6, fig.cap="Side-by-side plots for each attempted replication. Error bars show standard error of the mean. Original data estimated from figures when not otherwise available."}
   # colors:268bd2 859900 dc322f
 library(png)
 layout(matrix(1:24,nr=6,byr=T))
-project_key_sorted <- c(
-  "jsalloum","ehermann","salehi", # rep = 1
-  "mkeil","smraposo","jedtan","rhiac","lampinen", # rep=.5
-  "jreynolds","jmarias","auc" #rep = 0
-)
+project_key_sorted <- c("ehermann", "jsalloum", "smraposo", "jedtan", "salehi", "jreynolds","auc","mkeil","jmarias","lampinen","rhiac") #alphabetical by author
+
 for (key in project_key_sorted) {
   orig <- readPNG(paste0("../figures/",key,"-original.png"))
   rep <- readPNG(paste0("../figures/",key,"-replication.png"))
