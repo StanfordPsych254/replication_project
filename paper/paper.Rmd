@@ -318,7 +318,7 @@ p2 <- ggplot(tstatDF, aes(x = origBF, y = repBF)) +
                 labels = c(".1", "1", "10","100", "1e3", 
                            "1e6","1e9")) + 
   theme_bw(base_size=10) + theme(legend.position="bottom") + 
-  scale_size_continuous(breaks=c(.5, 2, 5),name = "rep. df/orig. df") + 
+  scale_size_continuous(breaks=c(.5, 2, 5),name = "Rep. df/Orig. df") + 
   scale_color_solarized(name = "Subj. rep. rating") +
   guides(size=guide_legend(order = 1), 
          color=guide_legend(order = 2))
