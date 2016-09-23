@@ -86,17 +86,17 @@ d <- left_join(project_plan, project_data_summary, by = c("project_key")) %>%
   \hline
 \specialcell{Citation\\(Psychological Science; 2015)} & Expt. & \specialcell{Open\\Data?} & \specialcell{Open\\Materials?} & \specialcell{On\\MTurk?} & \specialcell{N\\(orig)} & \specialcell{Power\\Standard} & \specialcell{N\\(rep)} & \specialcell{Instructor\\Fidelity} & \specialcell{Project link} \\ 
   \hline
-Atir, Rosenzweig, \& Dunning & 1b & No & Yes & Yes & 202 & Other &  50 & 6.67 & https://osf.io/uegk5/ \\ 
-Ko, Sadler, \& Galinksy & 2 & Yes & Some & No &  40 & Original &  40 & 4.67 & https://osf.io/g6k2u/\\ 
-Lewis \& Oyserman & 4 & No & Yes & Yes & 122 & 80\% power & 128 & 6.67 & https://osf.io/rdw6e/ \\ 
-Liverence \& Scholl & 1 & No & Some & No &  18 & Original* &  19 & 5.33 & https://osf.io/sfxrb/ \\ 
-Proudfoot, Kay, \& Koval & 1 & No & No & Yes &  80 & 80\% power &  84 & 6.67 & https://osf.io/ne8ph/ \\ 
-Scopelliti, Loewenstein, \& Vosgerau & 3 & Yes & Yes & Yes & 550 & Other & 124 & 5.67 & https://osf.io/32wsm/ \\ 
-Sofer et al. & 1 & No & Yes & No & 48 & Other &  95 & 4.33 & https://osf.io/5wmhn/ \\ 
-Storm \& Stone & 3 & No & No & No & 48 & Original &  61 & 4.00 & https://osf.io/9cgpq/ \\ 
-Wang et al. & 2 & No & No & No & 219 & 80\% power & 397 & 4.33 & https://osf.io/ng96w/ \\ 
-Xu \& Franconeri & 1a & No & No & No &  12 & Other* &  27 & 5.00 & https://osf.io/cgvzs/ \\ 
-Zaval, Markowitz, \& Weber & 1 & Yes & Yes & Yes & 312 & Original & 321 & 5.00 & https://osf.io/degwa/ \\ 
+Atir, Rosenzweig, \& Dunning & 1b & No & Yes & Yes & 202 & Other &  50 & 6.67 & osf.io/uegk5/ \\ 
+Ko, Sadler, \& Galinksy & 2 & Yes & Some & No &  40 & Original &  40 & 4.67 & osf.io/g6k2u/\\ 
+Lewis \& Oyserman & 4 & No & Yes & Yes & 122 & 80\% power & 128 & 6.67 & osf.io/rdw6e/ \\ 
+Liverence \& Scholl & 1 & No & Some & No &  18 & Original* &  19 & 5.33 & osf.io/sfxrb/ \\ 
+Proudfoot, Kay, \& Koval & 1 & No & No & Yes &  80 & 80\% power &  84 & 6.67 & osf.io/ne8ph/ \\ 
+Scopelliti, Loewenstein, \& Vosgerau & 3 & Yes & Yes & Yes & 550 & Other & 124 & 5.67 & osf.io/32wsm/ \\ 
+Sofer et al. & 1 & No & Yes & No & 48 & Other &  95 & 4.33 & osf.io/5wmhn/ \\ 
+Storm \& Stone & 3 & No & No & No & 48 & Original &  61 & 4.00 & osf.io/9cgpq/ \\ 
+Wang et al. & 2 & No & No & No & 219 & 80\% power & 397 & 4.33 & osf.io/ng96w/ \\ 
+Xu \& Franconeri & 1a & No & No & No &  12 & Other* &  27 & 5.00 & osf.io/cgvzs/ \\ 
+Zaval, Markowitz, \& Weber & 1 & Yes & Yes & Yes & 312 & Original & 321 & 5.00 & osf.io/degwa/ \\ 
    \hline
 \end{tabular}
 \caption{\label{tab:summary} Summary characteristics of original studies and our replications, along with links to project pages for individual projects. * marks projects where the number of trials was modified.} 
