@@ -1,7 +1,7 @@
-
 library(dplyr)
 library(readr)
 library(tidyr)
+library(ggplot2)
 
 project_plan <- read_csv("data/planning_and_outcomes.csv")
 
