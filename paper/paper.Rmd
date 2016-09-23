@@ -268,7 +268,7 @@ These additional measures therefore give another sense in which replications can
 
 While we preregistered an analysis determining whether the original reported effect size is included in the 95\% confidence interval found in the replication, we instead opted for a straightforward comparison of point estimates. This choice was motivated by recent concerns that using confidence intervals in this manner may lead to misleading interpretations [@morey2016], as well as discrepancies in the authors' reporting of effect sizes across the articles we included (which made computing confidence intervals difficult in some cases). 
 
-Next, following @etz2016, we compared Bayes Factors between the original and replication. We used the default test suggested by @rouder2009 and did not attempt to correct for publication bias.^[A default BF for one paper could not be computed based on the statistical test that was used.] This analysis revealed a number of interesting findings. First, as with effect sizes, we saw generally smaller Bayes Factors for the replications than the originals. Second, it appeared that replication Bayes Factors generally tracked nicely with subjective replication judgments. Finally, the Bayes Factors for several of the original effects did not appear to show strong evidential value (e.g., BF < 3); it would have been somewhat surprising for our replications to show stronger evidence than the original. 
+Next, following @etz2016, we compared Bayes Factors between the original and replication. We used the default test suggested by @rouder2009 and did not attempt to correct for publication bias.^[A default BF for one paper could not be computed based on the statistical test that was used.] This analysis revealed a number of interesting findings. First, as with effect sizes, we saw generally smaller Bayes Factors for the replications than the originals. Second, it appeared that replication Bayes Factors generally tracked nicely with subjective replication judgments. Finally, the Bayes Factors for several of the original effects did not appear to show strong evidential value (e.g., BF < 3, indicating that the alternative hypothesis is more than three times more likely than the null); it would have been somewhat surprising for our replications to show stronger evidence than the original. 
 
 ```{r, fig.cap="Replication effect size (A) and Bayes factor (B), plotted by the original effect size and Bayes factor, respectively. Point size shows replication N (A) and ratio of test degrees of freedom (B), color indicates subjective replication assessments by the authors. Note that the key statistic in the Sofer et al. (2015) replication was a multivariate $F$ test, hence a comparable default Bayes factor could not be computed. Additionally, the original Bayes factor for Atir et al (2015) was many orders of magnitude greater than the others, so we displayed it at the edge of the range for visibility.", fig.pos="ht", fig.height=3.6}
 
@@ -321,7 +321,7 @@ p2 <- ggplot(tstatDF, aes(x = origBF, y = repBF)) +
                 labels = c(".1", "1", "10","100", "1e3", 
                            "1e6","1e9")) + 
   theme_bw(base_size=10) + theme(legend.position="bottom") + 
-  scale_size_continuous(name = "rep. df/orig. df") + 
+    scale_size_continuous(breaks=c(.5, 2, 5),name = "rep. df/orig. df") + 
   scale_color_solarized(name = "Subj. rep. rating")
 
 plot_grid(p1, p2, labels = c("A", "B"))
