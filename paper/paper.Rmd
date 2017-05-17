@@ -5,6 +5,7 @@ output: kmr::apa_manuscript
 
 header-includes:
    - \usepackage{lscape}
+   - \usepackage{multicol}
    
 csl: apa6.csl
 bibliography: replication254.bib
@@ -84,6 +85,9 @@ d <- left_join(project_plan, project_data_summary, by = c("project_key")) %>%
 \centering
 \begin{tabular}{lllllr|lrcl}
   \hline
+  
+ & \multicolumn{5}{c|}{\underline{Original Study}} & \multicolumn{4}{c}{\underline{Replication Study}} \\ 
+  
 \specialcell{Citation\\(Psychological Science; 2015)} & Expt. & \specialcell{Open\\Data?} & \specialcell{Open\\Materials?} & \specialcell{On\\MTurk?} & \specialcell{N\\(orig)} & \specialcell{Power\\Standard} & \specialcell{N\\(rep)} & \specialcell{Instructor\\Fidelity} & \specialcell{Project link} \\ 
   \hline
 Atir, Rosenzweig, \& Dunning & 1b & No & Yes & Yes & 202 & Other &  50 & 6.67 & osf.io/uegk5/ \\ 
