@@ -1,6 +1,6 @@
 # replication_project
 
-Replications from Stanford Psych 254 - Winter 2016. This repository documents the analysis of all class projects. 
+These are the replications from Stanford Psych 254 - Winter 2016. This repository documents the analysis of all class projects. 
 
 ## Preprocessing
 
