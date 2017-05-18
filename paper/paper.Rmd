@@ -271,7 +271,9 @@ Next, following @etz2016, we compared Bayes Factors between the original and rep
 ```{r, fig.cap="Replication effect size (A) and Bayes factor (B), plotted by the original effect size and Bayes factor, respectively. Point size shows replication N (A) and ratio of test degrees of freedom (B), color indicates subjective replication assessments by the authors. Note that the key statistic for one replication was a multivariate $F$ test, hence a comparable default Bayes factor could not be computed. Additionally, the original Bayes factor for one finding was many orders of magnitude greater than the others so it is not displayed.", fig.pos="ht", fig.height=3.6}
 
 # Want semantically meaningful values for coding values
-colorMap <- c('No'='red', 'Partial'='#b58900', 'Yes'='green4')
+colorMap <- c('No'=rgb(0.75, 0.2, 0.2), 
+              'Partial'=rgb(0.8, 0.8, 0.4), 
+              'Yes'=rgb(0.2, 0.6, 0.2))
 
 p1 <- ggplot(d,aes(x=original_ES_d,y=rep_es)) +
   geom_point(alpha = .8, 
@@ -334,7 +336,8 @@ legend <- get_legend(
   p2 + 
     theme(legend.position="bottom") + 
     guides(color = guide_legend(title = "Subjective replication rating", 
-                                direction = 'horizontal'),
+                                direction = 'horizontal',
+                                override.aes = list(size=10)),
            size = FALSE)
 )
 plot_grid(plotrow, legend, ncol = 1, rel_heights = c(1, .2))
