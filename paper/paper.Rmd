@@ -276,8 +276,8 @@ colorMap <- c('No'=rgb(0.75, 0.2, 0.2),
               'Yes'=rgb(0.2, 0.6, 0.2))
 
 p1 <- ggplot(d,aes(x=original_ES_d,y=rep_es)) +
-  geom_point(alpha = .8, 
-             aes(color=replicated_TA_factor, size = collected_n)) +
+  geom_point(alpha = .8, pch=21,
+             aes(fill=replicated_TA_factor, size = collected_n)) +
   # geom_text_repel(aes(label = first_author_name), size = 2, force = 2) +
   scale_x_continuous(limits = c(0, 1), 
                 breaks = c(.1, .3, .5, .7, .9)) +
@@ -289,7 +289,7 @@ p1 <- ggplot(d,aes(x=original_ES_d,y=rep_es)) +
   ylab("Rep. effect size (r)") + 
   theme_bw(base_size=10) + theme(legend.position="bottom", aspect.ratio = 1) + 
   scale_size(name = "Rep. N") +
-  scale_color_manual(values = colorMap, guide = FALSE)  +
+  scale_fill_manual(values = colorMap, guide = FALSE)  +
   #scale_color_solarized(name = "Subj. rep. rating") +
   guides(size=guide_legend(order = 1, direction = "horizontal", byrow=TRUE))
 
@@ -311,8 +311,8 @@ tstatDF <- d %>%
 tstatDF$origBF[7] <- NA
 
 p2 <- ggplot(tstatDF, aes(x = origBF, y = repBF)) +
-  geom_point(alpha = .8, aes(size = df_ratio, 
-                             col = replicated_TA_factor)) +
+  geom_point(alpha = .8, pch=21, aes(size = df_ratio, 
+                             fill = replicated_TA_factor)) +
   geom_smooth(method = "lm", se = FALSE, colour="#657b83") +
   geom_abline(slope = 1, intercept = 0, linetype = 2) +
   xlab("Orig. Bayes Factor") + 
@@ -327,7 +327,7 @@ p2 <- ggplot(tstatDF, aes(x = origBF, y = repBF)) +
                            "1e6","1e9")) + 
   theme_bw(base_size=10) + 
   scale_size_continuous(breaks=c(.5, 2, 5),name = "Rep. df/Orig. df") + 
-  scale_color_manual(values = colorMap, guide = F) +
+  scale_fill_manual(values = colorMap, guide = F) +
   theme(legend.position="bottom", aspect.ratio = 1) + 
   guides(size=guide_legend(direction = 'horizontal'))
 
@@ -335,9 +335,9 @@ plotrow <- plot_grid(p1, p2, labels = c("A", "B"))
 legend <- get_legend(
   p2 + 
     theme(legend.position="bottom") + 
-    guides(color = guide_legend(title = "Subjective replication rating", 
+    guides(fill = guide_legend(title = "Subjective replication rating", 
                                 direction = 'horizontal',
-                                override.aes = list(size=10)),
+                                override.aes = list(size=8)),
            size = FALSE)
 )
 plot_grid(plotrow, legend, ncol = 1, rel_heights = c(1, .2))
