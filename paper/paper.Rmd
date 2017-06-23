@@ -162,38 +162,11 @@ Thanks to the Stanford Department of Psychology and the Vice Provost for Graduat
 
 An earlier draft of this manuscript was posted at [https://osf.io/preprints/psyarxiv/p73he/](https://osf.io/preprints/psyarxiv/p73he/).
 
-
 # Methods
 
-We begin by describing the general method of the class, then discuss shared methods for the replications and the process of development for each project. 
+We begin by describing the details of our course projects. Below, in the subsection on Pedagogical Implications, we discuss broader decision points for the course design that other instructors might consider. 
 
-## General Class Outline
-
-All projects were completed as part of a graduate-level methodology class. At the initiation of class, all students were told that they had the opportunity to contribute their individual class assignment to a group replication project. The requirements for joining the project were to conduct a pre-registered replication of a finding from the 2015 volume of *Psychological Science* and to contribute the code, data, and materials to the writeup. 
-
-Students selected projects based on interest, rather than via a systematic sampling strategy. After selecting a paper, students chose a particular study from within that paper based on their judgment of interest and feasibility. The modal study chosen was the first, but several students chose later studies in a set as well.  Thus, all interpretation of our findings should be with respect to this non-probability sample.  This sampling strategy may thus bias our results towards more exciting or novel findings, as well as those that were more feasible for students.
-
-We chose to use Amazon Mechanical Turk (AMT) as a platform for our replication studies. This choice was made to facilitate the process of recruiting samples large enough to enable replications of between-subjects designs (which typically require large samples) as well as to help students learn about a valuable resource for recruitment whose use requires some specialized knowledge. Our general class structure does not depend on the use of AMT, however, and the use of this particular online sample should be viewed as limiting the interpretation of some results. 
-
-A summary of the original empirical studies chosen for replication is given in Table \ref{tab:summary}. Students chose findings from a wide variety of domains for replication. One cluster of studies included investigations of memory and visual attention [e.g., @xu2015], for example in applied contexts like remembering "deleted" files [@storm2015] or tracking transitions between locations on smartphone apps [@liverence2015]. A second cluster came from studies of social perception and social judgment, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015]. Details of individual replications are available in Supplemental Material. 
-
-## Participants
-
-All study participants were recruited on AMT. Individual sample sizes are given in Table \ref{tab:summary}. Each sample was recruited independently, using the same account but a different title. 
-
-Of the `r nrow(d)` studies included in the final sample, `r sum(project_plan$original_on_turk=="Yes")` (`r 100 * round(mean(project_plan$original_on_turk=="Yes"), digits=2)`%) were originally conducted on AMT. For the other studies in our sample, demographic differences (in terms of age, sex, socio-economic status, and in some cases, national origin) are an important factor in interpreting our findings; see Supplemental Material for more discussion of this issue in individual cases.
-
-Repeat administration of empirical work on AMT has been raised as an issue in some prior work [e.g., @chandler2014], but tracking participation in specific paradigms is an open challenge. We did not ask participants whether they had participated in similar research previously, as we suspected that asking this sort of question would lead to a large number of inaccurate responses. In addition, half of the AMT population is estimated to change every six months [@stewart2015], and we expected that most of the studies in our sample that had been conducted on AMT had been performed at least a year previously (though see Supplemental Material for discussion of one particular paradigm that has been used more recently).
-
-Determining appropriate sample sizes is a major challenge in replication research [@button2013;@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;@button2013], but -- especially within the constraints of a limited budget -- it can be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or under-powered original studies but may lead to impractical or unnecessary recommendations for studies that were initially large and/or adequately powered. 
-
-We eventually used a hybrid, case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget.^[We initially were allocated \$1,500 but one student contributed personal research funds, leading to a total cost of $\approx$ \$1,700 for all studies. We attempted to set payment for our studies at approximately \$6/hour based on timing estimated from Pilot A sessions.] For all criteria, experimenters recruited an additional 5% of participants to ensure we still achieved the desired criterion if some participants skipped through or did not complete the study. In four cases, we powered the replication attempt to 80\% post-hoc power. In four cases, we used the original sample size. In one case, the original study was powered well above what would be required to find the effect of interest in the post-hoc analysis, so we chose a smaller sample size that yielded sufficiently high power for that effect. In two others, we reduced the number of trials as part of the adaptation to Mechanical Turk (in one of these, changing the sample size to compensate). In the last case, the original study used a multi-step procedure where the first step consisted of stimulus generation; we decreased the N in the first stage of the procedure and focused on achieving high power at the second stage.  
-
-## Materials and Methods
-
-Of the `r nrow(d)` studies included in the final sample, `r 100 * round(mean(project_plan$open_materials == "Yes" | project_plan$open_materials == "Some"), digits=2)`% of studies had either some or all materials openly available. For `r sum(project_plan$author_contact != "")` studies, however, students contacted the authors to request either materials or clarification of methods using a template email that was customized by the students and reviewed by the instructors (this template is included in our course materials). Responses were received in all but one case, all within a matter of days.  
-
-## Workflow
+All projects were completed as part of a graduate-level methodology class. At the initiation of class, all students were told that they had the opportunity to contribute their individual class assignment to a group replication project. The requirements for joining the project were to conduct a pre-registered replication of a finding from the 2015 volume of *Psychological Science* and to contribute the code, data, and materials to the writeup.  A schematic of our class timeline is shown in Figure 1.
 
 ```{r, fig.cap="A schematic view of our class timeline for replication projects. R indicates the approximate timing of instructor team reviews of student materials.", fig.height=4, fig.width=6, fig.align="center", fig.pos="t"}
 
@@ -206,9 +179,17 @@ usr<-par("usr")
 rasterImage(img, usr[1], usr[3], usr[2], usr[4])
 ```
 
-All replication studies were coded in JavaScript, HTML, and CSS so as to be run in a standard web browser. All analyses were written using R, a free and open-source platform for statistical analysis. A schematic of our class workflow is shown in Figure 1. Students wrote their final reports using [R Markdown](http://rmarkdown.rstudio.com/), a "literate programming" environment in which statistical analysis code can be interspersed with text, figures, and tables. This part of our workflow was extremely useful both pedagogically and for encouraging reproducible research practices: each milestone in our course, corresponding to each phase of a research project, required students to fill in additional sections of single unified document. 
+A summary of the original empirical studies chosen for replication is given in Table \ref{tab:summary}. Students chose findings from a wide variety of domains for replication. One cluster of studies included investigations of memory and visual attention [e.g., @xu2015], for example in applied contexts like remembering "deleted" files [@storm2015] or tracking transitions between locations on smartphone apps [@liverence2015]. A second cluster came from studies of social perception and social judgment, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015]. Details of individual replications are available in Supplemental Material. 
 
-Using the template developed by @osc2015 for replication reports (included in our course materials), students first specified the scope and methods of their proposed replication study, including any differences from the original methods. Later, they added the code necessary to analyze their data, and after collecting their full sample, the results of their data analysis (e.g., statistical tests and figures). This method of writing allows students to share a single compiled document via a hyperlink, facilitating review of writing, results, and code together in a single document.^[The current manuscript is written in this fashion as well.] This writing method is also likely to reduce the frequency of statistical reporting errors [@nuijten2015], given that errors are often introduced by transferring results between statistics and word-processing software packages. 
+## Participants
+
+All study participants were recruited on AMT. Individual sample sizes are given in Table \ref{tab:summary}. Each sample was recruited independently, using the same account but a different title. Of the `r nrow(d)` studies included in the final sample, `r sum(project_plan$original_on_turk=="Yes")` (`r 100 * round(mean(project_plan$original_on_turk=="Yes"), digits=2)`%) were originally conducted on AMT. For the other studies in our sample, demographic differences (in terms of age, sex, socio-economic status, and in some cases, national origin) are an important factor in interpreting our findings; see Supplemental Material for more discussion of this issue in individual cases.
+
+We determined sample sizes using a case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget (see below for discussion).^[We initially were allocated \$1,500 but one student contributed personal research funds, leading to a total cost of $\approx$ \$1,700 for all studies. We attempted to set payment for our studies at approximately \$6/hour based on timing estimated from Pilot A sessions.] For all criteria, experimenters recruited an additional 5% of participants to ensure we still achieved the desired criterion if some participants skipped through or did not complete the study. In four cases, we powered the replication attempt to 80\% post-hoc power. In four cases, we used the original sample size. In one case, the original study was powered well above what would be required to find the effect of interest in the post-hoc analysis, so we chose a smaller sample size that yielded sufficiently high power for that effect. In two others, we reduced the number of trials as part of the adaptation to Mechanical Turk (in one of these, changing the sample size to compensate). In the last case, the original study used a multi-step procedure where the first step consisted of stimulus generation; we decreased the N in the first stage of the procedure and focused on achieving high power at the second stage.  
+
+## Materials and Methods
+
+Of the `r nrow(d)` studies included in the final sample, `r 100 * round(mean(project_plan$open_materials == "Yes" | project_plan$open_materials == "Some"), digits=2)`% of studies had either some or all materials openly available. For `r sum(project_plan$author_contact != "")` studies, however, students contacted the authors to request either materials or clarification of methods using a template email that was customized by the students and reviewed by the instructors (this template is included in our course materials). Responses were received in all but one case, all within a matter of days.  
 
 ## Preregistration and Review
 
@@ -218,14 +199,13 @@ Once requested changes were made, the student conducted "Pilot B," using a handf
 
 After Pilot B review was completed, students were given authorization to collect the full sample of participants, contingent on having made any requested changes. Prior to data collection, the analytic script containing all confirmatory analyses was pre-registered using the Open Science Framework.
 
+## Statistical Approach
 
-## Statistical approach
-
-Despite the general emphasis in meta-analytic and reproducibility efforts on aggregating a single effect size of interest [@osc2015;@lipsey2001], it was often challenging for us to identify a single key statistical test for each study. Usually a substantial number of statistical tests were conducted, often within one or several regression models with multiple specifications. Thus, we interpret "key statistical test" results with caution. Despite this interpretive difficulty, following previous work, we attempted to use a single statistical test as our target for replication planning and analysis.
+Despite the general emphasis in meta-analytic and reproducibility efforts on aggregating a single effect size of interest [@osc2015;@lipsey2001], it was often challenging for us to identify a single key statistical test for each study. Usually a substantial number of statistical tests were conducted, often within one or several regression models with multiple specifications. Thus, we interpret "key statistical test" results with caution (see Empirical Results and Discussion below). Despite this interpretive difficulty, following previous work, we attempted to use a single statistical test as our target for replication planning and analysis.
 
 # Pedagogy: Results and Discussion
 
-## Pedagogical Assessment 
+## Results: Pedagogical Assessment 
 
 All of the 15 students in the class completed projects (two with extensions going beyond the class period). Of these, one chose a project outside of the sampling frame, and three opted out of the broader project prior to data collection.^[Note that these students did not express doubts about the success of their projects prior to opting out, and 2/3 of these projects were judged by the instructor team to have been successful replications. Thus we have no evidence that these students opted out systematically due to their belief that their project would fail.] The remaining 11 students contributed code, data, registrations, and materials to the final product. (In one case, a student did not complete the pre-registration procedure correctly but still submitted a pre-specified analysis plan to the instructors for review. We included this project in the final analysis.) 
 
@@ -233,43 +213,60 @@ Each member of the instructor team coded the fidelity of replications, weighing 
 
 In two cases, in final review of the projects (after data analysis), the instructor team decided that the student's choice of key statistical test was not in fact a strong test of the original authors' primary theoretical claim. In both of these cases, the original authors had fit regression models to the data and there was not a single obvious test that corresponded directly to the authors' hypothesis. After discussion, the instructor team converged on a statistical test that they thought better corresponded to the original authors' intended hypothesis of interest. We report results from these corrected tests here. We return to this issue in the Discussion, as we believe that test selection is a critical theoretical issue in replication research [see e.g., @monin2016 for discussion]. 
 
-## Pedagogical Implications
+## Discussion: Pedagogical Implications
 
 Because they were conducted by students within the constraints of a course, our studies had a number of limitations, including at least: 1) limited time for iterative piloting and adjustment, 2) limits on funding for larger samples, and 3) limits on domain expertise with respect to the specific effects that were chosen. But within these limitations, our group was able to produce a set of relatively close replications with generally good statistical power. Thus, our work here shows what is possible for motivated students using freely-available tools and resources. 
 
+HOW CAN THIS BE GENERALIZED
 
+### Models for students of different levels
 
 Though others' courses that incorporate replication projects will look quite different from our own, we recommend having the replication as a centerpiece of the course and giving ample opportunity for feedback throughout the study design. Without a central focus on the replication project, students would not have the time or motivation to complete a high quality project; without multiple opportunities for instructor feedback, we would have far less confidence in the quality of the final projects. 
 
-Finally, one of the barriers to more reproducible work in psychology is technical: Some of the tools (programmatic statistical analysis, version control) can feel inaccessible or intimidating to beginners. Indeed, our students, who came from a variety of disciplinary backgrounds, had relatively little experience with web-based empirical studies or literate, reproducible data analysis. Yet by the end of the course, all had gained sufficient proficiency with the suite of technical and conceptual tools necessary to carry out a study independently. This experience suggests that it is possible to convey key concepts in sufficient depth that -- within a supportive environment -- students can quickly learn to use a reproducible toolset. 
++ every student a separate project
++ group projects
++ single class projects
 
-## Decision Points for Instructors
 
-- how to customize for different levels of instructor
+### Project selection 
+
+Greater/lesser proejct curation
+
+Students selected projects based on interest, rather than via a systematic sampling strategy. After selecting a paper, students chose a particular study from within that paper based on their judgment of interest and feasibility. The modal study chosen was the first, but several students chose later studies in a set as well.  Thus, all interpretation of our findings should be with respect to this non-probability sample.  This sampling strategy may thus bias our results towards more exciting or novel findings, as well as those that were more feasible for students.
+
+
+### Subject population
+
+We chose to use Amazon Mechanical Turk (AMT) as a platform for our replication studies. This choice was made to facilitate the process of recruiting samples large enough to enable replications of between-subjects designs (which typically require large samples) as well as to help students learn about a valuable resource for recruitment whose use requires some specialized knowledge. Our general class structure does not depend on the use of AMT, however, and the use of this particular online sample should be viewed as limiting the interpretation of some results. 
+
+Repeat administration of empirical work on AMT has been raised as an issue in some prior work [e.g., @chandler2014], but tracking participation in specific paradigms is an open challenge. We did not ask participants whether they had participated in similar research previously, as we suspected that asking this sort of question would lead to a large number of inaccurate responses. In addition, half of the AMT population is estimated to change every six months [@stewart2015], and we expected that most of the studies in our sample that had been conducted on AMT had been performed at least a year previously (though see Supplemental Material for discussion of one particular paradigm that has been used more recently).
+
+Determining appropriate sample sizes is a major challenge in replication research [@button2013;@simonsohn2015]. Post-hoc power analyses are problematic because of the likelihood of inflation of effect sizes due to the "winner's curse" [@hoenig2001;@button2013], but -- especially within the constraints of a limited budget -- it can be impossible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or under-powered original studies but may lead to impractical or unnecessary recommendations for studies that were initially large and/or adequately powered. 
+
 
 ### Ethical approvals
 
 
 
-### Study selection
+We 
 
-- student expertise
-- group wiork
-- Strength of evidence in original, e.g. BF > 3
+Contacting original authors
 
+### Workflow selection
 
+Finally, one of the barriers to more reproducible work in psychology is technical: Some of the tools (programmatic statistical analysis, version control) can feel inaccessible or intimidating to beginners. Indeed, our students, who came from a variety of disciplinary backgrounds, had relatively little experience with web-based empirical studies or literate, reproducible data analysis. Yet by the end of the course, all had gained sufficient proficiency with the suite of technical and conceptual tools necessary to carry out a study independently. This experience suggests that it is possible to convey key concepts in sufficient depth that -- within a supportive environment -- students can quickly learn to use a reproducible toolset. 
 
-### Contacting original authors
+All replication studies were coded in JavaScript, HTML, and CSS so as to be run in a standard web browser. All analyses were written using R, a free and open-source platform for statistical analysis.  Students wrote their final reports using [R Markdown](http://rmarkdown.rstudio.com/), a "literate programming" environment in which statistical analysis code can be interspersed with text, figures, and tables. This part of our workflow was extremely useful both pedagogically and for encouraging reproducible research practices: each milestone in our course, corresponding to each phase of a research project, required students to fill in additional sections of single unified document. 
 
-### Results deposit
-
-
+Using the template developed by @osc2015 for replication reports (included in our course materials), students first specified the scope and methods of their proposed replication study, including any differences from the original methods. Later, they added the code necessary to analyze their data, and after collecting their full sample, the results of their data analysis (e.g., statistical tests and figures). This method of writing allows students to share a single compiled document via a hyperlink, facilitating review of writing, results, and code together in a single document.^[The current manuscript is written in this fashion as well.] This writing method is also likely to reduce the frequency of statistical reporting errors [@nuijten2015], given that errors are often introduced by transferring results between statistics and word-processing software packages. 
 
 
 
 # Empirical Findings: Results and Discussion
 
-## Confirmatory analyses
+## Results
+
+All reported results are from pre-registered, confirmatory analyses. 
 
 ### Subjective judgments of replication
 
@@ -433,7 +430,7 @@ legend <- get_legend(
 plot_grid(plotrow, legend, ncol = 1, rel_heights = c(1, .2))
 ```
 
-## Implications for Replication Research
+## Discussion: Implications for Replication Research
 
 ### Statistical Findings
 
@@ -456,6 +453,8 @@ In our view, two recommendations will improve this situation. First, authors sho
 # General Discussion
 
 In this paper, we reported a series of 11 student replications of previously-published empirical studies from the 2015 volume of *Psychological Science*. Our goal was to provide a proof of concept for pedagogical replications of recent findings in a top journal. Importantly, rather than attempting to gauge the truth of particular effects, our project aimed to assess the challenges of replicating findings -- selected on grounds of feasibility and interest -- within the constraints of a course project. Such classes could become the backbone of future collaborative replication efforts [@frank2012;@everett2015]. 
+
+<!-- MORE INSPIRATIONAL MATERIAL  -->
 
 This kind of cross-class collaboration would require instructors to make class results more broadly discoverable. We can envision a number of possible avenues for this kind of sharing. For example, if some products are shared openly in a repository like the [Open Science Framework](http://osf.io) or [figshare](http://figshare.com) and tagged appropriately, they will be discoverable via search engines. Alternatively, a more structured method for sharing and discovery would be upload to specific replication curation websites like [PsychFileDrawer](http://psychfiledrawer.org) or CurateScience (http://curatescience.org/). Both of these models assume limited coordination across instructors, but more structured collaborations are of course possible. For example, the [Collaborative Replications and Education Project](https://osf.io/wfc6u/), selected a subsample of important and feasible studies for replication and helped provide materials to instructors with the explicit goal of encouraging cross-lab pedagogical replications. 
 
