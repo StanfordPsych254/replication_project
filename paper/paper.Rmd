@@ -223,15 +223,51 @@ After Pilot B review was completed, students were given authorization to collect
 
 Despite the general emphasis in meta-analytic and reproducibility efforts on aggregating a single effect size of interest [@osc2015;@lipsey2001], it was often challenging for us to identify a single key statistical test for each study. Usually a substantial number of statistical tests were conducted, often within one or several regression models with multiple specifications. Thus, we interpret "key statistical test" results with caution. Despite this interpretive difficulty, following previous work, we attempted to use a single statistical test as our target for replication planning and analysis.
 
-# Results
+# Pedagogy: Results and Discussion
 
-## Pedagogical assessment 
+## Pedagogical Assessment 
 
 All of the 15 students in the class completed projects (two with extensions going beyond the class period). Of these, one chose a project outside of the sampling frame, and three opted out of the broader project prior to data collection.^[Note that these students did not express doubts about the success of their projects prior to opting out, and 2/3 of these projects were judged by the instructor team to have been successful replications. Thus we have no evidence that these students opted out systematically due to their belief that their project would fail.] The remaining 11 students contributed code, data, registrations, and materials to the final product. (In one case, a student did not complete the pre-registration procedure correctly but still submitted a pre-specified analysis plan to the instructors for review. We included this project in the final analysis.) 
 
 Each member of the instructor team coded the fidelity of replications, weighing whether the materials, sample, and task parameters differed from the original studies. We coded projects independently on a scale of 1 -- 7 (with 1 being a loose replication with substantive deviations from the original, and 7 being essentially identical), and then discussed our ratings and made adjustments (without coming to full consensus). The mean rating was `r round(mean(d$fidelity), digits = 2)` (range: `r round(min(d$fidelity), digits = 2)` -- `r round(max(d$fidelity), digits = 2)`). Several studies were essentially identical to the originals, but there was a group of others that included differences in population, number of trials, or method that might plausibly have had an effect on the results. 
 
 In two cases, in final review of the projects (after data analysis), the instructor team decided that the student's choice of key statistical test was not in fact a strong test of the original authors' primary theoretical claim. In both of these cases, the original authors had fit regression models to the data and there was not a single obvious test that corresponded directly to the authors' hypothesis. After discussion, the instructor team converged on a statistical test that they thought better corresponded to the original authors' intended hypothesis of interest. We report results from these corrected tests here. We return to this issue in the Discussion, as we believe that test selection is a critical theoretical issue in replication research [see e.g., @monin2016 for discussion]. 
+
+## Pedagogical Implications
+
+Because they were conducted by students within the constraints of a course, our studies had a number of limitations, including at least: 1) limited time for iterative piloting and adjustment, 2) limits on funding for larger samples, and 3) limits on domain expertise with respect to the specific effects that were chosen. But within these limitations, our group was able to produce a set of relatively close replications with generally good statistical power. Thus, our work here shows what is possible for motivated students using freely-available tools and resources. 
+
+
+
+Though others' courses that incorporate replication projects will look quite different from our own, we recommend having the replication as a centerpiece of the course and giving ample opportunity for feedback throughout the study design. Without a central focus on the replication project, students would not have the time or motivation to complete a high quality project; without multiple opportunities for instructor feedback, we would have far less confidence in the quality of the final projects. 
+
+Finally, one of the barriers to more reproducible work in psychology is technical: Some of the tools (programmatic statistical analysis, version control) can feel inaccessible or intimidating to beginners. Indeed, our students, who came from a variety of disciplinary backgrounds, had relatively little experience with web-based empirical studies or literate, reproducible data analysis. Yet by the end of the course, all had gained sufficient proficiency with the suite of technical and conceptual tools necessary to carry out a study independently. This experience suggests that it is possible to convey key concepts in sufficient depth that -- within a supportive environment -- students can quickly learn to use a reproducible toolset. 
+
+## Decision Points for Instructors
+
+- how to customize for different levels of instructor
+
+### Ethical approvals
+
+
+
+### Study selection
+
+- student expertise
+- group wiork
+- Strength of evidence in original, e.g. BF > 3
+
+
+
+### Contacting original authors
+
+### Results deposit
+
+
+
+
+
+# Empirical Findings: Results and Discussion
 
 ## Confirmatory analyses
 
@@ -397,52 +433,19 @@ legend <- get_legend(
 plot_grid(plotrow, legend, ncol = 1, rel_heights = c(1, .2))
 ```
 
-# Discussion
-
-In this paper, we reported a series of 11 student replications of previously-published empirical studies from the 2015 volume of *Psychological Science*. Our goal was to provide a proof of concept for pedagogical replications of recent findings in a top journal. Importantly, rather than attempting to gauge the truth of particular effects, our project aimed to assess the challenges of replicating findings -- selected on grounds of feasibility and interest -- within the constraints of a course project. Despite this narrower scope, we believe that insights from our approach are applicable to the broader goal of assessing replicability at scale, with implications both for replication pedagogy and for the practice of replication more broadly. We address each in turn.
-
-## Pedagogical Implications
-
-Because they were conducted by students within the constraints of a course, our studies had a number of limitations, including at least: 1) limited time for iterative piloting and adjustment, 2) limits on funding for larger samples, and 3) limits on domain expertise with respect to the specific effects that were chosen. But within these limitations, our group was able to produce a set of relatively close replications with generally good statistical power. Thus, our work here shows what is possible for motivated students using freely-available tools and resources. 
-
-Such classes could become the backbone of future collaborative replication efforts [@frank2012;@everett2015]. This kind of cross-class collaboration would require instructors to make class results more broadly discoverable. We can envision a number of possible avenues for this kind of sharing. For example, if some products are shared openly in a repository like the [Open Science Framework](http://osf.io) or [figshare](http://figshare.com) and tagged appropriately, they will be discoverable via search engines. Alternatively, a more structured method for sharing and discovery would be upload to specific replication curation websites like [PsychFileDrawer](http://psychfiledrawer.org) or CurateScience (http://curatescience.org/). Both of these models assume limited coordination across instructors, but more structured collaborations are of course possible. For example, the [Collaborative Replications and Education Project](https://osf.io/wfc6u/), selected a subsample of important and feasible studies for replication and helped provide materials to instructors with the explicit goal of encouraging cross-lab pedagogical replications. 
-
-One challenge for this kind of dissemination is how to curate which projects are released publicly. We are generally optimistic about the contributions of student work, but of course not every student project will be scientifically informative. To take an edge case, imagine a student makes an error in stimulus randomization that is not caught by the instructors until after data collection and that and creates a major confound in the collected data. In this case, we would argue that this work should not be deposited in a targeted replication repository. In the end, these decisions will be the responsibility of the course instructor -- much like decisions about when to publish other research.  
-
-Though others' courses that incorporate replication projects will look quite different from our own, we recommend having the replication as a centerpiece of the course and giving ample opportunity for feedback throughout the study design. Without a central focus on the replication project, students would not have the time or motivation to complete a high quality project; without multiple opportunities for instructor feedback, we would have far less confidence in the quality of the final projects. 
-
-Finally, one of the barriers to more reproducible work in psychology is technical: Some of the tools (programmatic statistical analysis, version control) can feel inaccessible or intimidating to beginners. Indeed, our students, who came from a variety of disciplinary backgrounds, had relatively little experience with web-based empirical studies or literate, reproducible data analysis. Yet by the end of the course, all had gained sufficient proficiency with the suite of technical and conceptual tools necessary to carry out a study independently. This experience suggests that it is possible to convey key concepts in sufficient depth that -- within a supportive environment -- students can quickly learn to use a reproducible toolset. 
-
-## Decision Points for Instructors
-
-- how to customize for different levels of instructor
-
-### Ethical approvals
-
-
-
-### Study selection
-
-- student expertise
-- group wiork
-- Strength of evidence in original, e.g. BF > 3
-
-
-
-### Contacting original authors
-
-### Results deposit
-
-
 ## Implications for Replication Research
+
+### Statistical Findings
 
 From a purely statistical point of view, the results of our studies were underwhelming. Despite our relatively close adherence to the original protocols and relatively large sample sizes, the modal outcome of our projects was partial replication. These partial replications often were cases in which some hint of the original pattern was observed but the key statistical test was not statistically significant and showed both smaller effect size and lower evidential value than the same test in the original. We invite readers to browse the narrative descriptions of individual replication attempts in our Supplemental Material to see the ways that patterns of empirical findings can differ from one another beyond the significance of a single test.
 
-One potential concern about our project is that our replications might be of lower quality, due to the lead role played by inexperienced investigators. This issue should be taken seriously by any instructor interested in doing replications in the classroom, but we believe it is not a major concern in the current case. First, our experimenters were graduate students, conducting other research in addition to their work in our class. Many of them will go on to publish in top journals (often alongside more senior collaborators), and this work will be treated on its merits, not on the basis of the experience level of the lead author. Indeed, evaluation on merits is even easier in our case, as all materials and methods for each project (including the full experiment) are easily accessible online. Second, the design of our course -- with multiple rounds of review by both graduate student teaching assistants and a faculty member -- mirrors the typical structure of experimental work, where there are multiple sources of feedback from researchers at different career stages. In general, we don't see any reason why the career stage of the students in our class should be more of a concern in the current case than it is for other research.
+<!-- One potential concern about our project is that our replications might be of lower quality, due to the lead role played by inexperienced investigators. This issue should be taken seriously by any instructor interested in doing replications in the classroom, but we believe it is not a major concern in the current case. First, our experimenters were graduate students, conducting other research in addition to their work in our class. Many of them will go on to publish in top journals (often alongside more senior collaborators), and this work will be treated on its merits, not on the basis of the experience level of the lead author. Indeed, evaluation on merits is even easier in our case, as all materials and methods for each project (including the full experiment) are easily accessible online. Second, the design of our course -- with multiple rounds of review by both graduate student teaching assistants and a faculty member -- mirrors the typical structure of experimental work, where there are multiple sources of feedback from researchers at different career stages. In general, we don't see any reason why the career stage of the students in our class should be more of a concern in the current case than it is for other research. -->
 
 In addition, our statistical findings mask a more optimistic message: In most of our projects, the next step for a motivated experimenter is clear. For example, in some projects we suspect that a followup could find strong evidence for the phenomenon of interest by titrating the particular planned analysis or the difficulty of the stimulus materials. In others, the difficulty appeared to be statistical power, since differences were in the predicted direction and sometimes reached significance in subsidiary analyses, so a followup would likely require a larger sample. And in some, differences of population would mean that followups would require further stimulus or task adaptation. More generally, we believe that our work here underscores the importance of iterated replication for pinpointing empirical effects and refining theories [see e.g., @lewis2016 for an example of this strategy and some discussion]. 
 
 Many statistical factors leading to lowered replicability have been discussed in past work, including analytic flexibility, context dependency, publication bias, and low statistical power among others [e.g., @button2013; @vanbavel2016; @ioannidis2005]. For both reasons of design and scale, our study here cannot disentangle these factors empirically. Nevertheless, the decreases in effect size and evidential value we report seem consistent with two explanations. First, we likely saw a "winner's curse," with initial publications tending to over-estimate effects. Second, we also might have seen a reduction in effect size because the original studies were tailored to their specific context and population, whereas our replications may not have been [@vanbavel2016, but cf. @inbar2016]. Future work would benefit from a statement of constraints on generality so as to provide a guide to the conditions under which an effect is likely to be present [@simons2016]. Both of these explanations are consistent with our observations, and, based on the previous literature [@osf2015,@vanbavel2016], we speculate that both winner's curse and context effects were present to some degree.
+
+### Key Tests
 
 Our experiences performing and compiling the studies here sheds light on one further concern that we believe has been under-reported in past studies [including @osc2015]. Our standard model of replication is based on the notion of a single key statistical test -- and its associated effect size -- being the properties of a study that can be targeted for replication. Yet, as we mentioned above, selecting this "key test" was difficult for most of the projects in our sample, and virtually impossible for some. We were often forced to consult other sections of the papers (e.g., abstracts, discussion sections) to gain clarity on what test was considered the critical one for the authors' interpretation. It is likely that some of our decisions would not be ratified by the original authors. 
 
@@ -450,9 +453,15 @@ Indeed, no study we attempted to replicate was pre-registered (though some were 
 
 In our view, two recommendations will improve this situation. First, authors should specify their "key test" more clearly. Pre-registration might facilitate this step, as regstration typically requires the selection of particular statistical analyses to be designated as critical for interpretation, but we believe this designation is critical even in un-registered experiments. Had "key test" information been available, it would have dramatically simplified the problem of selecting the effect to replicate in several cases. Second, the widespread adoption of open data and open analytic code practices would facilitate replication research. In addition to clarifying the summary report of results in a paper, the availability of data dramatically facilitates the computation of the relevant meta-analytic effect size for power analysis and statistical comparison.^[We note that, although we were grateful that several authors of the papers in our sample shared data and materials, the use of open (non-proprietary) formats for archiving data -- and in particular analytic code -- is often critical for investigators attempting to reproduce analyses.] 
 
-## Conclusions
+# General Discussion
 
-Our results here demonstrate the practical possibility of performing replication research in the classroom. There are many challenges for ensuring high-quality replications in a pedagogical setting -- from checking experimental methods to reviewing analytic code for errors -- but we would argue that these are not just pedagogical challenges. They are challenges for psychological science. We believe that the openness and transparency we pursued here as part of our pedagogical goals should be models not just for other classes but for future research more broadly. 
+In this paper, we reported a series of 11 student replications of previously-published empirical studies from the 2015 volume of *Psychological Science*. Our goal was to provide a proof of concept for pedagogical replications of recent findings in a top journal. Importantly, rather than attempting to gauge the truth of particular effects, our project aimed to assess the challenges of replicating findings -- selected on grounds of feasibility and interest -- within the constraints of a course project. Such classes could become the backbone of future collaborative replication efforts [@frank2012;@everett2015]. 
+
+This kind of cross-class collaboration would require instructors to make class results more broadly discoverable. We can envision a number of possible avenues for this kind of sharing. For example, if some products are shared openly in a repository like the [Open Science Framework](http://osf.io) or [figshare](http://figshare.com) and tagged appropriately, they will be discoverable via search engines. Alternatively, a more structured method for sharing and discovery would be upload to specific replication curation websites like [PsychFileDrawer](http://psychfiledrawer.org) or CurateScience (http://curatescience.org/). Both of these models assume limited coordination across instructors, but more structured collaborations are of course possible. For example, the [Collaborative Replications and Education Project](https://osf.io/wfc6u/), selected a subsample of important and feasible studies for replication and helped provide materials to instructors with the explicit goal of encouraging cross-lab pedagogical replications. 
+
+One challenge for this kind of dissemination is how to curate which projects are released publicly. We are generally optimistic about the contributions of student work, but of course not every student project will be scientifically informative. To take an edge case, imagine a student makes an error in stimulus randomization that is not caught by the instructors until after data collection and that and creates a major confound in the collected data. In this case, we would argue that this work should not be deposited in a targeted replication repository. In the end, these decisions will be the responsibility of the course instructor -- much like decisions about when to publish other research.  
+
+In conclusion, our results here demonstrate the practical possibility of performing replication research in the classroom. There are many challenges for ensuring high-quality replications in a pedagogical setting -- from checking experimental methods to reviewing analytic code for errors -- but we would argue that these are not just pedagogical challenges. They are challenges for psychological science. We believe that the openness and transparency we pursued here as part of our pedagogical goals should be models not just for other classes but for future research more broadly. 
 
 # Supplemental Material: Project-By-Project Methods Addendum
 
