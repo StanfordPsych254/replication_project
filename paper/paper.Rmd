@@ -226,9 +226,9 @@ HOW CAN THIS BE GENERALIZED
 
 Though others' courses that incorporate replication projects will look quite different from our own, we recommend having the replication as a centerpiece of the course and giving ample opportunity for feedback throughout the study design. Without a central focus on the replication project, students would not have the time or motivation to complete a high quality project; without multiple opportunities for instructor feedback, we would have far less confidence in the quality of the final projects. 
 
-+ every student a separate project
-+ group projects
-+ single class projects
+every student a separate project
+group projects
+single class projects
 
 
 ### Project selection 
