@@ -218,17 +218,63 @@ Because they were conducted by students within the constraints of a course, our 
 
 ## Discussion: Pedagogical Implications
 
-Above we have shown that classroom replication projects are possible. We now present information that we hope will reduce barriers to entry and encourage more researchers and instructor to include replications as part of course work.  This includes practical recommendations for implementation in a variety of classroom, key decision that instructors must make, and common issues that may arise throughout the projects and ways to mitigate or prevent these issues. 
+Above we have shown that classroom replication projects are possible. We now present information that we hope will reduce barriers to entry and encourage more researchers and instructor to include replications as part of coursework.  This includes practical recommendations for implementation in a variety of classroom, key decision that instructors must make, and common issues that may arise throughout the projects and ways to mitigate or prevent these issues. 
 
 ### Models for students of different levels
 
-Though others' courses that incorporate replication projects will look quite different from our own, we recommend having the replication as a centerpiece of the course and giving ample opportunity for feedback throughout the study design. Without a central focus on the replication project, students would not have the time or motivation to complete a high quality project; without multiple opportunities for instructor feedback, we would have far less confidence in the quality of the final projects. 
+Though others' courses that incorporate replication projects will look quite different from our own, we recommend having the replication as a centerpiece of the course and giving ample opportunity for feedback throughout the study design. Without a central focus on the replication project, students would not have the time or motivation to complete a high quality project; without multiple opportunities for instructor feedback, we would have far less confidence in the quality of the final projects.
 
-every student a separate project
-group projects
-single class projects
+That said, we beleive there are many ways to adapt the project format based on the students and constraints of the class.  In Table \ref{tab:classmodels} below, we present mulitple ways in which replication projects may be included in classrooms.  Though we do not go into detail on the specifics of what each of these courses might entail, we hope this provides an overview of the possibilities inherent in including replication work as part of student learning.
 
-Prerequisites - minimal
+\begin{landscape}
+\centering
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\begin{table}[ht]
+\footnotesize
+\centering
+
+\def\arraystretch{1.2}
+
+\begin{tabular}{l|lll}
+
+  \hline
+ 
+ & \multicolumn{3}{c}{\underline{Classroom Models}} \\
+  
+ & \underline{Model 1} & \underline{Model 2} & \underline{Model 3} \\
+
+Students & \multicolumn{1}{p{2in}}{\raggedright Undergraduate} & \multicolumn{1}{p{2in}}{\raggedright Advanced Undergraduate or Early Graduate} & \multicolumn{1}{p{2in}}{\raggedright Motivated Graduate} \\
+
+Goal & \multicolumn{1}{p{2in}}{\raggedright Gain experience with research process} & \multicolumn{1}{p{2in}}{\raggedright Conduct collaborative research} & \multicolumn{1}{p{2in}}{\raggedright Learn best practices and tools} \\
+
+Grouping & \multicolumn{1}{p{2in}}{\raggedright Full Class OR Medium groups (7-8 students)} & \multicolumn{1}{p{2in}}{\raggedright Small groups (2-4) or individual} & \multicolumn{1}{p{2in}}{\raggedright Individual} \\
+
+Project Selection & \multicolumn{1}{p{2in}}{\raggedright One class replication OR pre-specified list} & \multicolumn{1}{p{2in}}{\raggedright Curated list to choose from} & \multicolumn{1}{p{2in}}{\raggedright Open to student choice*} \\
+
+Data source & \multicolumn{1}{p{2in}}{\raggedright University or classroom participant pool} & \multicolumn{1}{p{2in}}{\raggedright In-person or online convenience sample} & \multicolumn{1}{p{2in}}{\raggedright targetted sampling of original populations} \\
+
+Workflow tools & \multicolumn{1}{p{2in}}{\raggedright Use familiar or GUI tools OR instructors implement studies} & \multicolumn{1}{p{2in}}{\raggedright Teach key tool plus introduction of others} & \multicolumn{1}{p{2in}}{\raggedright Teach full set of free open-source software} \\
+
+Review & \multicolumn{1}{p{2in}}{\raggedright Standardized format for submission} & \multicolumn{1}{p{2in}}{\raggedright Group and minimal instructor review} & \multicolumn{1}{p{2in}}{\raggedright Multiple reviews between students and with instructors} \\
+
+Pre-registration & \multicolumn{1}{p{2in}}{\raggedright Pre-registration by instructor} & \multicolumn{1}{p{2in}}{\raggedright Pre-registration by instructor (drafted by students)} & \multicolumn{1}{p{2in}}{\raggedright Pre-registration by students (with instructor review)} \\
+
+Dissemination & \multicolumn{1}{p{2in}}{\raggedright If up to quality standard} & \multicolumn{1}{p{2in}}{\raggedright Upon review of instructors} & \multicolumn{1}{p{2in}}{\raggedright Discuss dissemination as a class} \\
+
+
+
+
+\hline
+
+\end{tabular}
+\caption{\label{tab:classmodels} *This can also be done with random selection with sampling criteria} 
+\label{tab:classmodels}
+\end{table}
+
+\end{landscape}
 
 
 ### Project selection 
