@@ -224,7 +224,7 @@ Above we have shown that classroom replication projects are possible. We now pre
 
 Though others' courses that incorporate replication projects will look quite different from our own, we recommend having the replication as a centerpiece of the course and giving ample opportunity for feedback throughout the study design. Without a central focus on the replication project, students would not have the time or motivation to complete a high quality project; without multiple opportunities for instructor feedback, we would have far less confidence in the quality of the final projects.
 
-That said, we beleive there are many ways to adapt the project format based on the students and constraints of the class.  In Table \ref{tab:classmodels} below, we present mulitple ways in which replication projects may be included in classrooms.  Though we do not go into detail on the specifics of what each of these courses might entail, we hope this provides an overview of the possibilities inherent in including replication work as part of student learning.
+That said, we beleive there are many ways to adapt the project format based on the students and constraints of the class.  In Table \ref{tab:classmodels} below, we present mulitple ways in which replication projects may be included in classrooms.  Though we do not go into detail on all of the specifics of what each of these courses might entail, we hope this provides an overview of the possibilities inherent in including replication work as part of student learning.  We next turn to detailed discussion on a few we believe most pertinent to instructors.
 
 \begin{landscape}
 \centering
@@ -264,9 +264,6 @@ Pre-registration & \multicolumn{1}{p{2in}}{\raggedright Pre-registration by inst
 
 Dissemination & \multicolumn{1}{p{2in}}{\raggedright If up to quality standard} & \multicolumn{1}{p{2in}}{\raggedright Upon review of instructors} & \multicolumn{1}{p{2in}}{\raggedright Discuss dissemination as a class} \\
 
-
-
-
 \hline
 
 \end{tabular}
@@ -279,21 +276,19 @@ Dissemination & \multicolumn{1}{p{2in}}{\raggedright If up to quality standard} 
 
 ### Project selection 
 
-Greater/lesser proejct curation
+In our class, students selected projects based on interest, rather than via a systematic sampling strategy. After selecting a paper, students chose a particular study from within that paper based on their judgment of interest and feasibility. We encouraged students with little programming background to opt for methodologically simple studies, and more advanced students to take on a challenging design. However, this sample also reflects what is of most interest to beginning researchers, and we suspect may be a better sampling frame to better understand particularly impactful effects to be built upon in future research. The modal study chosen was the first, but several students chose later studies in a set as well.  Thus, all interpretation of our findings should be with respect to this non-probability sample.  This sampling strategy may thus bias our results towards more exciting or novel findings, as well as those that were more feasible for students.
 
-Students selected projects based on interest, rather than via a systematic sampling strategy. After selecting a paper, students chose a particular study from within that paper based on their judgment of interest and feasibility. We encouraged students with little programming background to opt for methodologically simple studies, and more advanced students to take on a challenging design. However, this sample also reflects what is of most interest to beginning researchers, and we suspect may be a better sampling frame to better understand particularly impactful effects to be built upon in future research. The modal study chosen was the first, but several students chose later studies in a set as well.  Thus, all interpretation of our findings should be with respect to this non-probability sample.  This sampling strategy may thus bias our results towards more exciting or novel findings, as well as those that were more feasible for students.
+The set of studies could be curated more or less for students based on expertise and constraints.  At the other extreme from our small graduate class, in a large undergraduate class it may make logistical sense for the instructors to choose 1-3 replication projects that students can select from. This would allow the instructor to be familiar with all replication projects taking place, and provide more structured discussion and problem-solving based on the challenges groups may run into.  
 
 ### Author contact
 
-Good faith replication based on the materials avaialble to an independent researcher.  This was an active choice. Only to receive materials or information not possible to resolve from the published article.
+Over half of our students reached out to original authors to request study materials or clafication on methods and/or analysis.  For the purposes of this class, we chose not to require contact with all original authors. Methods and materials should be open to allow for replication and incremental science [@nosek2015], and hoped to make the pedagogical point that good research should not require a researcher to return your email, and make students feel empowered that they can engage with and build on the published literature directly.  That is, we chose to do good-faith replications given all information in the original articles and supplemental online materials.  Only in cases where there are issues about access to materials or ambiguities in design/analysis were authors contacted.  
 
-However, we acknowledge there are benefits of contacting all authors.  Even just to say "this is what we're doing"
-
-""
+However, we acknowledge there are benefits of contacting all authors.  There are two main methods of doing so. First is as a professional courtesy by letting the authors know that their study is being replicated.  This not only provides goodwill (as replication are perceived by some to be adversarial; see Kahneman commentary?), it would also allow the original authors to pre-register their hypotheses or concerns with the replication study as experts in the underlying theory. Second is as a request for methodological feedback prior to replication. This is a trickier issue on many fronts.  By requesting feedback, this perpetuates insider information or lab-specific folklore on methodology that produces the greatest effects. When these assumptions or limitations of a theory or paradigm are not made explicit in publically-available format, this does not count as a record of science. In fact, some replications have prompted these assumptions to be made explicit by the original authors (CITE?).  In addition, when original materials of a study are not provided, it is on the reader to assume all neccessary information is provided to replicate, and is not due to idiosyncracies. Thus, we would generally advice against contacting authors for feedback or materials expect when replication is not viable without them.
 
 ### Subject population
 
-We chose to use Amazon Mechanical Turk (AMT) as a platform for our replication studies. This choice was made to facilitate the process of recruiting samples large enough to enable replications of between-subjects designs (which typically require large samples) as well as to help students learn about a valuable resource for recruitment whose use requires some specialized knowledge. Our general class structure does not depend on the use of AMT, however, and the use of this particular online sample should be viewed as limiting the interpretation of some results. 
+We chose to use Amazon Mechanical Turk (AMT) as a platform for our replication studies. This choice was made to facilitate the process of recruiting samples large enough to enable replications of between-subjects designs (which typically require large samples) as well as to help students learn about a valuable resource for recruitment whose use requires some specialized knowledge. Our general class structure does not depend on the use of AMT, however, and the use of this particular online sample should be viewed as limiting the interpretation of some results. Other classes many find participant pools or recruitment of community samples more feasible and appropriate.
 
 Repeat administration of empirical work on AMT has been raised as an issue in some prior work [e.g., @chandler2014], but tracking participation in specific paradigms is an open challenge. We did not ask participants whether they had participated in similar research previously, as we suspected that asking this sort of question would lead to a large number of inaccurate responses. In addition, half of the AMT population is estimated to change every six months [@stewart2015], and we expected that most of the studies in our sample that had been conducted on AMT had been performed at least a year previously (though see Supplemental Material for discussion of one particular paradigm that has been used more recently).
 
