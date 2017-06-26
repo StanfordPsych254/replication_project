@@ -244,7 +244,7 @@ That said, we beleive there are many ways to adapt the project format based on t
  
  & \multicolumn{3}{c}{\underline{Classroom Models}} \\
   
- & \underline{Model 1} & \underline{Model 2} & \underline{Model 3} \\
+\multicolumn{1}{p{1.5in}|}{\raggedright \underline{Course Attributes}} & \underline{Model 1} & \underline{Model 2} & \underline{Model 3} \\
 
 Students & \multicolumn{1}{p{2in}}{\raggedright Undergraduate} & \multicolumn{1}{p{2in}}{\raggedright Advanced Undergraduate or Early Graduate} & \multicolumn{1}{p{2in}}{\raggedright Motivated Graduate} \\
 
@@ -254,7 +254,7 @@ Grouping & \multicolumn{1}{p{2in}}{\raggedright Full Class OR Medium groups (7-8
 
 Project Selection & \multicolumn{1}{p{2in}}{\raggedright One class replication OR pre-specified list} & \multicolumn{1}{p{2in}}{\raggedright Curated list to choose from} & \multicolumn{1}{p{2in}}{\raggedright Open to student choice*} \\
 
-Data source & \multicolumn{1}{p{2in}}{\raggedright University or classroom participant pool} & \multicolumn{1}{p{2in}}{\raggedright In-person or online convenience sample} & \multicolumn{1}{p{2in}}{\raggedright targetted sampling of original populations} \\
+Data source & \multicolumn{1}{p{2in}}{\raggedright University or classroom participant pool} & \multicolumn{1}{p{2in}}{\raggedright In-person or online convenience sample} & \multicolumn{1}{p{2in}}{\raggedright Targetted sampling of original populations} \\
 
 Workflow tools & \multicolumn{1}{p{2in}}{\raggedright Use familiar or GUI tools OR instructors implement studies} & \multicolumn{1}{p{2in}}{\raggedright Teach key tool plus introduction of others} & \multicolumn{1}{p{2in}}{\raggedright Teach full set of free open-source software} \\
 
