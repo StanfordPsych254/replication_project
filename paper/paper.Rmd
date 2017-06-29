@@ -4,7 +4,7 @@ short-title: "Replication Through Pedagogy"
 output: kmr::apa_manuscript
 
 header-includes:
-   - \usepackage{lscape}
+   - \usepackage{pdflscape}
    - \usepackage{multicol}
    
 csl: apa6.csl
@@ -53,9 +53,10 @@ library(png)
 
 Replicability is a core value for empirical research and there is increasing concern throughout psychology that more independent replication is necessary [@osc2015;@wagenmakers2012]. Yet under the current incentive structure for science, replication is not typically valued for publication [@makel2012] or in metrics of research productivity [@koole2012]. One potential solution to this problem is to make replication an explicit part of pedagogy: that is, to teach students about experimental methods by asking them to run replication studies [@frank2012;@grahe2012]. Despite enthusiasm for this idea [@lebel2015;@everett2015;@standing2016;@king2016], there is limited data beyond anecdotal reports or individual projects [@phillips2015;@lakens2013] to support its efficacy in producing wide-scale pedagogical adoption.
 
-In the current article, we address the practical barriers of completing replications as part of required coursework and discuss the methodological decisions that replication projects must address more broadly. Towards this aim, we report the results of replication projects conducted in a graduate-level experimental methods course. Students conducted replications of published articles from the 2015 volume of the journal *Psychological Science*. These studies provide insight into both the difficulties of pedagogical replications and their promise as a method for improving the robustness of psychological research. 
+In the current article, we address the practical barriers of completing replications as part of required coursework and discuss the methodological decisions that such replication projects must address more broadly. Towards this aim, we report the results of replication projects conducted in a graduate-level experimental methods course. Students conducted replications of published articles from the 2015 volume of the journal *Psychological Science*. These studies provide insight into both the difficulties of pedagogical replications and their promise as a method for improving the robustness of psychological research. 
 
-We assess the challenges facing a student in choosing an article of interest and -- in a single attempt, within constraints of budget, expertise, and effort -- reproducing the findings. We consider a number of criteria for replication success, including statistical significance, effect size, a Bayesian measure of evidence [@etz2016], and a subjective assessment with respect to the original authors' interpretations. While each of these is imperfect, taken together these measures help provide a sense of how easy it is for a student to reproduce an effect to the degree that they could confidently build on it in future work. But, as we discuss below, the results of these replications may have different interpretations: While some are more direct, others differ on theoretically-relevant dimensions. Indeed, due to differences in population, timing, or method, some of our findings might be construed as assessing the boundary conditions of a particular effect rather than replicating the original exactly. Even in these cases, however, replication research of the type we conduct here contributes to an understanding of the robustness, generalizability, and expected effect sizes of previously published findings.
+We assess the challenges facing a student in choosing an article of interest and -- in a single attempt, within constraints of budget, expertise, and effort -- reproducing the findings. We consider a number of criteria for evaluating replication success, including statistical significance, effect size, a Bayesian measure of evidence [@etz2016], and a subjective assessment with respect to the original authors' interpretations. While each of these is imperfect, taken together these measures suggest that replications performed in the classroom are representative of larger, more systematic efforts. Perhaps more importantly, these results provide a sense of how easy it is for a student to reproduce an effect to the degree that they could confidently build on it in their own future work. 
+<!-- But, as we discuss below, the results of these replications may have different interpretations: While some are more direct, others differ on theoretically-relevant dimensions. Indeed, due to differences in population, timing, or method, some of our findings might be construed as assessing the boundary conditions of a particular effect rather than replicating the original exactly. Even in these cases, however, replication research of the type we conduct here contributes to an understanding of the robustness, generalizability, and expected effect sizes of previously published findings. -->
 
 We also describe our process for conducting replications as part of classroom pedagogy. Although mentorship in experimental methods is an important part of the standard advising relationship, the classroom context allows for elucidation of general principles of good research and discussion of how they can be modified to fit specific instances. And replication research in particular illustrates a number of important concepts -- experimental design, power analysis, reporting standards, and preregistration, among others -- more directly than open-ended projects, which require new conceptual development [see @frank2012 for extended argument]. There are significant limitations on what can be done in a single term, within the constraints of a course budget and the instructors' expertise. Nevertheless, were this approach implemented more widely, we believe the dividends paid to the field as a whole -- both scientific and educational -- would be considerable.
 
@@ -91,22 +92,22 @@ d <- left_join(project_plan, project_data_summary, by = c("project_key")) %>%
   
  & \multicolumn{5}{c|}{\underline{Original Study}} & \multicolumn{4}{c}{\underline{Replication Study}} \\ 
   
-\specialcell{Citation\\(Psychological Science; 2015)} & Expt. & \specialcell{Open\\Data?} & \specialcell{Open\\Materials?} & \specialcell{On\\MTurk?} & \specialcell{N\\(orig)} & \specialcell{Power\\Standard} & \specialcell{N\\(rep)} & \specialcell{Instructor\\Fidelity} & \specialcell{Project link} \\ 
+\specialcell{Citation\\(Psychological Science; 2015)} & Expt. & \specialcell{Open\\Data?} & \specialcell{Open\\Materials?} & \specialcell{On\\MTurk?} & \specialcell{N\\(orig)} & \specialcell{Power\\Standard} & \specialcell{N\\(rep)} & \specialcell{Instructor\\Fidelity}\\ 
   \hline
-Atir, Rosenzweig, \& Dunning & 1b & No & Yes & Yes & 202 & Other &  50 & 6.67 & osf.io/uegk5/ \\ 
-Ko, Sadler, \& Galinksy & 2 & Yes & Some & No &  40 & Original &  40 & 4.67 & osf.io/g6k2u/\\ 
-Lewis \& Oyserman & 4 & No & Yes & Yes & 122 & 80\% power & 128 & 6.67 & osf.io/rdw6e/ \\ 
-Liverence \& Scholl & 1 & No & Some & No &  18 & Original* &  19 & 5.33 & osf.io/sfxrb/ \\ 
-Proudfoot, Kay, \& Koval & 1 & No & No & Yes &  80 & 80\% power &  84 & 6.67 & osf.io/ne8ph/ \\ 
-Scopelliti, Loewenstein, \& Vosgerau & 3 & Yes & Yes & Yes & 550 & Other & 124 & 5.67 & osf.io/32wsm/ \\ 
-Sofer et al. & 1 & Yes & Yes & No & 48 & Other &  95 & 4.33 & osf.io/5wmhn/ \\ 
-Storm \& Stone & 3 & No & No & No & 48 & Original &  61 & 4.00 & osf.io/9cgpq/ \\ 
-Wang et al. & 2 & No & No & No & 219 & 80\% power & 397 & 4.33 & osf.io/ng96w/ \\ 
-Xu \& Franconeri & 1a & No & No & No &  12 & Other* &  27 & 5.00 & osf.io/cgvzs/ \\ 
-Zaval, Markowitz, \& Weber & 1 & Yes & Yes & Yes & 312 & Original & 321 & 5.00 & osf.io/degwa/ \\ 
+Atir, Rosenzweig, \& Dunning & 1b & No & Yes & Yes & 202 & Other &  50 & 6.67 & \\ 
+Ko, Sadler, \& Galinksy & 2 & Yes & Some & No &  40 & Original &  40 & 4.67 &\\ 
+Lewis \& Oyserman & 4 & No & Yes & Yes & 122 & 80\% power & 128 & 6.67 &\\ 
+Liverence \& Scholl & 1 & No & Some & No &  18 & Original* &  19 & 5.33 &\\ 
+Proudfoot, Kay, \& Koval & 1 & No & No & Yes &  80 & 80\% power &  84 & 6.67&\\ 
+Scopelliti, Loewenstein, \& Vosgerau & 3 & Yes & Yes & Yes & 550 & Other & 124 & 5.67& \\ 
+Sofer et al. & 1 & Yes & Yes & No & 48 & Other &  95 & 4.33& \\ 
+Storm \& Stone & 3 & No & No & No & 48 & Original &  61 & 4.00& \\ 
+Wang et al. & 2 & No & No & No & 219 & 80\% power & 397 & 4.33&\\ 
+Xu \& Franconeri & 1a & No & No & No &  12 & Other* &  27 & 5.00& \\ 
+Zaval, Markowitz, \& Weber & 1 & Yes & Yes & Yes & 312 & Original & 321 & 5.00&\\ 
    \hline
 \end{tabular}
-\caption{\label{tab:summary} Summary characteristics of original studies and our replications, along with links to project pages for individual projects. All project materials available publicly at osf.io/98ta4/files/. * marks projects where the number of trials was modified.} 
+\caption{\label{tab:summary} Summary characteristics of original studies and our replications. All project materials available publicly at osf.io/98ta4/files/, and links to individual project preregistrations, reports, and web experiments are available at osf.io/98ta4/wiki/ * marks projects where the number of trials was modified.} 
 \label{tab:summary}
 \end{table}
 
@@ -227,8 +228,8 @@ Though others' courses that incorporate replication projects will look quite dif
 
 That said, depending on the student population and class constraints, there are many ways to include a replication project in a course. Table \ref{tab:classmodels} presents three different possible models of replication projects, for general undergraduate classes, advanced undergraduate/early graduate classes, and more advanced graduate classes. These models are not meant to be binding suggestions, but we hope that they inspire instructors to consider how replication research could be included in their own teaching practice. The sections below provide some discussion of individual choice-points. 
 
+\begin{center}
 \begin{landscape}
-\centering
 
 \newcommand{\specialcell}[2][c]{%
   \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
@@ -270,7 +271,7 @@ Dissemination & \multicolumn{1}{p{2in}}{\raggedright If meeting pre-specified qu
 \end{table}
 
 \end{landscape}
-
+\end{center}
 <!-- Review & \multicolumn{1}{p{2in}}{\raggedright Standardized review checkpoints} & \multicolumn{1}{p{2in}}{\raggedright Extensive group review and minimal instructor review} & \multicolumn{1}{p{2in}}{\raggedright Multiple reviews between students and with instructors} \\ -->
 
 ### Project selection 
