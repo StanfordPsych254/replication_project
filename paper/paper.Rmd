@@ -52,20 +52,34 @@ library(png)
 ```
 
 <!-- The problem, a solution, and the current lack of evidence for it -->
-Replicability is a core value for empirical research and there is increasing concern throughout psychology that more independent replication is necessary [@osc2015;@wagenmakers2012]. Yet under the current incentive structure for science, replication is not typically valued for publication [@makel2012] or in metrics of research productivity [@koole2012]. One potential solution to this problem is to make replication an explicit part of pedagogy: that is, to teach students about experimental methods by asking them to run replication studies [@frank2012;@grahe2012]. Despite enthusiasm for this idea [@lebel2015;@everett2015;@standing2016;@king2016], there is limited data beyond anecdotal reports or individual projects [@phillips2015;@lakens2013] to support its efficacy in producing wide-scale pedagogical adoption. 
+Replicability is a core value for empirical research and there is increasing concern throughout psychology that more independent replication is necessary [@osc2015;@wagenmakers2012]. 
+Yet under the current incentive structure for science, replication is not typically valued for publication [@makel2012] or in metrics of research productivity [@koole2012]. 
+One potential solution to this problem is to make replication an explicit part of pedagogy: that is, to teach students about experimental methods by asking them to run replication studies [@frank2012;@grahe2012]. 
+Despite enthusiasm for this idea [@lebel2015;@everett2015;@standing2016;@king2016], there is limited data beyond anecdotal reports or individual projects [@phillips2015;@lakens2013] to support its efficacy in producing wide-scale pedagogical adoption. 
 
 <!-- The kind of evidence we're going to provide -->
-In the current article, we address the practical barriers faced by instructors planning to incorporate replications into their courses. As a concrete guide for other instructors, we report the pedagogical and methodological approach taken in our graduate-level experimental methods course. In this course, students conducted replications of published articles from the 2015 volume of the journal *Psychological Science* with rigorous instructor review at each major stage. The results of these replications represent a microcosm of larger replication efforts, providing insight into both the difficulties of pedagogical replications and their promise as a method for improving the robustness of psychological research.
+In the current article, we address the practical barriers faced by instructors planning to incorporate replications into their courses. 
+As a concrete guide for other instructors, we report the pedagogical and methodological approach taken in our graduate-level experimental methods course. 
+In this course, students conducted replications of published articles from the 2015 volume of the journal *Psychological Science* with rigorous instructor review at each major stage. 
+The results of these replications represent a microcosm of larger replication efforts, providing insight into both the difficulties of pedagogical replications and their promise as a method for improving the robustness of psychological research.
 
 <!-- The scientific value of that evidence  -->
-We assess the challenges facing a student in choosing an article of interest and -- in a single attempt, within constraints of budget, expertise, and effort -- reproducing the findings. We consider a number of criteria for evaluating replication success, including statistical significance, effect size, a Bayesian measure of evidence [@etz2016], and a subjective assessment with respect to the original authors' interpretations. While each of these is imperfect, taken together these measures help provide a sense of the robustness and generalizability of an effect, and perhaps more importantly, how easy it is for a student to reproduce an effect to the degree that they could confidently build on it in their own future work. 
+We assess the challenges facing a student in choosing an article of interest and -- in a single attempt, within constraints of budget, expertise, and effort -- reproducing the findings. 
+We consider a number of criteria for evaluating replication success, including statistical significance, effect size, a Bayesian measure of evidence [@etz2016], and a subjective assessment with respect to the original authors' interpretations. 
+While each of these is imperfect, taken together these measures help provide a sense of the robustness and generalizability of an effect, and perhaps more importantly, how easy it is for a student to reproduce an effect to the degree that they could confidently build on it in their own future work. 
 <!-- But, as we discuss below, the results of these replications may have different interpretations: While some are more direct, others differ on theoretically-relevant dimensions. Indeed, due to differences in population, timing, or method, some of our findings might be construed as assessing the boundary conditions of a particular effect rather than replicating the original exactly. Even in these cases, however, replication research of the type we conduct here contributes to an understanding of the robustness, generalizability, and expected effect sizes of previously published findings. -->
 
 <!-- The educational value of that evidence  -->
-We also describe in detail our process for conducting replications as part of classroom pedagogy. Although mentorship in experimental methods is an important part of the standard advising relationship, the classroom context allows for elucidation of general principles of good research and discussion of how they can be modified to fit specific instances. And replication research in particular illustrates a number of important concepts -- experimental design, power analysis, reporting standards, and preregistration, among others -- more directly than open-ended projects, which require new conceptual development [see @frank2012 for extended argument]. 
+We also describe in detail our process for conducting replications as part of classroom pedagogy. 
+Although mentorship in experimental methods is an important part of the standard advising relationship, the classroom context allows for elucidation of general principles of good research and discussion of how they can be modified to fit specific instances. 
+And replication research in particular illustrates a number of important concepts -- experimental design, power analysis, reporting standards, and preregistration, among others -- more directly than open-ended projects, which require new conceptual development [see @frank2012 for extended argument]. 
 
 <!-- Inspirational stuff and a call to join us... -->
-There are significant limitations on what can be done in a single term, within the constraints of a course budget and the instructors' expertise. Nevertheless, were this approach implemented more widely, we believe the dividends paid to the field as a whole -- both scientific and educational -- would be considerable. To encourage others to share our materials, our course outline, project templates, and assignments are available publicly at [https://osf.io/98ta4/files/](https://osf.io/98ta4/files/). In addition, all of our most recent lecture slides and materials are available on our course website at [http://psych254.stanford.edu](). We hope that others will share and reuse our materials as they consider how best to design a course customized to their context. 
+There are significant limitations on what can be done in a single term, within the constraints of a course budget and the instructors' expertise. 
+Nevertheless, were this approach implemented more widely, we believe the dividends paid to the field as a whole -- both scientific and educational -- would be considerable. 
+To encourage others to share our materials, our course outline, project templates, and assignments are available publicly at [https://osf.io/98ta4/files/](https://osf.io/98ta4/files/). 
+In addition, all of our most recent lecture slides and materials are available on our course website at [http://psych254.stanford.edu](). 
+We hope that others will share and reuse our materials as they consider how best to design a course customized to their context. 
 
 <!-- We begin by reporting the empirical results our replications, highlighting the importance of wide-scale replication efforts. We then provide the particular details of our course projects to give a sense of what a classroom replication project entails. We close with a discussion of broader decision points for the course design that other instructors might consider.  -->
 
@@ -124,7 +138,9 @@ Zaval, Markowitz, \& Weber & 1 & Yes & Yes & Yes & 312 & Original & 321 & 5.00&\
 
 <!-- Preregistration: Provide a link to any preregistration documentation. If only a subset of reported studies were preregistered, indicate which ones were and which ones were not. -->
 
-As described below, our procedure for individual project preregistrations was to register the analytic script with specific key hypothesis tests clearly marked. Individual project preregistration links are given at [osf.io/98ta4/wiki/](osf.io/98ta4/wiki/). Prior to data collection for all projects, we also pre-registered the confirmatory analyses reported in the current paper at [https://osf.io/rxz8m/](https://osf.io/rxz8m/). 
+As described below, our procedure for individual project preregistrations was to register the analytic script with specific key hypothesis tests clearly marked. 
+Individual project preregistration links are given at [osf.io/98ta4/wiki/](osf.io/98ta4/wiki/). 
+Prior to data collection for all projects, we also pre-registered the confirmatory analyses reported in the current paper at [https://osf.io/rxz8m/](https://osf.io/rxz8m/). 
 
 ## Data, Materials, and Online Resources
 
@@ -154,13 +170,15 @@ The authors declare that they have no conflicts of interest with respect to the 
 
 <!-- Author Contributions: Authorship implies significant participation in the research reported or in writing the manuscript, including participation in the design and/or interpretation of reported experiments or results, participation in the acquisition and/or analysis of data, and participation in drafting and/or revising the manuscript. All authors must agree to the order in which the authors are listed and must have read the final manuscript and approved its submission. They must also agree to take responsibility for the work in the event that its integrity or veracity is questioned. Authors should precisely describe their contributions to the research and manuscript, identifying each author by his or her initials. For example, “DJS and AOH jointly generated the idea for the study. AOH programmed the study and collected the data. DJS wrote the analysis code and analyzed the data, and AOH verified the accuracy of those analyses. DJS wrote the first draft of the manuscript, and both authors critically edited it. Both authors approved the final submitted version of the manuscript.” -->
 
-RXDH, ENS, and MCF designed the project, supported data planning and data collection for all projects, analyzed the data, and wrote the paper. CA, JMA, RC, EH, MK, AL, SR, JR, SS, JS, and JT planned individual projects, programmed studies, collected data, analyzed data, and gave feedback on the paper.
+RXDH, ENS, and MCF designed the project, supported data planning and data collection for all projects, analyzed the data, and wrote the paper. 
+CA, JMA, RC, EH, MK, AL, SR, JR, SS, JS, and JT planned individual projects, programmed studies, collected data, analyzed data, and gave feedback on the paper.
 
 ## Acknowledgements
 
 <!-- Acknowledgments: Authors should use this section to identify any people who should be credited for their assistance with the reported research. -->
 
-Thanks to the Stanford Department of Psychology and the Vice Provost for Graduate Education for funding to support the class. We are grateful to the authors of the original studies who provided materials and gave extensive comments on an earlier draft of this manuscript.
+Thanks to the Stanford Department of Psychology and the Vice Provost for Graduate Education for funding to support the class. 
+We are grateful to the authors of the original studies who provided materials and gave extensive comments on an earlier draft of this manuscript.
 
 ## Prior Versions
 
@@ -170,7 +188,10 @@ An earlier draft of this manuscript was posted at [https://osf.io/preprints/psya
 
 # Methods
 
-All projects were completed as part of a graduate-level methodology class. At the initiation of class, all students were told that they had the opportunity to contribute their individual class assignment to a group replication project. The requirements for joining the project were to conduct a pre-registered replication of a finding from the 2015 volume of *Psychological Science* and to contribute the code, data, and materials to the writeup.  A schematic of our class timeline is shown in Figure 1.
+All projects were completed as part of a graduate-level methodology class. 
+At the initiation of class, all students were told that they had the opportunity to contribute their individual class assignment to a group replication project. 
+The requirements for joining the project were to conduct a pre-registered replication of a finding from the 2015 volume of *Psychological Science* and to contribute the code, data, and materials to the writeup. 
+A schematic of our class timeline is shown in Figure 1.
 
 ```{r, fig.cap="A schematic view of our class timeline for replication projects. R indicates the approximate timing of instructor team reviews of student materials.", fig.height=4, fig.width=6, fig.align="center", fig.pos="t"}
 
@@ -183,13 +204,28 @@ usr<-par("usr")
 rasterImage(img, usr[1], usr[3], usr[2], usr[4])
 ```
 
-A summary of the original empirical studies chosen for replication is given in Table \ref{tab:summary}. Students chose findings from a wide variety of domains for replication. One cluster of studies included investigations of memory and visual attention [e.g., @xu2015], for example in applied contexts like remembering "deleted" files [@storm2015] or tracking transitions between locations on smartphone apps [@liverence2015]. A second cluster came from studies of social perception and social judgment, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015]. Details of individual replications are available in Supplemental Material. 
+A summary of the original empirical studies chosen for replication is given in Table \ref{tab:summary}. 
+Students chose findings from a wide variety of domains for replication. 
+One cluster of studies included investigations of memory and visual attention [e.g., @xu2015], for example in applied contexts like remembering "deleted" files [@storm2015] or tracking transitions between locations on smartphone apps [@liverence2015]. 
+A second cluster came from studies of social perception and social judgment, including judgments of faces and voices [@ko2015;@sofer2015], as well as studies of attributions of modesty, creativity, and expertise [@atir2015;@scopelliti2015;@proudfoot2015]. 
+Other studies investigated increasing retirement savings by orienting participants to the future [@lewis2015], legacy priming [@zaval2015], and the effects of math anxiety on performance [@wang2015]. 
+Details of individual replications are available in Supplemental Material. 
 
 ## Participants
 
-All study participants were recruited on Amazon Mechanical Turk (AMT). Individual sample sizes are given in Table \ref{tab:summary}. Each sample was recruited independently, using the same account but a different title. Of the `r nrow(d)` studies included in the final sample, `r sum(project_plan$original_on_turk=="Yes")` (`r 100 * round(mean(project_plan$original_on_turk=="Yes"), digits=2)`%) were originally conducted on AMT. For the other studies in our sample, demographic differences (in terms of age, sex, socio-economic status, and in some cases, national origin) are an important factor in interpreting our findings; see Supplemental Material for more discussion of this issue in individual cases.
+All study participants were recruited on Amazon Mechanical Turk (AMT). 
+Individual sample sizes are given in Table \ref{tab:summary}.
+Each sample was recruited independently, using the same account but a different title.
+Of the `r nrow(d)` studies included in the final sample, `r sum(project_plan$original_on_turk=="Yes")` (`r 100 * round(mean(project_plan$original_on_turk=="Yes"), digits=2)`%) were originally conducted on AMT. 
+For the other studies in our sample, demographic differences (in terms of age, sex, socio-economic status, and in some cases, national origin) are an important factor in interpreting our findings; see Supplemental Material for more discussion of this issue in individual cases.
 
-We determined sample sizes using a case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget (see below for discussion).^[We initially were allocated \$1,500 but one student contributed personal research funds, leading to a total cost of $\approx$ \$1,700 for all studies. We attempted to set payment for our studies at approximately \$6/hour based on timing estimated from Pilot A sessions.] For all criteria, experimenters recruited an additional 5% of participants to ensure we still achieved the desired criterion if some participants skipped through or did not complete the study. In four cases, we powered the replication attempt to 80\% power based on post-hoc power calculations of the original effect sizes. In four cases, we used the original sample size. In one case, the original study was powered well above what would be required to find the effect of interest based on the post-hoc analysis, so we chose a smaller sample size that yielded sufficiently high power for that effect. In two others, we reduced the number of trials as part of the adaptation to Mechanical Turk (in one of these, changing the sample size to compensate). In the last case, the original study used a multi-step procedure where the first step consisted of stimulus generation; we decreased the N in the first stage of the procedure and focused on achieving high power at the second stage.  
+We determined sample sizes using a case-by-case selection criterion that attempted to maximize the success of the project while staying within the constraints of our budget (see below for discussion).^[We initially were allocated \$1,500 but one student contributed personal research funds, leading to a total cost of $\approx$ \$1,700 for all studies. We attempted to set payment for our studies at approximately \$6/hour based on timing estimated from Pilot A sessions.] 
+For all criteria, experimenters recruited an additional 5% of participants to ensure we still achieved the desired criterion if some participants skipped through or did not complete the study. 
+In four cases, we powered the replication attempt to 80\% power based on post-hoc power calculations of the original effect sizes. 
+In four cases, we used the original sample size. 
+In one case, the original study was powered well above what would be required to find the effect of interest based on the post-hoc analysis, so we chose a smaller sample size that yielded sufficiently high power for that effect. 
+In two others, we reduced the number of trials as part of the adaptation to Mechanical Turk (in one of these, changing the sample size to compensate). 
+In the last case, the original study used a multi-step procedure where the first step consisted of stimulus generation; we decreased the N in the first stage of the procedure and focused on achieving high power at the second stage.  
 
 ## Materials and Methods
 
@@ -200,7 +236,12 @@ Responses were received in all but one case, all within a matter of days.
 
 ## Milestones, Preregistration, and Review
 
-In addition to as-needed guidance on projects, students advanced through a formal review process in which each student's work was inspected and critiqued several times by both the instructor and the teaching assistants (see Fig. 1). In the second week of the course, students wrote a brief proposal selecting their replication targets, which were reviewed for feasibility and concreteness. After their selection was approved, students proceeded to write the methods section of the @osc2015 replication report template. This section included a power analysis, proposed sample size, and explicit description of differences from the original study (see course materials for complete template). At the same time, students worked on an experiment 'mock-up': a fully functional but unpolished outline of their experiment, potentially using placeholders for one or more unfinished elements of the design. Upon reviewing the completed methods and mockup, the teaching staff gave thorough feedback and suggested changes to be made before beginning any data collection.
+In addition to as-needed guidance on projects, students advanced through a formal review process in which each student's work was inspected and critiqued several times by both the instructor and the teaching assistants (see Fig. 1). 
+In the second week of the course, students wrote a brief proposal selecting their replication targets, which were reviewed for feasibility and concreteness. 
+After their selection was approved, students proceeded to write the methods section of the @osc2015 replication report template. 
+This section included a power analysis, proposed sample size, and explicit description of differences from the original study (see course materials for complete template). 
+At the same time, students worked on an experiment 'mock-up': a fully functional but unpolished outline of their experiment, potentially using placeholders for one or more unfinished elements of the design. 
+Upon reviewing the completed methods and mockup, the teaching staff gave thorough feedback and suggested changes to be made before beginning any data collection.
 
 Further reviews were coordinated with completion of two pilot samples. The first, "Pilot A," consisted of a handful of non-naive participants (e.g., the experimenter, other students). The goal of this pilot was to ensure that all needed data were being accurately logged and that analytic scripts for the confirmatory analyses functioned appropriately. After Pilot A was completed, the instructor or a TA critiqued and reviewed the student's experimental script, analytic code, and resulting output. 
 
