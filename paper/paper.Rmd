@@ -176,7 +176,7 @@ CA, JMA, RC, EH, MK, AL, SR, JR, SS, JS, and JT planned individual projects, pro
 
 <!-- Acknowledgments: Authors should use this section to identify any people who should be credited for their assistance with the reported research. -->
 
-Thanks to the Stanford Department of Psychology and the Vice Provost for Graduate Education for funding to support the class. 
+Thanks to the Stanford Department of Psychology and the Vice Provost for Graduate Education for funding to support the class. This material is also based upon work supported by the National Science Foundation Graduate Research Fellowship under Grant No. DGE-1656518.
 We are grateful to the authors of the original studies who provided materials and gave extensive comments on an earlier draft of this manuscript.
 
 ## Prior Versions
