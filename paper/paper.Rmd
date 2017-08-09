@@ -151,7 +151,7 @@ All code and data necessary to reproduce the analyses reported here are availabl
 
 <!-- Measures: The text here should state “We report how we determined our sample size, all data exclusions, all manipulations, and all measures in the study” (see Simmons, Nelson, & Simonsohn, 2011). If any aspect of this statement is untrue, authors should explain why. All such details should be specified in the preregistration documentation as well. -->
 
-We report how we determined our sample size, all data exclusions, all manipulations, and all measures in the study (see @simmons2011).
+We report how we determined our sample size, all data exclusions, all manipulations, and all measures in the study [see @simmons2011].
 
 ## Subjects
 
@@ -262,115 +262,11 @@ Prior to data collection, the analytic script containing all confirmatory analys
 
 Despite the general emphasis in meta-analytic and reproducibility efforts on aggregating a single effect size of interest [@osc2015;@lipsey2001], it was often challenging to identify a single key statistical test for each study. Usually a substantial number of statistical tests were conducted, often within one or several ANOVA or regression models with multiple specifications. Thus, we interpret "key statistical test" results with caution (see Empirical Results and Discussion below). Despite this interpretive difficulty, we followed previous work and attempted to use a single statistical test as our target for replication planning and analysis.
 
-# Pedagogy: Results and Discussion
-
-## Results: Pedagogical Assessment 
-
-All of the 15 students in the class completed projects (two with extensions going beyond the class period). Of these, one chose a project outside of the sampling frame, and three opted out of the broader project prior to data collection.^[These students did not express doubts about the success of their projects prior to opting out, and 2/3 of these projects were judged by the instructor team to have been successful replications. Thus we have no evidence that these students opted out systematically due to their belief that their project would not replicate.] The remaining 11 students contributed code, data, registrations, and materials to the final product. (In one case, a student did not complete the pre-registration procedure correctly but still submitted a pre-specified analysis plan to the instructors for review. We included this project in the final analysis.) 
-
-Because they were conducted by students within the constraints of a course, our studies had a number of limitations, including: 1) limited time for iterative piloting and adjustment, 2) limits on funding for larger samples, and 3) limits on domain expertise with respect to the specific effects that were chosen. But within these limitations, our group was able to produce a set of relatively close replications with generally good statistical power. Thus, our work here shows what is possible for motivated students using freely-available tools and resources.
-
-## Discussion: Pedagogical Implications
-
-Our findings demonstrate that classroom replication projects are possible in one particular context. In the following subsections, we provide information that we hope will reduce barriers to entry and encourage more researchers and instructor to include replications as part of coursework in their courses. We discuss practical recommendations for implementation in a variety of classroom settings, key decisions that instructors must make, and common issues that arise during replication projects. 
-
-### Models for students of different levels
-
-Though others' courses that incorporate replication projects will look quite different from our own, we recommend having the replication as a centerpiece of the course and giving ample opportunity for feedback throughout the study design. Without a central focus on the replication project, students would likely not have the time or motivation to complete a high quality project; without multiple opportunities for extensive (and often interactive) instructor feedback, the quality of the final projects will decline. 
-
-That said, depending on the student population and class constraints, there are many ways to include a replication project in a course. Table \ref{tab:classmodels} presents three different possible models of replication projects, for general undergraduate classes, advanced undergraduate/early graduate classes, and more advanced graduate classes. These models are not meant to be binding suggestions, but we hope that they inspire instructors to consider how replication research could be included in their own teaching practice. The sections below provide some discussion of individual choice-points. 
-
-\begin{center}
-\begin{landscape}
-
-\newcommand{\specialcell}[2][c]{%
-  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
-
-\begin{table}[ht]
-\footnotesize
-\centering
-
-\def\arraystretch{1.2}
-
-\begin{tabular}{lccc}
-
- & \multicolumn{3}{c}{\underline{Classroom Models}} \\
-  
-\multicolumn{1}{p{1.5in}}{\raggedright \underline{Course Attributes}} & \underline{Model 1} & \underline{Model 2} & \underline{Model 3} \\
-
-Student group & \multicolumn{1}{p{2in}}{\raggedright Mid-level undergraduates} & \multicolumn{1}{p{2in}}{\raggedright Advanced undergraduates or graduate students} & \multicolumn{1}{p{2in}}{\raggedright Advanced graduate students} \\
-
-\hline
-
-Learning goal & \multicolumn{1}{p{2in}}{\raggedright Gain experience with research process} & \multicolumn{1}{p{2in}}{\raggedright Gain research independence} & \multicolumn{1}{p{2in}}{\raggedright Master best practices and tools} \\
-
-Project group size & \multicolumn{1}{p{2in}}{\raggedright Full class or medium-size groups (7-8 students)} & \multicolumn{1}{p{2in}}{\raggedright Small groups (2-4) or individuals} & \multicolumn{1}{p{2in}}{\raggedright Individuals} \\
-
-Project selection & \multicolumn{1}{p{2in}}{\raggedright Full class replication or choose from small curated list} & \multicolumn{1}{p{2in}}{\raggedright Choose from curated list} & \multicolumn{1}{p{2in}}{\raggedright Open project selection or meta-science sampling frame} \\
-
-Subject population & \multicolumn{1}{p{2in}}{\raggedright In-person convenience samples} & \multicolumn{1}{p{2in}}{\raggedright University pool or AMT} & \multicolumn{1}{p{2in}}{\raggedright AMT or targeted sampling of original populations} \\
-
-Workflow tools & \multicolumn{1}{p{2in}}{\raggedright GUI tools, instructors code studies} & \multicolumn{1}{p{2in}}{\raggedright Teach one key coding-based tool, GUI tools otherwise} & \multicolumn{1}{p{2in}}{\raggedright Teach full ecosystem of key coding tools} \\
-
-Pre-registration & \multicolumn{1}{p{2in}}{\raggedright Pre-registration by instructor} & \multicolumn{1}{p{2in}}{\raggedright Pre-registration drafted by students} & \multicolumn{1}{p{2in}}{\raggedright Pre-registration by students with instructor review} \\
-
-Dissemination & \multicolumn{1}{p{2in}}{\raggedright If meeting pre-specified quality standard} & \multicolumn{1}{p{2in}}{\raggedright With instructor approval} & \multicolumn{1}{p{2in}}{\raggedright As class default, subject to review} \\
-
-
-\end{tabular}
-\caption{\label{tab:classmodels} Three potential models for incorporating replication projects into classes of different levels.} 
-\label{tab:classmodels}
-\end{table}
-
-\end{landscape}
-\end{center}
-<!-- Review & \multicolumn{1}{p{2in}}{\raggedright Standardized review checkpoints} & \multicolumn{1}{p{2in}}{\raggedright Extensive group review and minimal instructor review} & \multicolumn{1}{p{2in}}{\raggedright Multiple reviews between students and with instructors} \\ -->
-
-### Project selection 
-
-In our class, students selected projects based on interest, and we encouraged students with little programming background to opt for methodologically simple studies, and more advanced students to take on a challenging design. This level of freedom is not ideal for less advanced courses, and the set of available replication studies should likely be curated for students at lower levels. For example, in a large undergraduate class it may be logistically simpler for the instructors to choose a small set of replication projects that students can select from, or perhaps even pool resources and collect multiple datasets for a single project. Limiting the set of projects both gives instructors a greater degree of familiarity with the relevant literature and allows for the development of more scaffolding of experimental materials. A mid-level course might split the difference between these two models, providing students with a broader -- but still curated -- list of potential projects. 
- 
-
-<!-- However, this sample also reflects what is of most interest to beginning researchers, and we suspect may be a better sampling frame to better understand particularly impactful effects to be built upon in future research. The modal study chosen was the first, but several students chose later studies in a set as well.  Thus, all interpretation of our findings should be with respect to this non-probability sample.  This sampling strategy may thus bias our results towards more exciting or novel findings, as well as those that were more feasible for students. -->
-
-### Subject population and sample size
-
-For pedagogical replications to also make a *scientific* contribution, they must be adequately powered and use subject populations comparable to those used in typical lab research. With these needs in mind, we chose to use Amazon Mechanical Turk (AMT) for our replication studies. AMT facilitates the process of recruiting diverse, high-quality samples [@BuhrmesterKwangGosling11;@CrumpEtAl13_Turk] that are large enough to enable replications of between-subjects designs (which typically require large samples). Because psychological research is increasingly conducted online, an additional pedagogical benefit is to build competence in these skills. Even if students’ current research does not use AMT, these replications allow students to build a skillset that can be used throughout their academic careers. 
-
-Depending on the course design and total funds allocated to the course (if any), populations other than AMT may be more feasible and appropriate.  We recommend instructors explore funding opportunities through teaching grants or departmental support, but note that a replication course without funding would be possible. For instance, recruitment from community samples or university participant pools may provide high-quality data while reducing costs and eliminating a technical challenge in data collection.
-
-Cost considerations must also enter into decisions about adequate sample sizes, which has been a major challenge in replication research [@button2013;@simonsohn2015]. Sample planning based on analysis of the achieved effect size in a previously-published study is problematic because of the likelihood of inflation of published effect sizes due to the "winner's curse" [@hoenig2001;@button2013]. But it may not be feasible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or under-powered original studies, but be unnecessary for studies that were initially large and/or adequately powered. 
-
-As a rule of thumb, for the type of replication research advocated here, conducting a small number of high-powered studies using representative samples is preferable to conducting a large number of under-powered studies in convenience samples. Results are much more likely to be to be interpretable by students and to make a contribution to the replication literature. Regardless of the eventual sample collected, we find that the discussion of subject population & sample size determination is one of the most eye-opening parts of our class and so we encourage instructors to allow students to participate in this planning process.
-
-
-<!-- as well as to help students learn about a valuable resource for recruitment whose use requires some specialized knowledge. -->
-### Workflow tools
-
-All our studies were coded in JavaScript, HTML, and CSS to be run in a standard web browser. All analyses were written using R, a free and open-source platform for statistical analysis.  Students wrote their final reports using [R Markdown](http://rmarkdown.rstudio.com/), a "literate programming" environment in which statistical analysis code can be interspersed with text, figures, and tables. This part of our workflow was extremely useful both pedagogically and for encouraging reproducible research practices: each milestone in our course, corresponding to each phase of a research project, required students to fill in additional sections of a single unified document that would become their final report. This method of writing allows students to easily share their cumulative work to date with instructors via a hyperlink, facilitating review of exposition, results, and code together in one location^[The current manuscript is written in this fashion as well; this writing method is also likely to reduce the frequency of statistical reporting errors [@nuijten2015], given that errors are often introduced by transferring results between statistics and word-processing software packages.]. 
-
-Some of these tools can feel inaccessible or intimidating to students with a more limited programming background. Indeed, our students came from a variety of disciplinary backgrounds; many had relatively little experience with web-based empirical studies or literate, reproducible data analysis. Yet by the end of the course, all gained sufficient proficiency with the suite of technical and conceptual tools necessary to carry out an independent project with support from their peers and the course staff. Our experience suggests that it is possible to convey key concepts in sufficient depth that students can learn to use a broad range of open and reproducible tools for their projects, even if mastery will require further experience. 
-
-Our explicit class goal was to provide students with experiences navigating the full ecosystem of open-source scientific tools. For classes at different levels, however, instructors will likely have different goals. It may be preferable for an intermediate course to focus on a single programming tool (e.g., R) and to use other GUI-based software for creating experiments, so as to minimize the learning burden for students. And for more introductory research methods course, instructors must gauge whether the added difficulty of a programming component is appropriate for the skills and backgrounds of their students.
-
-<!-- In our replications, we opted for a case-by-case weighing of the costs and benefits of increasing power across all studies. We first prioritized achieving the participants required for either 80% or original N (whichever was greater) for the maximum number of studies. This rule benefitted studies which were under the budget allocated for each individual project (i.e., studies that had large effect sizes and short participation times.)  Of those that achieved 80% power with sample sizes that were smaller than the original sample, we reduced the most expensive studies down to N required for 80% power. This allowed us to reach our budget goals with the exception of one particularly expensive study.  Fortunately, this student found external funding to reach 80% power. If this were not possible, we would have likely excluded this study from the pre-registration. -->
-
-### Author contact
-
-Over half of our students contacted original authors to request study materials or clarification on methods and/or analysis, but for the purposes of our class, we chose not to require contact with all original authors. We strongly believe methods and materials should be open to allow for replication and productive science [@nosek2015], and hoped to empower students to engage with and build on the published literature directly -- without personal relationships or even personal contact. That is, we chose to do good-faith replications given all information in the original articles and supplemental online materials. Authors were contacted only in cases where there were issues about access to materials or ambiguities in design or analysis. There are benefits of contacting original authors, however. In addition to professional courtesy, authors can provide valuable feedback or guidance (albeit at the cost of some imposition) prior to data collection, potentially heading off post-hoc debates about methodological choices. In the end, it is up to individual instructors to decide what they believe is best for their students in this area. 
-
-
-<!-- First, contact is a professional courtesy that lets the authors know that their study is being replicated and in some cases allows the original authors to pre-register their hypotheses or concerns with the replication study. Second, original authors can provide methodological feedback prior to replication. This second is a trickier issue on many fronts.  By requesting feedback, discussion with authors perpetuates the dissemination of insider information or lab-specific folklore on methodology that produces the greatest effects. When these assumptions or limitations of a theory or paradigm are not made explicit in publically-available format, this does not count as a record of science. In fact, some replications have prompted these assumptions to be made explicit by the original authors (CITE?).  In addition, when original materials of a study are not provided, it is on the reader to assume all neccessary information is provided to replicate, and is not due to idiosyncracies. Thus, we would generally advice against contacting authors for feedback or materials expect when replication is not viable without them. -->
-
-### Ethical approvals
-
-Ethical review standards vary across instutitions and countries, but we suspect certain ethical concerns will commonly arise when attempting to implement class replication projects. First, instructors may be concerned that ethics approval is not possible within the time constraints of the class. To mitigate this issue, we suggest contacting ethics bodies well in advance of classes to determine whether to create a standard protocol that encompasses all projects (as we did), or to set a timeline for students and instructors to submit individual study protocols very early in the course. Protocol development for both types -- umbrella and individual -- will be simplified if the study or pool of studies to be replicated is pre-selected by instructors. Second, review boards may be concerned about risks particular to the collection of data by students, e.g., lack of debriefing or greater risk of breach of confidentiality due to novice experimenters. We recommend building training around ethical issues into the syllabus of replication-based classes. This practice is both positive for students and also mitigates potential ethics approval concerns. 
-
 # Empirical Findings: Results and Discussion
 
 ## Results
 
-All reported results are from pre-registered, confirmatory analyses. In two cases, in final review of the projects (after data analysis), the instructor team decided that the student's choice of key statistical test was not in fact a strong test of the original authors' primary theoretical claim. In both of these cases, the original authors had fit regression models to the data and there was not a single obvious test that corresponded directly to the authors' hypothesis. After discussion, the instructor team converged on a statistical test that they thought better corresponded to the original authors' intended hypothesis of interest. We report results from these corrected tests here. We return to this issue below, as we believe that test selection is a critical theoretical issue in replication research (see e.g., @monin2016 for discussion).
+All reported results are from pre-registered, confirmatory analyses. In two cases, in final review of the projects (after data analysis), the instructor team decided that the student's choice of key statistical test was not in fact a strong test of the original authors' primary theoretical claim. In both of these cases, the original authors had fit regression models to the data and there was not a single obvious test that corresponded directly to the authors' hypothesis. After discussion, the instructor team converged on a statistical test that they thought better corresponded to the original authors' intended hypothesis of interest. We report results from these corrected tests here. We return to this issue below, as we believe that test selection is a critical theoretical issue in replication research [see e.g., @monin2016 for discussion].
 
 <!-- **rxdh: re: Dan Simons' comment about the results being cumbersome w/o Table 1 showing individual replication outcomes, maybe we should explicitly state our motivation behind presenting these results and say something along the lines of "to avoid targeting particular authors for potential criticism on the basis of a single replication, we only present summary evaluations aggregated across our replications"** MCF: let's say this in the coverletter? -->
 
@@ -569,11 +465,115 @@ Indeed, no study we attempted to replicate was pre-registered (though some were 
 
 <!-- In our view, two recommendations will improve this situation. First, authors should specify their "key test" more clearly. Pre-registration might facilitate this step, as regstration typically requires the selection of particular statistical analyses to be designated as critical for interpretation, but we believe this designation is critical even in un-registered experiments. Had "key test" information been available, it would have dramatically simplified the problem of selecting the effect to replicate in several cases. Second, the widespread adoption of open data and open analytic code practices would facilitate replication research. In addition to clarifying the summary report of results in a paper, the availability of data dramatically facilitates the computation of the relevant meta-analytic effect size for power analysis and statistical comparison.^[We note that, although we were grateful that several authors of the papers in our sample shared data and materials, the use of open (non-proprietary) formats for archiving data -- and in particular analytic code -- is often critical for investigators attempting to reproduce analyses.]  -->
 
+# Pedagogy: Results and Discussion
+
+## Results: Pedagogical Assessment 
+
+All of the 15 students in the class completed projects (two with extensions going beyond the class period). Of these, one chose a project outside of the sampling frame, and three opted out of the broader project prior to data collection.^[These students did not express doubts about the success of their projects prior to opting out, and 2/3 of these projects were judged by the instructor team to have been successful replications. Thus we have no evidence that these students opted out systematically due to their belief that their project would not replicate.] The remaining 11 students contributed code, data, registrations, and materials to the final product. (In one case, a student did not complete the pre-registration procedure correctly but still submitted a pre-specified analysis plan to the instructors for review. We included this project in the final analysis.) 
+
+Because they were conducted by students within the constraints of a course, our studies had a number of limitations, including: 1) limited time for iterative piloting and adjustment, 2) limits on funding for larger samples, and 3) limits on domain expertise with respect to the specific effects that were chosen. But within these limitations, our group was able to produce a set of relatively close replications with generally good statistical power. Thus, our work here shows what is possible for motivated students using freely-available tools and resources.
+
+## Discussion: Pedagogical Implications
+
+Our findings demonstrate that classroom replication projects are possible in one particular context. In the following subsections, we provide information that we hope will reduce barriers to entry and encourage more researchers and instructor to include replications as part of coursework in their courses. We discuss practical recommendations for implementation in a variety of classroom settings, key decisions that instructors must make, and common issues that arise during replication projects. 
+
+### Models for students of different levels
+
+Though others' courses that incorporate replication projects will look quite different from our own, we recommend having the replication as a centerpiece of the course and giving ample opportunity for feedback throughout the study design. Without a central focus on the replication project, students would likely not have the time or motivation to complete a high quality project; without multiple opportunities for extensive (and often interactive) instructor feedback, the quality of the final projects will decline. 
+
+That said, depending on the student population and class constraints, there are many ways to include a replication project in a course. Table \ref{tab:classmodels} presents three different possible models of replication projects, for general undergraduate classes, advanced undergraduate/early graduate classes, and more advanced graduate classes. These models are not meant to be binding suggestions, but we hope that they inspire instructors to consider how replication research could be included in their own teaching practice. The sections below provide some discussion of individual choice-points. 
+
+\begin{center}
+\begin{landscape}
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\begin{table}[ht]
+\footnotesize
+\centering
+
+\def\arraystretch{1.2}
+
+\begin{tabular}{lccc}
+
+ & \multicolumn{3}{c}{\underline{Classroom Models}} \\
+  
+\multicolumn{1}{p{1.5in}}{\raggedright \underline{Course Attributes}} & \underline{Model 1} & \underline{Model 2} & \underline{Model 3} \\
+
+Student group & \multicolumn{1}{p{2in}}{\raggedright Mid-level undergraduates} & \multicolumn{1}{p{2in}}{\raggedright Advanced undergraduates or graduate students} & \multicolumn{1}{p{2in}}{\raggedright Advanced graduate students} \\
+
+\hline
+
+Learning goal & \multicolumn{1}{p{2in}}{\raggedright Gain experience with research process} & \multicolumn{1}{p{2in}}{\raggedright Gain research independence} & \multicolumn{1}{p{2in}}{\raggedright Master best practices and tools} \\
+
+Project group size & \multicolumn{1}{p{2in}}{\raggedright Full class or medium-size groups (7-8 students)} & \multicolumn{1}{p{2in}}{\raggedright Small groups (2-4) or individuals} & \multicolumn{1}{p{2in}}{\raggedright Individuals} \\
+
+Project selection & \multicolumn{1}{p{2in}}{\raggedright Full class replication or choose from small curated list} & \multicolumn{1}{p{2in}}{\raggedright Choose from curated list} & \multicolumn{1}{p{2in}}{\raggedright Open project selection or meta-science sampling frame} \\
+
+Subject population & \multicolumn{1}{p{2in}}{\raggedright In-person convenience samples} & \multicolumn{1}{p{2in}}{\raggedright University pool or AMT} & \multicolumn{1}{p{2in}}{\raggedright AMT or targeted sampling of original populations} \\
+
+Workflow tools & \multicolumn{1}{p{2in}}{\raggedright GUI tools, instructors code studies} & \multicolumn{1}{p{2in}}{\raggedright Teach one key coding-based tool, GUI tools otherwise} & \multicolumn{1}{p{2in}}{\raggedright Teach full ecosystem of key coding tools} \\
+
+Pre-registration & \multicolumn{1}{p{2in}}{\raggedright Pre-registration by instructor} & \multicolumn{1}{p{2in}}{\raggedright Pre-registration drafted by students} & \multicolumn{1}{p{2in}}{\raggedright Pre-registration by students with instructor review} \\
+
+Dissemination & \multicolumn{1}{p{2in}}{\raggedright If meeting pre-specified quality standard} & \multicolumn{1}{p{2in}}{\raggedright With instructor approval} & \multicolumn{1}{p{2in}}{\raggedright As class default, subject to review} \\
+
+
+\end{tabular}
+\caption{\label{tab:classmodels} Three potential models for incorporating replication projects into classes of different levels.} 
+\label{tab:classmodels}
+\end{table}
+
+\end{landscape}
+\end{center}
+<!-- Review & \multicolumn{1}{p{2in}}{\raggedright Standardized review checkpoints} & \multicolumn{1}{p{2in}}{\raggedright Extensive group review and minimal instructor review} & \multicolumn{1}{p{2in}}{\raggedright Multiple reviews between students and with instructors} \\ -->
+
+### Project selection 
+
+In our class, students selected projects based on interest, and we encouraged students with little programming background to opt for methodologically simple studies, and more advanced students to take on a challenging design. This level of freedom is not ideal for less advanced courses, and the set of available replication studies should likely be curated for students at lower levels. For example, in a large undergraduate class it may be logistically simpler for the instructors to choose a small set of replication projects that students can select from, or perhaps even pool resources and collect multiple datasets for a single project. Limiting the set of projects both gives instructors a greater degree of familiarity with the relevant literature and allows for the development of more scaffolding of experimental materials. A mid-level course might split the difference between these two models, providing students with a broader -- but still curated -- list of potential projects. 
+ 
+
+<!-- However, this sample also reflects what is of most interest to beginning researchers, and we suspect may be a better sampling frame to better understand particularly impactful effects to be built upon in future research. The modal study chosen was the first, but several students chose later studies in a set as well.  Thus, all interpretation of our findings should be with respect to this non-probability sample.  This sampling strategy may thus bias our results towards more exciting or novel findings, as well as those that were more feasible for students. -->
+
+### Subject population and sample size
+
+For pedagogical replications to also make a *scientific* contribution, they must be adequately powered and use subject populations comparable to those used in typical lab research. With these needs in mind, we chose to use Amazon Mechanical Turk (AMT) for our replication studies. AMT facilitates the process of recruiting diverse, high-quality samples [@BuhrmesterKwangGosling11;@CrumpEtAl13_Turk] that are large enough to enable replications of between-subjects designs (which typically require large samples). Because psychological research is increasingly conducted online, an additional pedagogical benefit is to build competence in these skills. Even if students’ current research does not use AMT, these replications allow students to build a skillset that can be used throughout their academic careers. 
+
+Depending on the course design and total funds allocated to the course (if any), populations other than AMT may be more feasible and appropriate.  We recommend instructors explore funding opportunities through teaching grants or departmental support, but note that a replication course without funding would be possible. For instance, recruitment from community samples or university participant pools may provide high-quality data while reducing costs and eliminating a technical challenge in data collection.
+
+Cost considerations must also enter into decisions about adequate sample sizes, which has been a major challenge in replication research [@button2013;@simonsohn2015]. Sample planning based on analysis of the achieved effect size in a previously-published study is problematic because of the likelihood of inflation of published effect sizes due to the "winner's curse" [@hoenig2001;@button2013]. But it may not be feasible to follow more conservative guidelines in all cases. For example, @simonsohn2015 recommends 2.5x the original sample, which can be feasible for small or under-powered original studies, but be unnecessary for studies that were initially large and/or adequately powered. 
+
+As a rule of thumb, for the type of replication research advocated here, conducting a small number of high-powered studies using representative samples is preferable to conducting a large number of under-powered studies in convenience samples. Results are much more likely to be to be interpretable by students and to make a contribution to the replication literature. Regardless of the eventual sample collected, we find that the discussion of subject population & sample size determination is one of the most eye-opening parts of our class and so we encourage instructors to allow students to participate in this planning process.
+
+
+<!-- as well as to help students learn about a valuable resource for recruitment whose use requires some specialized knowledge. -->
+### Workflow tools
+
+All our studies were coded in JavaScript, HTML, and CSS to be run in a standard web browser. All analyses were written using R, a free and open-source platform for statistical analysis.  Students wrote their final reports using [R Markdown](http://rmarkdown.rstudio.com/), a "literate programming" environment in which statistical analysis code can be interspersed with text, figures, and tables. This part of our workflow was extremely useful both pedagogically and for encouraging reproducible research practices: each milestone in our course, corresponding to each phase of a research project, required students to fill in additional sections of a single unified document that would become their final report. This method of writing allows students to easily share their cumulative work to date with instructors via a hyperlink, facilitating review of exposition, results, and code together in one location^[The current manuscript is written in this fashion as well; this writing method is also likely to reduce the frequency of statistical reporting errors [@nuijten2015], given that errors are often introduced by transferring results between statistics and word-processing software packages.]. 
+
+Some of these tools can feel inaccessible or intimidating to students with a more limited programming background. Indeed, our students came from a variety of disciplinary backgrounds; many had relatively little experience with web-based empirical studies or literate, reproducible data analysis. Yet by the end of the course, all gained sufficient proficiency with the suite of technical and conceptual tools necessary to carry out an independent project with support from their peers and the course staff. Our experience suggests that it is possible to convey key concepts in sufficient depth that students can learn to use a broad range of open and reproducible tools for their projects, even if mastery will require further experience. 
+
+Our explicit class goal was to provide students with experiences navigating the full ecosystem of open-source scientific tools. For classes at different levels, however, instructors will likely have different goals. It may be preferable for an intermediate course to focus on a single programming tool (e.g., R) and to use other GUI-based software for creating experiments, so as to minimize the learning burden for students. And for more introductory research methods course, instructors must gauge whether the added difficulty of a programming component is appropriate for the skills and backgrounds of their students.
+
+<!-- In our replications, we opted for a case-by-case weighing of the costs and benefits of increasing power across all studies. We first prioritized achieving the participants required for either 80% or original N (whichever was greater) for the maximum number of studies. This rule benefitted studies which were under the budget allocated for each individual project (i.e., studies that had large effect sizes and short participation times.)  Of those that achieved 80% power with sample sizes that were smaller than the original sample, we reduced the most expensive studies down to N required for 80% power. This allowed us to reach our budget goals with the exception of one particularly expensive study.  Fortunately, this student found external funding to reach 80% power. If this were not possible, we would have likely excluded this study from the pre-registration. -->
+
+### Author contact
+
+Over half of our students contacted original authors to request study materials or clarification on methods and/or analysis, but for the purposes of our class, we chose not to require contact with all original authors. We strongly believe methods and materials should be open to allow for replication and productive science [@nosek2015], and hoped to empower students to engage with and build on the published literature directly -- without personal relationships or even personal contact. That is, we chose to do good-faith replications given all information in the original articles and supplemental online materials. Authors were contacted only in cases where there were issues about access to materials or ambiguities in design or analysis. There are benefits of contacting original authors, however. In addition to professional courtesy, authors can provide valuable feedback or guidance (albeit at the cost of some imposition) prior to data collection, potentially heading off post-hoc debates about methodological choices. In the end, it is up to individual instructors to decide what they believe is best for their students in this area. 
+
+
+<!-- First, contact is a professional courtesy that lets the authors know that their study is being replicated and in some cases allows the original authors to pre-register their hypotheses or concerns with the replication study. Second, original authors can provide methodological feedback prior to replication. This second is a trickier issue on many fronts.  By requesting feedback, discussion with authors perpetuates the dissemination of insider information or lab-specific folklore on methodology that produces the greatest effects. When these assumptions or limitations of a theory or paradigm are not made explicit in publically-available format, this does not count as a record of science. In fact, some replications have prompted these assumptions to be made explicit by the original authors (CITE?).  In addition, when original materials of a study are not provided, it is on the reader to assume all neccessary information is provided to replicate, and is not due to idiosyncracies. Thus, we would generally advice against contacting authors for feedback or materials expect when replication is not viable without them. -->
+
+### Ethical approvals
+
+Ethical review standards vary across instutitions and countries, but we suspect certain ethical concerns will commonly arise when attempting to implement class replication projects. First, instructors may be concerned that ethics approval is not possible within the time constraints of the class. To mitigate this issue, we suggest contacting ethics bodies well in advance of classes to determine whether to create a standard protocol that encompasses all projects (as we did), or to set a timeline for students and instructors to submit individual study protocols very early in the course. Protocol development for both types -- umbrella and individual -- will be simplified if the study or pool of studies to be replicated is pre-selected by instructors. Second, review boards may be concerned about risks particular to the collection of data by students, e.g., lack of debriefing or greater risk of breach of confidentiality due to novice experimenters. We recommend building training around ethical issues into the syllabus of replication-based classes. This practice is both positive for students and also mitigates potential ethics approval concerns. 
+
 # General Discussion
 
 In this paper, we reported a series of 11 student replications of previously-published empirical studies from the 2015 volume of *Psychological Science*. Our goal was to provide a proof of concept for pedagogical replications of recent findings in a top journal. Rather than attempting to gauge the truth of particular effects, our project aimed to assess the challenges of replicating findings -- selected on grounds of feasibility and interest -- within the constraints of a course project. Such classes could become the backbone of future collaborative replication efforts [@frank2012;@everett2015], and could help provide a source of data on the robustness of the empirical literature more generally. 
 
-This vision of collaborative pedagogical replication requires instructors to make class results more broadly discoverable. We can envision a number of possible avenues for this kind of sharing. For example, if some products are shared openly in a repository like the Open Science Framework (osf.io) or figshare (figshare.com) and tagged appropriately, they will be discoverable via search engines. Alternatively, a more structured method for sharing and discovery would be upload to specific replication curation websites like PsychFileDrawer (psychfiledrawer.org) or CurateScience (curatescience.org). Both of these models assume limited coordination across instructors, but more structured collaborations are of course possible. For example, the Collaborative Replications and Education Project (osf.io/wfc6u) selected a subsample of important and feasible studies for replication and helped provide materials to instructors with the explicit goal of encouraging cross-lab pedagogical replications. On these models, instructors must of course curate which projects are released publicly. But by pre-specifying review criteria, instructors can incorporate dissemination into their course as a reward for high quality work. 
+This vision of collaborative pedagogical replication requires instructors to make class results more broadly discoverable. We can envision a number of possible avenues for this kind of sharing. For example, if some products are shared openly in a repository like the Open Science Framework (http://osf.io) or figshare (http://figshare.com) and tagged appropriately, they will be discoverable via search engines. Alternatively, a more structured method for sharing and discovery would be upload to specific replication curation websites like PsychFileDrawer (http://psychfiledrawer.org) or CurateScience (http://curatescience.org). Both of these models assume limited coordination across instructors, but more structured collaborations are of course possible. For example, the Collaborative Replications and Education Project (http://osf.io/wfc6u) selected a subsample of important and feasible studies for replication and helped provide materials to instructors with the explicit goal of encouraging cross-lab pedagogical replications. On these models, instructors must of course curate which projects are released publicly. But by pre-specifying review criteria, instructors can incorporate dissemination into their course as a reward for high quality work. 
 
 <!-- We are generally optimistic about the contributions of student work, but of course not every student project will be scientifically informative. To take an edge case, imagine a student makes an error in stimulus presentation that is not caught by the instructors until after data collection. In this case, we would argue that this work should not be deposited in a targeted replication repository. But in the end, these decisions will be the responsibility of the course instructor -- much like decisions about when to publish other research.   -->
 
